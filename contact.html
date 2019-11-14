@@ -14,13 +14,19 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
   width: 250px;
   top: 43px;
   bottom: 0;
-  min-height: 400px;
-   margin-bottom: 100px;
-   clear: both;
+  height: inherit;
+}
+
+.w3-container{
+  min-height: 100%;
+    position: relative;
+    min-width: 100%;
+    overflow: hidden;
 }
 </style>
-<body>
 
+<body>
+  
 <!-- Navbar -->
 <div class="w3-top">
   <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
@@ -39,13 +45,27 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
-<div class="w3-main" style="margin-left:250px">
+<div class="w3-main">
 
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
-      <h1 class="w3-text-teal">Contact</h1>
-      <p>Add contacts.</p>
+      <h1 class="w3-text-black">By email</h1>
+      <p>If you have any questions, mathematical or otherwise, feel free to email me. My email address is (firstname).(lastname)@gmail.com.
+      </p>
     </div>
+
+    <div class="w3-row w3-padding-64">
+        <div class="w3-twothird w3-container">
+          <h1 class="w3-text-black">In person</h1>
+          <p>If you are trying to locate me in person my office is located in <a href="https://www.impan.pl">IMPAN</a>, office number 422. See below for the location of IMPAN on google maps:
+           </p>
+           <p align="center">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2444.199589029206!2d21.012639915932795!3d52.22159156605313!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471eccef23a16a9b%3A0x84d479b4e7e9993d!2sMathematical%20Institute%20of%20the%20Polish%20Academy%20of%20Sciences!5e0!3m2!1sen!2spl!4v1573659870494!5m2!1sen!2spl" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+          </p>
+        </div>
+
+
+
    
 
   <!-- Pagination -->

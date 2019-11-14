@@ -16,6 +16,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
   bottom: 0;
   height: inherit;
 }
+.w3-container{
+  min-height: 100%;
+    position: relative;
+    min-width: 100%;
+    overflow: hidden;
+}
 </style>
 <body>
 
@@ -37,13 +43,30 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
-<div class="w3-main" style="margin-left:250px">
+<div class="w3-main">
 
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
-      <h1 class="w3-text-teal">Expository Notes</h1>
-      <p>Add notes.</p>
+      <h1 class="w3-text-black">Expository Notes</h1>
+      <p>Below are some highly informal notes I have written for various purposes in no particular order. If you choose to read them, exercise caution due to their unpolishedness and age:
+          <ul><li><a href="MatsushimaNotes.pdf">Matsushima's formula and the Langlands conjecture </a>--These are informal notes meant to briefly summarize some of the ideas surrounding the work of my thesis and my work with A. Bertoloni Meli. As an added bonus I try to motivate the Langlands conjecture via the cohomology of Shimura varieties.</li>
+            <li><a href="Notes for p-adic reps.pdf"> Representations of <i>p</i>-adic reductive groups</a> -- These are very old notes written for a seminar on automorphic representations. They discuss some examples of representations of reductive <i>p</i>-adic groups.</li>
+        <li><a href="gl2reps.pdf"> Representations of adelic groups</a>-- These are very old notes written for a seminar on automorphic representations. They discuss ome examples of automorphic representations for GL<sub>2</sub>.</li>
+    <li><a href="localglobalgalois.pdf"> Galois groups of local and global fields</a> -- These are very old notes written for a seminar on Galois representations. The goal is to essentially discuss some basic aspects for the Galois groups of local and global fields, give some geometric intuition for these objects, and explain why one would expect them to be difficult to study.</li>
+    <li><a href="weilnotes.pdf"> Weil-Deligne representations and <i>p</i>-adic Hodge theory</a> -- These are very old notes written for a seminar on Galois representations. The goal is to motivate Weil-Deligne representations (i.e. why they naturally show up), <i>p</i>-adic Hodge theory, and how the two notions connect.</li>
+            <li><a href="Modularreps.pdf"> Modular representations of <i>p</i>-adic reductive groups</a> -- These notes are a discussion on the theory of characteristic <i>p</i>-representations of <i>p</i>-adic and <i>t</i>-adic reductive groups and their relationship with the chararacteristic 0 theory. There is, in particular, a discussion of Kazhdan's theorem which relates Hecke algebras of <i>p</i>-adic and <i>t</i>-adic groups. </li>
+            <li><a href="torsors.pdf"> A 'brief' discussion of torsors</a> -- These are notes written for two mentees I had in an independent study concerning the etale fundamental group. The goal was to motivate cohomology (in particular etale cohomology) via torsors. I think that the notes are well-intentioned and do genuniely have interesting didcatic value buried deep inside them. Unfortunately, they are long-winded, meandering, and overly self-indulgent. One day I intend to go back and tighten them up.</li>
+        </ul>
+        </p>
     </div>
+
+    <div class="w3-row w3-padding-64">
+            <div class="w3-twothird w3-container">
+              <h1 class="w3-text-black">My blog</h1>
+              <p>I also have a blog: <a href="https://ayoucis.wordpress.com/">Hard Arithmetic</a>. In addition to the notes listed above, it contains many other informal posts aimed at various levels, mostly about algebraic geometry and/or number theory.
+                
+                </p>
+            </div>
 
   <!-- Pagination -->
 

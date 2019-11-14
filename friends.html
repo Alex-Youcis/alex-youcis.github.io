@@ -16,6 +16,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
   bottom: 0;
   height: inherit;
 }
+.w3-container{
+  min-height: 100%;
+    position: relative;
+    min-width: 100%;
+    overflow: hidden;
+}
 </style>
 <body>
 
@@ -36,12 +42,20 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
-<div class="w3-main" style="margin-left:250px">
+<div class="w3-main">
 
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
-      <h1 class="w3-text-teal">Friends</h1>
-      <p>Add friends.</p>
+      <h1 class="w3-text-black">Friends</h1>
+      <p>Here is a list of mathematical friends and collaborators:</p>
+      <ul>
+        <li> <a href="https://math.berkeley.edu/~abm/abm.htm">Alexander Bertoloni Meli</a></li>
+        <li><a href="http://achinger.impan.pl/">Piotr Achinger</a></li>
+        <li><a href="https://www.math.ias.edu/~kshimizu/">Koji Shimizu</a></li>
+        <li><a href="https://arxiv.org/search/math?query=Kato%2C+Hiroki&searchtype=author&abstracts=show&order=-announced_date_first&size=50">Hiroki Kato</a></li>
+        <li><a href="https://marcin-lara.github.io/">Marcin Lara</a></li>
+        <li><a href="https://math.berkeley.edu/~jleake/">Jonathan Leake</a></li>
+      </ul>
     </div>
    
    
