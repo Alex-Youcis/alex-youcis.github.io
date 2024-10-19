@@ -37,17 +37,22 @@
     }
     .navbar {
       display: flex;
-      justify-content: center; /* Centered navigation links */
-      padding: 1em;
+      justify-content: flex-end; /* Align items to the right */
+      align-items: center;
+      padding: 0 1em;
+      height: 60px;
     }
-    .navbar a {
+    .nav-links {
+      display: flex;
+    }
+    .nav-links a {
       color: white;
       text-decoration: none;
       margin: 0 1em;
       position: relative; /* For underline effect */
       transition: color 0.3s ease; /* Smooth color transition */
     }
-    .navbar a::after {
+    .nav-links a::after {
       content: '';
       position: absolute;
       width: 0;
@@ -57,12 +62,55 @@
       bottom: -5px;
       transition: all 0.3s ease;
     }
-    .navbar a:hover {
+    .nav-links a:hover {
       color: var(--secondary-color); /* Change text color on hover */
     }
-    .navbar a:hover::after {
+    .nav-links a:hover::after {
       left: 0;
       width: 100%;
+    }
+    .nav-mobile {
+      display: none;
+    }
+    /* Mobile Navigation Styles */
+    @media screen and (max-width: 768px) {
+      .navbar {
+        justify-content: flex-end;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: var(--primary-color);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+      }
+      .nav-links a {
+        margin: 0;
+        padding: 1em;
+        text-align: right;
+        border-bottom: 1px solid var(--secondary-color);
+      }
+      .nav-mobile {
+        display: flex;
+        align-items: center;
+      }
+      .nav-text {
+        color: white;
+        margin-right: 0.5em;
+      }
+      .icon {
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      .navbar.responsive .nav-links {
+        display: flex;
+      }
+      .navbar.responsive .nav-mobile .nav-text {
+        display: none;
+      }
     }
     /* Main Content Styles */
     main {
@@ -110,10 +158,13 @@
         grid-template-columns: 1fr;
       }
       .navbar {
-        flex-direction: column;
+        justify-content: flex-end;
       }
-      .navbar a {
-        margin: 0.5em 0;
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
       }
     }
     /* Links inside publication-card */
@@ -170,11 +221,21 @@
 </head>
 <body>
   <header>
-    <nav class="navbar">
-      <a href="index.html">Home</a>
-      <a href="research.html">Publications and preprints</a>
-      <a href="#">Expository material</a>
-      <a href="friends.html">Friends</a>
+    <nav class="navbar" id="myNavbar">
+      <!-- Mobile Navigation -->
+      <div class="nav-mobile">
+        <span class="nav-text">Navigation</span>
+        <span class="icon" onclick="toggleMenu()">
+          <i class="fa fa-bars"></i>
+        </span>
+      </div>
+      <!-- Navigation links -->
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="research.html">Publications and preprints</a>
+        <a href="#">Expository material</a>
+        <a href="friends.html">Friends</a>
+      </div>
     </nav>
   </header>
   <main>
@@ -298,5 +359,12 @@
   <footer>
     <p>&copy; 2023 Alex Youcis. All rights reserved.</p>
   </footer>
+  <!-- JavaScript for Mobile Menu Toggle -->
+  <script>
+    function toggleMenu() {
+      var navbar = document.getElementById("myNavbar");
+      navbar.classList.toggle("responsive");
+    }
+  </script>
 </body>
 </html>
