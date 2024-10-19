@@ -1,112 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>Alex Youcis</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
-.w3-sidebar {
-  z-index: 3;
-  width: 250px;
-  top: 43px;
-  bottom: 0;
-  height: inherit;
-}
-.w3-container{
-  min-height: 100%;
-    position: relative;
-    min-width: 100%;
-    overflow: hidden;
-}
-</style>
+<head>
+  <title>Alex Youcis</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Include Fonts and Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <!-- Include CSS Styles -->
+  <style>
+    /* Root Variables for Colors */
+    :root {
+      --primary-color: #000000; /* Black */
+      --secondary-color: #ff0000; /* Red */
+      --background-color: #ffffff; /* White */
+      --text-color: #000000; /* Black */
+    }
+    /* Global Styles */
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+    }
+    /* Navbar Styles */
+    header {
+      background-color: var(--primary-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid var(--secondary-color);
+    }
+    .navbar {
+      display: flex;
+      justify-content: center;
+      padding: 1em;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1em;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: var(--secondary-color);
+      left: 50%;
+      bottom: -5px;
+      transition: all 0.3s ease;
+    }
+    .navbar a:hover {
+      color: var(--secondary-color);
+    }
+    .navbar a:hover::after {
+      left: 0;
+      width: 100%;
+    }
+    /* Main Content Styles */
+    main {
+      padding: 2em;
+    }
+    /* Footer Styles */
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+    /* Image Styles */
+    .profile-image {
+      display: block;
+      margin: 0 auto;
+      width: 250px;
+      height: 375px;
+      object-fit: cover;
+    }
+    /* Centered Content */
+    .centered {
+      text-align: center;
+    }
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+      }
+      .navbar a {
+        margin: 0.5em 0;
+      }
+    }
+  </style>
+  <!-- MathJax Configuration -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process',
+      }
+    };
+  </script>
+  <!-- Include MathJax -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
 <body>
-
-<!-- Navbar -->
-<div class="w3-top">
-  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
-    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About me</a>
-    <a href="research.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Research</a>
-    <a href="notes.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Expository material</a>
-    <a href="contact.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
-    <a href="friends.html" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Friends</a>
-  </div>
-</div>
-
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
-<div class="w3-main">
-  
-  <div class="w3-row w3-padding-64">
-    <div class="w3-twothird w3-container">
-<center>
-<h1 class="w3-text-black">Alex Youcis<br> <font size="+10">(new website <a href="https://sites.google.com/view/alex-youcis/">here</a>)</font></h1>
-    <img src="speech.jpg" style="width:250px;height:375px;">
-  </center>
-  <div class="w3-row w3-padding-64">
-    <div class="w3-twothird w3-container">
-      <h2 class="w3-text-black">About me</h2>
-      <p>My name is Alex Youcis (the IPA transcription for my last name is juːkɪs). <br>
-Currently I am a postdoc at the National University of Singapore. </p>
+  <header>
+    <nav class="navbar">
+      <a href="#">About Me</a>
+      <a href="research.html">Research</a>
+      <a href="notes.html">Expository Material</a>
+      <a href="contact.html">Contact</a>
+      <a href="friends.html">Friends</a>
+    </nav>
+  </header>
+  <main>
+    <div class="centered">
+      <h1>Alex Youcis</h1>
+      <h2>(new website <a href="https://sites.google.com/view/alex-youcis/">here</a>)</h2>
+      <img src="speech.jpg" alt="Alex Youcis" class="profile-image">
     </div>
-
-  <div class="w3-row w3-padding-64">
-        <div class="w3-twothird w3-container">
-          <h2 class="w3-text-black">My research interests</h2>
-          <p>Broadly speaking my research interests are arithmetic geometry, rigid geometry, and p-adic Hodge theory. I am particularly interested in interactions of these topics with the Langlands program.</p>
-        </div>
-
-  <div class="w3-row w3-padding-64">
-            <div class="w3-twothird w3-container">
-              <h2 class="w3-text-black">My CV</h2>
-              <p>A more detailed account of my professional activities can be found in my <a href="CV (10:15:24).pdf">CV</a>.</p>
-            </div>
-   
-
-  
-   
-  <!-- Pagination -->
-
- 
-
-    <div class="w3-container w3-theme-l1">
-      <p style="margin-bottom:.5cm;"> Alex Youcis -- all rights reserved. </p>
-    </div>
+    <section>
+      <h2>About Me</h2>
+      <p>My name is Alex Youcis (the IPA transcription for my last name is juːkɪs). Currently, I am a postdoc at the National University of Singapore.</p>
+    </section>
+    <section>
+      <h2>My Research Interests</h2>
+      <p>Broadly speaking, my research interests are arithmetic geometry, rigid geometry, and \(p\)-adic Hodge theory. I am particularly interested in interactions of these topics with the Langlands program.</p>
+    </section>
+    <section>
+      <h2>My CV</h2>
+      <p>A more detailed account of my professional activities can be found in my <a href="CV (10:15:24).pdf">CV</a>.</p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2023 Alex Youcis. All rights reserved.</p>
+    <!-- Social Icons (if any) -->
+    <!-- <div class="social-icons">
+      <a href="#"><i class="fa fa-linkedin"></i></a>
+      <a href="#"><i class="fa fa-github"></i></a>
+    </div> -->
   </footer>
-
-<!-- END MAIN -->
-</div>
-
-<script>
-
-
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
-
-// Toggle between showing and hiding the sidebar, and add overlay effect
-function w3_open() {
-  if (mySidebar.style.display === 'block') {
-    mySidebar.style.display = 'none';
-    overlayBg.style.display = "none";
-  } else {
-    mySidebar.style.display = 'block';
-    overlayBg.style.display = "block";
-  }
-}
-
-// Close the sidebar with the close button
-function w3_close() {
-  mySidebar.style.display = "none";
-  overlayBg.style.display = "none";
-}
-</script>
-
 </body>
 </html>
