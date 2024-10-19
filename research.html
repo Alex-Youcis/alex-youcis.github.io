@@ -89,47 +89,24 @@
         grid-template-columns: 1fr;
       }
     }
+    /* Links inside publication-card */
+    .publication-card a {
+      color: var(--secondary-color);
+      text-decoration: none;
+    }
+    .publication-card a:hover {
+      text-decoration: underline;
+    }
+    /* Details summary */
+    details summary {
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 <body>
   <header>
     <nav class="navbar">
       <div class="nav-left">
-        <a href="index.html">About Me</a>
-        <a href="#">Research</a>
-        <a href="notes.html">Expository Material</a>
-        <a href="contact.html">Contact</a>
-        <a href="friends.html">Friends</a>
-      </div>
-    </nav>
-  </header>
-  <main>
-    <h1><i class="fa fa-book"></i> Publications</h1>
-    <div class="publication-grid">
-      <!-- Publication Card Example -->
-      <div class="publication-card">
-        <h2>Gluing Triples</h2>
-        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/">Piotr Achinger</a></p>
-        <p><strong>Journal/Status:</strong> Draft</p>
-        <p><strong>Tags:</strong> Rigid analytic geometry</p>
-        <details>
-          <summary>Description</summary>
-          <p>We show that one may always glue a separated formal algebraic space ...</p>
-        </details>
-        <div class="links">
-          <a href="https://alex-youcis.github.io/Gluing%20Triples.pdf" class="btn">PDF</a>
-        </div>
-      </div>
-      <!-- Repeat for other publications -->
-    </div>
-  </main>
-  <footer>
-    <p>&copy; 2023 Alex Youcis. All rights reserved.</p>
-    <div class="social-icons">
-      <a href="#"><i class="fa fa-linkedin"></i></a>
-      <a href="#"><i class="fa fa-github"></i></a>
-      <!-- Add more icons as needed -->
-    </div>
-  </footer>
-</body>
-</html>
+        <
