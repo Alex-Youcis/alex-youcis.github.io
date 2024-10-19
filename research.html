@@ -11,10 +11,10 @@
   <style>
     /* Root Variables for Colors */
     :root {
-      --primary-color: #000000; /* Black */
-      --secondary-color: #ff0000; /* Red */
-      --background-color: #ffffff; /* White */
-      --text-color: #000000; /* Black */
+      --primary-color: #1D1E18; /* Dark color */
+      --secondary-color: #C5C3C6; /* Mid-tone gray */
+      --background-color: #DCDCDD; /* Light gray */
+      --text-color: #1D1E18; /* Dark color */
     }
     /* Global Styles */
     body {
@@ -30,7 +30,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 2px solid var(--secondary-color); /* Added red bottom border */
+      border-bottom: 2px solid var(--secondary-color); /* Updated border color */
     }
     .navbar {
       display: flex;
@@ -55,7 +55,7 @@
       transition: all 0.3s ease;
     }
     .navbar a:hover {
-      color: var(--secondary-color); /* Change text color to red on hover */
+      color: var(--secondary-color); /* Change text color on hover */
     }
     .navbar a:hover::after {
       left: 0;
@@ -87,7 +87,7 @@
       transition: background-color 0.3s ease; /* Smooth transition */
     }
     .publication-card .btn:hover {
-      background-color: #cc0000; /* Darker red on hover */
+      background-color: #9B999C; /* Darker shade of secondary color on hover */
     }
     /* Footer Styles */
     footer {
