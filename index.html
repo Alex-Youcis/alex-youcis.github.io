@@ -37,7 +37,7 @@
 
     .navbar {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end; /* Align items to the right */
       align-items: center;
       padding: 0 1em;
       height: 60px;
@@ -81,21 +81,25 @@
 
     /* Mobile Navigation Styles */
     @media screen and (max-width: 768px) {
+      .navbar {
+        justify-content: flex-end; /* Keep items right-aligned */
+      }
+
       .nav-links {
         display: none;
         flex-direction: column;
         background-color: var(--primary-color);
-        position: fixed;
-        top: 0;
+        position: absolute;
+        top: 60px; /* Place below the header */
         right: 0;
         width: 200px;
-        height: 100%;
-        padding-top: 60px;
       }
 
       .nav-links a {
-        margin: 1em;
+        margin: 0;
+        padding: 1em;
         text-align: right;
+        border-bottom: 1px solid var(--secondary-color);
       }
 
       .nav-mobile {
@@ -113,15 +117,14 @@
         font-size: 24px;
         cursor: pointer;
       }
-    }
 
-    /* Toggle class to display menu */
-    .navbar.responsive .nav-links {
-      display: flex;
-    }
+      .navbar.responsive .nav-links {
+        display: flex;
+      }
 
-    .navbar.responsive .nav-mobile .nav-text {
-      display: none;
+      .navbar.responsive .nav-mobile .nav-text {
+        display: none;
+      }
     }
 
     /* Main Content Styles */
@@ -235,19 +238,13 @@
     <section>
       <h2>Published Articles</h2>
       <ul class="publications">
-        <li><i>On the equal-rank case of the local Langlands correspondence</i>, with A. Bertoloni Meli, <a href="https://link.springer.com/article/10.1007/s00222-023-01186-3">Invent. Math.</a> (2023)</li>
-        <li><i>On the relation between the local Langlands correspondences of Carayol and Harris–Taylor</i>, <a href="https://www.ams.org/journals/tran/2023-376-05/S0002-9947-2022-08684-0/home.html">Trans. Amer. Math. Soc.</a> (2023)</li>
-        <li><i>A proof of the Kottwitz conjecture when \(G = \mathrm{GL}_n\)</i>, with A. Bertoloni Meli, <a href="https://doi.org/10.1017/fms.2022.3">Forum Math. Sigma</a> (2022)</li>
-        <li><i>Finiteness of cohomology of Shimura varieties and Galois representations</i>, with A. Bertoloni Meli, <a href="https://doi.org/10.1016/j.aim.2022.108265">Adv. Math.</a> (2022)</li>
-        <li><i>A comparison of higher Coleman theory on the Drinfel'd tower</i>, with S. Bijakowski and M. Straub, <a href="https://doi.org/10.1016/j.jnt.2021.05.021">J. Number Theory</a> (2021)</li>
-        <li><i>On eigenvarieties for totally indefinite quaternion algebras over totally real fields</i>, with J. Leake and M. Straub, <a href="https://doi.org/10.2140/ant.2020.14.3077">Algebra Number Theory</a> (2020)</li>
+        <li>Sample</li>
       </ul>
     </section>
     <section>
       <h2>Preprints</h2>
       <ul class="preprints">
-        <li><i>Gluing triples</i>, with P. Achinger, preprint</li>
-        <li><i>On the Kottwitz conjecture for quaternionic Shimura varieties</i>, with A. Bertoloni Meli, preprint</li>
+        <li>Sample</li>
       </ul>
     </section>
   </main>
