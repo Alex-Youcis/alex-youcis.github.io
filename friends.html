@@ -11,10 +11,11 @@
   <style>
     /* Root Variables for Colors */
     :root {
-      --primary-color: #000000; /* Black */
-      --secondary-color: #ff0000; /* Red */
-      --background-color: #ffffff; /* White */
-      --text-color: #000000; /* Black */
+      --primary-color: #1D1E18; /* Dark color */
+      --secondary-color: #C5C3C6; /* Mid-tone gray */
+      --background-color: #DCDCDD; /* Light gray */
+      --text-color: #1D1E18; /* Dark color */
+      --button-color: #BF0603; /* Button and collaborator link color */
     }
     /* Global Styles */
     body {
@@ -30,7 +31,9 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 2px solid var(--secondary-color); /* Added red bottom border */
+      /* Removed border-bottom */
+      /* Add subtle shadow */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     .navbar {
       display: flex;
@@ -55,7 +58,7 @@
       transition: all 0.3s ease;
     }
     .navbar a:hover {
-      color: var(--secondary-color); /* Change text color to red on hover */
+      color: var(--secondary-color); /* Change text color on hover */
     }
     .navbar a:hover::after {
       left: 0;
@@ -77,10 +80,12 @@
       margin-bottom: 0.5em;
     }
     .friends-list a {
-      color: var(--secondary-color);
+      color: var(--button-color); /* Use button color for links */
       text-decoration: none;
+      transition: color 0.3s ease;
     }
     .friends-list a:hover {
+      color: #9B0502; /* Darker shade on hover */
       text-decoration: underline;
     }
     /* Footer Styles */
@@ -92,6 +97,12 @@
     }
     /* Responsive Adjustments */
     @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+      }
+      .navbar a {
+        margin: 0.5em 0;
+      }
       .friends-list {
         column-count: 2;
       }
@@ -127,7 +138,7 @@
   <header>
     <nav class="navbar">
       <a href="index.html">Home</a>
-      <a href="research.html">Research</a>
+      <a href="research.html">Publications and preprints</a>
       <a href="notes.html">Expository material</a>
       <a href="#">Friends</a>
     </nav>
