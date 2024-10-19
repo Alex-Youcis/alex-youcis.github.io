@@ -12,9 +12,10 @@
     /* Root Variables for Colors */
     :root {
       --primary-color: #1D1E18; /* Dark color */
-      --secondary-color: #BF0603; /* Mid-tone gray */
+      --secondary-color: #C5C3C6; /* Mid-tone gray */
       --background-color: #DCDCDD; /* Light gray */
       --text-color: #1D1E18; /* Dark color */
+      --button-color: #BF0603; /* New button color */
     }
     /* Global Styles */
     body {
@@ -30,7 +31,9 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 2px solid var(--secondary-color); /* Updated border color */
+      /* Removed border-bottom */
+      /* Add subtle shadow */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     .navbar {
       display: flex;
@@ -78,7 +81,7 @@
       margin-top: 0;
     }
     .publication-card .btn {
-      background-color: var(--secondary-color);
+      background-color: var(--button-color);
       color: white;
       padding: 8px 12px;
       text-decoration: none;
@@ -87,7 +90,7 @@
       transition: background-color 0.3s ease; /* Smooth transition */
     }
     .publication-card .btn:hover {
-      background-color: #9B999C; /* Darker shade of secondary color on hover */
+      background-color: #9B0502; /* Darker shade of button color on hover */
     }
     /* Footer Styles */
     footer {
@@ -319,7 +322,6 @@
           <a href="https://arxiv.org/abs/1212.0771" class="btn">arXiv</a>
         </div>
       </div>
-      <!-- Add more publications as needed -->
     </div>
   </main>
   <footer>
