@@ -17,6 +17,7 @@
       --text-color: #1D1E18; /* Dark color */
       --button-color: #BF0603; /* Button and collaborator link color */
     }
+
     /* Global Styles */
     body {
       font-family: 'Open Sans', sans-serif;
@@ -25,28 +26,32 @@
       margin: 0;
       padding: 0;
     }
+
     /* Navbar Styles */
     header {
       background-color: var(--primary-color);
       position: sticky;
       top: 0;
       z-index: 1000;
-      /* Removed border-bottom */
       /* Add subtle shadow */
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
+
     .navbar {
       display: flex;
-      justify-content: center; /* Centered navigation links */
+      justify-content: center;
       padding: 1em;
     }
+
     .navbar a {
       color: white;
       text-decoration: none;
       margin: 0 1em;
-      position: relative; /* For underline effect */
-      transition: color 0.3s ease; /* Smooth color transition */
+      position: relative;
+      transition: color 0.3s ease;
+      display: block;
     }
+
     .navbar a::after {
       content: '';
       position: absolute;
@@ -57,17 +62,52 @@
       bottom: -5px;
       transition: all 0.3s ease;
     }
+
     .navbar a:hover {
-      color: var(--secondary-color); /* Change text color on hover */
+      color: var(--secondary-color);
     }
+
     .navbar a:hover::after {
       left: 0;
       width: 100%;
     }
+
+    .navbar .icon {
+      display: none;
+    }
+
+    /* Responsive Navigation Menu (Mobile) */
+    @media screen and (max-width: 768px) {
+      .navbar a { display: none; }
+      .navbar a.icon {
+        float: right;
+        display: block;
+      }
+      .navbar.responsive {
+        position: relative;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .navbar.responsive a.icon {
+        position: absolute;
+        right: 1em;
+        top: 1em;
+      }
+      .navbar.responsive a {
+        display: block;
+        width: 100%;
+        text-align: left;
+        margin: 0;
+        padding: 1em;
+        box-sizing: border-box;
+      }
+    }
+
     /* Main Content Styles */
     main {
       padding: 2em;
     }
+
     /* Footer Styles */
     footer {
       background-color: var(--primary-color);
@@ -75,6 +115,7 @@
       padding: 1em;
       text-align: center;
     }
+
     /* Image Styles */
     .profile-image {
       display: block;
@@ -83,18 +124,10 @@
       height: 375px;
       object-fit: cover;
     }
+
     /* Centered Content */
     .centered {
       text-align: center;
-    }
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-      }
-      .navbar a {
-        margin: 0.5em 0;
-      }
     }
   </style>
   <!-- MathJax Configuration -->
@@ -120,11 +153,15 @@
 </head>
 <body>
   <header>
-    <nav class="navbar">
+    <nav class="navbar" id="myNavbar">
       <a href="#">Home</a>
       <a href="research.html">Publications and preprints</a>
       <a href="notes.html">Expository material</a>
       <a href="friends.html">Friends</a>
+      <!-- Menu icon for mobile devices -->
+      <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">
+        <i class="fa fa-bars"></i>
+      </a>
     </nav>
   </header>
   <main>
@@ -148,11 +185,17 @@
   </main>
   <footer>
     <p>&copy; 2023 Alex Youcis. All rights reserved.</p>
-    <!-- Social Icons (if any) -->
-    <!-- <div class="social-icons">
-      <a href="#"><i class="fa fa-linkedin"></i></a>
-      <a href="#"><i class="fa fa-github"></i></a>
-    </div> -->
   </footer>
+  <!-- JavaScript for Mobile Menu Toggle -->
+  <script>
+    function toggleMenu() {
+      var navbar = document.getElementById("myNavbar");
+      if (navbar.className === "navbar") {
+        navbar.className += " responsive";
+      } else {
+        navbar.className = "navbar";
+      }
+    }
+  </script>
 </body>
 </html>
