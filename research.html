@@ -30,23 +30,36 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Added shadow */
+      border-bottom: 2px solid var(--secondary-color); /* Added red bottom border */
     }
     .navbar {
       display: flex;
-      justify-content: space-between;
+      justify-content: center; /* Centered navigation links */
       padding: 1em;
     }
     .navbar a {
       color: white;
       text-decoration: none;
       margin: 0 1em;
-      padding: 0.5em; /* Added padding */
+      position: relative; /* For underline effect */
+      transition: color 0.3s ease; /* Smooth color transition */
+    }
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: var(--secondary-color);
+      left: 50%;
+      bottom: -5px;
+      transition: all 0.3s ease;
     }
     .navbar a:hover {
-      color: white;
-      background-color: var(--secondary-color); /* Red background on hover */
-      border-radius: 4px; /* Rounded corners */
+      color: var(--secondary-color); /* Change text color to red on hover */
+    }
+    .navbar a:hover::after {
+      left: 0;
+      width: 100%;
     }
     /* Main Content Styles */
     main {
@@ -71,6 +84,7 @@
       text-decoration: none;
       border-radius: 4px;
       margin-right: 8px;
+      transition: background-color 0.3s ease; /* Smooth transition */
     }
     .publication-card .btn:hover {
       background-color: #cc0000; /* Darker red on hover */
@@ -136,17 +150,15 @@
 <body>
   <header>
     <nav class="navbar">
-      <div class="nav-left">
-        <a href="index.html">About Me</a>
-        <a href="#">Research</a>
-        <a href="notes.html">Expository Material</a>
-        <a href="contact.html">Contact</a>
-        <a href="friends.html">Friends</a>
-      </div>
+      <a href="index.html">About Me</a>
+      <a href="#">Research</a>
+      <a href="notes.html">Expository Material</a>
+      <a href="contact.html">Contact</a>
+      <a href="friends.html">Friends</a>
     </nav>
   </header>
   <main>
-    <h1><i class="fa fa-book"></i> Publications and preprints</h1> <!-- Updated header -->
+    <h1><i class="fa fa-book"></i> Publications and preprints</h1>
     <div class="publication-grid">
       <!-- Publication Cards -->
       <!-- First Publication -->
