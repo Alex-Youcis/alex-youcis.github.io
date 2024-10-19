@@ -158,12 +158,12 @@
     /* Publications and Preprints Styles */
     .publications, .preprints {
       list-style-type: none;
-      padding: 0;
+      padding-left: 1em;
     }
 
     .publications li::before, .preprints li::before {
       content: "\25CA"; /* Small diamond */
-      color: transparent; /* Transparent color */
+      color: var(--text-color); /* Use text color */
       display: inline-block;
       width: 1em;
       margin-left: -1em;
@@ -237,8 +237,8 @@
     </section>
     <section>
       <h2>Published Articles</h2>
-      <ul style="list-style-type: '◇ ';" class="publications">
-        <li>P. Achinger, M. Lara, and A. Youcis. <i></i>Variants of the de Jong fundamental group</>. To appear in <i></i>American Journal of Mathematics</i>. DOI:<a href="https://doi.org/10.48550/arXiv.2203.11750">10.48550/arXiv.2203.11750</a></li>
+      <ul class="publications">
+        <li>P. Achinger, M. Lara, and A. Youcis. <i>Variants of the de Jong fundamental group</i>. To appear in <i>American Journal of Mathematics</i>. DOI:<a href="https://doi.org/10.48550/arXiv.2203.11750">10.48550/arXiv.2203.11750</a></li>
       </ul>
     </section>
     <section>
