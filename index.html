@@ -86,7 +86,7 @@
       .navbar.responsive {
         position: relative;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: flex-start; /* Align items to the left */
       }
       .navbar.responsive a.icon {
         position: absolute;
@@ -96,10 +96,13 @@
       .navbar.responsive a {
         display: block;
         width: 100%;
-        text-align: left;
+        text-align: left; /* Left-align text */
         margin: 0;
         padding: 1em;
         box-sizing: border-box;
+      }
+      .navbar.responsive a:not(.icon)::after {
+        left: 10%; /* Adjust underline alignment */
       }
     }
 
