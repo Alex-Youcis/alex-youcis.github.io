@@ -1,115 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>Alex Youcis</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
-.w3-sidebar {
-  z-index: 3;
-  width: 250px;
-  top: 43px;
-  bottom: 0;
-  height: inherit;
-}
-.w3-container{
-  min-height: 100%;
-    position: relative;
-    min-width: 100%;
-    overflow: hidden;
-}
-</style>
+<head>
+  <title>Alex Youcis</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Include Fonts and Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <!-- Include CSS Styles -->
+  <style>
+    /* Root Variables for Colors */
+    :root {
+      --primary-color: #000000; /* Black */
+      --secondary-color: #ff0000; /* Red */
+      --background-color: #ffffff; /* White */
+      --text-color: #000000; /* Black */
+    }
+    /* Global Styles */
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+    }
+    /* Navbar Styles */
+    header {
+      background-color: var(--primary-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid var(--secondary-color); /* Added red bottom border */
+    }
+    .navbar {
+      display: flex;
+      justify-content: center; /* Centered navigation links */
+      padding: 1em;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1em;
+      position: relative; /* For underline effect */
+      transition: color 0.3s ease; /* Smooth color transition */
+    }
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: var(--secondary-color);
+      left: 50%;
+      bottom: -5px;
+      transition: all 0.3s ease;
+    }
+    .navbar a:hover {
+      color: var(--secondary-color); /* Change text color to red on hover */
+    }
+    .navbar a:hover::after {
+      left: 0;
+      width: 100%;
+    }
+    /* Main Content Styles */
+    main {
+      padding: 2em;
+    }
+    /* Friend Card Styles */
+    .friend-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+    }
+    .friend-card i {
+      font-size: 2em;
+      margin-right: 16px;
+      color: var(--secondary-color);
+    }
+    .friend-card a {
+      color: var(--secondary-color);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    .friend-card a:hover {
+      text-decoration: underline;
+    }
+    /* Footer Styles */
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+    /* Responsive Grid */
+    .friend-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2em;
+    }
+    @media (max-width: 768px) {
+      .friend-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    /* Centered Content */
+    .centered {
+      text-align: center;
+    }
+  </style>
+  <!-- MathJax Configuration -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process',
+      }
+    };
+  </script>
+  <!-- Include MathJax -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
 <body>
-
-<!-- Navbar -->
-<div class="w3-top">
-  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
-    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-    <a href="index.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About me</a>
-    <a href="research.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Research</a>
-    <a href="notes.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Expository material</a>
-    <a href="contact.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
-    <a href="friends.html" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Friends</a>
-  </div>
-</div>
-
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
-<div class="w3-main">
-
-  <div class="w3-row w3-padding-64">
-    <div class="w3-twothird w3-container">
-      <h1 class="w3-text-black">Friends</h1>
-      <p>Here is a list of mathematical friends and collaborators:</p>
-      <ul>
-        <li><a href="https://abhinandan.perso.math.cnrs.fr//">Abhinandan</a></li>
-        <li><a href="http://achinger.impan.pl/">Piotr Achinger</a></li>
-        <li> <a href="http://www-personal.umich.edu/~abertolo/">Alexander Bertoloni Meli</a></li>
-        <li> <a href="https://www.imo.universite-paris-saclay.fr/~kestutis.cesnavicius/">Kęstutis Česnavičius</a></li>
-        <li> <a href="https://www.skidmore.edu/mathematics/faculty/daniels.php">Patrick Daniels</a></li>
-        <li> <a href="https://terpconnect.umd.edu/~dillery/UMDWebsite.html"> Peter Dillery </a></li>
-        <li> <a href="https://eldenelmanto.com/"> Elden Elmanto </a></li>
-        <li> <a href="https://sites.google.com/umich.edu/hyg"> Haoyang Guo </a></li>
-        <li> <a href="http://www.davidrenshawhansen.net/"> David Hansen</a></li>
-        <li> <a href="https://web.stanford.edu/~pvhoften/">Pol van Hoften</a></li>
-        <li> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/">Naoki Imai</a></li>
-        <li><a href="https://arxiv.org/search/math?query=Kato%2C+Hiroki&searchtype=author&abstracts=show&order=-announced_date_first&size=50">Hiroki Kato</a></li>
-        <li><a href="https://sites.google.com/site/wansukimmaths/">Wansu Kim</a></li>
-        <li><a href="https://marcin-lara.github.io/">Marcin Lara</a></li>
-        <li><a href="https://math.berkeley.edu/~jleake/">Jonathan Leake</a></li>
-        <li><a href="http://shizhang.li/about%20me.html">Shizhang Li</a></li>
-        <li><a href="https://www.math.kyoto-u.ac.jp/~masaooi/"> Masao Oi</a></li>
-        <li><a href="https://sites.google.com/view/arghyas0"> Arghya Sadhukhan</a></li>
-        <li><a href="https://sites.google.com/view/alexander-sherman/home"> Alex Sherman</a></li>
-        <li><a href="https://ymsc.tsinghua.edu.cn/en/info/1033/2461.htm">Koji Shimizu</a></li>
-        <li><a href="https://sites.google.com/view/alexanderstokes">Alexander Stokes</a></li>
-        <li><a href="http://finnwiersig.de/">Finn Wiersig</a></li>
-        <li><a href="https://bogdanzavyalov.com/">Bogdan Zavyalov</a></li>
-      </ul>
+  <header>
+    <nav class="navbar">
+      <a href="index.html">About Me</a>
+      <a href="research.html">Research</a>
+      <a href="notes.html">Expository Material</a>
+      <a href="contact.html">Contact</a>
+      <a href="#">Friends</a>
+    </nav>
+  </header>
+  <main>
+    <h1><i class="fa fa-users"></i> Friends</h1>
+    <p>Here is a list of mathematical friends and collaborators:</p>
+    <div class="friend-grid">
+      <!-- Friend 1 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://abhinandan.perso.math.cnrs.fr/">Abhinandan</a>
+      </div>
+      <!-- Friend 2 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="http://achinger.impan.pl/">Piotr Achinger</a>
+      </div>
+      <!-- Friend 3 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="http://www-personal.umich.edu/~abertolo/">Alexander Bertoloni Meli</a>
+      </div>
+      <!-- Friend 4 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://www.imo.universite-paris-saclay.fr/~kestutis.cesnavicius/">Kęstutis Česnavičius</a>
+      </div>
+      <!-- Friend 5 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://www.skidmore.edu/mathematics/faculty/daniels.php">Patrick Daniels</a>
+      </div>
+      <!-- Friend 6 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://terpconnect.umd.edu/~dillery/UMDWebsite.html">Peter Dillery</a>
+      </div>
+      <!-- Friend 7 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://eldenelmanto.com/">Elden Elmanto</a>
+      </div>
+      <!-- Friend 8 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://sites.google.com/umich.edu/hyg">Haoyang Guo</a>
+      </div>
+      <!-- Friend 9 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="http://www.davidrenshawhansen.net/">David Hansen</a>
+      </div>
+      <!-- Friend 10 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://web.stanford.edu/~pvhoften/">Pol van Hoften</a>
+      </div>
+      <!-- Friend 11 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://www.ms.u-tokyo.ac.jp/~naoki/">Naoki Imai</a>
+      </div>
+      <!-- Friend 12 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://arxiv.org/search/math?query=Kato%2C+Hiroki&searchtype=author&abstracts=show&order=-announced_date_first&size=50">Hiroki Kato</a>
+      </div>
+      <!-- Friend 13 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://sites.google.com/site/wansukimmaths/">Wansu Kim</a>
+      </div>
+      <!-- Friend 14 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://marcin-lara.github.io/">Marcin Lara</a>
+      </div>
+      <!-- Friend 15 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://math.berkeley.edu/~jleake/">Jonathan Leake</a>
+      </div>
+      <!-- Friend 16 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="http://shizhang.li/about%20me.html">Shizhang Li</a>
+      </div>
+      <!-- Friend 17 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://www.math.kyoto-u.ac.jp/~masaooi/">Masao Oi</a>
+      </div>
+      <!-- Friend 18 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://sites.google.com/view/arghyas0">Arghya Sadhukhan</a>
+      </div>
+      <!-- Friend 19 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://sites.google.com/view/alexander-sherman/home">Alex Sherman</a>
+      </div>
+      <!-- Friend 20 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://ymsc.tsinghua.edu.cn/en/info/1033/2461.htm">Koji Shimizu</a>
+      </div>
+      <!-- Friend 21 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://sites.google.com/view/alexanderstokes">Alexander Stokes</a>
+      </div>
+      <!-- Friend 22 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="http://finnwiersig.de/">Finn Wiersig</a>
+      </div>
+      <!-- Friend 23 -->
+      <div class="friend-card">
+        <i class="fa fa-user"></i>
+        <a href="https://bogdanzavyalov.com/">Bogdan Zavyalov</a>
+      </div>
     </div>
-   
-   
-  <!-- Pagination -->
- 
-
-
-    <div class="w3-container w3-theme-l1">
-     <p style="margin-bottom:.5cm;"> Alex Youcis -- all rights reserved. </p>
-    </div>
+  </main>
+  <footer>
+    <p>&copy; 2023 Alex Youcis. All rights reserved.</p>
   </footer>
-
-<!-- END MAIN -->
-</div>
-
-<script>
-
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
-
-// Toggle between showing and hiding the sidebar, and add overlay effect
-function w3_open() {
-  if (mySidebar.style.display === 'block') {
-    mySidebar.style.display = 'none';
-    overlayBg.style.display = "none";
-  } else {
-    mySidebar.style.display = 'block';
-    overlayBg.style.display = "block";
-  }
-}
-
-// Close the sidebar with the close button
-function w3_close() {
-  mySidebar.style.display = "none";
-  overlayBg.style.display = "none";
-}
-</script>
-
 </body>
 </html>
