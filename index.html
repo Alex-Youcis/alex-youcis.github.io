@@ -11,10 +11,11 @@
   <style>
     /* Root Variables for Colors */
     :root {
-      --primary-color: #000000; /* Black */
-      --secondary-color: #ff0000; /* Red */
-      --background-color: #ffffff; /* White */
-      --text-color: #000000; /* Black */
+      --primary-color: #1D1E18; /* Dark color */
+      --secondary-color: #C5C3C6; /* Mid-tone gray */
+      --background-color: #DCDCDD; /* Light gray */
+      --text-color: #1D1E18; /* Dark color */
+      --button-color: #BF0603; /* Button and collaborator link color */
     }
     /* Global Styles */
     body {
@@ -30,19 +31,21 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 2px solid var(--secondary-color);
+      /* Removed border-bottom */
+      /* Add subtle shadow */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     .navbar {
       display: flex;
-      justify-content: center;
+      justify-content: center; /* Centered navigation links */
       padding: 1em;
     }
     .navbar a {
       color: white;
       text-decoration: none;
       margin: 0 1em;
-      position: relative;
-      transition: color 0.3s ease;
+      position: relative; /* For underline effect */
+      transition: color 0.3s ease; /* Smooth color transition */
     }
     .navbar a::after {
       content: '';
@@ -55,7 +58,7 @@
       transition: all 0.3s ease;
     }
     .navbar a:hover {
-      color: var(--secondary-color);
+      color: var(--secondary-color); /* Change text color on hover */
     }
     .navbar a:hover::after {
       left: 0;
