@@ -33,14 +33,16 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      /* Add subtle shadow */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1em;
+      height: 60px;
     }
 
     .navbar {
       display: flex;
-      justify-content: center;
-      padding: 1em;
+      align-items: center;
     }
 
     .navbar a {
@@ -76,33 +78,60 @@
       display: none;
     }
 
-    /* Responsive Navigation Menu (Mobile) */
+    /* Mobile Navigation Styles */
     @media screen and (max-width: 768px) {
-      .navbar a { display: none; }
+      header {
+        justify-content: space-between;
+      }
+
+      .navbar a {
+        display: none;
+      }
+
       .navbar a.icon {
-        float: right;
         display: block;
+        color: white;
+        font-size: 24px;
       }
+
       .navbar.responsive {
-        position: relative;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 100%;
+        background-color: var(--primary-color);
         flex-direction: column;
-        align-items: flex-start; /* Align items to the left */
+        align-items: flex-end;
+        padding-top: 60px;
       }
-      .navbar.responsive a.icon {
-        position: absolute;
-        right: 1em;
-        top: 1em;
-      }
+
       .navbar.responsive a {
         display: block;
-        width: 100%;
-        text-align: left; /* Left-align text */
-        margin: 0;
+        text-align: right;
         padding: 1em;
-        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
       }
-      .navbar.responsive a:not(.icon)::after {
-        left: 10%; /* Adjust underline alignment */
+
+      .navbar.responsive .nav-text {
+        display: none;
+      }
+    }
+
+    /* Navigation Text */
+    .nav-text {
+      color: white;
+      font-size: 18px;
+      display: none;
+    }
+
+    @media screen and (max-width: 768px) {
+      .nav-text {
+        display: block;
+      }
+      .navbar.responsive .nav-text {
+        display: none;
       }
     }
 
@@ -126,11 +155,34 @@
       width: 250px;
       height: 375px;
       object-fit: cover;
+      border: 5px solid white; /* White frame around the picture */
     }
 
     /* Centered Content */
     .centered {
       text-align: center;
+    }
+
+    /* Publications and Preprints Styles */
+    .publications, .preprints {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .publications li::before, .preprints li::before {
+      content: "\25CA"; /* Small diamond */
+      color: transparent; /* Transparent color */
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    .publications li, .preprints li {
+      margin-bottom: 0.5em;
+    }
+
+    .publications i, .preprints i {
+      font-style: italic;
     }
   </style>
   <!-- MathJax Configuration -->
@@ -156,6 +208,7 @@
 </head>
 <body>
   <header>
+    <span class="nav-text">Navigation</span>
     <nav class="navbar" id="myNavbar">
       <a href="#">Home</a>
       <a href="research.html">Publications and preprints</a>
@@ -185,6 +238,18 @@
       <h2>My CV</h2>
       <p>A more detailed account of my professional activities can be found in my <a href="CV (10:15:24).pdf">CV</a>.</p>
     </section>
+    <section>
+      <h2>Published Articles</h2>
+      <ul class="publications">
+        <li><i>Sample</i>, (joint with A. Bertoloni Meli), <a href="google.com</a> (2023)</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Preprints</h2>
+      <ul class="preprints">
+        <li><i>Sample</i>, (joint with A. Bertoloni Meli), <a href="google.com</a> (2023)</li>
+      </ul>
+    </section>
   </main>
   <footer>
     <p>&copy; 2023 Alex Youcis. All rights reserved.</p>
@@ -193,10 +258,13 @@
   <script>
     function toggleMenu() {
       var navbar = document.getElementById("myNavbar");
+      var navText = document.querySelector(".nav-text");
       if (navbar.className === "navbar") {
         navbar.className += " responsive";
+        navText.style.display = "none";
       } else {
         navbar.className = "navbar";
+        navText.style.display = "block";
       }
     }
   </script>
