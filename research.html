@@ -15,7 +15,7 @@
       --secondary-color: #C5C3C6; /* Mid-tone gray */
       --background-color: #DCDCDD; /* Light gray */
       --text-color: #1D1E18; /* Dark color */
-      --button-color: #BF0603; /* New button color */
+      --button-color: #BF0603; /* Button and collaborator link color */
     }
     /* Global Styles */
     body {
@@ -92,6 +92,15 @@
     .publication-card .btn:hover {
       background-color: #9B0502; /* Darker shade of button color on hover */
     }
+    /* Collaborator Links Styles */
+    .publication-card .collaborator-link {
+      color: var(--button-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .publication-card .collaborator-link:hover {
+      text-decoration: underline;
+    }
     /* Footer Styles */
     footer {
       background-color: var(--primary-color);
@@ -111,11 +120,11 @@
       }
     }
     /* Links inside publication-card */
-    .publication-card a {
+    .publication-card a:not(.btn):not(.collaborator-link) {
       color: var(--secondary-color);
       text-decoration: none;
     }
-    .publication-card a:hover {
+    .publication-card a:not(.btn):not(.collaborator-link):hover {
       text-decoration: underline;
     }
     /* Details summary */
@@ -166,7 +175,7 @@
       <!-- First Publication -->
       <div class="publication-card">
         <h2>Gluing Triples</h2>
-        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/">Piotr Achinger</a></p>
+        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a></p>
         <p><strong>Journal/Status:</strong> Draft</p>
         <p><strong>Tags:</strong> Rigid analytic geometry</p>
         <details>
@@ -180,7 +189,7 @@
       <!-- Second Publication -->
       <div class="publication-card">
         <h2>A Tannakian Framework for Prismatic \(F\)-crystals</h2>
-        <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/">Naoki Imai</a> and Hiroki Kato</p>
+        <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
         <p><strong>Journal/Status:</strong> Submitted</p>
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-crystals, \(p\)-adic shtukas, Tannakian formalism</p>
         <details>
@@ -194,7 +203,7 @@
       <!-- Third Publication -->
       <div class="publication-card">
         <h2>Canonical Integral Models of Shimura Varieties of Abelian Type</h2>
-        <p><strong>Collaborators:</strong> <a href="https://www.skidmore.edu/mathematics/faculty/daniels.php">Patrick Daniels</a></p>
+        <p><strong>Collaborators:</strong> <a href="https://www.skidmore.edu/mathematics/faculty/daniels.php" class="collaborator-link">Patrick Daniels</a></p>
         <p><strong>Journal/Status:</strong> Submitted</p>
         <p><strong>Tags:</strong> Shimura varieties, integral models, \(p\)-adic Hodge theory, \(p\)-adic shtukas</p>
         <details>
@@ -208,7 +217,7 @@
       <!-- Fourth Publication -->
       <div class="publication-card">
         <h2>The Prismatic Realization Functor for Shimura Varieties of Abelian Type</h2>
-        <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/">Naoki Imai</a> and Hiroki Kato</p>
+        <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
         <p><strong>Journal/Status:</strong> Submitted</p>
         <p><strong>Tags:</strong> Shimura varieties, integral models, \(p\)-adic Hodge theory, prismatic \(F\)-gauges, Fontaine--Laffaille theory</p>
         <details>
@@ -222,7 +231,7 @@
       <!-- Fifth Publication -->
       <div class="publication-card">
         <h2>The Analytic Topology is Enough for the \(B_\mathrm{dR}^+\)-Grassmannian</h2>
-        <p><strong>Collaborators:</strong> <a href="https://www.imo.universite-paris-saclay.fr/~kestutis.cesnavicius/">Kęstutis Česnavičius</a></p>
+        <p><strong>Collaborators:</strong> <a href="https://www.imo.universite-paris-saclay.fr/~kestutis.cesnavicius/" class="collaborator-link">Kęstutis Česnavičius</a></p>
         <p><strong>Journal/Status:</strong> Submitted</p>
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, torsors, Grothendieck--Serre conjecture</p>
         <details>
@@ -236,7 +245,7 @@
       <!-- Sixth Publication -->
       <div class="publication-card">
         <h2>The Jacobson--Morozov Morphism for Langlands Parameters in the Relative Setting</h2>
-        <p><strong>Collaborators:</strong> <a href="http://www-personal.umich.edu/~abertolo/">Alexander Bertoloni Meli</a> and <a href="https://www.ms.u-tokyo.ac.jp/~naoki/">Naoki Imai</a></p>
+        <p><strong>Collaborators:</strong> <a href="http://www-personal.umich.edu/~abertolo/" class="collaborator-link">Alexander Bertoloni Meli</a> and <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a></p>
         <p><strong>Journal/Status:</strong> <i>International Mathematics Research Notices</i></p>
         <p><strong>Tags:</strong> Langlands conjecture, \(L\)-parameters, moduli theory</p>
         <details>
@@ -251,7 +260,7 @@
       <!-- Seventh Publication -->
       <div class="publication-card">
         <h2>Specialization for the Pro-étale Fundamental Group</h2>
-        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/">Marcin Lara</a></p>
+        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></p>
         <p><strong>Journal/Status:</strong> <i>Compositio Mathematica</i></p>
         <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, de Jong fundamental group, pro-étale fundamental group</p>
         <details>
@@ -266,7 +275,7 @@
       <!-- Eighth Publication -->
       <div class="publication-card">
         <h2>Geometric Arcs and Fundamental Groups of Rigid Spaces</h2>
-        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/">Marcin Lara</a></p>
+        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></p>
         <p><strong>Journal/Status:</strong> <i>Journal für die reine und angewandte Mathematik</i></p>
         <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, de Jong fundamental group, pro-étale fundamental group</p>
         <details>
@@ -281,7 +290,7 @@
       <!-- Ninth Publication -->
       <div class="publication-card">
         <h2>Variants of the de Jong Fundamental Group</h2>
-        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/">Marcin Lara</a></p>
+        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></p>
         <p><strong>Journal/Status:</strong> To appear in <i>American Journal of Mathematics</i></p>
         <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, geometric arcs, de Jong fundamental group</p>
         <details>
@@ -295,7 +304,7 @@
       <!-- Tenth Publication -->
       <div class="publication-card">
         <h2>An Approach to the Characterization of the Local Langlands Correspondence</h2>
-        <p><strong>Collaborators:</strong> <a href="http://www-personal.umich.edu/~abertolo/">Alexander Bertoloni Meli</a></p>
+        <p><strong>Collaborators:</strong> <a href="http://www-personal.umich.edu/~abertolo/" class="collaborator-link">Alexander Bertoloni Meli</a></p>
         <p><strong>Journal/Status:</strong> <i>Representation Theory</i></p>
         <p><strong>Tags:</strong> The Langlands program, representation theory, endoscopy</p>
         <details>
