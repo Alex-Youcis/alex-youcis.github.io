@@ -1,136 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>Alex Youcis</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
-.w3-sidebar {
-  z-index: 3;
-  width: 250px;
-  top: 43px;
-  bottom: 0;
-  height: inherit;
-}
-.w3-container{
-  min-height: 100%;
-    position: relative;
-    min-width: 100%;
-    overflow: hidden;
-}
-</style>
+<head>
+  <title>Alex Youcis</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Include Fonts and Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <!-- Include CSS Styles -->
+  <style>
+    /* Root Variables for Colors */
+    :root {
+      --primary-color: #000000; /* Black */
+      --secondary-color: #ff0000; /* Red */
+      --background-color: #ffffff; /* White */
+      --text-color: #000000; /* Black */
+    }
+    /* Global Styles */
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+    }
+    /* Navbar Styles */
+    header {
+      background-color: var(--primary-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid var(--secondary-color); /* Added red bottom border */
+    }
+    .navbar {
+      display: flex;
+      justify-content: center; /* Centered navigation links */
+      padding: 1em;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1em;
+      position: relative; /* For underline effect */
+      transition: color 0.3s ease; /* Smooth color transition */
+    }
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: var(--secondary-color);
+      left: 50%;
+      bottom: -5px;
+      transition: all 0.3s ease;
+    }
+    .navbar a:hover {
+      color: var(--secondary-color); /* Change text color to red on hover */
+    }
+    .navbar a:hover::after {
+      left: 0;
+      width: 100%;
+    }
+    /* Main Content Styles */
+    main {
+      padding: 2em;
+    }
+    /* Publication Card Styles */
+    .publication-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .publication-card h2 {
+      margin-top: 0;
+    }
+    .publication-card .btn {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 8px 12px;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-right: 8px;
+      transition: background-color 0.3s ease; /* Smooth transition */
+    }
+    .publication-card .btn:hover {
+      background-color: #cc0000; /* Darker red on hover */
+    }
+    /* Footer Styles */
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+    /* Responsive Grid */
+    .publication-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2em;
+    }
+    @media (max-width: 768px) {
+      .publication-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    /* Links inside publication-card */
+    .publication-card a {
+      color: var(--secondary-color);
+      text-decoration: none;
+    }
+    .publication-card a:hover {
+      text-decoration: underline;
+    }
+    /* Details summary */
+    details summary {
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    /* Increased spacing between description and links */
+    .links {
+      margin-top: 16px;
+    }
+    /* Centered Content */
+    .centered {
+      text-align: center;
+    }
+    /* Image Styles */
+    .profile-image {
+      display: block;
+      margin: 0 auto;
+      width: 250px;
+      height: 375px;
+      object-fit: cover;
+    }
+  </style>
+  <!-- MathJax Configuration -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process',
+      }
+    };
+  </script>
+  <!-- Include MathJax -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
 <body>
-
-<!-- Navbar -->
-<div class="w3-top">
-  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
-    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-    <a href="index.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About me</a>
-    <a href="research.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Research</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Expository material</a>
-    <a href="contact.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
-    <a href="friends.html" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Friends</a>
-  </div>
-</div>
-
-
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
-<div class="w3-main">
-
-  <div class="w3-row w3-padding-64">
-    <div class="w3-twothird w3-container">
-      <h1 class="w3-text-black">Expository Notes</h1>
-      <p>Below are some highly informal notes I have written for various purposes in no particular order. If you choose to read them, exercise caution due to their unpolishedness and age:
-          <ul><li><a href="MatsushimaNotes.pdf">Matsushima's formula and the Langlands conjecture </a>--These are informal notes meant to briefly summarize some of the ideas surrounding the work of my thesis and my work with A. Bertoloni Meli. As an added bonus I try to motivate the Langlands conjecture via the cohomology of Shimura varieties.</li>
-            <li><a href="Notes for p-adic reps.pdf"> Representations of <i>p</i>-adic reductive groups</a> -- These are very old notes written for a seminar on automorphic representations. They discuss some examples of representations of reductive <i>p</i>-adic groups.</li>
-        <li><a href="gl2reps.pdf"> Representations of adelic groups</a>-- These are very old notes written for a seminar on automorphic representations. They discuss some examples of automorphic representations for GL<sub>2</sub>.</li>
-    <li><a href="localglobalgalois.pdf"> Galois groups of local and global fields</a> -- These are very old notes written for a seminar on Galois representations. The goal is to essentially discuss some basic aspects for the Galois groups of local and global fields, give some geometric intuition for these objects, and explain why one would expect them to be difficult to study.</li>
-    <li><a href="weilnotes.pdf"> Weil-Deligne representations and <i>p</i>-adic Hodge theory</a> -- These are very old notes written for a seminar on Galois representations. The goal is to motivate Weil-Deligne representations (i.e. why they naturally show up), <i>p</i>-adic Hodge theory, and how the two notions connect.</li>
-            <li><a href="Modularreps.pdf"> Modular representations of <i>p</i>-adic reductive groups</a> -- These notes are a discussion on the theory of characteristic <i>p</i>-representations of <i>p</i>-adic and <i>t</i>-adic reductive groups and their relationship with the chararacteristic 0 theory. There is, in particular, a discussion of Kazhdan's theorem which relates Hecke algebras of <i>p</i>-adic and <i>t</i>-adic groups. </li>
-            <li><a href="torsors.pdf"> A 'brief' discussion of torsors</a> -- These are notes written for two mentees I had in an independent study concerning the etale fundamental group. The goal was to motivate cohomology (in particular etale cohomology) via torsors. I think that the notes are well-intentioned and do genuniely have interesting didcatic value buried deep inside them. Unfortunately, they are long-winded, meandering, and overly self-indulgent. One day I intend to go back and tighten them up.</li>
-        </ul>
-        </p>
+  <header>
+    <nav class="navbar">
+      <a href="index.html">About Me</a>
+      <a href="research.html">Research</a>
+      <a href="#">Expository Material</a>
+      <a href="contact.html">Contact</a>
+      <a href="friends.html">Friends</a>
+    </nav>
+  </header>
+  <main>
+    <h1><i class="fa fa-pencil"></i> Expository Notes</h1>
+    <div class="publication-grid">
+      <!-- Note 1 -->
+      <div class="publication-card">
+        <h2>Matsushima's Formula and the Langlands Conjecture</h2>
+        <p><strong>Description:</strong> These are informal notes meant to briefly summarize some of the ideas surrounding the work of my thesis and my work with A. Bertoloni Meli. As an added bonus, I try to motivate the Langlands conjecture via the cohomology of Shimura varieties.</p>
+        <div class="links">
+          <a href="MatsushimaNotes.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- Note 2 -->
+      <div class="publication-card">
+        <h2>Representations of \(p\)-adic Reductive Groups</h2>
+        <p><strong>Description:</strong> These are very old notes written for a seminar on automorphic representations. They discuss some examples of representations of reductive \(p\)-adic groups.</p>
+        <div class="links">
+          <a href="Notes for p-adic reps.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- Note 3 -->
+      <div class="publication-card">
+        <h2>Representations of Adelic Groups</h2>
+        <p><strong>Description:</strong> These are very old notes written for a seminar on automorphic representations. They discuss some examples of automorphic representations for \(\mathrm{GL}_2\).</p>
+        <div class="links">
+          <a href="gl2reps.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- Note 4 -->
+      <div class="publication-card">
+        <h2>Galois Groups of Local and Global Fields</h2>
+        <p><strong>Description:</strong> These are very old notes written for a seminar on Galois representations. The goal is to essentially discuss some basic aspects of the Galois groups of local and global fields, give some geometric intuition for these objects, and explain why one would expect them to be difficult to study.</p>
+        <div class="links">
+          <a href="localglobalgalois.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- Note 5 -->
+      <div class="publication-card">
+        <h2>Weil–Deligne Representations and \(p\)-adic Hodge Theory</h2>
+        <p><strong>Description:</strong> These are very old notes written for a seminar on Galois representations. The goal is to motivate Weil–Deligne representations (i.e., why they naturally show up), \(p\)-adic Hodge theory, and how the two notions connect.</p>
+        <div class="links">
+          <a href="weilnotes.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- Note 6 -->
+      <div class="publication-card">
+        <h2>Modular Representations of \(p\)-adic Reductive Groups</h2>
+        <p><strong>Description:</strong> These notes are a discussion on the theory of characteristic \(p\) representations of \(p\)-adic and \(t\)-adic reductive groups and their relationship with the characteristic 0 theory. There is, in particular, a discussion of Kazhdan's theorem which relates Hecke algebras of \(p\)-adic and \(t\)-adic groups.</p>
+        <div class="links">
+          <a href="Modularreps.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- Note 7 -->
+      <div class="publication-card">
+        <h2>A 'Brief' Discussion of Torsors</h2>
+        <p><strong>Description:</strong> These are notes written for two mentees I had in an independent study concerning the étale fundamental group. The goal was to motivate cohomology (in particular étale cohomology) via torsors. I think that the notes are well-intentioned and do genuinely have interesting didactic value buried deep inside them. Unfortunately, they are long-winded, meandering, and overly self-indulgent. One day I intend to go back and tighten them up.</p>
+        <div class="links">
+          <a href="torsors.pdf" class="btn">PDF</a>
+        </div>
+      </div>
     </div>
-  
-  <p>
-  <p>
 
-  <div class="w3-row w3-padding-64">
-    <div class="w3-twothird w3-container">
-      <h1 class="w3-text-black">Some talk slides</h1>
-      <p>
-        Below are the slides from selected talks:
-          <ul><li>My <a href="CARTOON.pdf"> talk</a> at the <a href="http://www-personal.umich.edu/~kkoziol/cartoon/cartoon.html"> CARTOON Conference</a> on my work with Bertoloni Meli on characterizing the local Langlands conjecture.</li>
-              <li>My <a href="TodaiTalk.pdf"> talk </a> at the University of Tokyo number theory seminar.</li>
-        </ul>
-        </p>
+    <h1><i class="fa fa-slideshare"></i> Some Talk Slides</h1>
+    <div class="publication-grid">
+      <!-- Talk 1 -->
+      <div class="publication-card">
+        <h2>Talk at the CARTOON Conference</h2>
+        <p><strong>Description:</strong> My <a href="CARTOON.pdf">talk</a> at the <a href="http://www-personal.umich.edu/~kkoziol/cartoon/cartoon.html">CARTOON Conference</a> on my work with Bertoloni Meli on characterizing the local Langlands conjecture.</p>
+        <div class="links">
+          <a href="CARTOON.pdf" class="btn">Slides</a>
+        </div>
+      </div>
+      <!-- Talk 2 -->
+      <div class="publication-card">
+        <h2>Talk at the University of Tokyo Number Theory Seminar</h2>
+        <p><strong>Description:</strong> My <a href="TodaiTalk.pdf">talk</a> at the University of Tokyo number theory seminar.</p>
+        <div class="links">
+          <a href="TodaiTalk.pdf" class="btn">Slides</a>
+        </div>
+      </div>
     </div>
+
+    <h1><i class="fa fa-rss"></i> My Blog</h1>
+    <p>I also have a blog: <a href="https://ayoucis.wordpress.com/">Hard Arithmetic</a>. In addition to the notes listed above, it contains many other informal posts aimed at various levels, mostly about algebraic geometry and/or number theory.</p>
+
+    <h1><i class="fa fa-users"></i> Forum Accounts</h1>
+    <p>I occasionally contribute to <a href="https://math.stackexchange.com/">Math Stack Exchange</a>.</p>
     <p>
-      <p>
-    <div class="w3-row w3-padding-64">
-            <div class="w3-twothird w3-container">
-              <h1 class="w3-text-black">My blog</h1>
-              <p>I also have a blog: <a href="https://ayoucis.wordpress.com/">Hard Arithmetic</a>. In addition to the notes listed above, it contains many other informal posts aimed at various levels, mostly about algebraic geometry and/or number theory.
-                
-                </p>
-            </div>
-      
-      <p>
-      <p>
-    <div class="w3-row w3-padding-64">
-            <div class="w3-twothird w3-container">
-              <h1 class="w3-text-black">Forum accounts</h1>
-              <p>I occasionally contribute to <a href="https://math.stackexchange.com/">math.stackexchange</a>. 
-                <p>
-                  <a href="https://math.stackexchange.com/users/16497/alex-youcis"><img src="https://math.stackexchange.com/users/flair/16497.png" width="208" height="58" alt="profile for Alex Youcis at Mathematics Stack Exchange, Q&amp;A for people studying math at any level and professionals in related fields" title="profile for Alex Youcis at Mathematics Stack Exchange, Q&amp;A for people studying math at any level and professionals in related fields"></a>
-                
-                </p>
-            </div>
+      <a href="https://math.stackexchange.com/users/16497/alex-youcis"><img src="https://math.stackexchange.com/users/flair/16497.png" width="208" height="58" alt="profile for Alex Youcis at Mathematics Stack Exchange, Q&amp;A for people studying math at any level and professionals in related fields" title="profile for Alex Youcis at Mathematics Stack Exchange, Q&amp;A for people studying math at any level and professionals in related fields"></a>
+    </p>
 
-  <!-- Pagination -->
-
-
-
-
-    <div class="w3-container w3-theme-l1">
-      <p style="margin-bottom:.5cm;"> Alex Youcis -- all rights reserved. </p>
-    </div>
+  </main>
+  <footer>
+    <p>&copy; 2023 Alex Youcis. All rights reserved.</p>
   </footer>
-
-<!-- END MAIN -->
-</div>
-
-<script>
-
-
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
-
-// Toggle between showing and hiding the sidebar, and add overlay effect
-function w3_open() {
-  if (mySidebar.style.display === 'block') {
-    mySidebar.style.display = 'none';
-    overlayBg.style.display = "none";
-  } else {
-    mySidebar.style.display = 'block';
-    overlayBg.style.display = "block";
-  }
-}
-
-// Close the sidebar with the close button
-function w3_close() {
-  mySidebar.style.display = "none";
-  overlayBg.style.display = "none";
-}
-</script>
-
 </body>
 </html>
