@@ -11,10 +11,11 @@
   <style>
     /* Root Variables for Colors */
     :root {
-      --primary-color: #000000; /* Black */
-      --secondary-color: #ff0000; /* Red */
-      --background-color: #ffffff; /* White */
-      --text-color: #000000; /* Black */
+      --primary-color: #1D1E18; /* Dark color */
+      --secondary-color: #C5C3C6; /* Mid-tone gray */
+      --background-color: #DCDCDD; /* Light gray */
+      --text-color: #1D1E18; /* Dark color */
+      --button-color: #BF0603; /* Button and collaborator link color */
     }
     /* Global Styles */
     body {
@@ -30,7 +31,9 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 2px solid var(--secondary-color); /* Added red bottom border */
+      /* Removed border-bottom */
+      /* Add subtle shadow */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     .navbar {
       display: flex;
@@ -55,7 +58,7 @@
       transition: all 0.3s ease;
     }
     .navbar a:hover {
-      color: var(--secondary-color); /* Change text color to red on hover */
+      color: var(--secondary-color); /* Change text color on hover */
     }
     .navbar a:hover::after {
       left: 0;
@@ -78,7 +81,7 @@
       margin-top: 0;
     }
     .publication-card .btn {
-      background-color: var(--secondary-color);
+      background-color: var(--button-color);
       color: white;
       padding: 8px 12px;
       text-decoration: none;
@@ -87,7 +90,7 @@
       transition: background-color 0.3s ease; /* Smooth transition */
     }
     .publication-card .btn:hover {
-      background-color: #cc0000; /* Darker red on hover */
+      background-color: #9B0502; /* Darker shade of button color on hover */
     }
     /* Footer Styles */
     footer {
@@ -106,13 +109,19 @@
       .publication-grid {
         grid-template-columns: 1fr;
       }
+      .navbar {
+        flex-direction: column;
+      }
+      .navbar a {
+        margin: 0.5em 0;
+      }
     }
     /* Links inside publication-card */
-    .publication-card a {
+    .publication-card a:not(.btn) {
       color: var(--secondary-color);
       text-decoration: none;
     }
-    .publication-card a:hover {
+    .publication-card a:not(.btn):hover {
       text-decoration: underline;
     }
     /* Details summary */
