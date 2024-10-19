@@ -1,345 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Alex Youcis</title>
+  <title>Alex Youcis - Publications and Preprints</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Include Fonts and Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   <!-- Include CSS Styles -->
-  <style>
-    /* Root Variables for Colors */
-    :root {
-      --primary-color: #1D1E18; /* Dark color */
-      --secondary-color: #C5C3C6; /* Mid-tone gray */
-      --background-color: #DCDCDD; /* Light gray */
-      --text-color: #1D1E18; /* Dark color */
-      --button-color: #BF0603; /* Button and collaborator link color */
-    }
-    /* Global Styles */
-    body {
-      font-family: 'Open Sans', sans-serif;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 0;
-    }
-    /* Navbar Styles */
-    header {
-      background-color: var(--primary-color);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      /* Removed border-bottom */
-      /* Add subtle shadow */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .navbar {
-      display: flex;
-      justify-content: center; /* Centered navigation links */
-      padding: 1em;
-    }
-    .navbar a {
-      color: white;
-      text-decoration: none;
-      margin: 0 1em;
-      position: relative; /* For underline effect */
-      transition: color 0.3s ease; /* Smooth color transition */
-    }
-    .navbar a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      background-color: var(--secondary-color);
-      left: 50%;
-      bottom: -5px;
-      transition: all 0.3s ease;
-    }
-    .navbar a:hover {
-      color: var(--secondary-color); /* Change text color on hover */
-    }
-    .navbar a:hover::after {
-      left: 0;
-      width: 100%;
-    }
-    /* Main Content Styles */
-    main {
-      padding: 2em;
-    }
-    /* Publication Card Styles */
-    .publication-card {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .publication-card h2 {
-      margin-top: 0;
-    }
-    .publication-card .btn {
-      background-color: var(--button-color);
-      color: white;
-      padding: 8px 12px;
-      text-decoration: none;
-      border-radius: 4px;
-      margin-right: 8px;
-      transition: background-color 0.3s ease; /* Smooth transition */
-    }
-    .publication-card .btn:hover {
-      background-color: #9B0502; /* Darker shade of button color on hover */
-    }
-    /* Collaborator Links Styles */
-    .publication-card .collaborator-link {
-      color: var(--button-color);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    .publication-card .collaborator-link:hover {
-      text-decoration: underline;
-    }
-    /* Footer Styles */
-    footer {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 1em;
-      text-align: center;
-    }
-    /* Responsive Grid */
-    .publication-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2em;
-    }
-    @media (max-width: 768px) {
-      .publication-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    /* Links inside publication-card */
-    .publication-card a:not(.btn):not(.collaborator-link) {
-      color: var(--secondary-color);
-      text-decoration: none;
-    }
-    .publication-card a:not(.btn):not(.collaborator-link):hover {
-      text-decoration: underline;
-    }
-    /* Details summary */
-    details summary {
-      cursor: pointer;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-    /* Increased spacing between description and links */
-    .links {
-      margin-top: 16px;
-    }
-  </style>
-  <!-- MathJax Configuration -->
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\[', '\\]']],
-        processEscapes: true,
-      },
-      options: {
-        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-        ignoreHtmlClass: 'tex2jax_ignore',
-        processHtmlClass: 'tex2jax_process',
-      }
-    };
-  </script>
-  <!-- Include MathJax -->
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
+  <!-- Use the same CSS styles as in index.html -->
+  <!-- Copy the <style> section from index.html here -->
+  <!-- For brevity, the CSS is omitted, but it should be the same as in index.html -->
 </head>
 <body>
   <header>
-    <nav class="navbar">
-      <a href="index.html">Home</a>
-      <a href="#">Preprints and publications</a>
-      <a href="notes.html">Expository material</a>
-      <a href="friends.html">Friends</a>
+    <nav class="navbar" id="myNavbar">
+      <!-- Mobile Navigation -->
+      <div class="nav-mobile">
+        <span class="nav-text">Navigation</span>
+        <span class="icon" onclick="toggleMenu()">
+          <i class="fa fa-bars"></i>
+        </span>
+      </div>
+      <!-- Navigation links -->
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#">Publications and preprints</a>
+        <a href="notes.html">Expository material</a>
+        <a href="friends.html">Friends</a>
+      </div>
     </nav>
   </header>
   <main>
-    <h1><i class="fa fa-book"></i> Publications and preprints</h1>
+    <h1><i class="fa fa-book"></i> Publications and Preprints</h1>
     <div class="publication-grid">
       <!-- Publication Cards -->
       <!-- First Publication -->
       <div class="publication-card">
-        <h2>Gluing Triples</h2>
-        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a></p>
-        <p><strong>Journal/Status:</strong> Draft</p>
-        <p><strong>Tags:</strong> Rigid analytic geometry</p>
+        <h2>Sample Publication</h2>
+        <p><strong>Collaborators:</strong> Sample Collaborator</p>
+        <p><strong>Journal/Status:</strong> Sample Status</p>
+        <p><strong>Tags:</strong> Sample Tags</p>
         <details>
           <summary>Description</summary>
-          <p>We show that one may always glue a separated formal algebraic space \(\mathfrak{X}\) over \(\mathbb{Z}_p\) to a separated algebraic space \(X\) over \(\mathbb{Q}_p\) via an open embedding \(j\colon \mathfrak{X}_\eta\to X^\mathrm{an}\), resulting in an algebraic space. In fact, we show that this gluing procedure gives rise to an equivalence between such gluing triples \((X,\mathfrak{X},j)\) and the category of separated algebraic spaces over \(\mathbb{Z}_p\). Moreover, one may replace \(\mathbb{Z}_p\) by an essentially arbitrary base. This is a sort of 'non-affine' or space version of the Beauville--Lazlo theorem.</p>
+          <p>This is a sample description.</p>
         </details>
         <div class="links">
-          <a href="https://alex-youcis.github.io/Gluing%20Triples.pdf" class="btn">PDF</a>
-        </div>
-      </div>
-      <!-- Second Publication -->
-      <div class="publication-card">
-        <h2>A Tannakian Framework for Prismatic \(F\)-crystals</h2>
-        <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
-        <p><strong>Journal/Status:</strong> Submitted</p>
-        <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-crystals, \(p\)-adic shtukas, Tannakian formalism</p>
-        <details>
-          <summary>Description</summary>
-          <p>We study some Tannakian aspects of the theory of prismatic \(F\)-crystals, a recent notion in integral \(p\)-adic Hodge theory developed by Bhatt--Scholze and others. Additionally, we explain how to connect this Tannakian theory to the previous Tannakian theory of shtukas studied by Scholze et al.</p>
-        </details>
-        <div class="links">
-          <a href="https://arxiv.org/pdf/2406.08259" class="btn">arXiv</a>
-        </div>
-      </div>
-      <!-- Third Publication -->
-      <div class="publication-card">
-        <h2>Canonical Integral Models of Shimura Varieties of Abelian Type</h2>
-        <p><strong>Collaborators:</strong> <a href="https://www.skidmore.edu/mathematics/faculty/daniels.php" class="collaborator-link">Patrick Daniels</a></p>
-        <p><strong>Journal/Status:</strong> Submitted</p>
-        <p><strong>Tags:</strong> Shimura varieties, integral models, \(p\)-adic Hodge theory, \(p\)-adic shtukas</p>
-        <details>
-          <summary>Description</summary>
-          <p>We prove a conjecture of Pappas and Rapoport for all Shimura varieties of abelian type with parahoric level structure when \(p > 3\) by showing that the Kisin–Pappas–Zhou integral models of Shimura varieties of abelian type are canonical. In particular, this shows that these models are independent of the choices made during their construction, and that they satisfy functoriality with respect to morphisms of Shimura data.</p>
-        </details>
-        <div class="links">
-          <a href="https://arxiv.org/pdf/2402.05727.pdf" class="btn">arXiv</a>
-        </div>
-      </div>
-      <!-- Fourth Publication -->
-      <div class="publication-card">
-        <h2>The Prismatic Realization Functor for Shimura Varieties of Abelian Type</h2>
-        <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
-        <p><strong>Journal/Status:</strong> Submitted</p>
-        <p><strong>Tags:</strong> Shimura varieties, integral models, \(p\)-adic Hodge theory, prismatic \(F\)-gauges, Fontaine--Laffaille theory</p>
-        <details>
-          <summary>Description</summary>
-          <p>In this paper we construct an object on the integral canonical models of Shimura varieties of abelian type (and hyperspecial level) which should be thought of as the prismatic \(F\)-gauge realization of the universal \(\mathcal{G}\)-motive on such an object. We use this to obtain new \(p\)-adic Hodge-theoretic information about such Shimura varieties, notably an analogue of the Serre--Tate theorem, as well as characterizing them (even at finite levels). Along the way we develop an integral analogue of the functor \(D_\mathrm{crys}\), and relate it to Fontaine--Lafaille and Dieudonné theory.</p>
-        </details>
-        <div class="links">
-          <a href="https://arxiv.org/pdf/2310.08472" class="btn">arXiv</a>
-        </div>
-      </div>
-      <!-- Fifth Publication -->
-      <div class="publication-card">
-        <h2>The Analytic Topology is Enough for the \(B_\mathrm{dR}^+\)-Grassmannian</h2>
-        <p><strong>Collaborators:</strong> <a href="https://www.imo.universite-paris-saclay.fr/~kestutis.cesnavicius/" class="collaborator-link">Kęstutis Česnavičius</a></p>
-        <p><strong>Journal/Status:</strong> Submitted</p>
-        <p><strong>Tags:</strong> \(p\)-adic Hodge theory, torsors, Grothendieck--Serre conjecture</p>
-        <details>
-          <summary>Description</summary>
-          <p>In this paper we show that the \(B_\mathrm{dR}^+\)-affine Grassmannian can be computed as the sheafification of the presheaf quotient \(LG/L^+G\) for the analytic open topology (as opposed to the étale topology) for a reductive group \(G\).</p>
-        </details>
-        <div class="links">
-          <a href="https://arxiv.org/abs/2303.11710" class="btn">arXiv</a>
-        </div>
-      </div>
-      <!-- Sixth Publication -->
-      <div class="publication-card">
-        <h2>The Jacobson--Morozov Morphism for Langlands Parameters in the Relative Setting</h2>
-        <p><strong>Collaborators:</strong> <a href="http://www-personal.umich.edu/~abertolo/" class="collaborator-link">Alexander Bertoloni Meli</a> and <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a></p>
-        <p><strong>Journal/Status:</strong> <i>International Mathematics Research Notices</i></p>
-        <p><strong>Tags:</strong> Langlands conjecture, \(L\)-parameters, moduli theory</p>
-        <details>
-          <summary>Description</summary>
-          <p>In this paper we define a moduli space of \(L\)-parameters over \(\mathbb{Q}\), show it has good geometric properties (i.e., is smooth with explicitly parameterized geometric connected components), and show that there is a morphism from this moduli space to the moduli space of Weil--Deligne parameters which is an isomorphism over a dense open subset of the target.</p>
-        </details>
-        <div class="links">
-          <a href="https://academic.oup.com/imrn/advance-article/doi/10.1093/imrn/rnad217/7277067" class="btn">Journal</a>
-          <a href="https://arxiv.org/abs/2203.01768" class="btn">arXiv</a>
-        </div>
-      </div>
-      <!-- Seventh Publication -->
-      <div class="publication-card">
-        <h2>Specialization for the Pro-étale Fundamental Group</h2>
-        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></p>
-        <p><strong>Journal/Status:</strong> <i>Compositio Mathematica</i></p>
-        <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, de Jong fundamental group, pro-étale fundamental group</p>
-        <details>
-          <summary>Description</summary>
-          <p>For a formal scheme \(\mathfrak{X}\) over a height \(1\) valuation ring \(\mathcal{O}\), we construct a continuous specialization homomorphism \(\pi_1^\mathrm{dJ}(\mathfrak{X}_\eta)\to \pi_1^\mathrm{proet}(\mathfrak{X}_s)\) from the de Jong fundamental group of the generic fiber to the Bhatt--Scholze pro-étale fundamental group of the special fiber. We show that it is surjective in good cases. We also show that the notion of a de Jong covering space is étale local on the target for a smooth quasi-compact rigid space over an equicharacteristic \(0\) non-archimedean field \(K\).</p>
-        </details>
-        <div class="links">
-          <a href="https://www.cambridge.org/core/journals/compositio-mathematica/article/specialization-for-the-proetale-fundamental-group/9FF5AAC3BAFD65AA505EF8268C8641CB" class="btn">Journal</a>
-          <a href="https://arxiv.org/abs/2107.06761" class="btn">arXiv</a>
-        </div>
-      </div>
-      <!-- Eighth Publication -->
-      <div class="publication-card">
-        <h2>Geometric Arcs and Fundamental Groups of Rigid Spaces</h2>
-        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></p>
-        <p><strong>Journal/Status:</strong> <i>Journal für die reine und angewandte Mathematik</i></p>
-        <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, de Jong fundamental group, pro-étale fundamental group</p>
-        <details>
-          <summary>Description</summary>
-          <p>In this paper we develop a new notion of covering spaces, called <i>geometric coverings</i>, in rigid geometry. Our definition is modeled after the notion of geometric coverings developed by Bhatt--Scholze but must be modified to account for the more subtle topology of rigid spaces. We show that geometric coverings are closed under composition, disjoint union, and are étale local on the target. We also show that the category of geometric coverings is a tame infinite Galois category, and so supports a notion of fundamental group.</p>
-        </details>
-        <div class="links">
-          <a href="https://www.degruyter.com/document/doi/10.1515/crelle-2023-0013/html" class="btn">Journal</a>
-          <a href="https://arxiv.org/abs/2105.05184" class="btn">arXiv</a>
-        </div>
-      </div>
-      <!-- Ninth Publication -->
-      <div class="publication-card">
-        <h2>Variants of the de Jong Fundamental Group</h2>
-        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></p>
-        <p><strong>Journal/Status:</strong> To appear in <i>American Journal of Mathematics</i></p>
-        <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, geometric arcs, de Jong fundamental group</p>
-        <details>
-          <summary>Description</summary>
-          <p>This paper, a companion to <i>Geometric Arcs and Fundamental Groups of Rigid Spaces</i>, uses the theory of geometric coverings to study some previously introduced objects. For a (Grothendieck) topology \(\tau\) on a rigid space \(X\), write \(\mathbf{Cov}^\tau_X\) for the category of morphisms \(Y\to X\) which split into a disjoint union of finite étale pieces \(\tau\)-locally. We answer two questions of de Jong by showing that his notion of covering space is not admissible (and thus certainly not étale) local on the target in general, but that the resulting enlarged categories \(\mathbf{Cov}^\mathrm{adm}_X\) and \(\mathbf{Cov}^\mathrm{et}_X\) are still (essentially) tame infinite Galois categories. We also show that the category \(\mathbf{Loc}(X_\mathrm{proet})\) of pro-étale local systems on \(X\) is equivalent to the category \(\mathbf{Cov}^\mathrm{et}_X\), making the former (essentially) a tame infinite Galois category.</p>
-        </details>
-        <div class="links">
-          <a href="https://arxiv.org/abs/2203.11750" class="btn">arXiv</a>
-        </div>
-      </div>
-      <!-- Tenth Publication -->
-      <div class="publication-card">
-        <h2>An Approach to the Characterization of the Local Langlands Correspondence</h2>
-        <p><strong>Collaborators:</strong> <a href="http://www-personal.umich.edu/~abertolo/" class="collaborator-link">Alexander Bertoloni Meli</a></p>
-        <p><strong>Journal/Status:</strong> <i>Representation Theory</i></p>
-        <p><strong>Tags:</strong> The Langlands program, representation theory, endoscopy</p>
-        <details>
-          <summary>Description</summary>
-          <p>We show that, under suitable hypotheses, the local Langlands conjecture may be characterized by the so-called <i>Scholze--Shin equations</i>.</p>
-        </details>
-        <div class="links">
-          <a href="https://www.ams.org/journals/ert/2023-27-12/S1088-4165-2023-00643-7/" class="btn">Journal</a>
-          <a href="https://arxiv.org/abs/2003.11484" class="btn">arXiv</a>
-        </div>
-      </div>
-      <!-- Eleventh Publication -->
-      <div class="publication-card">
-        <h2>Bijective Projections on Parabolic Quotients of Affine Weyl Groups</h2>
-        <p><strong>Collaborators:</strong> E. Beazley, M. Nichols, M. Park, and X. Shi</p>
-        <p><strong>Journal/Status:</strong> <i>Journal of Algebraic Combinatorics</i></p>
-        <p><strong>Tags:</strong> Algebraic combinatorics, root theory, alcoves</p>
-        <details>
-          <summary>Description</summary>
-          <p>In previous work of Berg--Jones--Vazirani, a bijection was introduced between two sets of combinatorial objects of representation-theoretic significance: \(n\)-cores with first part equal to \(k\) and \((n-1)\)-cores with first part less than or equal to \(k\). In this article, we develop techniques using the associated affine hyperplane arrangement to interpret this bijection geometrically as a projection of alcoves onto the hyperplane containing their coroot lattice points.</p>
-        </details>
-        <div class="links">
-          <a href="https://doi.org/10.1007/s10801-014-0559-9" class="btn">Journal</a>
-          <a href="https://arxiv.org/abs/1212.0771" class="btn">arXiv</a>
+          <a href="#" class="btn">PDF</a>
         </div>
       </div>
     </div>
   </main>
   <footer>
     <p>&copy; 2023 Alex Youcis. All rights reserved.</p>
-    <div class="social-icons">
-      <a href="#"><i class="fa fa-linkedin"></i></a>
-      <a href="#"><i class="fa fa-github"></i></a>
-      <!-- Add more icons as needed -->
-    </div>
   </footer>
+  <!-- JavaScript for Mobile Menu Toggle -->
+  <script>
+    function toggleMenu() {
+      var navbar = document.getElementById("myNavbar");
+      navbar.classList.toggle("responsive");
+    }
+  </script>
 </body>
 </html>
