@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Toronto Number Theory Seminar — 2025–26</title>
+  <title>U of T Number Theory Seminar — 2025–26</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
   <style>
@@ -34,78 +34,71 @@
       .navbar.responsive .nav-mobile .nav-text{display:none}
     }
 
-    /* widen overall page just a bit */
-    main { padding: 2em 1.25em 3em; max-width: 1320px; margin: 0 auto; }
+    main { padding: 2em 1.25em 3em; max-width: 1200px; margin: 0 auto; }
 
-    .hero { background: #fff; border-radius: 14px; padding: 1.1em 1.25em; box-shadow: 0 2px 10px rgba(0,0,0,.05); display:grid; gap: .6em; margin-bottom: 1.2em; }
+    .hero { background: #fff; border-radius: 14px; padding: 1.25em 1.5em; box-shadow: 0 2px 10px rgba(0,0,0,.05); display:grid; gap: .75em; margin-bottom: 1.5em; }
     .hero h1 { margin: .2em 0 .1em; font-size: clamp(1.6rem, 3.2vw, 2.1rem); }
-    .meta { display:flex; flex-wrap:wrap; gap:.6em 1.1em; font-size: .98rem; color:#222; }
-    .meta .tag { background: var(--secondary-color); color:#111; border-radius: 999px; padding: .2em .6em; }
+    .meta { display:flex; flex-wrap:wrap; gap:.75em 1.25em; font-size: .98rem; color:#222; }
+    .meta .tag { background: var(--secondary-color); color:#111; border-radius: 999px; padding: .25em .7em; }
 
-    .notice { background:#fff; border-left: 6px solid var(--button-color); padding:.9em 1em; border-radius: 10px; margin: 1em 0; }
+    .notice { background:#fff; border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; margin: 1.25em 0; }
+    /* extra spacing for the callout block */
+    .callout { margin: 2.2em 0 2.2em; }
 
-    .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.55em .85em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); }
+    .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.6em .9em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); }
     .btn:hover { filter: brightness(1.05); }
 
-    .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap: 1.1em; }
+    .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap: 1.25em; }
     @media (max-width: 900px){ .grid-2 { grid-template-columns: 1fr; } }
 
-    h2 { margin-top: 1.2em; }
+    h2 { margin-top: 1.6em; }
 
     /* tables */
     .table-wrap { overflow-x:auto; background:#fff; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
     table { width:100%; border-collapse: collapse; table-layout: fixed; }
     thead { background: #f4f4f6; }
-    th, td { padding: .8em 1em; border-bottom: 1px solid #e6e6ea; vertical-align: top; overflow-wrap:anywhere; word-break:break-word; }
+    th, td { padding: .85em 1.2em; border-bottom: 1px solid #e6e6ea; vertical-align: top; overflow-wrap:anywhere; word-break:break-word; }
     th { text-align:left; font-weight:700; }
     tr:last-child td { border-bottom: none; }
     .nowrap { white-space: nowrap; }
 
-    /* generic details */
-    details { background:#fff; padding:.5em .7em; border-radius:10px; margin:.25em 0; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
-    details[open] summary { opacity:.95; }
-    summary { cursor:pointer; font-weight:600; }
-
-    /* abstracts cell: keep stable width and simple look */
+    /* abstracts: stable width and simple look */
     td details { width: 100%; padding: .35em .5em; }
-    td details summary { display:block; width:100%; padding:.15em 0; }
+    td details summary { display:block; width:100%; padding:.15em 0; cursor:pointer; font-weight:600; }
 
-    /* schedule toggles — tighter whitespace + pizzazz */
-    .sched { padding: 0; margin: .3em 0 .7em; box-shadow: none; background: transparent; }
+    /* Schedule toggles (distinct from notice bubble): dark pill with chevrons */
+    .sched { padding: 0; margin: .2em 0 .8em; border: none; background: transparent; box-shadow: none; }
     .sched > summary {
       display:flex; align-items:center; gap:.6em;
-      background: linear-gradient(180deg, #ffffff, #f7f7f9);
-      border: 1px solid #e1e1e6;
-      border-left: 6px solid var(--button-color);
-      border-radius: 12px;
-      padding: .45em .8em;
-      font-size: 1.15rem;
+      background: #1D1E18; /* dark bar */
+      color: #fff;
+      border: 1px solid #101010;
+      border-radius: 999px;
+      padding: .5em .9em;
+      font-size: 1.05rem;
       line-height: 1.2;
       list-style: none;
       margin: 0;
+      text-decoration: none;
     }
-    .sched > summary::marker { content: ""; } /* hide default */
+    .sched > summary::marker { content: ""; }
     .sched > summary:focus { outline: none; }
-    .sched > summary:hover { box-shadow: 0 2px 8px rgba(0,0,0,.06); }
-
-    /* chevron arrow */
-    .sched > summary::after {
-      content: "▾";
-      margin-left: auto;
-      transition: transform .18s ease;
-      font-size: 1.1rem;
-      opacity: .9;
+    .sched > summary:hover { filter: brightness(1.06); }
+    .sched > summary::before {
+      content: "▸";
+      font-size: 1.05rem;
+      opacity: .95;
+      transform: translateY(0.5px);
     }
-    .sched[open] > summary::after { transform: rotate(180deg); }
+    .sched[open] > summary::before { content: "▾"; }
 
-    /* compact spacing between summary and table */
     .sched > .table-wrap { margin-top: .55em; }
 
-    /* column sizing for both schedules */
-    .sched table col.date    { width: 14ch; }        /* fits “Sep 24, 2025” */
-    .sched table col.speaker { width: 20ch; }        /* fits “Vadim Vologodsky” */
-    .sched table col.title   { width: 30ch; }        /* ~two lines for long title */
-    /* abstract column auto-fills the rest */
+    /* Column sizing for both schedules: give abstract the most room */
+    .date-col    { width: 14ch; }  /* fits e.g. “Sep 24, 2025” */
+    .speaker-col { width: 20ch; }  /* “Vadim Vologodsky” on one line */
+    .title-col   { width: 30ch; }  /* long title wraps ~2 lines */
+    /* abstract column auto-fills remaining space */
   </style>
   <script>
     window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]], processEscapes:true }, options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' } };
@@ -125,7 +118,7 @@
         <a href="research.html">Publications and preprints</a>
         <a href="notes.html">Expository material</a>
         <a href="friends.html">Friends</a>
-        <a href="#" style="color: var(--secondary-color);">Toronto number theory seminar</a>
+        <a href="#" style="color: var(--secondary-color);">U of T number theory seminar</a>
       </div>
     </nav>
   </header>
@@ -174,26 +167,26 @@
       </section>
     </div>
 
-    <section id="subscribe">
-      <h2>Contact information</h2>
-      <p>Announcement list: <a href="#" aria-label="mailing list link">Join the mailing list</a> (weekly emails with titles/abstracts).</p>
-      <p>Organizer email: <a href="mailto:REPLACE_WITH_EMAIL">REPLACE_WITH_EMAIL</a>.</p>
-      <div class="notice">
-        <strong>Call for speakers:</strong> If you’d like to give a talk, please send a title/abstract and a few preferred dates. We especially encourage early-career researchers.
+    <!-- Call for speakers (kept; contact section removed) -->
+    <section id="call-for-speakers">
+      <div class="notice callout">
+        <strong>Call for speakers:</strong>
+        If you’d like to give a talk, please send a title/abstract and a few preferred dates to
+        <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.
       </div>
     </section>
 
-    <!-- Fall -->
+    <!-- Fall schedule -->
     <section id="schedule">
       <details class="sched" open>
         <summary>Fall term schedule</summary>
         <div class="table-wrap">
           <table>
             <colgroup>
-              <col class="date" />
-              <col class="speaker" />
-              <col class="title" />
-              <col class="abstract" />
+              <col class="date-col" />
+              <col class="speaker-col" />
+              <col class="title-col" />
+              <col />
             </colgroup>
             <thead>
               <tr>
@@ -225,17 +218,17 @@
       </details>
     </section>
 
-    <!-- Spring -->
+    <!-- Spring schedule -->
     <section id="spring-schedule">
       <details class="sched">
         <summary>Spring term schedule</summary>
         <div class="table-wrap">
           <table>
             <colgroup>
-              <col class="date" />
-              <col class="speaker" />
-              <col class="title" />
-              <col class="abstract" />
+              <col class="date-col" />
+              <col class="speaker-col" />
+              <col class="title-col" />
+              <col />
             </colgroup>
             <thead>
               <tr>
@@ -265,8 +258,6 @@
         </div>
       </details>
     </section>
-
-    <p class="footer-note">If you notice errors or would like to suggest a speaker, please email the organizer.</p>
   </main>
 
   <footer style="background:var(--primary-color); color:#fff; padding:1em; text-align:center;">
