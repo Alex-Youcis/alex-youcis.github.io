@@ -34,36 +34,78 @@
       .navbar.responsive .nav-mobile .nav-text{display:none}
     }
 
-    main { padding: 2em 1.25em 3em; max-width: 1200px; margin: 0 auto; }
+    /* widen overall page just a bit */
+    main { padding: 2em 1.25em 3em; max-width: 1320px; margin: 0 auto; }
 
-    .hero { background: #fff; border-radius: 14px; padding: 1.25em 1.5em; box-shadow: 0 2px 10px rgba(0,0,0,.05); display:grid; gap: .75em; margin-bottom: 1.5em; }
+    .hero { background: #fff; border-radius: 14px; padding: 1.1em 1.25em; box-shadow: 0 2px 10px rgba(0,0,0,.05); display:grid; gap: .6em; margin-bottom: 1.2em; }
     .hero h1 { margin: .2em 0 .1em; font-size: clamp(1.6rem, 3.2vw, 2.1rem); }
-    .meta { display:flex; flex-wrap:wrap; gap:.75em 1.25em; font-size: .98rem; color:#222; }
-    .meta .tag { background: var(--secondary-color); color:#111; border-radius: 999px; padding: .25em .7em; }
+    .meta { display:flex; flex-wrap:wrap; gap:.6em 1.1em; font-size: .98rem; color:#222; }
+    .meta .tag { background: var(--secondary-color); color:#111; border-radius: 999px; padding: .2em .6em; }
 
-    .notice { background:#fff; border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; margin: 1.25em 0; }
+    .notice { background:#fff; border-left: 6px solid var(--button-color); padding:.9em 1em; border-radius: 10px; margin: 1em 0; }
 
-    .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.6em .9em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); }
+    .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.55em .85em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); }
     .btn:hover { filter: brightness(1.05); }
 
-    .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap: 1.25em; }
+    .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap: 1.1em; }
     @media (max-width: 900px){ .grid-2 { grid-template-columns: 1fr; } }
 
-    h2 { margin-top: 1.6em; }
+    h2 { margin-top: 1.2em; }
 
+    /* tables */
     .table-wrap { overflow-x:auto; background:#fff; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
     table { width:100%; border-collapse: collapse; table-layout: fixed; }
     thead { background: #f4f4f6; }
-    th, td { padding: .85em 1.2em; border-bottom: 1px solid #e6e6ea; vertical-align: top; overflow-wrap:anywhere; word-break:break-word; }
+    th, td { padding: .8em 1em; border-bottom: 1px solid #e6e6ea; vertical-align: top; overflow-wrap:anywhere; word-break:break-word; }
     th { text-align:left; font-weight:700; }
     tr:last-child td { border-bottom: none; }
     .nowrap { white-space: nowrap; }
 
-    details { background:#fff; padding:.6em .8em; border-radius:10px; margin:.3em 0; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+    /* generic details */
+    details { background:#fff; padding:.5em .7em; border-radius:10px; margin:.25em 0; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
     details[open] summary { opacity:.95; }
-    summary { cursor:pointer; font-weight:600; min-width: 110px; display:inline-block; }
+    summary { cursor:pointer; font-weight:600; }
 
-    .footer-note { margin-top: 2.2em; font-size: .95rem; color:#222; }
+    /* abstracts cell: keep stable width and simple look */
+    td details { width: 100%; padding: .35em .5em; }
+    td details summary { display:block; width:100%; padding:.15em 0; }
+
+    /* schedule toggles — tighter whitespace + pizzazz */
+    .sched { padding: 0; margin: .3em 0 .7em; box-shadow: none; background: transparent; }
+    .sched > summary {
+      display:flex; align-items:center; gap:.6em;
+      background: linear-gradient(180deg, #ffffff, #f7f7f9);
+      border: 1px solid #e1e1e6;
+      border-left: 6px solid var(--button-color);
+      border-radius: 12px;
+      padding: .45em .8em;
+      font-size: 1.15rem;
+      line-height: 1.2;
+      list-style: none;
+      margin: 0;
+    }
+    .sched > summary::marker { content: ""; } /* hide default */
+    .sched > summary:focus { outline: none; }
+    .sched > summary:hover { box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+
+    /* chevron arrow */
+    .sched > summary::after {
+      content: "▾";
+      margin-left: auto;
+      transition: transform .18s ease;
+      font-size: 1.1rem;
+      opacity: .9;
+    }
+    .sched[open] > summary::after { transform: rotate(180deg); }
+
+    /* compact spacing between summary and table */
+    .sched > .table-wrap { margin-top: .55em; }
+
+    /* column sizing for both schedules */
+    .sched table col.date    { width: 14ch; }        /* fits “Sep 24, 2025” */
+    .sched table col.speaker { width: 20ch; }        /* fits “Vadim Vologodsky” */
+    .sched table col.title   { width: 30ch; }        /* ~two lines for long title */
+    /* abstract column auto-fills the rest */
   </style>
   <script>
     window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]], processEscapes:true }, options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' } };
@@ -98,7 +140,7 @@
       </div>
       <div>
         <a class="btn" href="#subscribe"><i class="fa fa-envelope"></i> Subscribe</a>
-        <a class="btn" href="https://sites.google.com/view/ntseminar/home" target="_blank" rel="noopener"><i class="fa fa-archive"></i> 2024–2025 NT seminar</a>
+        <a class="btn" href="https://sites.google.com/view/ntseminar/home" target="_blank" rel="noopener"><i class="fa fa-archive"></i> 2024-2025 NT seminar</a>
       </div>
     </section>
 
@@ -141,11 +183,18 @@
       </div>
     </section>
 
+    <!-- Fall -->
     <section id="schedule">
-      <details open>
-        <summary><h2>Fall term schedule</h2></summary>
+      <details class="sched" open>
+        <summary>Fall term schedule</summary>
         <div class="table-wrap">
           <table>
+            <colgroup>
+              <col class="date" />
+              <col class="speaker" />
+              <col class="title" />
+              <col class="abstract" />
+            </colgroup>
             <thead>
               <tr>
                 <th class="nowrap">Date</th>
@@ -176,11 +225,18 @@
       </details>
     </section>
 
+    <!-- Spring -->
     <section id="spring-schedule">
-      <details>
-        <summary><h2>Spring term schedule</h2></summary>
+      <details class="sched">
+        <summary>Spring term schedule</summary>
         <div class="table-wrap">
           <table>
+            <colgroup>
+              <col class="date" />
+              <col class="speaker" />
+              <col class="title" />
+              <col class="abstract" />
+            </colgroup>
             <thead>
               <tr>
                 <th class="nowrap">Date</th>
@@ -200,4 +256,25 @@
               <tr><td class="nowrap">Feb 25, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
               <tr><td class="nowrap">Mar 4, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
               <tr><td class="nowrap">Mar 11, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Mar 18, 202
+              <tr><td class="nowrap">Mar 18, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
+              <tr><td class="nowrap">Mar 25, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
+              <tr><td class="nowrap">Apr 1, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
+              <tr><td class="nowrap">Apr 8, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <p class="footer-note">If you notice errors or would like to suggest a speaker, please email the organizer.</p>
+  </main>
+
+  <footer style="background:var(--primary-color); color:#fff; padding:1em; text-align:center;">
+    <p>&copy; 2025 University of Toronto Number Theory Seminar</p>
+  </footer>
+
+  <script>
+    function toggleMenu(){ document.getElementById('myNavbar').classList.toggle('responsive'); }
+  </script>
+</body>
+</html>
