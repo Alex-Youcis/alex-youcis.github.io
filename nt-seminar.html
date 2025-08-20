@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>U of T number theory seminar — 2025–26</title>
+  <title>Toronto Number Theory Seminar — 2025–26</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
   <style>
@@ -12,9 +12,7 @@
       --secondary-color: #C5C3C6;
       --background-color: #DCDCDD;
       --text-color: #1D1E18;
-      --button-color: #BF0603; /* red accent */
-      --card: #ffffff;
-      --border: #e1e1e6;
+      --button-color: #BF0603;
     }
 
     body { font-family: 'Open Sans', sans-serif; background: var(--background-color); color: var(--text-color); margin: 0; }
@@ -38,29 +36,14 @@
 
     main { padding: 2em 1.25em 3em; max-width: 1200px; margin: 0 auto; }
 
-    /* HERO with three subtle U of T crests across */
-    .hero {
-      position: relative; overflow: hidden;
-      background: var(--card); border-radius: 14px; padding: 1.25em 1.5em;
-      box-shadow: 0 2px 10px rgba(0,0,0,.05); display:grid; gap: .75em; margin-bottom: 1.5em;
-    }
-    .hero::before{
-      content:""; position:absolute; inset:0; pointer-events:none; opacity:.06;
-      background-image:
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
-      background-repeat: no-repeat, no-repeat, no-repeat;
-      background-position: 16% center, 50% center, 84% center;
-      background-size: 140px auto, 140px auto, 140px auto; /* fits inside hero */
-    }
-    @media (max-width: 600px){
-      .hero::before{ background-size: 100px auto, 100px auto, 100px auto; }
-    }
-    .hero h1 { margin: .2em 0 .1em; font-size: clamp(1.6rem, 3.2vw, 2.1rem); position: relative; }
-    .meta { display:flex; flex-wrap:wrap; gap:.75em 1.25em; font-size: .98rem; color:#222; position: relative; }
+    .hero { background: #fff; border-radius: 14px; padding: 1.25em 1.5em; box-shadow: 0 2px 10px rgba(0,0,0,.05); display:grid; gap: .75em; margin-bottom: 1.5em; }
+    .hero h1 { margin: .2em 0 .1em; font-size: clamp(1.6rem, 3.2vw, 2.1rem); }
+    .meta { display:flex; flex-wrap:wrap; gap:.75em 1.25em; font-size: .98rem; color:#222; }
     .meta .tag { background: var(--secondary-color); color:#111; border-radius: 999px; padding: .25em .7em; }
-    .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.6em .9em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); position: relative; }
+
+    .notice { background:#fff; border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; margin: 1.25em 0; }
+
+    .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.6em .9em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); }
     .btn:hover { filter: brightness(1.05); }
 
     .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap: 1.25em; }
@@ -68,8 +51,7 @@
 
     h2 { margin-top: 1.6em; }
 
-    /* Tables */
-    .table-wrap { overflow-x:auto; background:var(--card); border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+    .table-wrap { overflow-x:auto; background:#fff; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
     table { width:100%; border-collapse: collapse; table-layout: fixed; }
     thead { background: #f4f4f6; }
     th, td { padding: .85em 1.2em; border-bottom: 1px solid #e6e6ea; vertical-align: top; overflow-wrap:anywhere; word-break:break-word; }
@@ -77,64 +59,57 @@
     tr:last-child td { border-bottom: none; }
     .nowrap { white-space: nowrap; }
 
-    /* Abstract cells */
-    details { background:var(--card); padding:.6em .8em; border-radius:10px; margin:.3em 0; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+    details { background:#fff; padding:.6em .8em; border-radius:10px; margin:.3em 0; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
     details[open] summary { opacity:.95; }
     summary { cursor:pointer; font-weight:600; min-width: 110px; display:inline-block; }
-    summary::-webkit-details-marker{display:none;}
-    summary::marker{content:"";}
 
-    /* Information for speakers — centered button; separate white dropdown with black separator */
-    #info .stack { width: min(560px, 100%); }
-    #info details { padding: 0; margin: .55em 0 .95em; border: 0; }
-    #info details > summary {
-      display: flex; justify-content: center; align-items: center; gap: .5em; width: 100%;
-      background: var(--card);
-      border: 1px solid var(--border); border-radius: 10px;
-      padding: .55em .85em; font-weight: 700;
-      box-shadow: 0 1px 3px rgba(0,0,0,.05);
+    .footer-note { margin-top: 2.2em; font-size: .95rem; color:#222; }
+      /* --- Header crest: 3 logos, visible & fully inside hero --- */
+    .hero{ position: relative; overflow:hidden; }
+    .hero::before{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background-image:
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
+      background-repeat: no-repeat,no-repeat,no-repeat;
+      background-position: 16% center, 50% center, 84% center;
+      background-size: auto 80%, auto 80%, auto 80%;
+      opacity: .18; /* more visible */
     }
-    #info details > summary::before { content: "▸"; opacity: .9; }
-    #info details[open] > summary::before { content: "▾"; }
-    #info details > .panel {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-top: 2px solid #000;          /* clear separation line */
-      border-radius: 0 0 10px 10px;
-      padding: .8em 1em;                    /* comfy side padding */
-      margin-top: .35em;
-      box-shadow: 0 1px 3px rgba(0,0,0,.05);
-    }
-    #info .panel ul { margin: .1em 0 0 0; padding-left: 1.35em; }
-    #info .panel li { margin: .3em 0; }
+    @media (max-width: 600px){ .hero::before{ background-size: auto 65%, auto 65%, auto 65%; } }
 
-    /* Call for speakers — same width as info dropdowns; white background; centered bold heading */
-    .notice { background:var(--card); border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; margin: 1.25em 0; }
-    .callout { width: 100%; }
-    .cfs-title { display:block; text-align:center; font-weight:700; margin-bottom:.35em; }
-
-    /* SCHEDULE oval buttons with THREE real borders (2cm black + 2cm red + white center) */
-    .sched { padding: 0; margin: .3em 0 .8em; border: none; background: transparent; box-shadow: none; }
-    .sched > summary{
-      display:flex; justify-content:center; align-items:center; width: 100%;
-      background: transparent; border: none; outline: none; margin:.45em 0;
+    /* --- Info dropdowns: centered button (white with black outline) + light-gray body --- */
+    #info details{ padding:0; margin:.55em 0 .95em; border:0; }
+    #info details > summary{
+      display:flex; justify-content:center; align-items:center; gap:.5em; width:100%;
+      background:#fff; border:2px solid #000; border-radius:10px;
+      padding:.6em .9em; font-weight:700; box-shadow:0 1px 3px rgba(0,0,0,.05);
     }
-    .oval.outer { display:inline-block; border: 2cm solid #000; border-radius: 9999px; }
-    .oval.middle{ display:inline-block; border: 2cm solid var(--button-color); border-radius: 9999px; }
-    .oval.inner { 
+    #info details > summary::before{ content:"▸"; opacity:.9; }
+    #info details[open] > summary::before{ content:"▾"; }
+    #info details > :not(summary){
+      background:#f2f3f6; border:1px solid #e1e1e6; border-radius:0 0 10px 10px;
+      padding:.85em 1em; margin-top:.35em; box-shadow:0 1px 3px rgba(0,0,0,.05);
+    }
+    #info details ul{ padding-left:1.35em; }
+    #info details li{ margin:.3em 0; }
+
+    /* Call for speakers adjustments */
+    .notice.callout{ background:#fff; }
+    .cfs-title{ display:block; text-align:center; font-weight:700; margin-bottom:.35em; }
+
+    /* --- Oval schedule buttons: thin concentric rings --- */
+    details > summary .chev::before{ content:"▸"; }
+    details[open] > summary .chev::before{ content:"▾"; }
+    .oval.outer{ display:inline-block; border:6px solid #000; border-radius:9999px; }
+    .oval.middle{ display:inline-block; border:4px solid var(--button-color); border-radius:9999px; }
+    .oval.inner{
       display:flex; align-items:center; justify-content:center; gap:.55em;
-      background:#fff; color: var(--text-color);
-      border-radius: 9999px; padding: .7em 1.2em;
-      /* Keep the whole thing inside the viewport even with 8cm total ring thickness */
-      width: calc(min(520px, 100vw - 8cm - 24px));
+      background:#fff; color: var(--text-color); border-radius:9999px;
+      padding:.7em 1.2em; width:min(520px, 100%);
       text-align:center; font-weight:700;
     }
-    .sched .chev::before{ content:"▸"; }
-    .sched[open] .chev::before{ content:"▾"; }
-    .sched > .table-wrap { margin-top: .65em; }
-
-    /* Invisible anchor so the Subscribe button still works without a visible section */
-    #subscribe { position: relative; height: 0; }
   </style>
   <script>
     window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]], processEscapes:true }, options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' } };
@@ -154,14 +129,14 @@
         <a href="research.html">Publications and preprints</a>
         <a href="notes.html">Expository material</a>
         <a href="friends.html">Friends</a>
-        <a href="#" style="color: var(--secondary-color);">U of T number theory seminar</a>
+        <a href="#" style="color: var(--secondary-color);">Toronto number theory seminar</a>
       </div>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <h1>U of T number theory seminar (2025–26)</h1>
+      <h1>Toronto Number Theory Seminar (2025–26)</h1>
       <div class="meta">
         <span class="tag"><i class="fa fa-calendar"></i>&nbsp; Wednesday, 2:10–3:0X PM <span class="muted">(50 minutes + questions)</span></span>
         <span class="tag"><i class="fa fa-map-marker"></i>&nbsp; Bahen Center, Room 6183</span>
@@ -183,61 +158,46 @@
       </section>
 
       <section id="info">
-        <h2>Information for speakers</h2>
-        <div class="stack">
-          <details>
-            <summary><span>Abstract</span></summary>
-            <div class="panel">
-              <p>Please make the abstract no more than one paragraph. Please feel free to use TeX which will be rendered.</p>
-            </div>
-          </details>
-          <details>
-            <summary><span>Format &amp; length</span></summary>
-            <div class="panel">
-              <p>50 minutes + short Q&amp;A. Please make the first 20 minutes accessible to a number-theory-focused graduate student.</p>
-            </div>
-          </details>
-          <details>
-            <summary><span>Technical logistics</span></summary>
-            <div class="panel">
-              <ul>
-                <li>If you are giving a slide talk, please send the slides three days in advance to <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.</li>
-                <li>The talk will be broadcast on Zoom.</li>
-                <li>The talk will be recorded and posted, unless requested otherwise.</li>
-              </ul>
-            </div>
-          </details>
-          <details>
-            <summary><span>Funding</span></summary>
-            <div class="panel">
-              <p>Funding for travel and lodging is limited and not guaranteed; please contact <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a> for more details.</p>
-            </div>
-          </details>
-
-          <!-- Call for speakers: white, same width as dropdowns -->
-          <div class="notice callout">
-            <span class="cfs-title">Call for speakers</span>
-            If you’d like to give a talk, please send a title/abstract and a few preferred dates to
-            <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.
-            Please include "U of T NT seminar" in your email subject.
-          </div>
-        </div>
+        <h2>Information for Speakers</h2>
+        <details>
+          <summary>Title & abstract</summary>
+          <p>Please email a title and 1–2 paragraph abstract by the Friday one week prior to your talk so we can publicize.</p>
+        </details>
+        <details>
+          <summary>Format & length</summary>
+          <p>50 minutes + short Q&A. Aim for accessibility: define notation early and include illustrative examples where possible.</p>
+        </details>
+        <details>
+          <summary>Logistics</summary>
+          <ul>
+            <li>Room: <em>TBD</em> (projector/HDMI available; chalkboard).</li>
+            <li>Tech: please bring slides as PDF or your own laptop (HDMI). Adapters available on request.</li>
+            <li>Travel: economy fare + local expenses covered if applicable (details on request).</li>
+          </ul>
+        </details>
       </section>
     </div>
 
-    <!-- Invisible anchor so the Subscribe button works even without a visible contact section -->
-    <div id="subscribe" aria-hidden="true"></div>
+    <section id="subscribe">
+      <h2>Contact information</h2>
+      <p>Announcement list: <a href="#" aria-label="mailing list link">Join the mailing list</a> (weekly emails with titles/abstracts).</p>
+      <p>Organizer email: <a href="mailto:REPLACE_WITH_EMAIL">REPLACE_WITH_EMAIL</a>.</p>
+      <div class="notice callout">
+        <span class="cfs-title">Call for speakers</span>
+        If you’d like to give a talk, send a title/abstract and preferred dates to 
+        <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>; include "U of T NT seminar" in your email subject.
+      </div>
+    </section>
 
-    <!-- Fall schedule -->
     <section id="schedule">
-      <details class="sched" open>
+      <details open>
         <summary>
           <span class="oval outer">
             <span class="oval middle">
-              <span class="oval inner"><span class="chev" aria-hidden="true"></span><span>Fall term schedule</span></span>
-            </span>
-          </span>
-        </summary>
+              <span class="oval inner"><span class="chev" aria-hidden="true"></span><span>Fall term schedule<\/span><\/span>
+            <\/span>
+          <\/span>
+        <\/summary>
         <div class="table-wrap">
           <table>
             <thead>
@@ -270,16 +230,15 @@
       </details>
     </section>
 
-    <!-- Spring schedule -->
     <section id="spring-schedule">
-      <details class="sched">
+      <details>
         <summary>
           <span class="oval outer">
             <span class="oval middle">
-              <span class="oval inner"><span class="chev" aria-hidden="true"></span><span>Spring term schedule</span></span>
-            </span>
-          </span>
-        </summary>
+              <span class="oval inner"><span class="chev" aria-hidden="true"></span><span>Spring term schedule<\/span><\/span>
+            <\/span>
+          <\/span>
+        <\/summary>
         <div class="table-wrap">
           <table>
             <thead>
@@ -301,23 +260,4 @@
               <tr><td class="nowrap">Feb 25, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
               <tr><td class="nowrap">Mar 4, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
               <tr><td class="nowrap">Mar 11, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Mar 18, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Mar 25, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Apr 1, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Apr 8, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-    </section>
-  </main>
-
-  <footer style="background:var(--primary-color); color:#fff; padding:1em; text-align:center;">
-    <p>&copy; 2025 U of T number theory seminar</p>
-  </footer>
-
-  <script>
-    function toggleMenu(){ document.getElementById('myNavbar').classList.toggle('responsive'); }
-  </script>
-</body>
-</html>
+              <tr><td class="nowrap">Mar 18, 202
