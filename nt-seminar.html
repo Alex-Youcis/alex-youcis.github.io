@@ -41,9 +41,36 @@
     .meta { display:flex; flex-wrap:wrap; gap:.75em 1.25em; font-size: .98rem; color:#222; }
     .meta .tag { background: var(--secondary-color); color:#111; border-radius: 999px; padding: .25em .7em; }
 
-    .notice { background:#fff; border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; margin: 1.25em 0; }
-    /* extra spacing for the callout block */
-    .callout { margin: 2.2em 0 2.2em; }
+    /* Elegant schedule toggles */
+    .sched { padding: 0; margin: .2em 0 .7em; border: none; background: transparent; box-shadow: none; }
+    .sched > summary {
+      display:flex; align-items:center; gap:.6em; cursor:pointer;
+      background: linear-gradient(180deg, #ffffff, #f8f8fa);
+      color: #1D1E18;
+      border: 1px solid #e1e1e6;
+      border-radius: 12px;
+      padding: .45em .8em;
+      font-weight: 700;
+      list-style: none;
+      margin: 0;
+      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    }
+    .sched > summary::marker { content: ""; }
+    .sched > summary:focus { outline: none; }
+    .sched > summary:hover { box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+    .sched > summary::before {
+      content: "▸";
+      font-size: 1.05rem;
+      opacity: .9;
+      transform: translateY(0.5px);
+    }
+    .sched[open] > summary::before { content: "▾"; }
+    .sched > .table-wrap { margin-top: .55em; }
+
+    /* Call for speakers — centered, ~half table width on desktop */
+    .notice { background:#fff; border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; }
+    .callout { width: 50%; margin: 2.2em auto; }
+    @media (max-width: 900px){ .callout { width: 100%; } }
 
     .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.6em .9em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); }
     .btn:hover { filter: brightness(1.05); }
@@ -62,43 +89,29 @@
     tr:last-child td { border-bottom: none; }
     .nowrap { white-space: nowrap; }
 
+    /* fixed column widths; Abstract takes remaining space */
+    .date-col    { width: 14ch; }
+    .speaker-col { width: 20ch; }
+    .title-col   { width: 30ch; }
+
     /* abstracts: stable width and simple look */
     td details { width: 100%; padding: .35em .5em; }
     td details summary { display:block; width:100%; padding:.15em 0; cursor:pointer; font-weight:600; }
 
-    /* Schedule toggles (distinct from notice bubble): dark pill with chevrons */
-    .sched { padding: 0; margin: .2em 0 .8em; border: none; background: transparent; box-shadow: none; }
-    .sched > summary {
-      display:flex; align-items:center; gap:.6em;
-      background: #1D1E18; /* dark bar */
-      color: #fff;
-      border: 1px solid #101010;
-      border-radius: 999px;
-      padding: .5em .9em;
-      font-size: 1.05rem;
-      line-height: 1.2;
-      list-style: none;
-      margin: 0;
-      text-decoration: none;
+    /* "Information for speakers" — button-like dropdowns */
+    #info details { border: none; padding: 0; margin: .4em 0; box-shadow: none; }
+    #info details summary {
+      display:inline-flex; align-items:center; gap:.5em; cursor:pointer;
+      background:#fff;
+      border:1px solid #e1e1e6;
+      border-radius:10px;
+      padding:.5em .8em;
+      font-weight:700;
+      box-shadow: 0 1px 3px rgba(0,0,0,.05);
     }
-    .sched > summary::marker { content: ""; }
-    .sched > summary:focus { outline: none; }
-    .sched > summary:hover { filter: brightness(1.06); }
-    .sched > summary::before {
-      content: "▸";
-      font-size: 1.05rem;
-      opacity: .95;
-      transform: translateY(0.5px);
-    }
-    .sched[open] > summary::before { content: "▾"; }
-
-    .sched > .table-wrap { margin-top: .55em; }
-
-    /* Column sizing for both schedules: give abstract the most room */
-    .date-col    { width: 14ch; }  /* fits e.g. “Sep 24, 2025” */
-    .speaker-col { width: 20ch; }  /* “Vadim Vologodsky” on one line */
-    .title-col   { width: 30ch; }  /* long title wraps ~2 lines */
-    /* abstract column auto-fills remaining space */
+    #info details summary::before { content:"▸"; opacity:.9; }
+    #info details[open] summary::before { content:"▾"; }
+    #info details > *:not(summary) { background:#fff; padding:.6em .8em; border-radius: 0 0 10px 10px; box-shadow: 0 1px 4px rgba(0,0,0,.05); margin-top:.4em; }
   </style>
   <script>
     window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]], processEscapes:true }, options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' } };
@@ -125,7 +138,7 @@
 
   <main>
     <section class="hero">
-      <h1>Toronto Number Theory Seminar (2025–26)</h1>
+      <h1>U of T Number Theory Seminar (2025–26)</h1>
       <div class="meta">
         <span class="tag"><i class="fa fa-calendar"></i>&nbsp; Wednesday, 2:10–3:0X PM <span class="muted">(50 minutes + questions)</span></span>
         <span class="tag"><i class="fa fa-map-marker"></i>&nbsp; Bahen Center, Room 6183</span>
@@ -149,25 +162,32 @@
       <section id="info">
         <h2>Information for Speakers</h2>
         <details>
-          <summary>Title & abstract</summary>
-          <p>Please email a title and 1–2 paragraph abstract by the Friday one week prior to your talk so we can publicize.</p>
+          <summary>Abstract</summary>
+          <p>Please make the abstract no more than one paragraph. Please feel free to use TeX which will be rendered.</p>
         </details>
         <details>
-          <summary>Format & length</summary>
-          <p>50 minutes + short Q&A. Aim for accessibility: define notation early and include illustrative examples where possible.</p>
+          <summary>Format &amp; length</summary>
+          <p>50 minutes + short Q&amp;A. Please make the first 20 minutes accessible to a number-theory-focused graduate student.</p>
         </details>
         <details>
-          <summary>Logistics</summary>
+          <summary>Technical logistics</summary>
           <ul>
-            <li>Room: <em>TBD</em> (projector/HDMI available; chalkboard).</li>
-            <li>Tech: please bring slides as PDF or your own laptop (HDMI). Adapters available on request.</li>
-            <li>Travel: economy fare + local expenses covered if applicable (details on request).</li>
+            <li>If you are giving a slide talk, please send the slides three days in advance to <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.</li>
+            <li>The talk will be broadcast on Zoom.</li>
+            <li>The talk will be recorded and posted, unless requested otherwise.</li>
           </ul>
+        </details>
+        <details>
+          <summary>Funding</summary>
+          <p>Funding for travel and lodging is limited and not guaranteed; please contact <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a> for more details.</p>
         </details>
       </section>
     </div>
 
-    <!-- Call for speakers (kept; contact section removed) -->
+    <!-- Invisible anchor so the 'Subscribe' button doesn't break -->
+    <div id="subscribe" aria-hidden="true"></div>
+
+    <!-- Call for speakers (centered, half width on desktop) -->
     <section id="call-for-speakers">
       <div class="notice callout">
         <strong>Call for speakers:</strong>
