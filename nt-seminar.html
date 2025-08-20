@@ -109,9 +109,12 @@
         <span class="tag"><i class="fa fa-user"></i>&nbsp; Organizers: Florian Herzig and Alex Youcis</span>
       </div>
       <div>
-        <a class="btn" href="#schedule"><i class="fa fa-list"></i> See schedule</a>
-        <a class="btn" href="#info"><i class="fa fa-info-circle"></i> Speaker info</a>
+        <!-- Removed 'See schedule' and 'Speaker info' buttons -->
         <a class="btn" href="#subscribe"><i class="fa fa-envelope"></i> Subscribe</a>
+        <!-- New: Past years button -->
+        <a class="btn" href="https://sites.google.com/view/ntseminar/home" target="_blank" rel="noopener">
+          <i class="fa fa-history"></i> Past years
+        </a>
       </div>
     </section>
 
@@ -122,9 +125,7 @@
           This seminar features research talks in analytic and arithmetic aspects of number theory broadly construed (including
           \(p\)-adic Hodge theory, automorphic forms, Galois representations, and related topics). Talks target a general number theory audience at the University of Toronto and nearby institutions.
         </p>
-        <div class="notice">
-          <strong>Call for speakers:</strong> If you’d like to give a talk, please send a title/abstract and a few preferred dates. We especially encourage early-career researchers.
-        </div>
+        <!-- 'Call for speakers' moved below to Contact information -->
       </section>
 
       <section id="info">
@@ -145,15 +146,17 @@
             <li>Travel: economy fare + local expenses covered if applicable (details on request).</li>
           </ul>
         </details>
-        
       </section>
     </div>
 
-    <!-- ===== Subscribe / Contact ===== -->
+    <!-- ===== Contact information ===== -->
     <section id="subscribe">
-      <h2>Subscribe & Contact</h2>
+      <h2>Contact information</h2>
       <p>Announcement list: <a href="#" aria-label="mailing list link">Join the mailing list</a> (weekly emails with titles/abstracts).</p>
       <p>Organizer email: <a href="mailto:REPLACE_WITH_EMAIL">REPLACE_WITH_EMAIL</a>.</p>
+      <div class="notice" style="margin-top:1em;">
+        <strong>Call for speakers:</strong> If you’d like to give a talk, please send a title/abstract and a few preferred dates. We especially encourage early-career researchers.
+      </div>
     </section>
 
     <!-- ===== Schedule ===== -->
@@ -166,7 +169,7 @@
               <th class="nowrap">Date</th>
               <th>Speaker</th>
               <th>Title</th>
-              <th>Abstract / Notes</th>
+              <th>Abstract</th>
             </tr>
           </thead>
           <tbody>
@@ -176,7 +179,10 @@
               <td>First Last (Affiliation)</td>
               <td><strong>Toward integral comparison isomorphisms in \(p\)-adic Hodge theory</strong></td>
               <td>
-                We sketch recent progress on integral comparison between crystalline and de&nbsp;Rham cohomology in certain non-proper settings.
+                <details>
+                  <summary>Click here</summary>
+                  We sketch recent progress on integral comparison between crystalline and de&nbsp;Rham cohomology in certain non-proper settings.
+                </details>
               </td>
             </tr>
             <tr>
@@ -184,30 +190,31 @@
               <td>First Last (Affiliation)</td>
               <td><strong>Potential automorphy and local–global compatibility for unitary groups</strong></td>
               <td>
-                Abstract TBA.
+                <details>
+                  <summary>Click here</summary>
+                  Abstract TBA.
+                </details>
               </td>
             </tr>
             <tr>
               <td class="nowrap">Sep 26, 2025</td>
               <td>First Last (Affiliation)</td>
               <td><strong>Special values of \(L\)-functions and Selmer groups</strong></td>
-              <td>Abstract TBA.</td>
+              <td>
+                <details>
+                  <summary>Click here</summary>
+                  Abstract TBA.
+                </details>
+              </td>
             </tr>
             <!-- Add more rows as the term fills in -->
           </tbody>
         </table>
       </div>
-      <p class="muted">Slides or notes can be linked in the “Abstract / Notes” column.</p>
+      <p class="muted">Slides or notes can be linked inside the abstract dropdown.</p>
     </section>
 
-    <!-- ===== Past terms (optional) ===== -->
-    <section id="archive">
-      <h2>Past Terms</h2>
-      <p>Link to previous years’ schedules:
-        <a href="https://sites.google.com/view/ntseminar/home" target="_blank" rel="noopener">2024–25 archive</a>
-        <!-- Add more links as needed. -->
-      </p>
-    </section>
+    <!-- Removed the separate 'Past Terms' section per your request -->
 
     <p class="footer-note">If you notice errors or would like to suggest a speaker, please email the organizer.</p>
   </main>
