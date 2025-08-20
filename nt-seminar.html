@@ -13,6 +13,8 @@
       --background-color: #DCDCDD;
       --text-color: #1D1E18;
       --button-color: #BF0603; /* red accent */
+      --card: #ffffff;
+      --border: #e1e1e6;
     }
 
     body { font-family: 'Open Sans', sans-serif; background: var(--background-color); color: var(--text-color); margin: 0; }
@@ -36,24 +38,28 @@
 
     main { padding: 2em 1.25em 3em; max-width: 1200px; margin: 0 auto; }
 
-    /* HERO with subtle U of T crest background */
+    /* HERO with three subtle U of T crests across */
     .hero {
       position: relative; overflow: hidden;
-      background: #fff; border-radius: 14px; padding: 1.25em 1.5em;
+      background: var(--card); border-radius: 14px; padding: 1.25em 1.5em;
       box-shadow: 0 2px 10px rgba(0,0,0,.05); display:grid; gap: .75em; margin-bottom: 1.5em;
     }
     .hero::before{
-      content:""; position:absolute; inset:0; pointer-events:none;
-      background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
-      background-repeat: no-repeat;
-      background-position: right -120px center;
-      background-size: 520px auto;
-      opacity: .06;
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.06;
+      background-image:
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
+      background-repeat: no-repeat, no-repeat, no-repeat;
+      background-position: 16% center, 50% center, 84% center;
+      background-size: 140px auto, 140px auto, 140px auto; /* fits inside hero */
+    }
+    @media (max-width: 600px){
+      .hero::before{ background-size: 100px auto, 100px auto, 100px auto; }
     }
     .hero h1 { margin: .2em 0 .1em; font-size: clamp(1.6rem, 3.2vw, 2.1rem); position: relative; }
     .meta { display:flex; flex-wrap:wrap; gap:.75em 1.25em; font-size: .98rem; color:#222; position: relative; }
     .meta .tag { background: var(--secondary-color); color:#111; border-radius: 999px; padding: .25em .7em; }
-
     .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.6em .9em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); position: relative; }
     .btn:hover { filter: brightness(1.05); }
 
@@ -63,7 +69,7 @@
     h2 { margin-top: 1.6em; }
 
     /* Tables */
-    .table-wrap { overflow-x:auto; background:#fff; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+    .table-wrap { overflow-x:auto; background:var(--card); border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
     table { width:100%; border-collapse: collapse; table-layout: fixed; }
     thead { background: #f4f4f6; }
     th, td { padding: .85em 1.2em; border-bottom: 1px solid #e6e6ea; vertical-align: top; overflow-wrap:anywhere; word-break:break-word; }
@@ -71,49 +77,58 @@
     tr:last-child td { border-bottom: none; }
     .nowrap { white-space: nowrap; }
 
-    /* Generic details (fallback) */
-    details { background:#fff; padding:.6em .8em; border-radius:10px; margin:.3em 0; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+    /* Abstract cells */
+    details { background:var(--card); padding:.6em .8em; border-radius:10px; margin:.3em 0; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
     details[open] summary { opacity:.95; }
     summary { cursor:pointer; font-weight:600; min-width: 110px; display:inline-block; }
+    summary::-webkit-details-marker{display:none;}
+    summary::marker{content:"";}
 
-    /* Information for speakers column: button bubble + flat body */
+    /* Information for speakers — centered button; separate white dropdown with black separator */
     #info .stack { width: min(560px, 100%); }
-    #info details { background: none; padding: 0; margin: .55em 0 .95em; border-radius: 0; box-shadow: none; }
+    #info details { padding: 0; margin: .55em 0 .95em; border: 0; }
     #info details > summary {
-      display: inline-flex; align-items: center; gap: .5em; width: 100%;
-      background: #fff;
-      border: 1px solid #e1e1e6; border-radius: 10px;
+      display: flex; justify-content: center; align-items: center; gap: .5em; width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border); border-radius: 10px;
       padding: .55em .85em; font-weight: 700;
       box-shadow: 0 1px 3px rgba(0,0,0,.05);
     }
     #info details > summary::before { content: "▸"; opacity: .9; }
     #info details[open] > summary::before { content: "▾"; }
-    /* Flat body that blends with page */
     #info details > .panel {
-      background: transparent; border: none; box-shadow: none;
-      padding: .6em .2em; margin-top: .35em;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-top: 2px solid #000;          /* clear separation line */
+      border-radius: 0 0 10px 10px;
+      padding: .8em 1em;                    /* comfy side padding */
+      margin-top: .35em;
+      box-shadow: 0 1px 3px rgba(0,0,0,.05);
     }
-    /* Safer bullet indent & spacing in the technical list */
     #info .panel ul { margin: .1em 0 0 0; padding-left: 1.35em; }
     #info .panel li { margin: .3em 0; }
 
-    /* Call for speakers bubble matches dropdown width */
-    .notice { background:#fff; border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; margin: 1.25em 0; }
-    .callout { background:#f2f3f6; width: 100%; }
+    /* Call for speakers — same width as info dropdowns; white background; centered bold heading */
+    .notice { background:var(--card); border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; margin: 1.25em 0; }
+    .callout { width: 100%; }
+    .cfs-title { display:block; text-align:center; font-weight:700; margin-bottom:.35em; }
 
-    /* Schedule toggles: centered, chevron + text, double rim (outer black 2cm, inner red 2cm) */
+    /* SCHEDULE oval buttons with THREE real borders (2cm black + 2cm red + white center) */
     .sched { padding: 0; margin: .3em 0 .8em; border: none; background: transparent; box-shadow: none; }
     .sched > summary{
-      position: relative;
-      display:flex; align-items:center; justify-content:center; gap:.55em;
-      width: min(520px, 100%); margin: .45em auto; padding: .7em 1.2em;
-      color: var(--text-color); background: #fff;
-      border-radius: 999px; border: none; outline: none;
-      /* Double inset ring: outer black (4cm total), inner red (2cm), center stays white */
-      box-shadow: inset 0 0 0 4cm #000, inset 0 0 0 2cm var(--button-color);
-      font-weight: 700; text-align: center;
+      display:flex; justify-content:center; align-items:center; width: 100%;
+      background: transparent; border: none; outline: none; margin:.45em 0;
     }
-    .sched > summary::marker{ content:""; }
+    .oval.outer { display:inline-block; border: 2cm solid #000; border-radius: 9999px; }
+    .oval.middle{ display:inline-block; border: 2cm solid var(--button-color); border-radius: 9999px; }
+    .oval.inner { 
+      display:flex; align-items:center; justify-content:center; gap:.55em;
+      background:#fff; color: var(--text-color);
+      border-radius: 9999px; padding: .7em 1.2em;
+      /* Keep the whole thing inside the viewport even with 8cm total ring thickness */
+      width: calc(min(520px, 100vw - 8cm - 24px));
+      text-align:center; font-weight:700;
+    }
     .sched .chev::before{ content:"▸"; }
     .sched[open] .chev::before{ content:"▾"; }
     .sched > .table-wrap { margin-top: .65em; }
@@ -171,19 +186,19 @@
         <h2>Information for speakers</h2>
         <div class="stack">
           <details>
-            <summary>Abstract</summary>
+            <summary><span>Abstract</span></summary>
             <div class="panel">
               <p>Please make the abstract no more than one paragraph. Please feel free to use TeX which will be rendered.</p>
             </div>
           </details>
           <details>
-            <summary>Format &amp; length</summary>
+            <summary><span>Format &amp; length</span></summary>
             <div class="panel">
               <p>50 minutes + short Q&amp;A. Please make the first 20 minutes accessible to a number-theory-focused graduate student.</p>
             </div>
           </details>
           <details>
-            <summary>Technical logistics</summary>
+            <summary><span>Technical logistics</span></summary>
             <div class="panel">
               <ul>
                 <li>If you are giving a slide talk, please send the slides three days in advance to <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.</li>
@@ -193,15 +208,15 @@
             </div>
           </details>
           <details>
-            <summary>Funding</summary>
+            <summary><span>Funding</span></summary>
             <div class="panel">
               <p>Funding for travel and lodging is limited and not guaranteed; please contact <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a> for more details.</p>
             </div>
           </details>
 
-          <!-- Call for speakers: same width as the dropdown buttons -->
+          <!-- Call for speakers: white, same width as dropdowns -->
           <div class="notice callout">
-            <strong>Call for speakers:</strong>
+            <span class="cfs-title">Call for speakers</span>
             If you’d like to give a talk, please send a title/abstract and a few preferred dates to
             <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.
             Please include "U of T NT seminar" in your email subject.
@@ -210,13 +225,19 @@
       </section>
     </div>
 
-    <!-- Invisible anchor so the Subscribe button works even without a visible section -->
+    <!-- Invisible anchor so the Subscribe button works even without a visible contact section -->
     <div id="subscribe" aria-hidden="true"></div>
 
     <!-- Fall schedule -->
     <section id="schedule">
       <details class="sched" open>
-        <summary><span class="chev" aria-hidden="true"></span><span>Fall term schedule</span></summary>
+        <summary>
+          <span class="oval outer">
+            <span class="oval middle">
+              <span class="oval inner"><span class="chev" aria-hidden="true"></span><span>Fall term schedule</span></span>
+            </span>
+          </span>
+        </summary>
         <div class="table-wrap">
           <table>
             <thead>
@@ -252,7 +273,13 @@
     <!-- Spring schedule -->
     <section id="spring-schedule">
       <details class="sched">
-        <summary><span class="chev" aria-hidden="true"></span><span>Spring term schedule</span></summary>
+        <summary>
+          <span class="oval outer">
+            <span class="oval middle">
+              <span class="oval inner"><span class="chev" aria-hidden="true"></span><span>Spring term schedule</span></span>
+            </span>
+          </span>
+        </summary>
         <div class="table-wrap">
           <table>
             <thead>
