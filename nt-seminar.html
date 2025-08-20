@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Toronto Number Theory Seminar — 2025–26</title>
+  <title>U of T number theory seminar — 2025–26</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
   <style>
@@ -12,7 +12,7 @@
       --secondary-color: #C5C3C6;
       --background-color: #DCDCDD;
       --text-color: #1D1E18;
-      --button-color: #BF0603;
+      --button-color: #BF0603; /* red accent */
     }
 
     body { font-family: 'Open Sans', sans-serif; background: var(--background-color); color: var(--text-color); margin: 0; }
@@ -36,16 +36,25 @@
 
     main { padding: 2em 1.25em 3em; max-width: 1200px; margin: 0 auto; }
 
-    .hero { background: #fff; border-radius: 14px; padding: 1.25em 1.5em; box-shadow: 0 2px 10px rgba(0,0,0,.05); display:grid; gap: .75em; margin-bottom: 1.5em; }
-    .hero-header { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
-    .hero h1 { margin: .2em 0 .1em; font-size: clamp(1.6rem, 3.2vw, 2.1rem); }
-    .uoft-logo { height: 48px; width: auto; object-fit: contain; margin-left: .5rem; filter: drop-shadow(0 1px 1px rgba(0,0,0,.08)); }
-    @media (max-width: 520px){ .uoft-logo { height: 40px; } }
-
-    .meta { display:flex; flex-wrap:wrap; gap:.75em 1.25em; font-size: .98rem; color:#222; }
+    /* HERO with subtle U of T crest background */
+    .hero {
+      position: relative; overflow: hidden;
+      background: #fff; border-radius: 14px; padding: 1.25em 1.5em;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05); display:grid; gap: .75em; margin-bottom: 1.5em;
+    }
+    .hero::before{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
+      background-repeat: no-repeat;
+      background-position: right -120px center;
+      background-size: 520px auto;
+      opacity: .06;
+    }
+    .hero h1 { margin: .2em 0 .1em; font-size: clamp(1.6rem, 3.2vw, 2.1rem); position: relative; }
+    .meta { display:flex; flex-wrap:wrap; gap:.75em 1.25em; font-size: .98rem; color:#222; position: relative; }
     .meta .tag { background: var(--secondary-color); color:#111; border-radius: 999px; padding: .25em .7em; }
 
-    .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.6em .9em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); }
+    .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.6em .9em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); position: relative; }
     .btn:hover { filter: brightness(1.05); }
 
     .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap: 1.25em; }
@@ -53,7 +62,7 @@
 
     h2 { margin-top: 1.6em; }
 
-    /* tables */
+    /* Tables */
     .table-wrap { overflow-x:auto; background:#fff; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
     table { width:100%; border-collapse: collapse; table-layout: fixed; }
     thead { background: #f4f4f6; }
@@ -62,50 +71,54 @@
     tr:last-child td { border-bottom: none; }
     .nowrap { white-space: nowrap; }
 
-    /* details defaults */
+    /* Generic details (fallback) */
     details { background:#fff; padding:.6em .8em; border-radius:10px; margin:.3em 0; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
     details[open] summary { opacity:.95; }
-    summary { cursor:pointer; font-weight:600; }
+    summary { cursor:pointer; font-weight:600; min-width: 110px; display:inline-block; }
 
-    /* schedule toggles: compact, centered, symmetrical flourishes */
-    .sched { padding: 0; margin: .3em 0 .8em; border: none; background: transparent; box-shadow: none; }
-    .sched > summary {
-      display:flex; align-items:center; justify-content:center; gap:.6em;
-      max-width: 520px; margin: .4em auto; padding: .55em 1.1em;
+    /* Information for speakers column: button bubble + flat body */
+    #info .stack { width: min(560px, 100%); }
+    #info details { background: none; padding: 0; margin: .55em 0 .95em; border-radius: 0; box-shadow: none; }
+    #info details > summary {
+      display: inline-flex; align-items: center; gap: .5em; width: 100%;
       background: #fff;
-      border: 1px solid #e4e4ea; border-radius: 14px;
-      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+      border: 1px solid #e1e1e6; border-radius: 10px;
+      padding: .55em .85em; font-weight: 700;
+      box-shadow: 0 1px 3px rgba(0,0,0,.05);
+    }
+    #info details > summary::before { content: "▸"; opacity: .9; }
+    #info details[open] > summary::before { content: "▾"; }
+    /* Flat body that blends with page */
+    #info details > .panel {
+      background: transparent; border: none; box-shadow: none;
+      padding: .6em .2em; margin-top: .35em;
+    }
+    /* Safer bullet indent & spacing in the technical list */
+    #info .panel ul { margin: .1em 0 0 0; padding-left: 1.35em; }
+    #info .panel li { margin: .3em 0; }
+
+    /* Call for speakers bubble matches dropdown width */
+    .notice { background:#fff; border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; margin: 1.25em 0; }
+    .callout { background:#f2f3f6; width: 100%; }
+
+    /* Schedule toggles: centered, chevron + text, double rim (outer black 2cm, inner red 2cm) */
+    .sched { padding: 0; margin: .3em 0 .8em; border: none; background: transparent; box-shadow: none; }
+    .sched > summary{
+      position: relative;
+      display:flex; align-items:center; justify-content:center; gap:.55em;
+      width: min(520px, 100%); margin: .45em auto; padding: .7em 1.2em;
+      color: var(--text-color); background: #fff;
+      border-radius: 999px; border: none; outline: none;
+      /* Double inset ring: outer black (4cm total), inner red (2cm), center stays white */
+      box-shadow: inset 0 0 0 4cm #000, inset 0 0 0 2cm var(--button-color);
       font-weight: 700; text-align: center;
-      list-style: none;
     }
-    .sched > summary::marker { content: ""; }
-    .sched > summary:hover { box-shadow: 0 3px 10px rgba(0,0,0,.08); }
-    .sched .chev::before { content: "▸"; }
-    .sched[open] .chev::before { content: "▾"; }
-    .flourish { font-size: 1.05rem; opacity: .65; letter-spacing:.02em; }
-    .sum-title { font-weight: 700; }
-    .sched > .table-wrap { margin-top: .6em; }
+    .sched > summary::marker{ content:""; }
+    .sched .chev::before{ content:"▸"; }
+    .sched[open] .chev::before{ content:"▾"; }
+    .sched > .table-wrap { margin-top: .65em; }
 
-    /* info section: button-like dropdowns */
-    #info details { border:none; padding:0; margin:.45em 0; box-shadow:none; }
-    #info details summary {
-      display:inline-flex; align-items:center; gap:.5em;
-      background:#fff; border:1px solid #e1e1e6; border-radius:10px;
-      padding:.5em .8em; font-weight:700; box-shadow:0 1px 3px rgba(0,0,0,.05);
-    }
-    #info details summary::before { content:"▸"; opacity:.9; }
-    #info details[open] summary::before { content:"▾"; }
-    #info details > *:not(summary) {
-      background:#fff; padding:.6em .8em; border-radius: 0 0 10px 10px;
-      box-shadow: 0 1px 4px rgba(0,0,0,.05); margin-top:.4em;
-    }
-
-    /* call for speakers bubble (centered, slightly grayer) */
-    .notice { background:#fff; border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; }
-    .callout { background:#f2f3f6; width: 50%; margin: 1.2em auto 0; }
-    @media (max-width: 900px){ .callout { width: 100%; } }
-
-    /* invisible anchor so the Subscribe button still works */
+    /* Invisible anchor so the Subscribe button still works without a visible section */
     #subscribe { position: relative; height: 0; }
   </style>
   <script>
@@ -126,17 +139,14 @@
         <a href="research.html">Publications and preprints</a>
         <a href="notes.html">Expository material</a>
         <a href="friends.html">Friends</a>
-        <a href="#" style="color: var(--secondary-color);">Toronto number theory seminar</a>
+        <a href="#" style="color: var(--secondary-color);">U of T number theory seminar</a>
       </div>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <div class="hero-header">
-        <h1>Toronto Number Theory Seminar (2025–26)</h1>
-        <img class="uoft-logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png" alt="University of Toronto crest">
-      </div>
+      <h1>U of T number theory seminar (2025–26)</h1>
       <div class="meta">
         <span class="tag"><i class="fa fa-calendar"></i>&nbsp; Wednesday, 2:10–3:0X PM <span class="muted">(50 minutes + questions)</span></span>
         <span class="tag"><i class="fa fa-map-marker"></i>&nbsp; Bahen Center, Room 6183</span>
@@ -159,49 +169,54 @@
 
       <section id="info">
         <h2>Information for speakers</h2>
-        <details>
-          <summary>Abstract</summary>
-          <p>Please make the abstract no more than one paragraph. Please feel free to use TeX which will be rendered.</p>
-        </details>
-        <details>
-          <summary>Format &amp; length</summary>
-          <p>50 minutes + short Q&amp;A. Please make the first 20 minutes accessible to a number-theory-focused graduate student.</p>
-        </details>
-        <details>
-          <summary>Technical logistics</summary>
-          <ul>
-            <li>If you are giving a slide talk, please send the slides three days in advance to <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.</li>
-            <li>The talk will be broadcast on Zoom.</li>
-            <li>The talk will be recorded and posted, unless requested otherwise.</li>
-          </ul>
-        </details>
-        <details>
-          <summary>Funding</summary>
-          <p>Funding for travel and lodging is limited and not guaranteed; please contact <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a> for more details.</p>
-        </details>
+        <div class="stack">
+          <details>
+            <summary>Abstract</summary>
+            <div class="panel">
+              <p>Please make the abstract no more than one paragraph. Please feel free to use TeX which will be rendered.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Format &amp; length</summary>
+            <div class="panel">
+              <p>50 minutes + short Q&amp;A. Please make the first 20 minutes accessible to a number-theory-focused graduate student.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Technical logistics</summary>
+            <div class="panel">
+              <ul>
+                <li>If you are giving a slide talk, please send the slides three days in advance to <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.</li>
+                <li>The talk will be broadcast on Zoom.</li>
+                <li>The talk will be recorded and posted, unless requested otherwise.</li>
+              </ul>
+            </div>
+          </details>
+          <details>
+            <summary>Funding</summary>
+            <div class="panel">
+              <p>Funding for travel and lodging is limited and not guaranteed; please contact <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a> for more details.</p>
+            </div>
+          </details>
 
-        <!-- Call for speakers bubble (moved here, centered, slightly grayer) -->
-        <div class="notice callout">
-          <strong>Call for speakers:</strong>
-          If you’d like to give a talk, please send a title/abstract and a few preferred dates to
-          <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.
-          Please include "U of T NT seminar" in your email subject.
+          <!-- Call for speakers: same width as the dropdown buttons -->
+          <div class="notice callout">
+            <strong>Call for speakers:</strong>
+            If you’d like to give a talk, please send a title/abstract and a few preferred dates to
+            <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.
+            Please include "U of T NT seminar" in your email subject.
+          </div>
         </div>
       </section>
     </div>
 
-    <!-- invisible anchor so the Subscribe button works without a visible Contact section -->
+    <!-- Invisible anchor so the Subscribe button works even without a visible section -->
     <div id="subscribe" aria-hidden="true"></div>
 
     <!-- Fall schedule -->
     <section id="schedule">
       <details class="sched" open>
-        <summary>
-          <span class="chev" aria-hidden="true"></span>
-          <span class="flourish" aria-hidden="true">✦</span>
-          <span class="sum-title">Fall term schedule</span>
-          <span class="flourish" aria-hidden="true">✦</span>
-        </summary>
+        <summary><span class="chev" aria-hidden="true"></span><span>Fall term schedule</span></summary>
         <div class="table-wrap">
           <table>
             <thead>
@@ -237,12 +252,7 @@
     <!-- Spring schedule -->
     <section id="spring-schedule">
       <details class="sched">
-        <summary>
-          <span class="chev" aria-hidden="true"></span>
-          <span class="flourish" aria-hidden="true">✦</span>
-          <span class="sum-title">Spring term schedule</span>
-          <span class="flourish" aria-hidden="true">✦</span>
-        </summary>
+        <summary><span class="chev" aria-hidden="true"></span><span>Spring term schedule</span></summary>
         <div class="table-wrap">
           <table>
             <thead>
@@ -276,7 +286,7 @@
   </main>
 
   <footer style="background:var(--primary-color); color:#fff; padding:1em; text-align:center;">
-    <p>&copy; 2025 University of Toronto Number Theory Seminar</p>
+    <p>&copy; 2025 U of T number theory seminar</p>
   </footer>
 
   <script>
