@@ -16,7 +16,7 @@
       --card: #ffffff;
       --border: #e1e1e6;
 
-      /* NEW: unify info-button font size so we can match the term-button text exactly */
+      /* master text size for Info buttons AND term buttons */
       --info-btn-font-size: 1rem;
     }
 
@@ -48,7 +48,7 @@
       box-shadow: 0 2px 10px rgba(0,0,0,.05); display:grid; gap: .75em; margin-bottom: 1.5em;
     }
     .hero::before{
-      content:""; position:absolute; inset:0; pointer-events:none; opacity:.22; /* more visible */
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.22;
       background-image:
         url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
         url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
@@ -66,10 +66,21 @@
     .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.6em .9em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); position: relative; }
     .btn:hover { filter: brightness(1.05); }
 
-    .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap: 1.25em; }
+    /* Two-column layout: make columns equal height, left splits into two equal rows */
+    .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap: 1.25em; align-items: stretch; }
     @media (max-width: 900px){ .grid-2 { grid-template-columns: 1fr; } }
 
-    h2 { margin-top: 1.6em; }
+    /* Reusable white bubble */
+    .bubble {
+      background: var(--card); border-radius: 14px; padding: 1em 1.2em;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05);
+    }
+    /* Left column stack: About + Call for speakers occupy equal height */
+    .left-stack { display:grid; grid-template-rows: 1fr 1fr; gap: 1.25em; height: 100%; }
+    .left-stack > .bubble,
+    .left-stack > .notice.callout { height: 100%; overflow:auto; display:flex; flex-direction:column; }
+
+    h2 { margin-top: 0; }
 
     /* Tables */
     .table-wrap { overflow-x:auto; background:var(--card); border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
@@ -87,38 +98,38 @@
     summary::-webkit-details-marker{display:none;}
     summary::marker{content:"";}
 
-    /* Information for speakers — white button with black outline + white body (same width) */
-    #info .stack { width: min(560px, 100%); }
-    #info details { padding: 0; margin: .55em 0 .95em; border: 0; }
+    /* Information for speakers — one big bubble with left-aligned items */
+    #info .info-bubble { background:#fff; border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,.05); padding: 1em 1.2em; height:100%; display:flex; flex-direction:column; }
+    #info .stack { width: 100%; }
+    #info details { padding: 0; margin: .5em 0; border: 0; }
     #info details > summary {
-      display:flex; justify-content:center; align-items:center; gap:.5em; width:100%;
+      display:flex; justify-content:flex-start; align-items:center; gap:.5em; width:100%;
       background:#fff; border:2px solid #000; border-radius:10px;
-      padding:.6em .9em; font-weight:700; box-shadow:0 1px 3px rgba(0,0,0,.05);
+      padding:.4em .8em; font-weight:700; box-shadow:0 1px 3px rgba(0,0,0,.05);
       font-size: var(--info-btn-font-size);
     }
     #info details > summary::before { content:"▸"; opacity:.9; }
     #info details[open] > summary::before { content:"▾"; }
-    /* CHANGED: match width, remove separator, reduce vertical padding */
+    /* Body blends with the big bubble: no border, no separator, tighter padding */
     #info details > .panel {
-      background:#fff; border:2px solid #000; border-top:0; border-radius:0 0 10px 10px;
-      padding:.5em .9em; margin-top:0; box-shadow:0 1px 3px rgba(0,0,0,.05);
+      background: transparent; border: 0; border-radius: 0;
+      padding: .35em 0 .45em 0; margin-top: .2em; box-shadow: none;
     }
     #info .panel ul { padding-left:1.35em; }
     #info .panel li { margin:.3em 0; }
 
-    /* Call for speakers — same width as dropdowns; white; centered/bold heading */
-    .notice { background:var(--card); border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; margin: 1.25em 0; }
+    /* Call for speakers — unchanged style */
+    .notice { background:var(--card); border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; margin: 0; }
     .callout { width: 100%; }
-    .cfs-title { display:block; text-align:center; font-weight:700; margin-bottom:.35em; }
+    .cfs-title { display:block; text-align:center; font-weight:700; margin-bottom:.35em; font-size: var(--info-btn-font-size); }
 
-    /* Term buttons: exact layered pill; now scaled so label = info button font size */
+    /* Term buttons: exact layered pill; label matches info button text size */
     .sched { padding: 0; margin: .3em 0 .8em; border: none; background: transparent; box-shadow: none; }
     .sched > summary { display:flex; justify-content:center; align-items:center; margin:.45em 0; }
     .term-btn {
-      /* CHANGED: base height derived from the info button font-size so label matches exactly */
-      --label-size: var(--info-btn-font-size);
-      --btn-h: calc(var(--label-size) * 3);         /* label is ≈ 1/3 button height */
-      --band: calc(var(--btn-h) * 0.075);           /* each band ~7.5% height */
+      --label-size: var(--info-btn-font-size);   /* match Info button text size */
+      --btn-h: calc(var(--label-size) * 3);      /* label ≈ 1/3 of height */
+      --band: calc(var(--btn-h) * 0.075);        /* each band ~7.5% height */
       --radius: calc(var(--btn-h) * 0.5);
       border: 0; background: transparent; padding: 0; cursor: pointer; line-height: 0;
     }
@@ -144,11 +155,11 @@
     .term-btn[aria-expanded="true"] .term-btn__chevron { transform: rotate(180deg); }
     .sched[open] .term-btn__chevron { transform: rotate(180deg); }
 
-    /* Column width preferences (make Abstract widest) */
-    .col-date    { width: 12ch; }  /* fits 'Sep 10, 2025' */
-    .col-speaker { width: 20ch; }  /* fits 'Vadim Vologodsky' on one line */
-    .col-title   { width: 34ch; }  /* encourages two lines for the given long title */
-    /* No width on the 4th col so it takes the remaining space */
+    /* Column width preferences (Abstract widest) */
+    .col-date    { width: 12ch; }
+    .col-speaker { width: 20ch; }
+    .col-title   { width: 34ch; }
+    /* 4th column (Abstract) takes remaining space */
 
     /* Invisible anchor so Subscribe button still works */
     #subscribe { position: relative; height: 0; }
@@ -191,51 +202,57 @@
     </section>
 
     <div class="grid-2">
-      <section id="blurb">
-        <h2>About</h2>
-        <p>
-          This seminar features research talks in analytic and arithmetic aspects of number theory broadly construed (including
-          \(p\)-adic Hodge theory, automorphic forms, Galois representations, and related topics). Talks target a general number theory audience at the University of Toronto and nearby institutions.
-        </p>
-      </section>
+      <!-- LEFT COLUMN: About bubble + Call for speakers bubble, equal heights -->
+      <div class="left-stack">
+        <section id="blurb" class="bubble">
+          <h2>About</h2>
+          <p>
+            This seminar features research talks in analytic and arithmetic aspects of number theory broadly construed (including
+            \(p\)-adic Hodge theory, automorphic forms, Galois representations, and related topics). Talks target a general number theory audience at the University of Toronto and nearby institutions.
+          </p>
+        </section>
 
+        <!-- Call for speakers (unchanged content/style), now below About -->
+        <div class="notice callout">
+          <span class="cfs-title">Call for speakers</span>
+          If you’d like to give a talk, send a title/abstract and preferred dates to
+          <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>; include "U of T NT seminar" in your email subject.
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: One big bubble with left-aligned dropdown items -->
       <section id="info">
         <h2>Information for speakers</h2>
-        <div class="stack">
-          <details>
-            <summary>Abstract</summary>
-            <div class="panel">
-              <p>Please make the abstract no more than one paragraph. Please feel free to use TeX which will be rendered.</p>
-            </div>
-          </details>
-          <details>
-            <summary>Format &amp; length</summary>
-            <div class="panel">
-              <p>50 minutes + short Q&amp;A. Please make the first 20 minutes accessible to a number-theory-focused graduate student.</p>
-            </div>
-          </details>
-          <details>
-            <summary>Technical logistics</summary>
-            <div class="panel">
-              <ul>
-                <li>If you are giving a slide talk, please send the slides three days in advance to <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.</li>
-                <li>The talk will be broadcast on Zoom.</li>
-                <li>The talk will be recorded and posted, unless requested otherwise.</li>
-              </ul>
-            </div>
-          </details>
-          <details>
-            <summary>Funding</summary>
-            <div class="panel">
-              <p>Funding for travel and lodging is limited and not guaranteed; please contact <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a> for more details.</p>
-            </div>
-          </details>
-
-          <!-- Call for speakers: same width as dropdowns; white background; centered bold title -->
-          <div class="notice callout">
-            <span class="cfs-title">Call for speakers</span>
-            If you’d like to give a talk, send a title/abstract and preferred dates to
-            <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>; include "U of T NT seminar" in your email subject.
+        <div class="info-bubble">
+          <div class="stack">
+            <details>
+              <summary>Abstract</summary>
+              <div class="panel">
+                <p>Please make the abstract no more than one paragraph. Please feel free to use TeX which will be rendered.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Format &amp; length</summary>
+              <div class="panel">
+                <p>50 minutes + short Q&amp;A. Please make the first 20 minutes accessible to a number-theory-focused graduate student.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Technical logistics</summary>
+              <div class="panel">
+                <ul>
+                  <li>If you are giving a slide talk, please send the slides three days in advance to <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.</li>
+                  <li>The talk will be broadcast on Zoom.</li>
+                  <li>The talk will be recorded and posted, unless requested otherwise.</li>
+                </ul>
+              </div>
+            </details>
+            <details>
+              <summary>Funding</summary>
+              <div class="panel">
+                <p>Funding for travel and lodging is limited and not guaranteed; please contact <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a> for more details.</p>
+              </div>
+            </details>
           </div>
         </div>
       </section>
