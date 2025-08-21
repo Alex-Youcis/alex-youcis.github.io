@@ -1,810 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>U of T number theory seminar — 2025–26</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+  <title>Alex Youcis</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Include Fonts and Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <!-- Include CSS Styles -->
   <style>
+    /* Root Variables for Colors */
     :root {
-      --primary-color: #1D1E18;
-      --secondary-color: #C5C3C6;
-      --background-color: #DCDCDD;
-      --text-color: #1D1E18;
-      --button-color: #BF0603; /* red accent */
-      --card: #ffffff;
-      --border: #e1e1e6;
-
-      /* master text size for Info buttons AND base scale for term buttons */
-      --info-btn-font-size: 1rem;
+      --primary-color: #1D1E18; /* Dark color */
+      --secondary-color: #C5C3C6; /* Mid-tone gray */
+      --background-color: #DCDCDD; /* Light gray */
+      --text-color: #1D1E18; /* Dark color */
+      --button-color: #BF0603; /* Button and collaborator link color */
     }
 
-    body { font-family: 'Open Sans', sans-serif; background: var(--background-color); color: var(--text-color); margin: 0; }
-    header { background: var(--primary-color); position: sticky; top: 0; z-index: 1000; }
-    .navbar { display:flex; justify-content:flex-end; align-items:center; padding:0 1em; height:60px; }
-    .nav-links { display:flex; }
-    .nav-links a { color:#fff; text-decoration:none; margin:0 1em; position:relative; transition:color .3s ease; }
-    .nav-links a::after { content:''; position:absolute; width:0; height:2px; background:var(--secondary-color); left:50%; bottom:-5px; transition:all .3s ease; }
-    .nav-links a:hover { color:var(--secondary-color); }
-    .nav-links a:hover::after { left:0; width:100%; }
-    .nav-mobile{display:none}
-    @media (max-width: 768px){
-      .nav-links{display:none; flex-direction:column; background:var(--primary-color); position:absolute; top:60px; right:0; width:220px}
-      .nav-links a{margin:0; padding:1em; text-align:right; border-bottom:1px solid var(--secondary-color)}
-      .nav-mobile{display:flex; align-items:center}
-      .nav-text{color:#fff; margin-right:.5em}
-      .icon{color:#fff; font-size:24px; cursor:pointer}
-      .navbar.responsive .nav-links{display:flex}
-      .navbar.responsive .nav-mobile .nav-text{display:none}
+    /* Global Styles */
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
     }
 
-    main { padding: 2em 1.25em 3em; max-width: 1200px; margin: 0 auto; }
-
-    /* HERO with 3 visible U of T crests, fully inside card */
-    .hero {
-      position: relative; overflow: hidden;
-      background: var(--card); border-radius: 14px; padding: 1.25em 1.5em;
-      box-shadow: 0 2px 10px rgba(0,0,0,.05); display:grid; gap: .75em; margin-bottom: 1.5em;
-    }
-    .hero::before{
-      content:""; position:absolute; inset:0; pointer-events:none; opacity:.22;
-      background-image:
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
-      background-repeat: no-repeat, no-repeat, no-repeat;
-      background-position: 16% center, 50% center, 84% center; /* equidistributed */
-      background-size: auto 96%, auto 96%, auto 96%;           /* scaled up 1.2× */
-    }
-    @media (max-width: 600px){
-      .hero::before{ background-size: auto 78%, auto 78%, auto 78%; }
-    }
-    .hero h1 { margin: .2em 0 .1em; font-size: clamp(1.6rem, 3.2vw, 2.1rem); position: relative; }
-    .meta { display:flex; flex-wrap:wrap; gap:.75em 1.25em; font-size: .98rem; color:#222; position: relative; }
-    .meta .tag { background: var(--secondary-color); color:#111; border-radius: 999px; padding: .25em .7em; }
-    .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.6em .9em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); position: relative; }
-    .btn:hover { filter: brightness(1.05); }
-
-    /* Reusable white bubble */
-    .bubble {
-      background: var(--card); border-radius: 14px; padding: 1em 1.2em;
-      box-shadow: 0 2px 10px rgba(0,0,0,.05);
-      display:flex; flex-direction:column;
+    /* Navbar Styles */
+    header {
+      background-color: var(--primary-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      /* Removed border-bottom */
+      /* Add subtle shadow */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    h2 { margin-top: 0; }
-
-    /* Tables */
-    .table-wrap { overflow-x:auto; background:var(--card); border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
-    table { width:100%; border-collapse: collapse; table-layout: fixed; }
-    thead { background: #f4f4f6; }
-    th, td { padding: .85em 1.2em; border-bottom: 1px solid #e6e6ea; vertical-align: top; overflow-wrap:anywhere; word-break:break-word; }
-    th { text-align:left; font-weight:700; }
-    tr:last-child td { border-bottom: none; }
-    .nowrap { white-space: nowrap; }
-
-    /* Abstract cells (generic) */
-    details { background:var(--card); padding:.6em .8em; border-radius:10px; margin:.3em 0; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
-    details[open] summary { opacity:.95; }
-    summary { cursor:pointer; font-weight:600; min-width: 110px; display:inline-block; }
-    summary::-webkit-details-marker{display:none;}
-    summary::marker{content:"";}
-
-    /* Call for speakers (legacy utility) */
-    .notice { background:var(--card); border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; margin: 0; }
-    .callout { width: 100%; }
-    .cfs-title { display:block; text-align:center; font-weight:700; margin-bottom:.35em; font-size: var(--info-btn-font-size); }
-
-    /* Term buttons: exact layered pill */
-    .sched { padding: 0; margin: .3em 0 .8em; border: none; background: transparent; box-shadow: none; }
-    .sched > summary { display:flex; justify-content:center; align-items:center; margin:.45em 0; }
-    .term-btn {
-      /* SCALE UP 1.5x (only the term buttons) */
-      --label-size: calc(var(--info-btn-font-size) * 1.5);
-      --btn-h: calc(var(--label-size) * 3);      /* label ≈ 1/3 of height */
-      --band: calc(var(--btn-h) * 0.075);        /* each band ~7.5% height */
-      --radius: calc(var(--btn-h) * 0.5);
-      border: 0; background: transparent; padding: 0; cursor: pointer; line-height: 0;
-    }
-    .term-btn__outer { display:inline-block; background:#000; padding: var(--band); border-radius: var(--radius); }
-    .term-btn__middle{ display:inline-block; background: var(--button-color); padding: var(--band); border-radius: calc(var(--radius) - var(--band)); }
-    .term-btn__inner {
-      display:inline-flex; align-items:center; justify-content:center;
-      gap: calc(var(--btn-h) * 0.18);
-      background:#fff; border-radius: calc(var(--radius) - (2 * var(--band)));
-      height: var(--btn-h);
-      padding: 0 calc(var(--btn-h) * 1.4); /* keeps text ≈ 1/5 of width */
-    }
-    .term-btn__label {
-      font: 700 var(--label-size)/1.05 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      color:#000; white-space:nowrap;
-    }
-    .term-btn__chevron {
-      width: calc(var(--btn-h) * 0.28); height: calc(var(--btn-h) * 0.28);
-      flex:0 0 auto; transition: transform 160ms ease; color:#000;
-    }
-    .term-btn:focus-visible .term-btn__inner { outline: 2px solid #333; outline-offset: 3px; }
-    .term-btn:hover .term-btn__inner { background:#f7f7f7; }
-    .term-btn[aria-expanded="true"] .term-btn__chevron { transform: rotate(180deg); }
-    .sched[open] .term-btn__chevron { transform: rotate(180deg); }
-
-    /* Column width preferences (Abstract widest) */
-    .col-date    { width: 12ch; }
-    .col-speaker { width: 20ch; }
-    .col-title   { width: 34ch; }
-    /* 4th column (Abstract) takes remaining space */
-
-    /* Invisible anchor so Subscribe button still works */
-    #subscribe { position: relative; height: 0; }
-
-    /* =========================
-       NAMESPACED CSS FROM SPEC
-       ========================= */
-    /* Grid wrapper: two equal columns, equal height */
-    .info-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-6, 24px);
-      align-items: stretch;  /* ensure columns stretch to equal height */
-      margin-bottom: 1.25em;
-    }
-
-    /* Left column stacks About above Call */
-    .info-layout__left {
+    .navbar {
       display: flex;
-      flex-direction: column;
-      gap: var(--space-6, 24px);
+      justify-content: flex-end; /* Right-aligned navigation links */
+      align-items: center;
+      padding: 0 1em;
+      height: 60px;
     }
 
-    /* Bold black outline around About / Call / Information bubbles */
-    .about-card, .call-card, .speakers-card { border: 3px solid #000; }
-    /* Red left accent on Call bubble */
-    .call-card { border-left: 6px solid var(--button-color) !important; }
+    .nav-links {
+      display: flex;
+    }
 
-    /* Speaker subsections spacing (base) */
-    .speaker-section + .speaker-section { margin-top: var(--space-3, 12px); }
-    .speaker-section__title { margin: 0 0 var(--space-2, 8px) 0; }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1em;
+      position: relative; /* For underline effect */
+      transition: color 0.3s ease; /* Smooth color transition */
+    }
 
-    /* Responsive: stack to one column on small screens */
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: var(--secondary-color);
+      left: 50%;
+      bottom: -5px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--secondary-color); /* Change text color on hover */
+    }
+
+    .nav-links a:hover::after {
+      left: 0;
+      width: 100%;
+    }
+
+    .nav-mobile {
+      display: none;
+    }
+
+    /* Mobile Navigation Styles */
+    @media screen and (max-width: 768px) {
+      .navbar {
+        justify-content: flex-end; /* Keep items right-aligned */
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: var(--primary-color);
+        position: absolute;
+        top: 60px; /* Place below the header */
+        right: 0;
+        width: 200px;
+      }
+
+      .nav-links a {
+        margin: 0;
+        padding: 1em;
+        text-align: right;
+        border-bottom: 1px solid var(--secondary-color);
+      }
+
+      .nav-mobile {
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-text {
+        color: white;
+        margin-right: 0.5em;
+      }
+
+      .icon {
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      .navbar.responsive .nav-links {
+        display: flex;
+      }
+
+      .navbar.responsive .nav-mobile .nav-text {
+        display: none;
+      }
+    }
+
+    /* Main Content Styles */
+    main {
+      padding: 2em;
+    }
+
+    /* Friends List Styles */
+    .friends-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      column-count: 3;
+      column-gap: 2em;
+    }
+
+    .friends-list li {
+      margin-bottom: 0.5em;
+    }
+
+    .friends-list a {
+      color: var(--button-color); /* Use button color for links */
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .friends-list a:hover {
+      color: #9B0502; /* Darker shade on hover */
+      text-decoration: underline;
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+
+    /* Responsive Adjustments */
     @media (max-width: 768px) {
-      .info-layout { grid-template-columns: 1fr; }
+      /* Removed previous .navbar adjustments */
+      .friends-list {
+        column-count: 2;
+      }
     }
 
-    /* =========================================
-       EXTRA SPACING inside Information bubble
-       (slightly increased to balance column heights after moving Funding)
-       ========================================= */
-    .speakers-card > h2 { margin-bottom: 12px; }                /* was 8px */
-    .speakers-card .speaker-section + .speaker-section { margin-top: 16px; } /* was 8px */
-    .speakers-card .speaker-section__title { margin-bottom: 6px; }           /* was 4px */
-    .speakers-card .speaker-section__body p { margin: 6px 0; }               /* was 4px */
-    .speakers-card .speaker-section__body ul { margin: 6px 0 6px 1.25em; }   /* was 4px */
-    .speakers-card .speaker-section__body li { margin: 3px 0; }              /* was 2px */
-
-    /* =========================
-       Abstract toggle button in tables
-       ========================= */
-    details.abs { background: transparent; padding: 0; box-shadow: none; border-radius: 0; }
-    .abs__btn {
-      display: inline-flex; align-items: center; gap: .4em;
-      padding: .25em .55em; border: 1px solid #cfcfd4; border-radius: 8px;
-      font-weight: 700; background: #fff; cursor: pointer;
+    @media (max-width: 480px) {
+      .friends-list {
+        column-count: 1;
+      }
     }
-    .abs__chev { width: 0.9em; height: 0.9em; transition: transform 160ms ease; }
-    details.abs[open] .abs__chev { transform: rotate(180deg); }
-    .abs__body { margin-top: .5em; }
   </style>
+  <!-- MathJax Configuration -->
   <script>
-    window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]], processEscapes:true }, options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' } };
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        processEscapes: true,
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process',
+      }
+    };
   </script>
+  <!-- Include MathJax -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
 </head>
 <body>
   <header>
     <nav class="navbar" id="myNavbar">
+      <!-- Mobile Navigation -->
       <div class="nav-mobile">
         <span class="nav-text">Navigation</span>
-        <span class="icon" onclick="toggleMenu()"><i class="fa fa-bars"></i></span>
+        <span class="icon" onclick="toggleMenu()">
+          <i class="fa fa-bars"></i>
+        </span>
       </div>
+      <!-- Navigation links -->
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="research.html">Publications and preprints</a>
         <a href="notes.html">Expository material</a>
-        <a href="friends.html">Friends</a>
-        <a href="#" style="color: var(--secondary-color);">U of T number theory seminar</a>
+        <a href="#">Friends</a>
+         <a href="nt-seminar.html">U of T number theory seminar</a>
       </div>
     </nav>
   </header>
-
   <main>
-    <section class="hero">
-      <h1>U of T number theory seminar (2025–26)</h1>
-      <div class="meta">
-        <span class="tag"><i class="fa fa-calendar"></i>&nbsp; Wednesday, 2:10–3:0X PM <span class="muted">(50 minutes + questions)</span></span>
-        <span class="tag"><i class="fa fa-map-marker"></i>&nbsp; Bahen Center, Room 6183</span>
-        <span class="tag"><i class="fa fa-user"></i>&nbsp; Organizers: Florian Herzig and Alex Youcis</span>
-      </div>
-      <div>
-        <a class="btn" href="#subscribe"><i class="fa fa-envelope"></i> Subscribe</a>
-        <a class="btn" href="https://sites.google.com/view/ntseminar/home" target="_blank" rel="noopener"><i class="fa fa-archive"></i> 2024–2025 NT seminar</a>
-      </div>
-    </section>
-
-    <!-- Restructured area -->
-    <section class="info-layout" aria-labelledby="info-for-speakers-title">
-      <!-- LEFT COLUMN -->
-      <div class="info-layout__left">
-        <article class="bubble bubble--white about-card" id="blurb" aria-labelledby="about-title">
-          <h2 id="about-title">About</h2>
-          <p>
-            This seminar features research talks in analytic and arithmetic aspects of number theory broadly construed (including
-            \(p\)-adic Hodge theory, automorphic forms, Galois representations, and related topics).
-          </p>
-        </article>
-
-        <article class="bubble bubble--white call-card" aria-labelledby="call-title">
-          <h2 id="call-title">Call for speakers</h2>
-          <p>
-            To give a talk, send a title/abstract and preferred dates to
-            <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>; include "U of T NT seminar" in your email subject.
-          </p>
-          <!-- Moved Funding here -->
-          <section class="speaker-section">
-            <h3 class="speaker-section__title"><strong>Funding</strong></h3>
-            <div class="speaker-section__body">
-              <p>Funding for travel and lodging is limited and not guaranteed; please contact <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a> for more details.</p>
-            </div>
-          </section>
-        </article>
-      </div>
-
-      <!-- RIGHT COLUMN -->
-      <aside class="bubble bubble--white speakers-card" id="info">
-        <h2 id="info-for-speakers-title">Information for speakers</h2>
-
-        <section class="speaker-section">
-          <h3 class="speaker-section__title"><strong>Abstract</strong></h3>
-          <div class="speaker-section__body">
-            <p>Please make the abstract no more than one paragraph. Please feel free to use TeX which will be rendered.</p>
-          </div>
-        </section>
-
-        <section class="speaker-section">
-          <h3 class="speaker-section__title"><strong>Format &amp; length</strong></h3>
-          <div class="speaker-section__body">
-            <p>50 minutes + short Q&amp;A. Please make the first 20 minutes accessible to a number-theory-focused graduate student.</p>
-          </div>
-        </section>
-
-        <section class="speaker-section">
-          <h3 class="speaker-section__title"><strong>Technical logistics</strong></h3>
-          <div class="speaker-section__body">
-            <ul>
-              <li>If you are giving a slide talk, please send the slides three days in advance to <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.</li>
-              <li>The talk will be broadcast on Zoom.</li>
-              <li>The talk will be recorded and posted, unless requested otherwise.</li>
-            </ul>
-          </div>
-        </section>
-      </aside>
-    </section>
-
-    <!-- Invisible anchor so the Subscribe button works even without a visible contact section -->
-    <div id="subscribe" aria-hidden="true"></div>
-
-    <!-- Fall schedule (closed by default) -->
-    <section id="schedule">
-      <details class="sched">
-        <summary>
-          <button class="term-btn" type="button" aria-expanded="false">
-            <span class="term-btn__outer">
-              <span class="term-btn__middle">
-                <span class="term-btn__inner">
-                  <span class="term-btn__label">Fall term schedule</span>
-                  <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                  </svg>
-                </span>
-              </span>
-            </span>
-          </button>
-        </summary>
-        <div class="table-wrap">
-          <table>
-            <colgroup>
-              <col class="col-date">
-              <col class="col-speaker">
-              <col class="col-title">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th class="nowrap">Date</th>
-                <th>Speaker</th>
-                <th>Title</th>
-                <th>Abstract</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="nowrap">Sep 3, 2025</td>
-                <td>Alex Youcis</td>
-                <td><em>An integral comparison of crystalline and de Rham cohomology</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">
-                      Let \( \mathcal{O}_K \) be a mixed characteristic complete DVR with residue field \( k \) of characteristic \( p \), and \( X/\mathcal{O}_K \) a smooth proper formal scheme. A celebrated result of Berthelot--Ogus shows that the de Rham cohomology groups \( H^i_\mathrm{dR}(X/\mathcal{O}_K) \) and crystalline cohomology groups \( H^i_\mathrm{crys}(X_k/W(k))\otimes_{W(k)}\mathcal{O}_K \) agree <i>rationally</i>, i.e., after inverting \( p \). Using recent advances in prismatic cohomology we show that an <i>integral</i> version of this statement holds using appropriate notions of 'twisted' de Rham and crystalline cohomology. This is a prismatic manifestation of Dwork's trick. This further gives an integral comparison even for non-trivial (prismatic) coefficients, and allows one to initiate a prismatic study of the relationship between crystalline and de Rham torsion.
-                    </div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Sep 10, 2025</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Sep 17, 2025</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Sep 24, 2025</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Oct 1, 2025</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Oct 8, 2025</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Oct 15, 2025</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Oct 22, 2025</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Oct 29, 2025</td>
-                <td>Reading week (no seminar)</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td class="nowrap">Nov 5, 2025</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Nov 12, 2025</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Nov 19, 2025</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Nov 26, 2025</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Dec 3, 2025</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Dec 10, 2025</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-    </section>
-
-    <!-- Spring schedule -->
-    <section id="spring-schedule">
-      <details class="sched">
-        <summary>
-          <button class="term-btn" type="button" aria-expanded="false">
-            <span class="term-btn__outer">
-              <span class="term-btn__middle">
-                <span class="term-btn__inner">
-                  <span class="term-btn__label">Spring term schedule</span>
-                  <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                  </svg>
-                </span>
-              </span>
-            </span>
-          </button>
-        </summary>
-        <div class="table-wrap">
-          <table>
-            <colgroup>
-              <col class="col-date">
-              <col class="col-speaker">
-              <col class="col-title">
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th class="nowrap">Date</th>
-                <th>Speaker</th>
-                <th>Title</th>
-                <th>Abstract</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="nowrap">Jan 7, 2026</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Jan 14, 2026</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Jan 21, 2026</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Jan 28, 2026</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Feb 4, 2026</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Feb 11, 2026</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Feb 18, 2026</td>
-                <td>Reading week (no seminar)</td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td class="nowrap">Feb 25, 2026</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Mar 4, 2026</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Mar 11, 2026</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Mar 18, 2026</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Mar 25, 2026</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Apr 1, 2026</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-              <tr>
-                <td class="nowrap">Apr 8, 2026</td><td>TBA</td><td><em>TBA</em></td>
-                <td>
-                  <details class="abs">
-                    <summary class="abs__btn">
-                      <span class="abs__label">Abstract:</span>
-                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                      </svg>
-                    </summary>
-                    <div class="abs__body">TBA</div>
-                  </details>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-    </section>
+    <h1><i class="fa fa-users"></i> Friends</h1>
+    <p>Here is a list of mathematical friends and collaborators:</p>
+    <ul class="friends-list">
+      <li><a href="https://abhinandan.perso.math.cnrs.fr/">Abhinandan</a></li>
+      <li><a href="http://achinger.impan.pl/">Piotr Achinger</a></li>
+      <li><a href="https://math.bu.edu/people/abertolo/">Alexander Bertoloni Meli</a></li>
+      <li><a href="https://www.imo.universite-paris-saclay.fr/~kestutis.cesnavicius/">Kęstutis Česnavičius</a></li>
+      <li><a href="https://www.skidmore.edu/mathematics/faculty/daniels.php">Patrick Daniels</a></li>
+      <li><a href="https://terpconnect.umd.edu/~dillery/UMDWebsite.html">Peter Dillery</a></li>
+      <li><a href="https://eldenelmanto.com/">Elden Elmanto</a></li>
+      <li><a href="https://sites.google.com/umich.edu/hyg">Haoyang Guo</a></li>
+      <li><a href="http://www.davidrenshawhansen.net/">David Hansen</a></li>
+      <li><a href="https://web.stanford.edu/~pvhoften/">Pol van Hoften</a></li>
+      <li><a href="https://www.ms.u-tokyo.ac.jp/~naoki/">Naoki Imai</a></li>
+      <li><a href="https://arxiv.org/search/math?query=Kato%2C+Hiroki&searchtype=author&abstracts=show&order=-announced_date_first&size=50">Hiroki Kato</a></li>
+      <li><a href="https://sites.google.com/site/wansukimmaths/">Wansu Kim</a></li>
+      <li><a href="https://marcin-lara.github.io/">Marcin Lara</a></li>
+      <li><a href="https://math.berkeley.edu/~jleake/">Jonathan Leake</a></li>
+      <li><a href="http://shizhang.li/about%20me.html">Shizhang Li</a></li>
+      <li><a href="https://masaooi.github.io/">Masao Oi</a></li>
+      <li><a href="https://sites.google.com/view/arghyas0">Arghya Sadhukhan</a></li>
+      <li><a href="https://sites.google.com/view/alexander-sherman/home">Alex Sherman</a></li>
+      <li><a href="https://ymsc.tsinghua.edu.cn/en/info/1033/2461.htm">Koji Shimizu</a></li>
+      <li><a href="https://sites.google.com/view/alexanderstokes">Alexander Stokes</a></li>
+      <li><a href="http://finnwiersig.de/">Finn Wiersig</a></li>
+      <li><a href="https://bogdanzavyalov.com/">Bogdan Zavyalov</a></li>
+    </ul>
   </main>
-
-  <footer style="background:var(--primary-color); color:#fff; padding:1em; text-align:center;">
+  <footer>
     <p>&copy; 2025 Alex Youcis. All rights reserved.</p>
   </footer>
-
+  <!-- JavaScript for Mobile Menu Toggle -->
   <script>
-    function toggleMenu(){ document.getElementById('myNavbar').classList.toggle('responsive'); }
-
-    // Make the pill buttons actually toggle their <details> parents and keep ARIA in sync.
-    (function () {
-      function wire(details) {
-        const btn = details.querySelector('.term-btn');
-        if (!btn) return;
-
-        const reflect = () =>
-          btn.setAttribute('aria-expanded', details.open ? 'true' : 'false');
-        reflect();
-
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          details.open = !details.open;
-          reflect();
-        });
-
-        btn.addEventListener('keydown', (e) => {
-          if (e.key === ' ' || e.key === 'Enter') {
-            e.preventDefault();
-            btn.click();
-          }
-        });
-
-        details.addEventListener('toggle', reflect);
-      }
-
-      document.querySelectorAll('details.sched').forEach(wire);
-    })();
+    function toggleMenu() {
+      var navbar = document.getElementById("myNavbar");
+      navbar.classList.toggle("responsive");
+    }
   </script>
 </body>
 </html>
