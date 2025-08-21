@@ -175,8 +175,8 @@
        EXTRA SPACING inside Information bubble
        (balance column heights; also increase space from H2 to first section)
        ========================================= */
-    .speakers-card > h2 { margin-bottom: 20px; }                 /* increased (was 12px) */
-    .speakers-card .speaker-section + .speaker-section { margin-top: 16px; } /* unchanged from last revision */
+    .speakers-card > h2 { margin-bottom: 20px; }                 /* increased */
+    .speakers-card .speaker-section + .speaker-section { margin-top: 16px; }
     .speakers-card .speaker-section__title { margin-bottom: 6px; }
     .speakers-card .speaker-section__body p { margin: 6px 0; }
     .speakers-card .speaker-section__body ul { margin: 6px 0 6px 1.25em; }
@@ -194,6 +194,36 @@
     .abs__chev { width: 0.9em; height: 0.9em; transition: transform 160ms ease; }
     details.abs[open] .abs__chev { transform: rotate(180deg); }
     .abs__body { margin-top: .5em; }
+
+    /* =======================================================
+       MOBILE-ONLY FIXES (do not affect desktop presentation)
+       ======================================================= */
+    @media (max-width: 600px) {
+      /* Hero: center content and give the action buttons breathing room */
+      .hero { text-align: center; padding: 1.25em 1em 1.6em; }
+      .meta { justify-content: center; gap: .5em .6em; }
+      .hero .btn { margin: .25em; }
+
+      /* Scale down the large oval term buttons proportionally */
+      .term-btn {
+        --label-size: calc(var(--info-btn-font-size) * 1.05); /* smaller text on phones */
+        --btn-h: calc(var(--label-size) * 3);
+        --band: calc(var(--btn-h) * 0.075);
+        --radius: calc(var(--btn-h) * 0.5);
+      }
+
+      /* Tables: avoid one-letter wrapping by letting columns size naturally
+         and enabling horizontal scroll when needed */
+      .table-wrap { -webkit-overflow-scrolling: touch; }
+      .table-wrap table { table-layout: auto; min-width: 680px; } /* allow scroll instead of squish */
+      .table-wrap th, .table-wrap td { word-break: normal; overflow-wrap: break-word; }
+
+      /* Make the abstract toggle button easier to hit on mobile */
+      .abs__btn { padding: .35em .7em; }
+
+      /* Tighten vertical margins under schedule headers on phones */
+      .sched > summary { margin: .3em 0; }
+    }
   </style>
   <script>
     window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]], processEscapes:true }, options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' } };
@@ -247,7 +277,7 @@
         <article class="bubble bubble--white call-card" aria-labelledby="call-title">
           <h2 id="call-title">Call for speakers</h2>
           <p>
-            Send a title/abstract and preferred dates to
+            To give a talk, send a title/abstract and preferred dates to
             <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>; include "U of T NT seminar" in your email subject.
           </p>
           <!-- Funding section moved here -->
@@ -341,7 +371,7 @@
                       </svg>
                     </summary>
                     <div class="abs__body">
-                      Let \( \mathcal{O}_K \) be a mixed characteristic complete DVR with residue field \( k \) of characteristic \( p \), and \( X/\mathcal{O}_K \) a smooth proper formal scheme. A celebrated result of Berthelot--Ogus shows that the de Rham cohomology groups \( H^i_\mathrm{dR}(X/\mathcal{O}_K) \) and crystalline cohomology groups \( H^i_\mathrm{crys}(X_k/W(k)) \) agree after tensoring to \(K\). Using recent advances in prismatic cohomology we show that an <i>integral</i> version of this statement holds using appropriate notions of 'twisted' de Rham and crystalline cohomology. This is a prismatic manifestation of Dwork's trick. This further gives an integral comparison even for non-trivial (prismatic) coefficients, and allows one to initiate a prismatic study of the relationship between crystalline and de Rham torsion.
+                      Let \( \mathcal{O}_K \) be a mixed characteristic complete DVR with residue field \( k \) of characteristic \( p \), and \( X/\mathcal{O}_K \) a smooth proper formal scheme. A celebrated result of Berthelot--Ogus shows that the de Rham cohomology groups \( H^i_\mathrm{dR}(X/\mathcal{O}_K) \) and crystalline cohomology groups \( H^i_\mathrm{crys}(X_k/W(k))\otimes_{W(k)}\mathcal{O}_K \) agree <i>rationally</i>, i.e., after inverting \( p \). Using recent advances in prismatic cohomology we show that an <i>integral</i> version of this statement holds using appropriate notions of 'twisted' de Rham and crystalline cohomology. This is a prismatic manifestation of Dwork's trick. This further gives an integral comparison even for non-trivial (prismatic) coefficients, and allows one to initiate a prismatic study of the relationship between crystalline and de Rham torsion.
                     </div>
                   </details>
                 </td>
