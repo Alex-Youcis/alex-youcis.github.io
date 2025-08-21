@@ -66,19 +66,12 @@
     .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.6em .9em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); position: relative; }
     .btn:hover { filter: brightness(1.05); }
 
-    /* Two-column layout: make columns equal height, left splits into two equal rows */
-    .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap: 1.25em; align-items: stretch; }
-    @media (max-width: 900px){ .grid-2 { grid-template-columns: 1fr; } }
-
     /* Reusable white bubble */
     .bubble {
       background: var(--card); border-radius: 14px; padding: 1em 1.2em;
       box-shadow: 0 2px 10px rgba(0,0,0,.05);
+      display:flex; flex-direction:column;
     }
-    /* Left column stack: About + Call for speakers occupy equal height */
-    .left-stack { display:grid; grid-template-rows: 1fr 1fr; gap: 1.25em; height: 100%; }
-    .left-stack > .bubble,
-    .left-stack > .notice.callout { height: 100%; overflow:auto; display:flex; flex-direction:column; }
 
     h2 { margin-top: 0; }
 
@@ -98,27 +91,7 @@
     summary::-webkit-details-marker{display:none;}
     summary::marker{content:"";}
 
-    /* Information for speakers — one big bubble with left-aligned items */
-    #info .info-bubble { background:#fff; border-radius:14px; box-shadow:0 2px 10px rgba(0,0,0,.05); padding: 1em 1.2em; height:100%; display:flex; flex-direction:column; }
-    #info .stack { width: 100%; }
-    #info details { padding: 0; margin: .5em 0; border: 0; }
-    #info details > summary {
-      display:flex; justify-content:flex-start; align-items:center; gap:.5em; width:100%;
-      background:#fff; border:2px solid #000; border-radius:10px;
-      padding:.4em .8em; font-weight:700; box-shadow:0 1px 3px rgba(0,0,0,.05);
-      font-size: var(--info-btn-font-size);
-    }
-    #info details > summary::before { content:"▸"; opacity:.9; }
-    #info details[open] > summary::before { content:"▾"; }
-    /* Body blends with the big bubble: no border, no separator, tighter padding */
-    #info details > .panel {
-      background: transparent; border: 0; border-radius: 0;
-      padding: .35em 0 .45em 0; margin-top: .2em; box-shadow: none;
-    }
-    #info .panel ul { padding-left:1.35em; }
-    #info .panel li { margin:.3em 0; }
-
-    /* Call for speakers — unchanged style */
+    /* Call for speakers (kept for other uses; not used in restructured area) */
     .notice { background:var(--card); border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; margin: 0; }
     .callout { width: 100%; }
     .cfs-title { display:block; text-align:center; font-weight:700; margin-bottom:.35em; font-size: var(--info-btn-font-size); }
@@ -163,6 +136,38 @@
 
     /* Invisible anchor so Subscribe button still works */
     #subscribe { position: relative; height: 0; }
+
+    /* =========================
+       NAMESPACED CSS FROM SPEC
+       ========================= */
+    /* Grid wrapper: two equal columns, equal height */
+    .info-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6, 24px);
+      align-items: stretch;  /* ensure columns stretch to equal height */
+      margin-bottom: 1.25em;
+    }
+
+    /* Left column stacks two cards and spaces them to fill height */
+    .info-layout__left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* stretches space so total height matches right column */
+      gap: var(--space-6, 24px);      /* keeps a minimum visual gap */
+    }
+
+    /* Bubble base reused; ensure it stretches naturally (already flex) */
+
+    /* Speaker subsections spacing */
+    .speaker-section + .speaker-section { margin-top: var(--space-5, 20px); }
+    .speaker-section__title { margin: 0 0 var(--space-2, 8px) 0; }
+
+    /* Responsive: stack to one column on small screens */
+    @media (max-width: 768px) {
+      .info-layout { grid-template-columns: 1fr; }
+      .info-layout__left { justify-content: initial; } /* normal flow on mobile */
+    }
   </style>
   <script>
     window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]], processEscapes:true }, options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' } };
@@ -201,62 +206,66 @@
       </div>
     </section>
 
-    <div class="grid-2">
-      <!-- LEFT COLUMN: About bubble + Call for speakers bubble, equal heights -->
-      <div class="left-stack">
-        <section id="blurb" class="bubble">
-          <h2>About</h2>
+    <!-- =========================
+         RESTRUCTURED AREA (SPEC)
+         ========================= -->
+    <section class="info-layout" aria-labelledby="info-for-speakers-title">
+      <!-- LEFT COLUMN -->
+      <div class="info-layout__left">
+        <article class="bubble bubble--white about-card" id="blurb" aria-labelledby="about-title">
+          <h2 id="about-title">About</h2>
           <p>
             This seminar features research talks in analytic and arithmetic aspects of number theory broadly construed (including
             \(p\)-adic Hodge theory, automorphic forms, Galois representations, and related topics). Talks target a general number theory audience at the University of Toronto and nearby institutions.
           </p>
-        </section>
+        </article>
 
-        <!-- Call for speakers (unchanged content/style), now below About -->
-        <div class="notice callout">
-          <span class="cfs-title">Call for speakers</span>
-          If you’d like to give a talk, send a title/abstract and preferred dates to
-          <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>; include "U of T NT seminar" in your email subject.
-        </div>
+        <article class="bubble bubble--white call-card" aria-labelledby="call-title">
+          <h2 id="call-title">Call for speakers</h2>
+          <p>
+            If you’d like to give a talk, send a title/abstract and preferred dates to
+            <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>; include "U of T NT seminar" in your email subject.
+          </p>
+        </article>
       </div>
 
-      <!-- RIGHT COLUMN: One big bubble with left-aligned dropdown items -->
-      <section id="info">
-        <h2>Information for speakers</h2>
-        <div class="info-bubble">
-          <div class="stack">
-            <details>
-              <summary>Abstract</summary>
-              <div class="panel">
-                <p>Please make the abstract no more than one paragraph. Please feel free to use TeX which will be rendered.</p>
-              </div>
-            </details>
-            <details>
-              <summary>Format &amp; length</summary>
-              <div class="panel">
-                <p>50 minutes + short Q&amp;A. Please make the first 20 minutes accessible to a number-theory-focused graduate student.</p>
-              </div>
-            </details>
-            <details>
-              <summary>Technical logistics</summary>
-              <div class="panel">
-                <ul>
-                  <li>If you are giving a slide talk, please send the slides three days in advance to <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.</li>
-                  <li>The talk will be broadcast on Zoom.</li>
-                  <li>The talk will be recorded and posted, unless requested otherwise.</li>
-                </ul>
-              </div>
-            </details>
-            <details>
-              <summary>Funding</summary>
-              <div class="panel">
-                <p>Funding for travel and lodging is limited and not guaranteed; please contact <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a> for more details.</p>
-              </div>
-            </details>
+      <!-- RIGHT COLUMN -->
+      <aside class="bubble bubble--white speakers-card" id="info">
+        <h2 id="info-for-speakers-title">Information for speakers</h2>
+
+        <section class="speaker-section">
+          <h3 class="speaker-section__title"><strong>Abstract</strong></h3>
+          <div class="speaker-section__body">
+            <p>Please make the abstract no more than one paragraph. Please feel free to use TeX which will be rendered.</p>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+
+        <section class="speaker-section">
+          <h3 class="speaker-section__title"><strong>Format &amp; length</strong></h3>
+          <div class="speaker-section__body">
+            <p>50 minutes + short Q&amp;A. Please make the first 20 minutes accessible to a number-theory-focused graduate student.</p>
+          </div>
+        </section>
+
+        <section class="speaker-section">
+          <h3 class="speaker-section__title"><strong>Technical logistics</strong></h3>
+          <div class="speaker-section__body">
+            <ul>
+              <li>If you are giving a slide talk, please send the slides three days in advance to <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.</li>
+              <li>The talk will be broadcast on Zoom.</li>
+              <li>The talk will be recorded and posted, unless requested otherwise.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="speaker-section">
+          <h3 class="speaker-section__title"><strong>Funding</strong></h3>
+          <div class="speaker-section__body">
+            <p>Funding for travel and lodging is limited and not guaranteed; please contact <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a> for more details.</p>
+          </div>
+        </section>
+      </aside>
+    </section>
 
     <!-- Invisible anchor so the Subscribe button works even without a visible contact section -->
     <div id="subscribe" aria-hidden="true"></div>
