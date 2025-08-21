@@ -52,7 +52,7 @@
         url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
       background-repeat: no-repeat, no-repeat, no-repeat;
       background-position: 16% center, 50% center, 84% center; /* equidistributed */
-      background-size: auto 96%, auto 96%, auto 96%;           /* 1.2× previous (80% -> 96%) */
+      background-size: auto 96%, auto 96%, auto 96%;           /* scaled up 1.2× */
     }
     @media (max-width: 600px){
       .hero::before{ background-size: auto 78%, auto 78%, auto 78%; }
@@ -110,8 +110,8 @@
     .sched { padding: 0; margin: .3em 0 .8em; border: none; background: transparent; box-shadow: none; }
     .sched > summary { display:flex; justify-content:center; align-items:center; margin:.45em 0; }
     .term-btn {
-      --btn-h: 72px;                  /* master height: adjust to scale */
-      --band: calc(var(--btn-h) * 0.075);   /* each band ~7.5% of height */
+      --btn-h: 72px;                       /* master height: adjust to scale */
+      --band: calc(var(--btn-h) * 0.075);  /* each band ~7.5% of height */
       --radius: calc(var(--btn-h) * 0.5);
       --font-size: calc(var(--btn-h) * 0.333);
       border: 0; background: transparent; padding: 0; cursor: pointer; line-height: 0;
@@ -338,16 +338,39 @@
   <script>
     function toggleMenu(){ document.getElementById('myNavbar').classList.toggle('responsive'); }
 
-    // Sync aria-expanded on the pill buttons with <details open> state
-    document.querySelectorAll('.sched').forEach((d) => {
-      const btn = d.querySelector('.term-btn');
-      if (!btn) return;
-      const setAria = () => btn.setAttribute('aria-expanded', d.open ? 'true' : 'false');
-      setAria();
-      d.addEventListener('toggle', setAria);
-      // Also allow pressing the button to toggle the details (summary click)
-      btn.addEventListener('click', (e) => { /* summary handles toggle */ });
-    });
+    // Make the pill buttons actually toggle their <details> parents and keep ARIA in sync.
+    (function () {
+      function wire(details) {
+        const btn = details.querySelector('.term-btn');
+        if (!btn) return;
+
+        // Reflect current state to ARIA
+        const reflect = () =>
+          btn.setAttribute('aria-expanded', details.open ? 'true' : 'false');
+        reflect();
+
+        // Click toggles the details
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          details.open = !details.open;
+          reflect();
+        });
+
+        // Keyboard support: Enter/Space toggle
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            btn.click();
+          }
+        });
+
+        // If something else toggles the <details>, keep ARIA synced
+        details.addEventListener('toggle', reflect);
+      }
+
+      document.querySelectorAll('details.sched').forEach(wire);
+    })();
   </script>
 </body>
 </html>
