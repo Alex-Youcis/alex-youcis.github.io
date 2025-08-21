@@ -157,11 +157,12 @@
       gap: var(--space-6, 24px);      /* keeps a minimum visual gap */
     }
 
-    /* Bubble base reused; ensure it stretches naturally (already flex) */
-
-    /* Speaker subsections spacing */
-    .speaker-section + .speaker-section { margin-top: var(--space-5, 20px); }
+    /* Speaker subsections spacing (REDUCED) */
+    .speaker-section + .speaker-section { margin-top: var(--space-3, 12px); }
     .speaker-section__title { margin: 0 0 var(--space-2, 8px) 0; }
+
+    /* Bold black outline around About / Call / Information bubbles */
+    .about-card, .call-card, .speakers-card { border: 3px solid #000; }
 
     /* Responsive: stack to one column on small screens */
     @media (max-width: 768px) {
@@ -206,9 +207,7 @@
       </div>
     </section>
 
-    <!-- =========================
-         RESTRUCTURED AREA (SPEC)
-         ========================= -->
+    <!-- Restructured area -->
     <section class="info-layout" aria-labelledby="info-for-speakers-title">
       <!-- LEFT COLUMN -->
       <div class="info-layout__left">
@@ -270,11 +269,11 @@
     <!-- Invisible anchor so the Subscribe button works even without a visible contact section -->
     <div id="subscribe" aria-hidden="true"></div>
 
-    <!-- Fall schedule -->
+    <!-- Fall schedule (now CLOSED by default) -->
     <section id="schedule">
-      <details class="sched" open>
+      <details class="sched">
         <summary>
-          <button class="term-btn" type="button" aria-expanded="true">
+          <button class="term-btn" type="button" aria-expanded="false">
             <span class="term-btn__outer">
               <span class="term-btn__middle">
                 <span class="term-btn__inner">
