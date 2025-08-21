@@ -15,6 +15,9 @@
       --button-color: #BF0603; /* red accent */
       --card: #ffffff;
       --border: #e1e1e6;
+
+      /* NEW: unify info-button font size so we can match the term-button text exactly */
+      --info-btn-font-size: 1rem;
     }
 
     body { font-family: 'Open Sans', sans-serif; background: var(--background-color); color: var(--text-color); margin: 0; }
@@ -91,12 +94,14 @@
       display:flex; justify-content:center; align-items:center; gap:.5em; width:100%;
       background:#fff; border:2px solid #000; border-radius:10px;
       padding:.6em .9em; font-weight:700; box-shadow:0 1px 3px rgba(0,0,0,.05);
+      font-size: var(--info-btn-font-size);
     }
     #info details > summary::before { content:"▸"; opacity:.9; }
     #info details[open] > summary::before { content:"▾"; }
+    /* CHANGED: match width, remove separator, reduce vertical padding */
     #info details > .panel {
-      background:#fff; border:1px solid var(--border); border-radius:0 0 10px 10px;
-      padding:.85em 1em; margin-top:.35em; box-shadow:0 1px 3px rgba(0,0,0,.05);
+      background:#fff; border:2px solid #000; border-top:0; border-radius:0 0 10px 10px;
+      padding:.5em .9em; margin-top:0; box-shadow:0 1px 3px rgba(0,0,0,.05);
     }
     #info .panel ul { padding-left:1.35em; }
     #info .panel li { margin:.3em 0; }
@@ -106,14 +111,15 @@
     .callout { width: 100%; }
     .cfs-title { display:block; text-align:center; font-weight:700; margin-bottom:.35em; }
 
-    /* Term buttons: exact layered pill with bands ~7.5% height each (total ~15%) */
+    /* Term buttons: exact layered pill; now scaled so label = info button font size */
     .sched { padding: 0; margin: .3em 0 .8em; border: none; background: transparent; box-shadow: none; }
     .sched > summary { display:flex; justify-content:center; align-items:center; margin:.45em 0; }
     .term-btn {
-      --btn-h: 72px;                       /* master height: adjust to scale */
-      --band: calc(var(--btn-h) * 0.075);  /* each band ~7.5% of height */
+      /* CHANGED: base height derived from the info button font-size so label matches exactly */
+      --label-size: var(--info-btn-font-size);
+      --btn-h: calc(var(--label-size) * 3);         /* label is ≈ 1/3 button height */
+      --band: calc(var(--btn-h) * 0.075);           /* each band ~7.5% height */
       --radius: calc(var(--btn-h) * 0.5);
-      --font-size: calc(var(--btn-h) * 0.333);
       border: 0; background: transparent; padding: 0; cursor: pointer; line-height: 0;
     }
     .term-btn__outer { display:inline-block; background:#000; padding: var(--band); border-radius: var(--radius); }
@@ -123,10 +129,10 @@
       gap: calc(var(--btn-h) * 0.18);
       background:#fff; border-radius: calc(var(--radius) - (2 * var(--band)));
       height: var(--btn-h);
-      padding: 0 calc(var(--btn-h) * 1.4); /* gives width so label ≈ 1/5 of total */
+      padding: 0 calc(var(--btn-h) * 1.4); /* keeps text ≈ 1/5 of width */
     }
     .term-btn__label {
-      font: 700 var(--font-size)/1.05 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font: 700 var(--label-size)/1.05 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       color:#000; white-space:nowrap;
     }
     .term-btn__chevron {
@@ -135,9 +141,14 @@
     }
     .term-btn:focus-visible .term-btn__inner { outline: 2px solid #333; outline-offset: 3px; }
     .term-btn:hover .term-btn__inner { background:#f7f7f7; }
-    /* rotate chevron on open (two ways: via ARIA and via details[open]) */
     .term-btn[aria-expanded="true"] .term-btn__chevron { transform: rotate(180deg); }
     .sched[open] .term-btn__chevron { transform: rotate(180deg); }
+
+    /* Column width preferences (make Abstract widest) */
+    .col-date    { width: 12ch; }  /* fits 'Sep 10, 2025' */
+    .col-speaker { width: 20ch; }  /* fits 'Vadim Vologodsky' on one line */
+    .col-title   { width: 34ch; }  /* encourages two lines for the given long title */
+    /* No width on the 4th col so it takes the remaining space */
 
     /* Invisible anchor so Subscribe button still works */
     #subscribe { position: relative; height: 0; }
@@ -252,6 +263,12 @@
         </summary>
         <div class="table-wrap">
           <table>
+            <colgroup>
+              <col class="col-date">
+              <col class="col-speaker">
+              <col class="col-title">
+              <col>
+            </colgroup>
             <thead>
               <tr>
                 <th class="nowrap">Date</th>
@@ -301,6 +318,12 @@
         </summary>
         <div class="table-wrap">
           <table>
+            <colgroup>
+              <col class="col-date">
+              <col class="col-speaker">
+              <col class="col-title">
+              <col>
+            </colgroup>
             <thead>
               <tr>
                 <th class="nowrap">Date</th>
@@ -344,12 +367,10 @@
         const btn = details.querySelector('.term-btn');
         if (!btn) return;
 
-        // Reflect current state to ARIA
         const reflect = () =>
           btn.setAttribute('aria-expanded', details.open ? 'true' : 'false');
         reflect();
 
-        // Click toggles the details
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -357,7 +378,6 @@
           reflect();
         });
 
-        // Keyboard support: Enter/Space toggle
         btn.addEventListener('keydown', (e) => {
           if (e.key === ' ' || e.key === 'Enter') {
             e.preventDefault();
@@ -365,7 +385,6 @@
           }
         });
 
-        // If something else toggles the <details>, keep ARIA synced
         details.addEventListener('toggle', reflect);
       }
 
