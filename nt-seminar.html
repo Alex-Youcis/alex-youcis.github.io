@@ -84,7 +84,7 @@
     tr:last-child td { border-bottom: none; }
     .nowrap { white-space: nowrap; }
 
-    /* Abstract cells */
+    /* Abstract cells (generic) */
     details { background:var(--card); padding:.6em .8em; border-radius:10px; margin:.3em 0; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
     details[open] summary { opacity:.95; }
     summary { cursor:pointer; font-weight:600; min-width: 110px; display:inline-block; }
@@ -150,17 +150,16 @@
       margin-bottom: 1.25em;
     }
 
-    /* Left column stacks two cards and spaces them to fill height */
+    /* Left column now stacks with normal spacing (CALL sits just under ABOUT) */
     .info-layout__left {
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* stretches space so total height matches right column */
-      gap: var(--space-6, 24px);      /* keeps a minimum visual gap */
+      gap: var(--space-6, 24px);
     }
 
     /* Bold black outline around About / Call / Information bubbles */
     .about-card, .call-card, .speakers-card { border: 3px solid #000; }
-    /* Reinstate red left accent on Call bubble */
+    /* Red left accent on Call bubble */
     .call-card { border-left: 6px solid var(--button-color) !important; }
 
     /* Speaker subsections spacing (base) */
@@ -170,7 +169,6 @@
     /* Responsive: stack to one column on small screens */
     @media (max-width: 768px) {
       .info-layout { grid-template-columns: 1fr; }
-      .info-layout__left { justify-content: initial; } /* normal flow on mobile */
     }
 
     /* =========================================
@@ -183,6 +181,19 @@
     .speakers-card .speaker-section__body p { margin: 4px 0; }
     .speakers-card .speaker-section__body ul { margin: 4px 0 4px 1.25em; }
     .speakers-card .speaker-section__body li { margin: 2px 0; }
+
+    /* =========================
+       Abstract toggle button in tables
+       ========================= */
+    details.abs { background: transparent; padding: 0; box-shadow: none; border-radius: 0; }
+    .abs__btn {
+      display: inline-flex; align-items: center; gap: .4em;
+      padding: .25em .55em; border: 1px solid #cfcfd4; border-radius: 8px;
+      font-weight: 700; background: #fff; cursor: pointer;
+    }
+    .abs__chev { width: 0.9em; height: 0.9em; transition: transform 160ms ease; }
+    details.abs[open] .abs__chev { transform: rotate(180deg); }
+    .abs__body { margin-top: .5em; }
   </style>
   <script>
     window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]], processEscapes:true }, options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' } };
@@ -322,30 +333,207 @@
                 <td>Alex Youcis</td>
                 <td><strong>An integral comparison of crystalline and de Rham cohomology</strong></td>
                 <td>
-                  <details><summary>Click here</summary>
-                    Let \( \mathcal{O}_K \) be a mixed characteristic complete DVR with residue field \( k \) of characteristic \( p \), and \( X/\mathcal{O}_K \) a smooth proper formal scheme. A celebrated result of Berthelot--Ogus shows that the de Rham cohomology groups \( H^i_\mathrm{dR}(X/\mathcal{O}_K) \) and crystalline cohomology groups \( H^i_\mathrm{crys}(X_k/W(k))\otimes_{W(k)}\mathcal{O}_K \) agree <i>rationally</i>, i.e., after inverting \( p \). Using recent advances in prismatic cohomology we show that an <i>integral</i> version of this statement holds using appropriate notions of 'twisted' de Rham and crystalline cohomology. This is a prismatic manifestation of Dwork's trick. This further gives an integral comparison even for non-trivial (prismatic) coefficients, and allows one to initiate a prismatic study of the relationship between crystalline and de Rham torsion.
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">
+                      Let \( \mathcal{O}_K \) be a mixed characteristic complete DVR with residue field \( k \) of characteristic \( p \), and \( X/\mathcal{O}_K \) a smooth proper formal scheme. A celebrated result of Berthelot--Ogus shows that the de Rham cohomology groups \( H^i_\mathrm{dR}(X/\mathcal{O}_K) \) and crystalline cohomology groups \( H^i_\mathrm{crys}(X_k/W(k))\otimes_{W(k)}\mathcal{O}_K \) agree <i>rationally</i>, i.e., after inverting \( p \). Using recent advances in prismatic cohomology we show that an <i>integral</i> version of this statement holds using appropriate notions of 'twisted' de Rham and crystalline cohomology. This is a prismatic manifestation of Dwork's trick. This further gives an integral comparison even for non-trivial (prismatic) coefficients, and allows one to initiate a prismatic study of the relationship between crystalline and de Rham torsion.
+                    </div>
                   </details>
                 </td>
               </tr>
-              <tr><td class="nowrap">Sep 10, 2025</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Sep 17, 2025</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Sep 24, 2025</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Oct 1, 2025</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Oct 8, 2025</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Oct 15, 2025</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Oct 22, 2025</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
+              <tr>
+                <td class="nowrap">Sep 10, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Sep 17, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Sep 24, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Oct 1, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Oct 8, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Oct 15, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Oct 22, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
               <tr>
                 <td class="nowrap">Oct 29, 2025</td>
                 <td>Reading week (no seminar)</td>
                 <td></td>
                 <td></td>
               </tr>
-              <tr><td class="nowrap">Nov 5, 2025</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Nov 12, 2025</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Nov 19, 2025</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Nov 26, 2025</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Dec 3, 2025</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Dec 10, 2025</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
+              <tr>
+                <td class="nowrap">Nov 5, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Nov 12, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Nov 19, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Nov 26, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Dec 3, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Dec 10, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -386,25 +574,194 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td class="nowrap">Jan 7, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Jan 14, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Jan 21, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Jan 28, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Feb 4, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Feb 11, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
+              <tr>
+                <td class="nowrap">Jan 7, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Jan 14, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Jan 21, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Jan 28, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Feb 4, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Feb 11, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
               <tr>
                 <td class="nowrap">Feb 18, 2026</td>
                 <td>Reading week (no seminar)</td>
                 <td></td>
                 <td></td>
               </tr>
-              <tr><td class="nowrap">Feb 25, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Mar 4, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Mar 11, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Mar 18, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Mar 25, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Apr 1, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
-              <tr><td class="nowrap">Apr 8, 2026</td><td>TBA</td><td><strong>TBA</strong></td><td><details><summary>Click here</summary>Abstract TBA.</details></td></tr>
+              <tr>
+                <td class="nowrap">Feb 25, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Mar 4, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Mar 11, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Mar 18, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Mar 25, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Apr 1, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Apr 8, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Abstract TBA.</div>
+                  </details>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
