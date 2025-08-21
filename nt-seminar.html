@@ -16,7 +16,7 @@
       --card: #ffffff;
       --border: #e1e1e6;
 
-      /* master text size for Info buttons AND term buttons */
+      /* master text size for Info buttons AND base scale for term buttons */
       --info-btn-font-size: 1rem;
     }
 
@@ -91,16 +91,17 @@
     summary::-webkit-details-marker{display:none;}
     summary::marker{content:"";}
 
-    /* Call for speakers (kept for other uses; not used in restructured area) */
+    /* Call for speakers (legacy utility) */
     .notice { background:var(--card); border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; margin: 0; }
     .callout { width: 100%; }
     .cfs-title { display:block; text-align:center; font-weight:700; margin-bottom:.35em; font-size: var(--info-btn-font-size); }
 
-    /* Term buttons: exact layered pill; label matches info button text size */
+    /* Term buttons: exact layered pill */
     .sched { padding: 0; margin: .3em 0 .8em; border: none; background: transparent; box-shadow: none; }
     .sched > summary { display:flex; justify-content:center; align-items:center; margin:.45em 0; }
     .term-btn {
-      --label-size: var(--info-btn-font-size);   /* match Info button text size */
+      /* SCALE UP 1.5x (only the term buttons) */
+      --label-size: calc(var(--info-btn-font-size) * 1.5);
       --btn-h: calc(var(--label-size) * 3);      /* label ≈ 1/3 of height */
       --band: calc(var(--btn-h) * 0.075);        /* each band ~7.5% height */
       --radius: calc(var(--btn-h) * 0.5);
@@ -157,18 +158,31 @@
       gap: var(--space-6, 24px);      /* keeps a minimum visual gap */
     }
 
-    /* Speaker subsections spacing (REDUCED) */
-    .speaker-section + .speaker-section { margin-top: var(--space-3, 12px); }
-    .speaker-section__title { margin: 0 0 var(--space-2, 8px) 0; }
-
     /* Bold black outline around About / Call / Information bubbles */
     .about-card, .call-card, .speakers-card { border: 3px solid #000; }
+    /* Reinstate red left accent on Call bubble */
+    .call-card { border-left: 6px solid var(--button-color) !important; }
+
+    /* Speaker subsections spacing (base) */
+    .speaker-section + .speaker-section { margin-top: var(--space-3, 12px); }
+    .speaker-section__title { margin: 0 0 var(--space-2, 8px) 0; }
 
     /* Responsive: stack to one column on small screens */
     @media (max-width: 768px) {
       .info-layout { grid-template-columns: 1fr; }
       .info-layout__left { justify-content: initial; } /* normal flow on mobile */
     }
+
+    /* =========================================
+       EXTRA TIGHTENING inside Information bubble
+       (placed last so it wins in cascade)
+       ========================================= */
+    .speakers-card > h2 { margin-bottom: 8px; }
+    .speakers-card .speaker-section + .speaker-section { margin-top: 8px; }
+    .speakers-card .speaker-section__title { margin-bottom: 4px; }
+    .speakers-card .speaker-section__body p { margin: 4px 0; }
+    .speakers-card .speaker-section__body ul { margin: 4px 0 4px 1.25em; }
+    .speakers-card .speaker-section__body li { margin: 2px 0; }
   </style>
   <script>
     window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]], processEscapes:true }, options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' } };
@@ -215,14 +229,14 @@
           <h2 id="about-title">About</h2>
           <p>
             This seminar features research talks in analytic and arithmetic aspects of number theory broadly construed (including
-            \(p\)-adic Hodge theory, automorphic forms, Galois representations, and related topics). Talks target a general number theory audience at the University of Toronto and nearby institutions.
+            \(p\)-adic Hodge theory, automorphic forms, Galois representations, and related topics).
           </p>
         </article>
 
         <article class="bubble bubble--white call-card" aria-labelledby="call-title">
           <h2 id="call-title">Call for speakers</h2>
           <p>
-            If you’d like to give a talk, send a title/abstract and preferred dates to
+            To give a talk, send a title/abstract and preferred dates to
             <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>; include "U of T NT seminar" in your email subject.
           </p>
         </article>
@@ -269,7 +283,7 @@
     <!-- Invisible anchor so the Subscribe button works even without a visible contact section -->
     <div id="subscribe" aria-hidden="true"></div>
 
-    <!-- Fall schedule (now CLOSED by default) -->
+    <!-- Fall schedule (closed by default) -->
     <section id="schedule">
       <details class="sched">
         <summary>
