@@ -150,7 +150,7 @@
       margin-bottom: 1.25em;
     }
 
-    /* Left column now stacks with normal spacing (CALL sits just under ABOUT) */
+    /* Left column stacks About above Call */
     .info-layout__left {
       display: flex;
       flex-direction: column;
@@ -172,15 +172,15 @@
     }
 
     /* =========================================
-       EXTRA TIGHTENING inside Information bubble
-       (placed last so it wins in cascade)
+       EXTRA SPACING inside Information bubble
+       (balance column heights; also increase space from H2 to first section)
        ========================================= */
-    .speakers-card > h2 { margin-bottom: 8px; }
-    .speakers-card .speaker-section + .speaker-section { margin-top: 8px; }
-    .speakers-card .speaker-section__title { margin-bottom: 4px; }
-    .speakers-card .speaker-section__body p { margin: 4px 0; }
-    .speakers-card .speaker-section__body ul { margin: 4px 0 4px 1.25em; }
-    .speakers-card .speaker-section__body li { margin: 2px 0; }
+    .speakers-card > h2 { margin-bottom: 20px; }                 /* increased (was 12px) */
+    .speakers-card .speaker-section + .speaker-section { margin-top: 16px; } /* unchanged from last revision */
+    .speakers-card .speaker-section__title { margin-bottom: 6px; }
+    .speakers-card .speaker-section__body p { margin: 6px 0; }
+    .speakers-card .speaker-section__body ul { margin: 6px 0 6px 1.25em; }
+    .speakers-card .speaker-section__body li { margin: 3px 0; }
 
     /* =========================
        Abstract toggle button in tables
@@ -250,6 +250,13 @@
             To give a talk, send a title/abstract and preferred dates to
             <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>; include "U of T NT seminar" in your email subject.
           </p>
+          <!-- Funding section moved here -->
+          <section class="speaker-section">
+            <h3 class="speaker-section__title"><strong>Funding</strong></h3>
+            <div class="speaker-section__body">
+              <p>Funding for travel and lodging is limited and not guaranteed; please contact <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a> for more details.</p>
+            </div>
+          </section>
         </article>
       </div>
 
@@ -279,13 +286,6 @@
               <li>The talk will be broadcast on Zoom.</li>
               <li>The talk will be recorded and posted, unless requested otherwise.</li>
             </ul>
-          </div>
-        </section>
-
-        <section class="speaker-section">
-          <h3 class="speaker-section__title"><strong>Funding</strong></h3>
-          <div class="speaker-section__body">
-            <p>Funding for travel and lodging is limited and not guaranteed; please contact <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a> for more details.</p>
           </div>
         </section>
       </aside>
@@ -331,7 +331,7 @@
               <tr>
                 <td class="nowrap">Sep 3, 2025</td>
                 <td>Alex Youcis</td>
-                <td><strong>An integral comparison of crystalline and de Rham cohomology</strong></td>
+                <td><em>An integral comparison of crystalline and de Rham cohomology</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -341,13 +341,13 @@
                       </svg>
                     </summary>
                     <div class="abs__body">
-                      Let \( \mathcal{O}_K \) be a mixed characteristic complete DVR with residue field \( k \) of characteristic \( p \), and \( X/\mathcal{O}_K \) a smooth proper formal scheme. A celebrated result of Berthelot--Ogus shows that the de Rham cohomology groups \( H^i_\mathrm{dR}(X/\mathcal{O}_K) \) and crystalline cohomology groups \( H^i_\mathrm{crys}(X_k/W(k))\otimes_{W(k)}\mathcal{O}_K \) agree <i>rationally</i>, i.e., after inverting \( p \). Using recent advances in prismatic cohomology we show that an <i>integral</i> version of this statement holds using appropriate notions of 'twisted' de Rham and crystalline cohomology. This is a prismatic manifestation of Dwork's trick. This further gives an integral comparison even for non-trivial (prismatic) coefficients, and allows one to initiate a prismatic study of the relationship between crystalline and de Rham torsion.
+                      Let \( \mathcal{O}_K \) be a mixed characteristic complete DVR with residue field \( k \) of characteristic \( p \), and \( X/\mathcal{O}_K \) a smooth proper formal scheme. A result of Berthelot--Ogus shows that the de Rham cohomology groups \( H^i_\mathrm{dR}(X/\mathcal{O}_K) \) and crystalline cohomology groups \( H^i_\mathrm{crys}(X_k/W(k))\otimes_{W(k)}\mathcal{O}_K \) agree <i>rationally</i>, i.e., after inverting \( p \). Using recent advances in prismatic cohomology we show that an <i>integral</i> version of this statement holds using appropriate notions of 'twisted' de Rham and crystalline cohomology. This is a prismatic manifestation of Dwork's trick. This further gives an integral comparison even for non-trivial (prismatic) coefficients, and allows one to initiate a prismatic study of the relationship between crystalline and de Rham torsion.
                     </div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Sep 10, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Sep 10, 2025</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -356,12 +356,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Sep 17, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Sep 17, 2025</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -370,12 +370,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Sep 24, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Sep 24, 2025</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -384,12 +384,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Oct 1, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Oct 1, 2025</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -398,12 +398,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Oct 8, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Oct 8, 2025</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -412,12 +412,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Oct 15, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Oct 15, 2025</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -426,12 +426,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Oct 22, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Oct 22, 2025</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -440,7 +440,7 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
@@ -451,7 +451,7 @@
                 <td></td>
               </tr>
               <tr>
-                <td class="nowrap">Nov 5, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Nov 5, 2025</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -460,12 +460,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Nov 12, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Nov 12, 2025</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -474,12 +474,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Nov 19, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Nov 19, 2025</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -488,12 +488,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Nov 26, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Nov 26, 2025</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -502,12 +502,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Dec 3, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Dec 3, 2025</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -516,12 +516,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Dec 10, 2025</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Dec 10, 2025</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -530,7 +530,7 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
@@ -575,7 +575,7 @@
             </thead>
             <tbody>
               <tr>
-                <td class="nowrap">Jan 7, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Jan 7, 2026</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -584,12 +584,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Jan 14, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Jan 14, 2026</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -598,12 +598,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Jan 21, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Jan 21, 2026</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -612,12 +612,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Jan 28, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Jan 28, 2026</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -626,12 +626,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Feb 4, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Feb 4, 2026</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -640,12 +640,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Feb 11, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Feb 11, 2026</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -654,7 +654,7 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
@@ -665,7 +665,7 @@
                 <td></td>
               </tr>
               <tr>
-                <td class="nowrap">Feb 25, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Feb 25, 2026</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -674,12 +674,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Mar 4, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Mar 4, 2026</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -688,12 +688,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Mar 11, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Mar 11, 2026</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -702,12 +702,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Mar 18, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Mar 18, 2026</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -716,12 +716,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Mar 25, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Mar 25, 2026</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -730,12 +730,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Apr 1, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Apr 1, 2026</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -744,12 +744,12 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td class="nowrap">Apr 8, 2026</td><td>TBA</td><td><strong>TBA</strong></td>
+                <td class="nowrap">Apr 8, 2026</td><td>TBA</td><td><em>TBA</em></td>
                 <td>
                   <details class="abs">
                     <summary class="abs__btn">
@@ -758,7 +758,7 @@
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">Abstract TBA.</div>
+                    <div class="abs__body">TBA</div>
                   </details>
                 </td>
               </tr>
