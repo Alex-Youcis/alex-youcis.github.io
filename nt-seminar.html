@@ -131,6 +131,9 @@
     .term-controls{display:flex;gap:14px;justify-content:center;margin:.8em 0 1em;flex-wrap:wrap}
     .term-controls .hidden{display:none !important;}
 
+    /* ⟵ NEW: shrink button width so they fit side-by-side more easily */
+    .term-controls .term-btn__inner { padding: 0 calc(var(--btn-h) * 0.9); }
+
     /* Column width preferences (Abstract widest) */
     .col-date    { width: 12ch; }
     .col-speaker { width: 20ch; }
@@ -148,7 +151,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: var(--space-6, 24px);
-      align-items: start;  /* changed from stretch -> start (no equal height) */
+      align-items: start;  /* no equal height */
       margin-bottom: 1.25em;
     }
 
@@ -161,7 +164,6 @@
 
     /* Bold black outline around About / Information bubbles */
     .about-card, .call-card, .speakers-card { border: 3px solid #000; }
-    /* Red left accent on Call bubble (unused since call removed) */
     .call-card { border-left: 6px solid var(--button-color) !important; }
 
     /* Speaker subsections spacing (base) */
@@ -177,8 +179,8 @@
        SPACING TWEAKS IN INFORMATION BUBBLE
        (more space after H2, less at the very bottom)
        ========================================= */
-    .speakers-card > h2 { margin-bottom: 28px; }  /* increased further */
-    .speakers-card { padding-bottom: 0.8em; }     /* trim bottom padding slightly */
+    .speakers-card > h2 { margin-bottom: 28px; }
+    .speakers-card { padding-bottom: 0.8em; }
     .speakers-card .speaker-section:last-child { margin-bottom: 0; }
     .speakers-card .speaker-section__body > *:last-child { margin-bottom: 0; }
 
@@ -199,26 +201,21 @@
        MOBILE-ONLY FIXES (do not affect desktop presentation)
        ======================================================= */
     @media (max-width: 600px) {
-      /* Hero: center content and give the action buttons breathing room */
       .hero { text-align: center; padding: 1.25em 1em 1.6em; }
       .meta { justify-content: center; gap: .5em .6em; }
       .hero .btn { margin: .25em; }
 
-      /* Scale down the large oval term buttons proportionally */
       .term-btn {
-        --label-size: calc(var(--info-btn-font-size) * 1.05); /* smaller text on phones */
+        --label-size: calc(var(--info-btn-font-size) * 1.05);
         --btn-h: calc(var(--label-size) * 3);
         --band: calc(var(--btn-h) * 0.075);
         --radius: calc(var(--btn-h) * 0.5);
       }
 
-      /* Tables: avoid one-letter wrapping by letting columns size naturally
-         and enabling horizontal scroll when needed */
       .table-wrap { -webkit-overflow-scrolling: touch; }
-      .table-wrap table { table-layout: auto; min-width: 680px; } /* allow scroll instead of squish */
+      .table-wrap table { table-layout: auto; min-width: 680px; }
       .table-wrap th, .table-wrap td { word-break: normal; overflow-wrap: break-word; }
 
-      /* Tighten vertical margins under schedule headers on phones */
       .sched > summary { margin: .3em 0; }
     }
   </style>
@@ -276,7 +273,7 @@
       <aside class="bubble bubble--white speakers-card" id="info">
         <h2 id="info-for-speakers-title">Information for speakers</h2>
 
-        <!-- Abstract subsection was previously removed per your instruction -->
+        <!-- Abstract subsection removed per your instruction -->
 
         <section class="speaker-section">
           <h3 class="speaker-section__title"><strong>Format &amp; length</strong></h3>
