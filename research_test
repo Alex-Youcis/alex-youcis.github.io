@@ -1,148 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Publications & preprints — Alex Youcis</title>
-
-  <!-- Fonts & Icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-
+  <title>Preprints and publications</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Include Fonts and Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <!-- Include CSS Styles -->
   <style>
-    :root{
-      --primary-color:#1D1E18;
-      --secondary-color:#C5C3C6;
-      --background-color:#DCDCDD;
-      --text-color:#1D1E18;
-      --button-color:#BF0603;
-      --card:#fff;
-      --border:#e6e6ea;
+    /* Root Variables for Colors */
+    :root {
+      --primary-color: #1D1E18; /* Dark color */
+      --secondary-color: #C5C3C6; /* Mid-tone gray */
+      --background-color: #DCDCDD; /* Light gray */
+      --text-color: #1D1E18; /* Dark color */
+      --button-color: #BF0603; /* Button color */
     }
 
-    /* Base */
-    body{font-family:'Open Sans',sans-serif;background:var(--background-color);color:var(--text-color);margin:0}
-    main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
-
-    /* Header / Nav (kept consistent) */
-    header{background:var(--primary-color);position:sticky;top:0;z-index:1000;box-shadow:0 2px 4px rgba(0,0,0,.1)}
-    .navbar{display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px}
-    .nav-links{display:flex}
-    .nav-links a{color:#fff;text-decoration:none;margin:0 1em;position:relative;transition:color .3s ease}
-    .nav-links a::after{content:'';position:absolute;width:0;height:2px;background:var(--secondary-color);left:50%;bottom:-5px;transition:all .3s ease}
-    .nav-links a:hover{color:var(--secondary-color)}
-    .nav-links a:hover::after{left:0;width:100%}
-    .nav-mobile{display:none}
-    @media (max-width:768px){
-      .nav-links{display:none;flex-direction:column;background:var(--primary-color);position:absolute;top:60px;right:0;width:220px}
-      .nav-links a{margin:0;padding:1em;text-align:right;border-bottom:1px solid var(--secondary-color)}
-      .nav-mobile{display:flex;align-items:center}
-      .nav-text{color:#fff;margin-right:.5em}
-      .icon{color:#fff;font-size:24px;cursor:pointer}
-      .navbar.responsive .nav-links{display:flex}
-      .navbar.responsive .nav-mobile .nav-text{display:none}
+    /* Global Styles */
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
     }
 
-    /* Hero (matches seminar page) */
-    .hero{
-      position:relative;overflow:hidden;background:var(--card);
-      border-radius:14px;padding:1.25em 1.5em;margin:1.5em 0 1.25em;
-      box-shadow:0 2px 10px rgba(0,0,0,.05);display:grid;gap:.5em
+    /* Navbar Styles */
+    header {
+      background-color: var(--primary-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    .hero::before{
-      content:"";position:absolute;inset:0;pointer-events:none;opacity:.22;
+    .navbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 1em;
+      height: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* (Moved espresso art out of navbar; now appears in the page header below) */
+
+    .nav-links { display: flex; position: relative; z-index: 1; }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1em;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: var(--secondary-color);
+      left: 50%;
+      bottom: -5px;
+      transition: all 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--secondary-color); }
+    .nav-links a:hover::after { left: 0; width: 100%; }
+    .nav-mobile { display: none; }
+
+    /* Mobile Navigation */
+    @media screen and (max-width: 768px) {
+      .navbar { justify-content: flex-end; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: var(--primary-color);
+        position: absolute; top: 60px; right: 0; width: 200px;
+      }
+      .nav-links a { margin: 0; padding: 1em; text-align: right; border-bottom: 1px solid var(--secondary-color); }
+      .nav-mobile { display: flex; align-items: center; position: relative; z-index: 1; }
+      .nav-text { color: white; margin-right: 0.5em; }
+      .icon { color: white; font-size: 24px; cursor: pointer; }
+      .navbar.responsive .nav-links { display: flex; }
+      .navbar.responsive .nav-mobile .nav-text { display: none; }
+    }
+
+    /* Page header with espresso cups */
+    .page-hero {
+      position: relative;
+      padding: 1.2em 0;
+      margin: 0 auto .75em auto;
+      max-width: 1200px;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: "";
+      position: absolute; inset: 0;
       background-image:
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
-      background-repeat:no-repeat,no-repeat,no-repeat;
-      background-position:16% center,50% center,84% center;
-      background-size:auto 96%,auto 96%,auto 96%;
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path opacity=".35" d="M3 8h13a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3H3z"/><path opacity=".35" d="M3 8v8a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8"/><path opacity=".35" d="M16 9h2a2 2 0 0 1 0 4h-2"/></svg>'),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path opacity=".35" d="M3 8h13a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3H3z"/><path opacity=".35" d="M3 8v8a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8"/><path opacity=".35" d="M16 9h2a2 2 0 0 1 0 4h-2"/></svg>'),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path opacity=".35" d="M3 8h13a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3H3z"/><path opacity=".35" d="M3 8v8a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8"/><path opacity=".35" d="M16 9h2a2 2 0 0 1 0 4h-2"/></svg>');
+      background-repeat: no-repeat, no-repeat, no-repeat;
+      background-position: 16% center, 50% center, 84% center;
+      background-size: auto 100%, auto 100%, auto 100%;
+      opacity: .18;
+      pointer-events: none;
     }
-    @media (max-width:600px){ .hero::before{ background-size:auto 78%,auto 78%,auto 78%; } }
-    .hero h1{margin:.2em 0 .1em;font-size:clamp(1.6rem,3.2vw,2.1rem);position:relative}
-    .hero .meta{position:relative;display:flex;flex-wrap:wrap;gap:.5em 1em;font-size:.98rem}
-    .hero .tag{background:var(--secondary-color);color:#111;border-radius:999px;padding:.25em .7em}
+    .page-hero h1 { margin: 0; position: relative; z-index: 1; }
 
-    /* Filter bar */
-    .filterbar{
-      display:flex;gap:.75em;align-items:center;flex-wrap:wrap;
-      margin:.6em 0 1.2em
+    /* Main Content Styles */
+    main { padding: 2em; max-width: 1200px; margin: 0 auto; }
+
+    /* Filters */
+    .filters {
+      display: flex; gap: .75rem; flex-wrap: wrap; align-items: center;
+      margin: 0 0 1.25rem 0;
     }
-    .filter-input{
-      background:#fff;border:1px solid var(--border);border-radius:10px;
-      padding:.55em .8em;min-width:260px;flex:1 1 260px;
-      box-shadow:0 1px 4px rgba(0,0,0,.04)
+    .filter-btn {
+      background: #fff; color: var(--text-color);
+      border: 1px solid var(--secondary-color);
+      border-radius: 999px; padding: .45em .9em; cursor: pointer;
+      font-weight: 600;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
     }
+    .filter-btn.active { background: var(--button-color); color: #fff; border-color: var(--button-color); }
+    .filter-note { opacity: .8; font-size: .95rem; }
 
-    /* Cards grid */
-    .pub-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25em}
-    @media (max-width:900px){ .pub-grid{grid-template-columns:1fr} }
-
-    /* Card (bubble) */
-    .pub-card{
-      background:var(--card);border:1px solid var(--border);border-radius:14px;
-      box-shadow:0 2px 10px rgba(0,0,0,.05);padding:1em 1.2em;display:flex;flex-direction:column
+    /* Publication Card Styles */
+    .publication-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2em;
     }
-    .pub-title{margin:.1em 0 .35em;font-size:1.15rem;line-height:1.25}
-    .pub-meta{display:flex;flex-wrap:wrap;gap:.4em 1em;margin:.1em 0 .6em;font-size:.97rem;color:#222}
-    .pub-meta .meta-item i{margin-right:.4em}
+    @media (max-width: 900px) { .publication-grid { grid-template-columns: 1fr; } }
 
-    /* Tags as chips */
-    .tags{display:flex;flex-wrap:wrap;gap:.35em;margin:.15em 0 .6em}
-    .tag{display:inline-block;background:#f1f1f4;border:1px solid var(--border);border-radius:999px;padding:.25em .6em;font-size:.9rem}
-
-    /* Links */
-    .links{display:flex;flex-wrap:wrap;gap:.5em;margin-top:.7em}
-    .btn{display:inline-flex;align-items:center;gap:.4em;background:var(--button-color);color:#fff;text-decoration:none;padding:.55em .85em;border-radius:10px;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.15)}
-    .btn:hover{filter:brightness(1.05)}
-
-    /* Abstract toggle (matches seminar style) */
-    details.abs{margin:.4em 0 0}
-    summary.abs__btn{
-      display:inline-flex;align-items:center;gap:.4em;padding:.25em .55em;
-      border:1px solid #cfcfd4;border-radius:8px;background:#fff;font-weight:700;cursor:pointer
+    .publication-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden; /* so bg stays inside rounded corners */
     }
-    .abs__btn::-webkit-details-marker{display:none}
-    .abs__btn::marker{content:""}
-    .abs__chev{width:.95em;height:.95em;transition:transform 160ms ease}
-    details.abs[open] .abs__chev{transform:rotate(180deg)}
-    .abs__body{margin-top:.55em}
+    .publication-card h2 { margin: 0 0 .4em 0; }
+    .publication-card .btn {
+      background-color: var(--button-color);
+      color: white;
+      padding: 8px 12px;
+      text-decoration: none;
+      border-radius: 6px;
+      margin-right: 8px;
+      transition: background-color 0.2s ease;
+      display: inline-block;
+    }
+    .publication-card .btn:hover { background-color: #9B0502; }
 
-    /* Footer */
-    footer{background:var(--primary-color);color:#fff;padding:1em;text-align:center;margin-top:2em}
-    footer .social-icons a{color:#fff;margin:0 .25em}
+    .publication-card .collaborator-link {
+      color: var(--button-color);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .publication-card .collaborator-link:hover { text-decoration: underline; }
 
-    /* Active link tint */
-    .nav-links a.active{color:var(--secondary-color)}
+    .publication-card a:not(.btn):not(.collaborator-link) {
+      color: var(--button-color);
+      text-decoration: none;
+    }
+    .publication-card a:not(.btn):not(.collaborator-link):hover { text-decoration: underline; }
 
-    /* Mobile niceties */
-    @media (max-width:600px){
-      .hero{text-align:center}
-      .hero .meta{justify-content:center}
+    details summary {
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 8px;
+      list-style: none;
+    }
+    details summary::-webkit-details-marker { display: none; }
+
+    .links { margin-top: 12px; }
+
+    /* ====== LOW-OPACITY BACKGROUND PER CARD (template) ======
+       To enable on a card:
+         1) Add class="has-bg" to .publication-card
+         2) Add style="--card-bg: url('FULL_IMAGE_URL');" on the same element
+    */
+    .publication-card.has-bg {
+      /* Fixed background block height so it DOES NOT grow when details open */
+      --bg-height: 220px;
+    }
+    .publication-card.has-bg::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: var(--bg-height);
+      background-image: var(--card-bg);
+      background-size: cover;
+      background-position: center;
+      opacity: .10;
+      pointer-events: none;
+    }
+    .publication-card.has-bg > * { position: relative; z-index: 1; }
+
+    /* Make description content always sit on solid white (no show-through) */
+    .publication-card details { background: #fff; position: relative; z-index: 2; }
+
+    /* Footer Styles */
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1em;
+      text-align: center;
     }
   </style>
 
-  <!-- MathJax -->
+  <!-- MathJax Configuration -->
   <script>
     window.MathJax = {
-      tex:{ inlineMath:[['\\(','\\)']], displayMath:[['\\[','\\]']], processEscapes:true },
-      options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' }
+      tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], processEscapes: true },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
+                 ignoreHtmlClass: 'tex2jax_ignore', processHtmlClass: 'tex2jax_process' }
     };
   </script>
+  <!-- Include MathJax -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
 </head>
 <body>
   <header>
     <nav class="navbar" id="myNavbar">
+      <!-- Mobile Navigation -->
       <div class="nav-mobile">
         <span class="nav-text">Navigation</span>
         <span class="icon" onclick="toggleMenu()"><i class="fa fa-bars"></i></span>
       </div>
+      <!-- Navigation links -->
       <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="#" class="active">Preprints and publications</a>
+        <a href="#">Preprints and publications</a>
         <a href="notes.html">Expository material</a>
         <a href="friends.html">Friends</a>
         <a href="nt-seminar.html">U of T number theory seminar</a>
@@ -150,331 +246,247 @@
     </nav>
   </header>
 
-  <main>
-    <!-- Hero -->
-    <section class="hero">
-      <h1><i class="fa fa-book"></i> Publications &amp; preprints</h1>
-      <div class="meta">
-        <span class="tag"><i class="fa fa-check"></i> Peer-reviewed &amp; to appear</span>
-        <span class="tag"><i class="fa fa-flask"></i> Preprints</span>
-      </div>
-    </section>
+  <!-- Page header with espresso art -->
+  <div class="page-hero">
+    <h1>Preprints and publications</h1>
+  </div>
 
-    <!-- Filter -->
-    <div class="filterbar">
-      <input id="filterInput" class="filter-input" type="search" placeholder="Filter by title, collaborator, journal, or tag…" aria-label="Filter publications">
+  <main>
+
+    <div class="filters">
+      <button class="filter-btn" data-filter="published">Published</button>
+      <button class="filter-btn" data-filter="preprints">Preprints</button>
+      <span class="filter-note">Click a filter to show only those items; click again to clear.</span>
     </div>
 
-    <!-- Cards -->
-    <section class="pub-grid" id="pubGrid">
-      <!-- 1 -->
-      <article class="pub-card" data-keywords="integral comparison crystalline de rham prismatic hodge gauges abhinandan submitted preprint">
-        <h2 class="pub-title">An integral comparison of crystalline and de Rham cohomology</h2>
-        <div class="pub-meta">
-          <span class="meta-item"><i class="fa fa-users"></i> Collaborators: <a href="https://abhinandan.perso.math.cnrs.fr/" class="collaborator-link">Abhinandan</a></span>
-          <span class="meta-item"><i class="fa fa-bookmark"></i> Submitted</span>
-        </div>
-        <div class="tags">
-          <span class="tag">\(p\)-adic Hodge theory</span>
-          <span class="tag">prismatic \(F\)-gauges</span>
-          <span class="tag">crystalline</span>
-          <span class="tag">de Rham</span>
-        </div>
-        <details class="abs">
-          <summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary>
-          <div class="abs__body">
-            <p>We give an integral comparison between <i>twisted</i> crystalline and <i>twisted</i> de Rham cohomology, using a Dwork-style argument in the stacky approach to prismatic cohomology, allowing arbitrary prismatic coefficients. For the structure sheaf this recovers (rationally) the Berthelot–Ogus isomorphism and clarifies the relationship between torsion in crystalline and de Rham cohomology.</p>
-          </div>
+    <div class="publication-grid">
+
+      <!-- ===== CARD 1 (already had background set) ===== -->
+      <div class="publication-card has-bg"
+           style="--card-bg: url('https://alex-youcis.github.io/An%20integral%20comparison%20of%20crystalline%20and%20de%20Rham%20cohomology.png');"
+           data-status="preprint">
+        <h2>An integral comparison of crystalline and de Rham cohomology</h2>
+        <p><strong>Collaborators:</strong> <a href="https://abhinandan.perso.math.cnrs.fr/" class="collaborator-link">Abhinandan</a></p>
+        <p class="pub-status"><strong>Status:</strong> Submitted</p>
+        <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-gauges, crystalline cohomology, de Rham cohomology</p>
+        <details>
+          <summary>Description</summary>
+          <p>In this paper we give an integral comparison between <i>twisted</i> crystalline and <i>twisted</i> de Rham cohomology, appropriately defined. This makes use of an analogue of Dwork's trick in the stacky approach to prismatic cohomology, and allows for arbitrary prismatic coefficients. In the case of the structure sheaf, this rationally recovers Berthelot--Ogus's celebrated isomorphism. Finally, we make use of this integral comparison to give a study of the relationship between torsion in crystalline and de Rham cohomology.</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2507.17631" class="btn">arXiv</a>
         </div>
-      </article>
+      </div>
 
-      <!-- 2 -->
-      <article class="pub-card" data-keywords="integral analogue fontaine crystalline functor imai kato submitted preprint lafaille gauges">
-        <h2 class="pub-title">An integral analogue of Fontaine's crystalline functor</h2>
-        <div class="pub-meta">
-          <span class="meta-item"><i class="fa fa-users"></i> Collaborators: <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</span>
-          <span class="meta-item"><i class="fa fa-bookmark"></i> Submitted</span>
-        </div>
-        <div class="tags">
-          <span class="tag">\(p\)-adic Hodge theory</span>
-          <span class="tag">prismatic \(F\)-gauges</span>
-          <span class="tag">Fontaine–Laffaille</span>
-        </div>
-        <details class="abs">
-          <summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary>
-          <div class="abs__body">
-            <p>We develop an integral analogue of \(D_{\mathrm{crys}}\) and relate it to Fontaine–Laffaille and Dieudonné theory. In the Fontaine–Laffaille range \([0,p-2]\), local systems, Fontaine–Laffaille modules, prismatic \(F\)-crystals, and prismatic \(F\)-gauges coincide, explaining both the successes within the range and failures outside it.</p>
-          </div>
+      <!-- ===== CARD 2 ===== -->
+      <div class="publication-card has-bg"
+           style="--card-bg: url('https://alex-youcis.github.io/Integral%20Dcrys.png');"
+           data-status="preprint">
+        <h2>An integral analogue of Fontaine's crystalline functor</h2>
+        <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
+        <p class="pub-status"><strong>Status:</strong> Submitted</p>
+        <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-gauges, Fontaine--Laffaille theory.</p>
+        <details>
+          <summary>Description</summary>
+          <p>In this paper we develop an integral analogue of the functor \(D_\mathrm{crys}\), and relate it to Fontaine--Lafaille and Dieudonné theory. Notably, we show that in the Fontaine--Laffaille range \([0,p-2]\) that all the most common types of integral \(p\)-adic Hodge theoretic objects (i.e., local systems, Fontaine--Laffaille modules, prismatic \(F\)-crystals, and prismatic \(F\)-gaues) all agree. This helps clarify the sucesses of Fontaine--Laffaille theory in the Fontaine--Laffaille range and its failures outside of that range (as only in that range does it recover the 'correct', more refined, integral \(p\)-adic Hodge theory).</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2504.16282" class="btn">arXiv</a>
         </div>
-      </article>
+      </div>
 
-      <!-- 3 -->
-      <article class="pub-card" data-keywords="beauville laszlo gluing algebraic spaces achinger submitted rigid">
-        <h2 class="pub-title">Beauville—Laszlo gluing of algebraic spaces</h2>
-        <div class="pub-meta">
-          <span class="meta-item"><i class="fa fa-users"></i> Collaborators: <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a></span>
-          <span class="meta-item"><i class="fa fa-bookmark"></i> Submitted</span>
-        </div>
-        <div class="tags">
-          <span class="tag">algebraic spaces</span>
-          <span class="tag">rigid geometry</span>
-        </div>
-        <details class="abs">
-          <summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary>
-          <div class="abs__body">
-            <p>We show a Beauville–Laszlo type gluing theorem for algebraic spaces over \(\mathbb{Z}_p\) (and more general bases), equating gluing triples \((X,\mathfrak{X},j)\) with separated algebraic spaces and explaining several phenomena in arithmetic geometry.</p>
-          </div>
+      <!-- ===== CARD 3 ===== -->
+      <div class="publication-card has-bg"
+           style="--card-bg: url('https://alex-youcis.github.io/BL.png');"
+           data-status="preprint">
+        <h2>Beauville—Laszlo gluing of algebraic spaces</h2>
+        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a></p>
+        <p class="pub-status"><strong>Status:</strong> Submitted</p>
+        <p><strong>Tags:</strong> Rigid analytic geometry</p>
+        <details>
+          <summary>Description</summary>
+          <p>We show that one may always glue a separated formal algebraic space \(\mathfrak{X}\) over \(\mathbb{Z}_p\) to a separated algebraic space \(X\) over \(\mathbb{Q}_p\) via an open embedding \(j\colon \mathfrak{X}_\eta\to X^\mathrm{an}\), resulting in an algebraic space. In fact, we show that this gluing procedure gives rise to an equivalence …</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2410.20500" class="btn">arXiv</a>
         </div>
-      </article>
+      </div>
 
-      <!-- 4 -->
-      <article class="pub-card" data-keywords="tannakian prismatic f crystals shtukas imai kato submitted">
-        <h2 class="pub-title">A Tannakian framework for prismatic \(F\)-crystals</h2>
-        <div class="pub-meta">
-          <span class="meta-item"><i class="fa fa-users"></i> Collaborators: <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</span>
-          <span class="meta-item"><i class="fa fa-bookmark"></i> Submitted</span>
-        </div>
-        <div class="tags">
-          <span class="tag">\(p\)-adic Hodge theory</span>
-          <span class="tag">prismatic \(F\)-crystals</span>
-          <span class="tag">shtukas</span>
-          <span class="tag">Tannakian</span>
-        </div>
-        <details class="abs">
-          <summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary>
-          <div class="abs__body">
-            <p>We study Tannakian aspects of prismatic \(F\)-crystals and explain how they connect to the Tannakian theory of shtukas.</p>
-          </div>
+      <!-- ===== CARD 4 ===== -->
+      <div class="publication-card has-bg"
+           style="--card-bg: url('https://alex-youcis.github.io/Tanakian.png');"
+           data-status="preprint">
+        <h2>A Tannakian Framework for Prismatic \(F\)-crystals</h2>
+        <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
+        <p class="pub-status"><strong>Status:</strong> Submitted</p>
+        <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-crystals, \(p\)-adic shtukas, Tannakian formalism</p>
+        <details>
+          <summary>Description</summary>
+          <p>We study some Tannakian aspects of the theory of prismatic \(F\)-crystals …</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2406.08259" class="btn">arXiv</a>
         </div>
-      </article>
+      </div>
 
-      <!-- 5 -->
-      <article class="pub-card" data-keywords="canonical integral models shimura varieties abelian type daniels forum of mathematics sigma published shtukas hodge">
-        <h2 class="pub-title">Canonical integral models of Shimura varieties of abelian type</h2>
-        <div class="pub-meta">
-          <span class="meta-item"><i class="fa fa-users"></i> Collaborators: <a href="https://www.skidmore.edu/mathematics/faculty/daniels.php" class="collaborator-link">Patrick Daniels</a></span>
-          <span class="meta-item"><i class="fa fa-bookmark"></i> <i>Forum of Mathematics, Sigma</i></span>
-        </div>
-        <div class="tags">
-          <span class="tag">Shimura varieties</span>
-          <span class="tag">integral models</span>
-          <span class="tag">\(p\)-adic Hodge theory</span>
-          <span class="tag">\(p\)-adic shtukas</span>
-        </div>
-        <details class="abs">
-          <summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary>
-          <div class="abs__body">
-            <p>We prove the Pappas–Rapoport conjecture for abelian-type Shimura varieties with parahoric level \(p>3\), showing Kisin–Pappas–Zhou integral models are canonical and functorial in the Shimura datum.</p>
-          </div>
+      <!-- ===== CARD 5 (PUBLISHED) ===== -->
+      <div class="publication-card has-bg"
+           style="--card-bg: url('https://alex-youcis.github.io/PR%20for%20AT.png');"
+           data-status="published">
+        <h2>Canonical Integral Models of Shimura Varieties of Abelian Type</h2>
+        <p><strong>Collaborators:</strong> <a href="https://www.skidmore.edu/mathematics/faculty/daniels.php" class="collaborator-link">Patrick Daniels</a></p>
+        <p class="pub-status"><strong>Status:</strong> <i>Forum of Mathematics, Sigma</i></p>
+        <p><strong>Tags:</strong> Shimura varieties, integral models, \(p\)-adic Hodge theory, \(p\)-adic shtukas</p>
+        <details>
+          <summary>Description</summary>
+          <p>We prove a conjecture of Pappas and Rapoport for all Shimura varieties …</p>
         </details>
         <div class="links">
           <a href="https://www.cambridge.org/core/journals/forum-of-mathematics-sigma/article/canonical-integral-models-for-shimura-varieties-of-abelian-type/AC4BFA2A33124AB438004D512BBC64CD" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2402.05727" class="btn">arXiv</a>
         </div>
-      </article>
+      </div>
 
-      <!-- 6 -->
-      <article class="pub-card" data-keywords="prismatic realization functor shimura abelian type imai kato submitted">
-        <h2 class="pub-title">The prismatic realization functor for Shimura varieties of abelian type</h2>
-        <div class="pub-meta">
-          <span class="meta-item"><i class="fa fa-users"></i> Collaborators: <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</span>
-          <span class="meta-item"><i class="fa fa-bookmark"></i> Submitted</span>
-        </div>
-        <div class="tags">
-          <span class="tag">Shimura varieties</span>
-          <span class="tag">\(p\)-adic Hodge theory</span>
-          <span class="tag">prismatic \(F\)-gauges</span>
-          <span class="tag">Fontaine–Laffaille</span>
-        </div>
-        <details class="abs">
-          <summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary>
-          <div class="abs__body">
-            <p>We construct a prismatic \(F\)-gauge realization on integral models of abelian-type Shimura varieties (hyperspecial level), yielding new \(p\)-adic Hodge-theoretic information (e.g. a Serre–Tate-type statement) and characterizations even at finite levels.</p>
-          </div>
+      <!-- ===== CARD 6 ===== -->
+      <div class="publication-card has-bg"
+           style="--card-bg: url('https://alex-youcis.github.io/realization.png');"
+           data-status="preprint">
+        <h2>The Prismatic Realization Functor for Shimura Varieties of Abelian Type</h2>
+        <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
+        <p class="pub-status"><strong>Status:</strong> Submitted</p>
+        <p><strong>Tags:</strong> Shimura varieties, integral models, \(p\)-adic Hodge theory, prismatic \(F\)-gauges, Fontaine--Laffaille theory</p>
+        <details>
+          <summary>Description</summary>
+          <p>In this paper we construct an object on the integral canonical models of Shimura varieties …</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2310.08472" class="btn">arXiv</a>
         </div>
-      </article>
+      </div>
 
-      <!-- 7 -->
-      <article class="pub-card" data-keywords="analytic topology bdR+ grassmannian cesnavicius simons symposium to appear torsors">
-        <h2 class="pub-title">The analytic topology is enough for the \(B_\mathrm{dR}^+\)-Grassmannian</h2>
-        <div class="pub-meta">
-          <span class="meta-item"><i class="fa fa-users"></i> Collaborators: <a href="https://www.imo.universite-paris-saclay.fr/~kestutis.cesnavicius/" class="collaborator-link">Kęstutis Česnavičius</a></span>
-          <span class="meta-item"><i class="fa fa-bookmark"></i> To appear (Simons Symposium proceedings)</span>
-        </div>
-        <div class="tags">
-          <span class="tag">\(B_\mathrm{dR}^+\)-Grassmannian</span>
-          <span class="tag">torsors</span>
-          <span class="tag">\(p\)-adic Hodge theory</span>
-        </div>
-        <details class="abs">
-          <summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary>
-          <div class="abs__body">
-            <p>We compute the \(B_\mathrm{dR}^+\)-affine Grassmannian as the analytic-open sheafification of \(LG/L^+G\) for a reductive \(G\), rather than in the étale topology.</p>
-          </div>
+      <!-- ===== CARD 7 (PUBLISHED) ===== -->
+      <div class="publication-card has-bg"
+           style="--card-bg: url('https://alex-youcis.github.io/Bdr.png');"
+           data-status="published">
+        <h2>The Analytic Topology is Enough for the \(B_\mathrm{dR}^+\)-Grassmannian</h2>
+        <p><strong>Collaborators:</strong> <a href="https://www.imo.universite-paris-saclay.fr/~kestutis.cesnavicius/" class="collaborator-link">Kęstutis Česnavičius</a></p>
+        <p class="pub-status"><strong>Status:</strong> To appear in the proceedings of the 2023 Simons Symposium on \(p\)-adic Hodge theory</p>
+        <p><strong>Tags:</strong> \(p\)-adic Hodge theory, torsors, Grothendieck--Serre conjecture</p>
+        <details>
+          <summary>Description</summary>
+          <p>In this paper we show that the \(B_\mathrm{dR}^+\)-affine Grassmannian can be computed …</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2303.11710" class="btn">arXiv</a>
         </div>
-      </article>
+      </div>
 
-      <!-- 8 -->
-      <article class="pub-card" data-keywords="jacobson morozov morphism langlands parameters relative bertoloni meli imai imrn">
-        <h2 class="pub-title">The Jacobson–Morozov morphism for Langlands parameters in the relative setting</h2>
-        <div class="pub-meta">
-          <span class="meta-item"><i class="fa fa-users"></i> Collaborators: <a href="https://math.bu.edu/people/abertolo/" class="collaborator-link">Alexander Bertoloni Meli</a> and <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a></span>
-          <span class="meta-item"><i class="fa fa-bookmark"></i> <i>International Mathematics Research Notices</i></span>
-        </div>
-        <div class="tags">
-          <span class="tag">Langlands</span>
-          <span class="tag">\(L\)-parameters</span>
-          <span class="tag">moduli</span>
-        </div>
-        <details class="abs">
-          <summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary>
-          <div class="abs__body">
-            <p>We construct a moduli space of \(L\)-parameters over \(\mathbb{Q}\), prove smoothness and a description of connected components, and exhibit a morphism to the moduli of Weil–Deligne parameters that is an isomorphism over a dense open subset.</p>
-          </div>
+      <!-- ===== CARD 8 (PUBLISHED) ===== -->
+      <div class="publication-card has-bg"
+           style="--card-bg: url('https://alex-youcis.github.io/GA.png');"
+           data-status="published">
+        <h2>The Jacobson--Morozov Morphism for Langlands Parameters in the Relative Setting</h2>
+        <p><strong>Collaborators:</strong> <a href="https://math.bu.edu/people/abertolo/" class="collaborator-link">Alexander Bertoloni Meli</a> and <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a></p>
+        <p class="pub-status"><strong>Status:</strong> <i>International Mathematics Research Notices</i></p>
+        <p><strong>Tags:</strong> Langlands conjecture, \(L\)-parameters, moduli theory</p>
+        <details>
+          <summary>Description</summary>
+          <p>We define a moduli space of \(L\)-parameters over \(\mathbb{Q}\) …</p>
         </details>
         <div class="links">
           <a href="https://academic.oup.com/imrn/advance-article/doi/10.1093/imrn/rnad217/7277067" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2203.01768" class="btn">arXiv</a>
         </div>
-      </article>
+      </div>
 
-      <!-- 9 -->
-      <article class="pub-card" data-keywords="specialization pro-etale fundamental group achinger lara compositio rigid">
-        <h2 class="pub-title">Specialization for the pro-étale fundamental group</h2>
-        <div class="pub-meta">
-          <span class="meta-item"><i class="fa fa-users"></i> Collaborators: <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></span>
-          <span class="meta-item"><i class="fa fa-bookmark"></i> <i>Compositio Mathematica</i></span>
-        </div>
-        <div class="tags">
-          <span class="tag">rigid geometry</span>
-          <span class="tag">covering spaces</span>
-          <span class="tag">fundamental groups</span>
-        </div>
-        <details class="abs">
-          <summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary>
-          <div class="abs__body">
-            <p>For a formal scheme \(\mathfrak{X}\) over a height-1 valuation ring, we construct a specialization homomorphism \(\pi_1^\mathrm{dJ}(\mathfrak{X}_\eta)\to \pi_1^\mathrm{proet}(\mathfrak{X}_s)\), prove surjectivity in good cases, and show de Jong coverings are étale-local on the target for smooth quasi-compact rigid spaces over an equicharacteristic-0 non-archimedean field.</p>
-          </div>
+      <!-- ===== CARD 9 (PUBLISHED) ===== -->
+      <div class="publication-card has-bg"
+           style="--card-bg: url('https://alex-youcis.github.io/dJ.png');"
+           data-status="published">
+        <h2>Specialization for the Pro-étale Fundamental Group</h2>
+        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></p>
+        <p class="pub-status"><strong>Status:</strong> <i>Compositio Mathematica</i></p>
+        <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, de Jong fundamental group, pro-étale fundamental group</p>
+        <details>
+          <summary>Description</summary>
+          <p>For a formal scheme \(\mathfrak{X}\) over a height \(1\) valuation ring \(\mathcal{O}\) …</p>
         </details>
         <div class="links">
           <a href="https://www.cambridge.org/core/journals/compositio-mathematica/article/specialization-for-the-proetale-fundamental-group/9FF5AAC3BAFD65AA505EF8268C8641CB" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2107.06761" class="btn">arXiv</a>
         </div>
-      </article>
+      </div>
 
-      <!-- 10 -->
-      <article class="pub-card" data-keywords="geometric arcs fundamental groups rigid achinger lara crelle">
-        <h2 class="pub-title">Geometric arcs and fundamental groups of rigid spaces</h2>
-        <div class="pub-meta">
-          <span class="meta-item"><i class="fa fa-users"></i> Collaborators: <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></span>
-          <span class="meta-item"><i class="fa fa-bookmark"></i> <i>Journal für die reine und angewandte Mathematik</i></span>
-        </div>
-        <div class="tags">
-          <span class="tag">geometric coverings</span>
-          <span class="tag">rigid geometry</span>
-          <span class="tag">fundamental groups</span>
-        </div>
-        <details class="abs">
-          <summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary>
-          <div class="abs__body">
-            <p>We define geometric coverings in rigid geometry (adapting Bhatt–Scholze’s notion) and show stability under composition and disjoint union, étale locality on the target, and that the category forms a tame infinite Galois category supporting a fundamental group.</p>
-          </div>
+      <!-- ===== CARD 10 (PUBLISHED) ===== -->
+      <div class="publication-card has-bg"
+           style="--card-bg: url('https://alex-youcis.github.io/Characterization.png');"
+           data-status="published">
+        <h2>Geometric Arcs and Fundamental Groups of Rigid Spaces</h2>
+        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></p>
+        <p class="pub-status"><strong>Status:</strong> <i>Journal für die reine und angewandte Mathematik</i></p>
+        <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, de Jong fundamental group, pro-étale fundamental group</p>
+        <details>
+          <summary>Description</summary>
+          <p>We develop a new notion of covering spaces, called <i>geometric coverings</i>, in rigid geometry …</p>
         </details>
         <div class="links">
           <a href="https://www.degruyter.com/document/doi/10.1515/crelle-2023-0013/html" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2105.05184" class="btn">arXiv</a>
         </div>
-      </article>
+      </div>
 
-      <!-- 11 -->
-      <article class="pub-card" data-keywords="variants de jong fundamental group achinger lara ajm to appear">
-        <h2 class="pub-title">Variants of the de Jong fundamental group</h2>
-        <div class="pub-meta">
-          <span class="meta-item"><i class="fa fa-users"></i> Collaborators: <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></span>
-          <span class="meta-item"><i class="fa fa-bookmark"></i> To appear in <i>American Journal of Mathematics</i></span>
-        </div>
-        <div class="tags">
-          <span class="tag">rigid geometry</span>
-          <span class="tag">geometric arcs</span>
-          <span class="tag">covering spaces</span>
-        </div>
-        <details class="abs">
-          <summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary>
-          <div class="abs__body">
-            <p>Using the geometric covering framework we address questions of de Jong, compare admissible/étale local notions, and identify \(\mathbf{Loc}(X_{\mathrm{proet}})\) with \(\mathbf{Cov}^\mathrm{et}_X\), making the former essentially a tame infinite Galois category.</p>
-          </div>
+      <!-- ===== CARD 11 (PUBLISHED) ===== -->
+      <div class="publication-card has-bg"
+           style="--card-bg: url('https://alex-youcis.github.io/alcoves.png');"
+           data-status="published">
+        <h2>Variants of the de Jong Fundamental Group</h2>
+        <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></p>
+        <p class="pub-status"><strong>Status:</strong> To appear in <i>American Journal of Mathematics</i></p>
+        <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, geometric arcs, de Jong fundamental group</p>
+        <details>
+          <summary>Description</summary>
+          <p>This paper, a companion to <i>Geometric Arcs and Fundamental Groups of Rigid Spaces</i>, uses the theory of geometric coverings …</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2203.11750" class="btn">arXiv</a>
         </div>
-      </article>
+      </div>
 
-      <!-- 12 -->
-      <article class="pub-card" data-keywords="characterization local langlands correspondence scholze shin equations bertoloni meli representation theory">
-        <h2 class="pub-title">An approach to the characterization of the local Langlands correspondence</h2>
-        <div class="pub-meta">
-          <span class="meta-item"><i class="fa fa-users"></i> Collaborators: <a href="https://math.bu.edu/people/abertolo/" class="collaborator-link">Alexander Bertoloni Meli</a></span>
-          <span class="meta-item"><i class="fa fa-bookmark"></i> <i>Representation Theory</i></span>
-        </div>
-        <div class="tags">
-          <span class="tag">Langlands program</span>
-          <span class="tag">representation theory</span>
-          <span class="tag">endoscopy</span>
-        </div>
-        <details class="abs">
-          <summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary>
-          <div class="abs__body">
-            <p>Under suitable hypotheses we show the local Langlands conjecture is characterized by the Scholze–Shin equations.</p>
-          </div>
+      <!-- ===== CARD 12 (PUBLISHED) ===== -->
+      <div class="publication-card"
+           data-status="published">
+        <h2>An Approach to the Characterization of the Local Langlands Correspondence</h2>
+        <p><strong>Collaborators:</strong> <a href="https://math.bu.edu/people/abertolo/" class="collaborator-link">Alexander Bertoloni Meli</a></p>
+        <p class="pub-status"><strong>Status:</strong> <i>Representation Theory</i></p>
+        <p><strong>Tags:</strong> The Langlands program, representation theory, endoscopy</p>
+        <details>
+          <summary>Description</summary>
+          <p>We show that, under suitable hypotheses, the local Langlands conjecture may be characterized by the so-called <i>Scholze--Shin equations</i>.</p>
         </details>
         <div class="links">
           <a href="https://www.ams.org/journals/ert/2023-27-12/S1088-4165-2023-00643-7/" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2003.11484" class="btn">arXiv</a>
         </div>
-      </article>
+      </div>
 
-      <!-- 13 -->
-      <article class="pub-card" data-keywords="bijective projections parabolic quotients affine weyl groups beazley milicevic nichols park xi jac alg comb">
-        <h2 class="pub-title">Bijective projections on parabolic quotients of affine Weyl groups</h2>
-        <div class="pub-meta">
-          <span class="meta-item"><i class="fa fa-users"></i> Collaborators: <a href="https://www.haverford.edu/users/emilicevic" class="collaborator-link">Elizabeth (Beazley) Milićević</a>, <a href="https://margaretnichols.me/" class="collaborator-link">Margaret Nichols</a>, Minhea Park, and <a href="https://sites.google.com/view/dannyshi" class="collaborator-link">Xiaolin (Danny) Xi</a></span>
-          <span class="meta-item"><i class="fa fa-bookmark"></i> <i>Journal of Algebraic Combinatorics</i></span>
-        </div>
-        <div class="tags">
-          <span class="tag">algebraic combinatorics</span>
-          <span class="tag">root theory</span>
-          <span class="tag">alcoves</span>
-        </div>
-        <details class="abs">
-          <summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary>
-          <div class="abs__body">
-            <p>We reinterpret a bijection of Berg–Jones–Vazirani between certain \(n\)-core partitions via geometry of the affine hyperplane arrangement, as a projection of alcoves onto the coroot-lattice hyperplane.</p>
-          </div>
+      <!-- ===== CARD 13 (PUBLISHED) ===== -->
+      <div class="publication-card"
+           data-status="published">
+        <h2>Bijective Projections on Parabolic Quotients of Affine Weyl Groups</h2>
+        <p><strong>Collaborators:</strong> <a href="https://www.haverford.edu/users/emilicevic" class="collaborator-link">Elizabeth (Beazley) Milićević</a>, <a href="https://margaretnichols.me/" class="collaborator-link">Margaret Nichols</a>, Minhea Park, and <a href="https://sites.google.com/view/dannyshi" class="collaborator-link">Xiaolin (Danny) Xi</a></p>
+        <p class="pub-status"><strong>Status:</strong> <i>Journal of Algebraic Combinatorics</i></p>
+        <p><strong>Tags:</strong> Algebraic combinatorics, root theory, alcoves</p>
+        <details>
+          <summary>Description</summary>
+          <p>In previous work of Berg--Jones--Vazirani, a bijection was introduced between two sets of combinatorial objects …</p>
         </details>
         <div class="links">
           <a href="https://doi.org/10.1007/s10801-014-0559-9" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/1212.0771" class="btn">arXiv</a>
         </div>
-      </article>
-    </section>
+      </div>
+
+    </div>
   </main>
 
   <footer>
@@ -485,20 +497,33 @@
     </div>
   </footer>
 
-  <!-- JS -->
+  <!-- JavaScript for Mobile Menu Toggle + Filters -->
   <script>
-    function toggleMenu(){ document.getElementById('myNavbar').classList.toggle('responsive'); }
+    function toggleMenu() {
+      var navbar = document.getElementById("myNavbar");
+      navbar.classList.toggle("responsive");
+    }
 
-    // Simple client-side filter
+    // Simple filter logic: uses data-status on each card
     (function(){
-      const input = document.getElementById('filterInput');
-      const cards = Array.from(document.querySelectorAll('.pub-card'));
-      if(!input) return;
-      input.addEventListener('input', function(){
-        const q = this.value.trim().toLowerCase();
-        cards.forEach(card=>{
-          const hay = (card.textContent + ' ' + (card.dataset.keywords||'')).toLowerCase();
-          card.style.display = hay.includes(q) ? '' : 'none';
+      const btns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.publication-card');
+
+      function apply(filter){
+        cards.forEach(card => {
+          const status = card.getAttribute('data-status'); // "published" or "preprint"
+          if(!filter){ card.style.display = ''; return; }
+          card.style.display = (status === filter) ? '' : 'none';
+        });
+      }
+
+      btns.forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const isActive = btn.classList.contains('active');
+          btns.forEach(b=>b.classList.remove('active'));
+          if(isActive){ apply(null); return; }
+          btn.classList.add('active');
+          apply(btn.dataset.filter);
         });
       });
     })();
