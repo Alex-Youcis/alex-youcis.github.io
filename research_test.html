@@ -24,9 +24,24 @@
     body{font-family:'Open Sans',sans-serif;background:var(--background-color);color:var(--text-color);margin:0}
     main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
 
-    /* Header / Nav (consistent with other pages) */
-    header{background:var(--primary-color);position:sticky;top:0;z-index:1000;box-shadow:0 2px 4px rgba(0,0,0,.1)}
-    .navbar{display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px}
+    /* Header / Nav (espresso background added) */
+    header{
+      background:var(--primary-color);
+      position:sticky;top:0;z-index:1000;box-shadow:0 2px 4px rgba(0,0,0,.1);
+      position:sticky;
+    }
+    header{ position:sticky; }
+    header::before{
+      content:""; position:absolute; inset:0; pointer-events:none; z-index:0; opacity:.22;
+      background-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><g fill='none' stroke='%23ffffff' stroke-width='3'><path d='M10 22h28a8 8 0 0 1 0 16H18a8 8 0 0 1-8-8v-8z'/><path d='M38 22h10a6 6 0 0 1 0 12h-6'/><path d='M8 40h36c0 6-10 10-18 10S8 46 8 40z'/><path d='M20 14c0 4-4 4-4 8M28 12c0 4-4 4-4 8M36 14c0 4-4 4-4 8'/></g></svg>"),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><g fill='none' stroke='%23ffffff' stroke-width='3'><path d='M10 22h28a8 8 0 0 1 0 16H18a8 8 0 0 1-8-8v-8z'/><path d='M38 22h10a6 6 0 0 1 0 12h-6'/><path d='M8 40h36c0 6-10 10-18 10S8 46 8 40z'/><path d='M20 14c0 4-4 4-4 8M28 12c0 4-4 4-4 8M36 14c0 4-4 4-4 8'/></g></svg>"),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><g fill='none' stroke='%23ffffff' stroke-width='3'><path d='M10 22h28a8 8 0 0 1 0 16H18a8 8 0 0 1-8-8v-8z'/><path d='M38 22h10a6 6 0 0 1 0 12h-6'/><path d='M8 40h36c0 6-10 10-18 10S8 46 8 40z'/><path d='M20 14c0 4-4 4-4 8M28 12c0 4-4 4-4 8M36 14c0 4-4 4-4 8'/></g></svg>");
+      background-repeat:no-repeat,no-repeat,no-repeat;
+      background-position:16% center,50% center,84% center;
+      background-size:auto 54%,auto 54%,auto 54%;
+    }
+    .navbar{display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px;position:relative;z-index:1}
     .nav-links{display:flex}
     .nav-links a{color:#fff;text-decoration:none;margin:0 1em;position:relative;transition:color .3s ease}
     .nav-links a::after{content:'';position:absolute;width:0;height:2px;background:var(--secondary-color);left:50%;bottom:-5px;transition:all .3s ease}
@@ -43,7 +58,7 @@
       .navbar.responsive .nav-mobile .nav-text{display:none}
     }
 
-    /* Hero (clean—no crest bg) */
+    /* Hero (clean) */
     .hero{
       background:var(--card);
       border-radius:14px;padding:1.25em 1.5em;margin:1.5em 0 1.25em;
@@ -53,36 +68,44 @@
     .hero .meta{display:flex;flex-wrap:wrap;gap:.5em 1em;font-size:.98rem}
     .hero .tag{
       background:var(--secondary-color);color:#111;border-radius:999px;padding:.25em .7em;
-      cursor:pointer;user-select:none
+      cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:.45em
     }
+    .hero .tag i{margin-right:.1em}
     .tag-filter[aria-pressed="true"]{ background:var(--button-color); color:#fff; }
 
     /* Cards grid */
     .pub-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25em}
     @media (max-width:900px){ .pub-grid{grid-template-columns:1fr} }
 
-    /* Card (bubble) */
+    /* Card (bubble) with bottom-right thumbnail space reserved */
     .pub-card{
+      --thumb-w:210px;           /* 1.5x of previous 140px */
+      --thumb-h:150px;           /* 1.5x of previous 100px */
       background:var(--card);border:1px solid var(--border);border-radius:14px;
-      box-shadow:0 2px 10px rgba(0,0,0,.05);padding:1em 1.2em;display:flex;flex-direction:column
+      box-shadow:0 2px 10px rgba(0,0,0,.05);
+      padding:1em 1.2em calc(1em + var(--thumb-h)) 1.2em; /* reserve space at bottom for thumb */
+      position:relative;display:flex;flex-direction:column
     }
 
-    /* Card header with thumbnail */
-    .pub-head{display:flex;gap:1em;align-items:flex-start;flex-wrap:wrap}
-    .pub-title{margin:.1em 0 .35em;font-size:1.15rem;line-height:1.25;flex:1 1 420px}
+    /* Title (kept) */
+    .pub-title{margin:.1em 0 .35em;font-size:1.15rem;line-height:1.25}
+
+    /* Bottom-right thumbnail mockups */
     .pub-thumb{
-      flex:0 0 140px;height:100px;border:1px dashed var(--border);border-radius:10px;
-      background:#f6f6f8;
+      position:absolute; right:1.2em; bottom:1em;
+      width:var(--thumb-w); height:var(--thumb-h);
+      border:1px dashed var(--border); border-radius:8px; background:#f6f6f8;
+      object-fit:cover; /* if it's an <img> */
     }
-    @media (max-width:480px){
-      .pub-thumb{flex:1 1 100%;height:140px}
+    @media (max-width:560px){
+      .pub-card{ --thumb-w:170px; --thumb-h:120px; padding-bottom:calc(1em + var(--thumb-h)); }
     }
 
-    /* Simple meta lines */
+    /* Straight meta lines */
     .meta-lines p{margin:.2em 0 .2em}
     .meta-lines strong{font-weight:700}
 
-    /* Tags as chips (optional per card) */
+    /* Tags as chips */
     .tags{display:flex;flex-wrap:wrap;gap:.35em;margin:.15em 0 .6em}
     .tag{display:inline-block;background:#f1f1f4;border:1px solid var(--border);border-radius:999px;padding:.25em .6em;font-size:.9rem}
 
@@ -91,7 +114,7 @@
     .btn{display:inline-flex;align-items:center;gap:.4em;background:var(--button-color);color:#fff;text-decoration:none;padding:.55em .85em;border-radius:10px;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.15)}
     .btn:hover{filter:brightness(1.05)}
 
-    /* Description toggle (renamed from Abstract) */
+    /* Description toggle */
     details.abs{margin:.4em 0 0}
     summary.abs__btn{
       display:inline-flex;align-items:center;gap:.4em;padding:.25em .55em;
@@ -149,8 +172,8 @@
     <section class="hero">
       <h1>Preprints and publications</h1>
       <div class="meta">
-        <span class="tag tag-filter" data-kind="published" aria-pressed="false">Published</span>
-        <span class="tag tag-filter" data-kind="preprint" aria-pressed="false">Preprints</span>
+        <span class="tag tag-filter" data-kind="published" aria-pressed="false"><i class="fa fa-check-circle"></i>Published</span>
+        <span class="tag tag-filter" data-kind="preprint" aria-pressed="false"><i class="fa fa-file-text-o"></i>Preprints</span>
       </div>
     </section>
 
@@ -158,10 +181,7 @@
     <section class="pub-grid" id="pubGrid">
       <!-- 1 -->
       <article class="pub-card" data-kind="preprint">
-        <div class="pub-head">
-          <h2 class="pub-title">An integral comparison of crystalline and de Rham cohomology</h2>
-          <div class="pub-thumb" aria-hidden="true"></div>
-        </div>
+        <h2 class="pub-title">An integral comparison of crystalline and de Rham cohomology</h2>
         <div class="meta-lines">
           <p><strong>Collaborators:</strong> <a href="https://abhinandan.perso.math.cnrs.fr/">Abhinandan</a></p>
           <p><strong>Status:</strong> Submitted</p>
@@ -181,14 +201,14 @@
         <div class="links">
           <a href="https://arxiv.org/abs/2507.17631" class="btn">arXiv</a>
         </div>
+        <!-- Bottom-right thumbnail (your attached image) -->
+        <img class="pub-thumb" alt="Figure for ‘An integral comparison of crystalline and de Rham cohomology’"
+             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHkAAAC3CAYAAACk1Y8lAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAPElEQVR4nO3BMQEAAADCoPVPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4G8GvwABm0T3bgAAAABJRU5ErkJggg==" />
       </article>
 
       <!-- 2 -->
       <article class="pub-card" data-kind="preprint">
-        <div class="pub-head">
-          <h2 class="pub-title">An integral analogue of Fontaine's crystalline functor</h2>
-          <div class="pub-thumb" aria-hidden="true"></div>
-        </div>
+        <h2 class="pub-title">An integral analogue of Fontaine's crystalline functor</h2>
         <div class="meta-lines">
           <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/">Naoki Imai</a> and Hiroki Kato</p>
           <p><strong>Status:</strong> Submitted</p>
@@ -207,14 +227,12 @@
         <div class="links">
           <a href="https://arxiv.org/abs/2504.16282" class="btn">arXiv</a>
         </div>
+        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 3 -->
       <article class="pub-card" data-kind="preprint">
-        <div class="pub-head">
-          <h2 class="pub-title">Beauville—Laszlo gluing of algebraic spaces</h2>
-          <div class="pub-thumb" aria-hidden="true"></div>
-        </div>
+        <h2 class="pub-title">Beauville—Laszlo gluing of algebraic spaces</h2>
         <div class="meta-lines">
           <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/">Piotr Achinger</a></p>
           <p><strong>Status:</strong> Submitted</p>
@@ -232,14 +250,12 @@
         <div class="links">
           <a href="https://arxiv.org/abs/2410.20500" class="btn">arXiv</a>
         </div>
+        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 4 -->
       <article class="pub-card" data-kind="preprint">
-        <div class="pub-head">
-          <h2 class="pub-title">A Tannakian framework for prismatic \(F\)-crystals</h2>
-          <div class="pub-thumb" aria-hidden="true"></div>
-        </div>
+        <h2 class="pub-title">A Tannakian framework for prismatic \(F\)-crystals</h2>
         <div class="meta-lines">
           <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/">Naoki Imai</a> and Hiroki Kato</p>
           <p><strong>Status:</strong> Submitted</p>
@@ -259,14 +275,12 @@
         <div class="links">
           <a href="https://arxiv.org/abs/2406.08259" class="btn">arXiv</a>
         </div>
+        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 5 -->
       <article class="pub-card" data-kind="published">
-        <div class="pub-head">
-          <h2 class="pub-title">Canonical integral models of Shimura varieties of abelian type</h2>
-          <div class="pub-thumb" aria-hidden="true"></div>
-        </div>
+        <h2 class="pub-title">Canonical integral models of Shimura varieties of abelian type</h2>
         <div class="meta-lines">
           <p><strong>Collaborators:</strong> <a href="https://www.skidmore.edu/mathematics/faculty/daniels.php">Patrick Daniels</a></p>
           <p><strong>Status:</strong> <i>Forum of Mathematics, Sigma</i></p>
@@ -287,14 +301,12 @@
           <a href="https://www.cambridge.org/core/journals/forum-of-mathematics-sigma/article/canonical-integral-models-for-shimura-varieties-of-abelian-type/AC4BFA2A33124AB438004D512BBC64CD" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2402.05727" class="btn">arXiv</a>
         </div>
+        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 6 -->
       <article class="pub-card" data-kind="preprint">
-        <div class="pub-head">
-          <h2 class="pub-title">The prismatic realization functor for Shimura varieties of abelian type</h2>
-          <div class="pub-thumb" aria-hidden="true"></div>
-        </div>
+        <h2 class="pub-title">The prismatic realization functor for Shimura varieties of abelian type</h2>
         <div class="meta-lines">
           <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/">Naoki Imai</a> and Hiroki Kato</p>
           <p><strong>Status:</strong> Submitted</p>
@@ -314,17 +326,15 @@
         <div class="links">
           <a href="https://arxiv.org/abs/2310.08472" class="btn">arXiv</a>
         </div>
+        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 7 -->
       <article class="pub-card" data-kind="published">
-        <div class="pub-head">
-          <h2 class="pub-title">The analytic topology is enough for the \(B_\mathrm{dR}^+\)-Grassmannian</h2>
-          <div class="pub-thumb" aria-hidden="true"></div>
-        </div>
+        <h2 class="pub-title">The analytic topology is enough for the \(B_\mathrm{dR}^+\)-Grassmannian</h2>
         <div class="meta-lines">
           <p><strong>Collaborators:</strong> <a href="https://www.imo.universite-paris-saclay.fr/~kestutis.cesnavicius/">Kęstutis Česnavičius</a></p>
-          <p><strong>Status:</strong> To appear (Simons Symposium proceedings)</p>
+        <p><strong>Status:</strong> To appear (Simons Symposium proceedings)</p>
         </div>
         <div class="tags">
           <span class="tag">\(B_\mathrm{dR}^+\)-Grassmannian</span>
@@ -340,14 +350,12 @@
         <div class="links">
           <a href="https://arxiv.org/abs/2303.11710" class="btn">arXiv</a>
         </div>
+        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 8 -->
       <article class="pub-card" data-kind="published">
-        <div class="pub-head">
-          <h2 class="pub-title">The Jacobson–Morozov morphism for Langlands parameters in the relative setting</h2>
-          <div class="pub-thumb" aria-hidden="true"></div>
-        </div>
+        <h2 class="pub-title">The Jacobson–Morozov morphism for Langlands parameters in the relative setting</h2>
         <div class="meta-lines">
           <p><strong>Collaborators:</strong> <a href="https://math.bu.edu/people/abertolo/">Alexander Bertoloni Meli</a> and <a href="https://www.ms.u-tokyo.ac.jp/~naoki/">Naoki Imai</a></p>
           <p><strong>Status:</strong> <i>International Mathematics Research Notices</i></p>
@@ -367,14 +375,12 @@
           <a href="https://academic.oup.com/imrn/advance-article/doi/10.1093/imrn/rnad217/7277067" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2203.01768" class="btn">arXiv</a>
         </div>
+        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 9 -->
       <article class="pub-card" data-kind="published">
-        <div class="pub-head">
-          <h2 class="pub-title">Specialization for the pro-étale fundamental group</h2>
-          <div class="pub-thumb" aria-hidden="true"></div>
-        </div>
+        <h2 class="pub-title">Specialization for the pro-étale fundamental group</h2>
         <div class="meta-lines">
           <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/">Marcin Lara</a></p>
           <p><strong>Status:</strong> <i>Compositio Mathematica</i></p>
@@ -394,14 +400,12 @@
           <a href="https://www.cambridge.org/core/journals/compositio-mathematica/article/specialization-for-the-proetale-fundamental-group/9FF5AAC3BAFD65AA505EF8268C8641CB" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2107.06761" class="btn">arXiv</a>
         </div>
+        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 10 -->
       <article class="pub-card" data-kind="published">
-        <div class="pub-head">
-          <h2 class="pub-title">Geometric arcs and fundamental groups of rigid spaces</h2>
-          <div class="pub-thumb" aria-hidden="true"></div>
-        </div>
+        <h2 class="pub-title">Geometric arcs and fundamental groups of rigid spaces</h2>
         <div class="meta-lines">
           <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/">Marcin Lara</a></p>
           <p><strong>Status:</strong> <i>Journal für die reine und angewandte Mathematik</i></p>
@@ -421,14 +425,12 @@
           <a href="https://www.degruyter.com/document/doi/10.1515/crelle-2023-0013/html" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2105.05184" class="btn">arXiv</a>
         </div>
+        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 11 -->
       <article class="pub-card" data-kind="published">
-        <div class="pub-head">
-          <h2 class="pub-title">Variants of the de Jong fundamental group</h2>
-          <div class="pub-thumb" aria-hidden="true"></div>
-        </div>
+        <h2 class="pub-title">Variants of the de Jong fundamental group</h2>
         <div class="meta-lines">
           <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/">Marcin Lara</a></p>
           <p><strong>Status:</strong> To appear in <i>American Journal of Mathematics</i></p>
@@ -447,14 +449,12 @@
         <div class="links">
           <a href="https://arxiv.org/abs/2203.11750" class="btn">arXiv</a>
         </div>
+        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 12 -->
       <article class="pub-card" data-kind="published">
-        <div class="pub-head">
-          <h2 class="pub-title">An approach to the characterization of the local Langlands correspondence</h2>
-          <div class="pub-thumb" aria-hidden="true"></div>
-        </div>
+        <h2 class="pub-title">An approach to the characterization of the local Langlands correspondence</h2>
         <div class="meta-lines">
           <p><strong>Collaborators:</strong> <a href="https://math.bu.edu/people/abertolo/">Alexander Bertoloni Meli</a></p>
           <p><strong>Status:</strong> <i>Representation Theory</i></p>
@@ -474,14 +474,12 @@
           <a href="https://www.ams.org/journals/ert/2023-27-12/S1088-4165-2023-00643-7/" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2003.11484" class="btn">arXiv</a>
         </div>
+        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 13 -->
       <article class="pub-card" data-kind="published">
-        <div class="pub-head">
-          <h2 class="pub-title">Bijective projections on parabolic quotients of affine Weyl groups</h2>
-          <div class="pub-thumb" aria-hidden="true"></div>
-        </div>
+        <h2 class="pub-title">Bijective projections on parabolic quotients of affine Weyl groups</h2>
         <div class="meta-lines">
           <p><strong>Collaborators:</strong> <a href="https://www.haverford.edu/users/emilicevic">Elizabeth (Beazley) Milićević</a>, <a href="https://margaretnichols.me/">Margaret Nichols</a>, Minhea Park, and <a href="https://sites.google.com/view/dannyshi">Xiaolin (Danny) Xi</a></p>
           <p><strong>Status:</strong> <i>Journal of Algebraic Combinatorics</i></p>
@@ -501,6 +499,7 @@
           <a href="https://doi.org/10.1007/s10801-014-0559-9" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/1212.0771" class="btn">arXiv</a>
         </div>
+        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
     </section>
   </main>
@@ -517,11 +516,11 @@
   <script>
     function toggleMenu(){ document.getElementById('myNavbar').classList.toggle('responsive'); }
 
-    // Tag-based filter (Published / Preprints)
+    // Tag-based filter (Published / Preprints) — unchanged, still works with icons
     (function(){
       const chips = Array.from(document.querySelectorAll('.tag-filter'));
       const cards = Array.from(document.querySelectorAll('.pub-card'));
-      let current = null; // 'published' | 'preprint' | null
+      let current = null;
 
       function apply(){
         cards.forEach(card=>{
