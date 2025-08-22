@@ -4,170 +4,231 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>U of T number theory seminar — 2025–26</title>
-  <!-- Fonts & Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-
   <style>
-    :root{
-      --primary-color:#1D1E18;   /* header bg */
-      --secondary-color:#C5C3C6;  /* accents */
-      --background-color:#DCDCDD; /* page bg */
-      --text-color:#1D1E18;       /* body text */
-      --button-color:#BF0603;     /* buttons */
-      --card:#fff;
-      --border:#e6e6ea;
-      --bubble-radius:14px;
+    :root {
+      --primary-color: #1D1E18;
+      --secondary-color: #C5C3C6;
+      --background-color: #DCDCDD;
+      --text-color: #1D1E18;
+      --button-color: #BF0603; /* red accent */
+      --card: #ffffff;
+      --border: #e1e1e6;
+
+      /* master text size for Info buttons AND base scale for term buttons */
+      --info-btn-font-size: 1rem;
     }
 
-    /* Base */
-    body{font-family:'Open Sans',sans-serif;background:var(--background-color);color:var(--text-color);margin:0}
-    main{padding:2em 1.25em 3em;max-width:1100px;margin:0 auto}
-
-    /* Header with low-opacity U of T logos (three, evenly spaced) */
-    header{
-      background:var(--primary-color);
-      position:sticky;top:0;z-index:1000;box-shadow:0 2px 4px rgba(0,0,0,.1);
-    }
-    header::before{
-      content:""; position:absolute; inset:0; pointer-events:none; z-index:0; opacity:.28;
-      background-image:
-        url("https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png"),
-        url("https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png"),
-        url("https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png");
-      background-repeat:no-repeat,no-repeat,no-repeat;
-      background-position:16% center,50% center,84% center;
-      background-size:auto 70%,auto 70%,auto 70%;
-      filter:grayscale(100%);
-    }
-    .navbar{display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px;position:relative;z-index:1}
-    .nav-links{display:flex}
-    .nav-links a{color:#fff;text-decoration:none;margin:0 1em;position:relative;transition:color .3s ease}
-    .nav-links a::after{content:'';position:absolute;width:0;height:2px;background:var(--secondary-color);left:50%;bottom:-5px;transition:all .3s ease}
-    .nav-links a:hover{color:var(--secondary-color)}
-    .nav-links a:hover::after{left:0;width:100%}
+    body { font-family: 'Open Sans', sans-serif; background: var(--background-color); color: var(--text-color); margin: 0; }
+    header { background: var(--primary-color); position: sticky; top: 0; z-index: 1000; }
+    .navbar { display:flex; justify-content:flex-end; align-items:center; padding:0 1em; height:60px; }
+    .nav-links { display:flex; }
+    .nav-links a { color:#fff; text-decoration:none; margin:0 1em; position:relative; transition:color .3s ease; }
+    .nav-links a::after { content:''; position:absolute; width:0; height:2px; background:var(--secondary-color); left:50%; bottom:-5px; transition:all .3s ease; }
+    .nav-links a:hover { color:var(--secondary-color); }
+    .nav-links a:hover::after { left:0; width:100%; }
     .nav-mobile{display:none}
-    @media (max-width:768px){
-      .nav-links{display:none;flex-direction:column;background:var(--primary-color);position:absolute;top:60px;right:0;width:220px}
-      .nav-links a{margin:0;padding:1em;text-align:right;border-bottom:1px solid var(--secondary-color)}
-      .nav-mobile{display:flex;align-items:center}
-      .nav-text{color:#fff;margin-right:.5em}
-      .icon{color:#fff;font-size:24px;cursor:pointer}
+    @media (max-width: 768px){
+      .nav-links{display:none; flex-direction:column; background:var(--primary-color); position:absolute; top:60px; right:0; width:220px}
+      .nav-links a{margin:0; padding:1em; text-align:right; border-bottom:1px solid var(--secondary-color)}
+      .nav-mobile{display:flex; align-items:center}
+      .nav-text{color:#fff; margin-right:.5em}
+      .icon{color:#fff; font-size:24px; cursor:pointer}
       .navbar.responsive .nav-links{display:flex}
       .navbar.responsive .nav-mobile .nav-text{display:none}
     }
 
-    /* Hero */
-    .hero{
-      background:var(--card); border-radius:var(--bubble-radius);
-      padding:1.25em 1.5em; margin:1.5em 0 1.25em;
-      box-shadow:0 2px 10px rgba(0,0,0,.05); display:grid; gap:.75em
-    }
-    .hero h1{margin:.2em 0 .1em;font-size:clamp(1.6rem,3.2vw,2.1rem)}
-    .meta{display:flex;flex-wrap:wrap;gap:.75em 1.25em;font-size:.98rem;color:#222}
-    .meta .tag{background:var(--secondary-color);color:#111;border-radius:999px;padding:.25em .7em}
-    .actions{display:flex;flex-wrap:wrap;gap:.6em}
-    .btn{display:inline-flex;align-items:center;gap:.4em;background:var(--button-color);color:#fff;text-decoration:none;padding:.6em .9em;border-radius:10px;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.15)}
-    .btn:hover{filter:brightness(1.05)}
+    main { padding: 2em 1.25em 3em; max-width: 1200px; margin: 0 auto; }
 
-    /* Shared bubble */
-    .bubble{
-      background:#fff; border:2px solid #000; border-radius:var(--bubble-radius);
-      box-shadow:0 2px 10px rgba(0,0,0,.05); padding:1.1em 1.25em; display:flex; flex-direction:column;
+    /* HERO with 3 visible U of T crests, fully inside card */
+    .hero {
+      position: relative; overflow: hidden;
+      background: var(--card); border-radius: 14px; padding: 1.25em 1.5em;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05); display:grid; gap: .75em; margin-bottom: 1.5em;
     }
-    .bubble h2{margin:.1em 0 .6em}
-
-    /* === Info layout (left wider to balance; call bubble removed) === */
-    .info-layout{
-      display:grid; grid-template-columns:1.2fr 1fr; gap:24px; align-items:start;
-      margin:1.25em 0 1.25em;
+    .hero::before{
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.22;
+      background-image:
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
+      background-repeat: no-repeat, no-repeat, no-repeat;
+      background-position: 16% center, 50% center, 84% center; /* equidistributed */
+      background-size: auto 96%, auto 96%, auto 96%;           /* scaled up 1.2× */
     }
-    .info-layout__left{display:flex;flex-direction:column;gap:24px}
-    @media (max-width:900px){ .info-layout{grid-template-columns:1fr} }
-
-    /* Speaker subsections (static) */
-    .speaker-section + .speaker-section{margin-top:16px}
-    .speaker-section__title{margin:0 0 6px 0}
-    .speakers-card h2{margin:.1em 0 .9em} /* a touch more space under bubble title */
-
-    /* Term dropdown buttons (layered pill, equal bands ~15% total area) */
-    .term-controls{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:1.2em 0 .8em}
-    .term-btn{
-      --btn-h:56px;                 /* master scale (kept from prior) */
-      --band:calc(var(--btn-h)*.075);  /* each band ≈7.5% height */
-      --radius:calc(var(--btn-h)*.50);
-      --font-size:calc(var(--btn-h)*.333);
-      border:0;background:transparent;padding:0;cursor:pointer;line-height:0
+    @media (max-width: 600px){
+      .hero::before{ background-size: auto 78%, auto 78%, auto 78%; }
     }
-    .term-btn__outer{display:inline-block;background:#000;padding:var(--band);border-radius:var(--radius)}
-    .term-btn__middle{display:inline-block;background:#d10000;padding:var(--band);border-radius:calc(var(--radius) - var(--band))}
-    .term-btn__inner{
-      display:inline-flex;align-items:center;justify-content:center;gap:calc(var(--btn-h)*.18);
-      background:#fff;border-radius:calc(var(--radius) - (2*var(--band)));height:var(--btn-h);
-      padding:0 calc(var(--btn-h)*1.4);
-    }
-    .term-btn__label{font:700 var(--font-size)/1.05 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#000;white-space:nowrap}
-    .term-btn__chevron{width:calc(var(--btn-h)*.28);height:calc(var(--btn-h)*.28);flex:0 0 auto;transition:transform 160ms ease;color:#000}
-    .term-btn[aria-expanded="true"] .term-btn__chevron{transform:rotate(180deg)}
-    .term-btn:focus-visible .term-btn__inner{outline:2px solid #333;outline-offset:3px}
-    .term-btn:hover .term-btn__inner{background:#f7f7f7}
+    .hero h1 { margin: .2em 0 .1em; font-size: clamp(1.6rem, 3.2vw, 2.1rem); position: relative; }
+    .meta { display:flex; flex-wrap:wrap; gap:.75em 1.25em; font-size: .98rem; color:#222; position: relative; }
+    .meta .tag { background: var(--secondary-color); color:#111; border-radius: 999px; padding: .25em .7em; }
+    .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.6em .9em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); position: relative; }
+    .btn:hover { filter: brightness(1.05); }
 
-    /* Schedule tables */
-    .table-wrap{overflow-x:auto;background:#fff;border-radius:var(--bubble-radius);box-shadow:0 2px 10px rgba(0,0,0,.05);border:1px solid var(--border)}
-    table{width:100%;border-collapse:collapse}
-    thead{background:#f4f4f6}
-    th,td{padding:.75em .9em;border-bottom:1px solid #e6e6ea;vertical-align:top}
-    th{text-align:left;font-weight:700}
-    tr:last-child td{border-bottom:none}
-    .nowrap{white-space:nowrap}
-    .muted{color:#333;opacity:.85;font-size:.95rem}
-    /* Column sizing: Date narrow, Speaker fits "Vadim Vologodsky" on one line, Title ~ two lines, Abstract takes rest */
-    col.col-date{width:9.5ch}
-    col.col-speaker{width:20ch}
-    col.col-title{width:36ch}
-    col.col-abs{width:auto}
-    td em{font-style:italic;font-weight:normal}
-
-    /* Per-row abstract toggle */
-    details.abs{margin:.25em 0 0}
-    summary.abs__btn{
-      display:inline-flex;align-items:center;gap:.4em;padding:.25em .55em;
-      border:1px solid #cfcfd4;border-radius:8px;background:#fff;font-weight:700;cursor:pointer
-    }
-    .abs__btn::-webkit-details-marker{display:none}
-    .abs__btn::marker{content:""}
-    .abs__chev{width:.95em;height:.95em;transition:transform 160ms ease}
-    details.abs[open] .abs__chev{transform:rotate(180deg)}
-    .abs__body{margin-top:.5em}
-
-    /* Mobile improvements for tables */
-    @media (max-width:700px){
-      col.col-title{width:28ch}
-      col.col-speaker{width:18ch}
-      th,td{padding:.65em .7em}
-    }
-    @media (max-width:560px){
-      col.col-title{width:22ch}
-      col.col-speaker{width:16ch}
-      .nowrap{white-space:normal}
+    /* Reusable white bubble */
+    .bubble {
+      background: var(--card); border-radius: 14px; padding: 1em 1.2em;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05);
+      display:flex; flex-direction:column;
     }
 
-    /* Footer */
-    footer{background:var(--primary-color);color:#fff;padding:1em;text-align:center;margin-top:2em}
+    h2 { margin-top: 0; }
+
+    /* Tables */
+    .table-wrap { overflow-x:auto; background:var(--card); border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+    table { width:100%; border-collapse: collapse; table-layout: fixed; }
+    thead { background: #f4f4f6; }
+    th, td { padding: .85em 1.2em; border-bottom: 1px solid #e6e6ea; vertical-align: top; overflow-wrap:anywhere; word-break:break-word; }
+    th { text-align:left; font-weight:700; }
+    tr:last-child td { border-bottom: none; }
+    .nowrap { white-space: nowrap; }
+
+    /* Abstract cells (generic) */
+    details { background:var(--card); padding:.6em .8em; border-radius:10px; margin:.3em 0; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+    details[open] summary { opacity:.95; }
+    summary { cursor:pointer; font-weight:600; min-width: 110px; display:inline-block; }
+    summary::-webkit-details-marker{display:none;}
+    summary::marker{content:"";}
+
+    /* Call for speakers (legacy utility) */
+    .notice { background:var(--card); border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; margin: 0; }
+    .callout { width: 100%; }
+    .cfs-title { display:block; text-align:center; font-weight:700; margin-bottom:.35em; font-size: var(--info-btn-font-size); }
+
+    /* Term buttons: exact layered pill */
+    .sched { padding: 0; margin: .3em 0 .8em; border: none; background: transparent; box-shadow: none; }
+    .sched > summary { display:none !important; } /* hide in-place summaries; we use top buttons */
+    .term-btn {
+      --label-size: calc(var(--info-btn-font-size) * 1.5);
+      --btn-h: calc(var(--label-size) * 3);      /* label ≈ 1/3 of height */
+      --band: calc(var(--btn-h) * 0.075);        /* each band ~7.5% height */
+      --radius: calc(var(--btn-h) * 0.5);
+      border: 0; background: transparent; padding: 0; cursor: pointer; line-height: 0;
+    }
+    .term-btn__outer { display:inline-block; background:#000; padding: var(--band); border-radius: var(--radius); }
+    .term-btn__middle{ display:inline-block; background: var(--button-color); padding: var(--band); border-radius: calc(var(--radius) - var(--band)); }
+    .term-btn__inner {
+      display:inline-flex; align-items:center; justify-content:center;
+      gap: calc(var(--btn-h) * 0.18);
+      background:#fff; border-radius: calc(var(--radius) - (2 * var(--band)));
+      height: var(--btn-h);
+      padding: 0 calc(var(--btn-h) * 1.4); /* keeps text ≈ 1/5 of width */
+    }
+    .term-btn__label {
+      font: 700 var(--label-size)/1.05 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:#000; white-space:nowrap;
+    }
+    .term-btn__chevron {
+      width: calc(var(--btn-h) * 0.28); height: calc(var(--btn-h) * 0.28);
+      flex:0 0 auto; transition: transform 160ms ease; color:#000;
+    }
+    .term-btn:focus-visible .term-btn__inner { outline: 2px solid #333; outline-offset: 3px; }
+    .term-btn:hover .term-btn__inner { background:#f7f7f7; }
+    .term-btn[aria-expanded="true"] .term-btn__chevron { transform: rotate(180deg); }
+
+    /* Side-by-side button row */
+    .term-controls{display:flex;gap:14px;justify-content:center;margin:.8em 0 1em;flex-wrap:wrap}
+    .term-controls .hidden{display:none !important;}
+
+    /* Column width preferences (Abstract widest) */
+    .col-date    { width: 12ch; }
+    .col-speaker { width: 20ch; }
+    .col-title   { width: 34ch; }
+    /* 4th column (Abstract) takes remaining space */
+
+    /* Invisible anchor so Subscribe button still works */
+    #subscribe { position: relative; height: 0; }
+
+    /* =========================
+       NAMESPACED CSS FROM SPEC
+       ========================= */
+    /* Grid wrapper: two equal columns, equal height */
+    .info-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6, 24px);
+      align-items: stretch;  /* ensure columns stretch to equal height */
+      margin-bottom: 1.25em;
+    }
+
+    /* Left column stacks About above Call */
+    .info-layout__left {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6, 24px);
+    }
+
+    /* Bold black outline around About / Call / Information bubbles */
+    .about-card, .call-card, .speakers-card { border: 3px solid #000; }
+    /* Red left accent on Call bubble */
+    .call-card { border-left: 6px solid var(--button-color) !important; }
+
+    /* Speaker subsections spacing (base) */
+    .speaker-section + .speaker-section { margin-top: var(--space-3, 12px); }
+    .speaker-section__title { margin: 0 0 var(--space-2, 8px) 0; }
+
+    /* Responsive: stack to one column on small screens */
+    @media (max-width: 768px) {
+      .info-layout { grid-template-columns: 1fr; }
+    }
+
+    /* =========================================
+       SPACING TWEAKS IN INFORMATION BUBBLE
+       (more space after H2, less at the very bottom)
+       ========================================= */
+    .speakers-card > h2 { margin-bottom: 28px; }  /* increased further */
+    .speakers-card { padding-bottom: 0.8em; }     /* trim bottom padding slightly */
+    .speakers-card .speaker-section:last-child { margin-bottom: 0; }
+    .speakers-card .speaker-section__body > *:last-child { margin-bottom: 0; }
+
+    /* =========================
+       Abstract toggle button in tables
+       ========================= */
+    details.abs { background: transparent; padding: 0; box-shadow: none; border-radius: 0; }
+    .abs__btn {
+      display: inline-flex; align-items: center; gap: .4em;
+      padding: .25em .55em; border: 1px solid #cfcfd4; border-radius: 8px;
+      font-weight: 700; background: #fff; cursor: pointer;
+    }
+    .abs__chev { width: 0.9em; height: 0.9em; transition: transform 160ms ease; }
+    details.abs[open] .abs__chev { transform: rotate(180deg); }
+    .abs__body { margin-top: .5em; }
+
+    /* =======================================================
+       MOBILE-ONLY FIXES (do not affect desktop presentation)
+       ======================================================= */
+    @media (max-width: 600px) {
+      /* Hero: center content and give the action buttons breathing room */
+      .hero { text-align: center; padding: 1.25em 1em 1.6em; }
+      .meta { justify-content: center; gap: .5em .6em; }
+      .hero .btn { margin: .25em; }
+
+      /* Scale down the large oval term buttons proportionally */
+      .term-btn {
+        --label-size: calc(var(--info-btn-font-size) * 1.05); /* smaller text on phones */
+        --btn-h: calc(var(--label-size) * 3);
+        --band: calc(var(--btn-h) * 0.075);
+        --radius: calc(var(--btn-h) * 0.5);
+      }
+
+      /* Tables: avoid one-letter wrapping by letting columns size naturally
+         and enabling horizontal scroll when needed */
+      .table-wrap { -webkit-overflow-scrolling: touch; }
+      .table-wrap table { table-layout: auto; min-width: 680px; } /* allow scroll instead of squish */
+      .table-wrap th, .table-wrap td { word-break: normal; overflow-wrap: break-word; }
+
+      /* Tighten vertical margins under schedule headers on phones */
+      .sched > summary { margin: .3em 0; }
+    }
   </style>
-
-  <!-- MathJax -->
   <script>
-    window.MathJax = {
-      tex:{ inlineMath:[['\\(','\\)']], displayMath:[['\\[','\\]']], processEscapes:true },
-      options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' }
-    };
+    window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]], processEscapes:true }, options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' } };
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-  <!-- Nav -->
   <header>
     <nav class="navbar" id="myNavbar">
       <div class="nav-mobile">
@@ -185,43 +246,52 @@
   </header>
 
   <main>
-    <!-- Hero -->
     <section class="hero">
       <h1>U of T number theory seminar (2025–26)</h1>
       <div class="meta">
-        <span class="tag"><i class="fa fa-calendar"></i>&nbsp; Wednesday, 2:10–3:00 PM <span class="muted">(50 minutes + questions)</span></span>
+        <span class="tag"><i class="fa fa-calendar"></i>&nbsp; Wednesday, 2:10–3:0X PM <span class="muted">(50 minutes + questions)</span></span>
         <span class="tag"><i class="fa fa-map-marker"></i>&nbsp; Bahen Center, Room 6183</span>
         <span class="tag"><i class="fa fa-user"></i>&nbsp; Organizers: Florian Herzig and Alex Youcis</span>
       </div>
-      <div class="actions">
+      <div>
         <a class="btn" href="#subscribe"><i class="fa fa-envelope"></i> Subscribe</a>
-        <a class="btn" href="https://sites.google.com/view/ntseminar/home" target="_blank" rel="noopener"><i class="fa fa-external-link"></i> 2024–2025 NT seminar</a>
+        <a class="btn" href="https://sites.google.com/view/ntseminar/home" target="_blank" rel="noopener"><i class="fa fa-archive"></i> 2024–2025 NT seminar</a>
       </div>
     </section>
 
-    <!-- About + Information (two columns; call bubble removed) -->
+    <!-- Restructured area -->
     <section class="info-layout" aria-labelledby="info-for-speakers-title">
-      <!-- LEFT -->
+      <!-- LEFT COLUMN -->
       <div class="info-layout__left">
-        <article class="bubble about-card" aria-labelledby="about-title">
+        <article class="bubble bubble--white about-card" id="blurb" aria-labelledby="about-title">
           <h2 id="about-title">About</h2>
           <p>
-            This seminar features research talks in analytic and arithmetic aspects of number theory broadly construed
-            (including \(p\)-adic Hodge theory, automorphic forms, Galois representations, and related topics).
+            This seminar features research talks in number theory broadly construed (e.g.,
+            \(p\)-adic Hodge theory, automorphic forms, Galois representations, arithmetic statistics, etc.).
           </p>
+        </article>
+
+        <article class="bubble bubble--white call-card" aria-labelledby="call-title">
+          <h2 id="call-title">Call for speakers</h2>
+          <p>
+            To give a talk, send a title/abstract and preferred dates to
+            <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>; include "U of T NT seminar" in your email subject.
+          </p>
+          <!-- Funding section stays here -->
+          <section class="speaker-section">
+            <h3 class="speaker-section__title"><strong>Funding</strong></h3>
+            <div class="speaker-section__body">
+              <p>Funding for travel and lodging is limited and not guaranteed; please contact <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a> for more details.</p>
+            </div>
+          </section>
         </article>
       </div>
 
-      <!-- RIGHT -->
-      <aside class="bubble speakers-card">
+      <!-- RIGHT COLUMN -->
+      <aside class="bubble bubble--white speakers-card" id="info">
         <h2 id="info-for-speakers-title">Information for speakers</h2>
 
-        <section class="speaker-section">
-          <h3 class="speaker-section__title"><strong>Abstract</strong></h3>
-          <div class="speaker-section__body">
-            <p>Please make the abstract no more than one paragraph. Please feel free to use TeX which will be rendered.</p>
-          </div>
-        </section>
+        <!-- Abstract subsection removed as requested -->
 
         <section class="speaker-section">
           <h3 class="speaker-section__title"><strong>Format &amp; length</strong></h3>
@@ -241,157 +311,552 @@
       </aside>
     </section>
 
-    <!-- Term controls -->
-    <div class="term-controls">
-      <!-- Fall toggle (default CLOSED per request) -->
-      <button class="term-btn" type="button" aria-expanded="false" aria-controls="fall-panel" id="fall-toggle">
-        <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner">
-          <span class="term-btn__label">Fall term schedule</span>
-          <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-        </span></span></span>
+    <!-- Invisible anchor so the Subscribe button works even without a visible contact section -->
+    <div id="subscribe" aria-hidden="true"></div>
+
+    <!-- Side-by-side buttons row -->
+    <div class="term-controls" aria-label="Term schedule controls">
+      <button class="term-btn" id="fall-top" type="button" aria-expanded="false" aria-controls="fall-panel">
+        <span class="term-btn__outer">
+          <span class="term-btn__middle">
+            <span class="term-btn__inner">
+              <span class="term-btn__label">Fall term schedule</span>
+              <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </span>
+          </span>
+        </span>
       </button>
 
-      <!-- Spring toggle (default CLOSED) -->
-      <button class="term-btn" type="button" aria-expanded="false" aria-controls="spring-panel" id="spring-toggle">
-        <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner">
-          <span class="term-btn__label">Spring term schedule</span>
-          <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-        </span></span></span>
+      <button class="term-btn" id="spring-top" type="button" aria-expanded="false" aria-controls="spring-panel">
+        <span class="term-btn__outer">
+          <span class="term-btn__middle">
+            <span class="term-btn__inner">
+              <span class="term-btn__label">Spring term schedule</span>
+              <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </span>
+          </span>
+        </span>
       </button>
     </div>
 
-    <!-- FALL TABLE -->
-    <section id="fall-panel" hidden>
-      <div class="table-wrap">
-        <table aria-label="Fall term schedule">
-          <colgroup>
-            <col class="col-date" />
-            <col class="col-speaker" />
-            <col class="col-title" />
-            <col class="col-abs" />
-          </colgroup>
-          <thead>
-            <tr>
-              <th class="nowrap">Date</th>
-              <th>Speaker</th>
-              <th>Title</th>
-              <th>Abstract</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="nowrap">Sep 3, 2025</td>
-              <td>Alex Youcis (Toronto)</td>
-              <td><em>An integral comparison of crystalline and de Rham cohomology</em></td>
-              <td>
-                <details class="abs">
-                  <summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary>
-                  <div class="abs__body">
-                    Let \(\mathcal{O}_K\) be a mixed characteristic complete DVR with residue field \(k\) of characteristic \(p\), and \(X/\mathcal{O}_K\) a smooth proper formal scheme. A celebrated result of Berthelot--Ogus shows that the de Rham cohomology groups \(H^i_\mathrm{dR}(X/\mathcal{O}_K)\) and crystalline cohomology groups \(H^i_\mathrm{crys}(X_k/W(k))\otimes_{W(k)}\mathcal{O}_K\) agree <i>rationally</i>, i.e., after inverting \(p\). Using recent advances in prismatic cohomology we show that an <i>integral</i> version of this statement holds using appropriate notions of 'twisted' de Rham and crystalline cohomology. This is a prismatic manifestation of Dwork's trick. This further gives an integral comparison even for non-trivial (prismatic) coefficients, and allows one to initiate a prismatic study of the relationship between crystalline and de Rham torsion.
-                  </div>
-                </details>
-              </td>
-            </tr>
-
-            <!-- Remaining Fall dates -->
-            <tr><td class="nowrap">Sep 10, 2025</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Sep 17, 2025</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Sep 24, 2025</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Oct 1, 2025</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Oct 8, 2025</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Oct 15, 2025</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Oct 22, 2025</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <!-- Reading week -->
-            <tr>
-              <td class="nowrap">Oct 29, 2025</td>
-              <td colspan="3">Reading week (no seminar)</td>
-            </tr>
-            <tr><td class="nowrap">Nov 5, 2025</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Nov 12, 2025</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Nov 19, 2025</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Nov 26, 2025</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Dec 3, 2025</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Dec 10, 2025</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-          </tbody>
-        </table>
-      </div>
+    <!-- Fall schedule (table lives inside details; summary hidden; controlled by top button) -->
+    <section id="schedule">
+      <details class="sched" id="fall-details">
+        <summary><!-- hidden on purpose --></summary>
+        <div class="table-wrap" id="fall-panel">
+          <table>
+            <colgroup>
+              <col class="col-date">
+              <col class="col-speaker">
+              <col class="col-title">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="nowrap">Date</th>
+                <th>Speaker</th>
+                <th>Title</th>
+                <th>Abstract</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="nowrap">Sep 3, 2025</td>
+                <td>Alex Youcis</td>
+                <td><em>An integral comparison of crystalline and de Rham cohomology</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">
+                      Let \( \mathcal{O}_K \) be a mixed characteristic complete DVR with residue field \( k \) of characteristic \( p \), and \( X/\mathcal{O}_K \) a smooth proper formal scheme. A celebrated result of Berthelot–Ogus shows that the de Rham cohomology groups \( H^i_\mathrm{dR}(X/\mathcal{O}_K) \) and crystalline cohomology groups \( H^i_\mathrm{crys}(X_k/W(k))\) agree after tensoring to \(K\). Using recent advances in prismatic cohomology we show that an <i>integral</i> version of this statement holds using appropriate notions of 'twisted' de Rham and crystalline cohomology. This is a prismatic manifestation of Dwork's trick. This further gives an integral comparison even for non-trivial (prismatic) coefficients, and allows one to initiate a prismatic study of the relationship between crystalline and de Rham torsion. This is based off joint work with Abhinandan.
+                    </div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Sep 10, 2025</td><td><a href="https://sites.google.com/view/yi-shan/" target="_blank" rel="noopener">Yi Shan</a></td><td><em>Automorphic forms of \(F_4\) and exceptional theta series</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">For a connected reductive group scheme over \(\mathbb{Z}\), it is interesting to study its level one automorphic forms, for example, give a dimension formula or some explicit construction. For a classical group with small rank or a compact \(G_2\)-type group, a computable dimension formula is given by Chenevier–Ta&iuml;bi–Renard, and it is known that some families of automorphic forms can be constructed via theta correspondences. In this talk, I will present my recent work on the automorphic forms of a compact \(F_4\)-type group, emphasizing an "exceptional" analogue of the classical theta series on Euclidean spaces. </div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Sep 17, 2025</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Sep 24, 2025</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Oct 1, 2025</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Oct 8, 2025</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Oct 15, 2025</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Oct 22, 2025</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Oct 29, 2025</td>
+                <td>Reading week (no seminar)</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="nowrap">Nov 5, 2025</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Nov 12, 2025</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Nov 19, 2025</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Nov 26, 2025</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Dec 3, 2025</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Dec 10, 2025</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
     </section>
 
-    <!-- SPRING TABLE -->
-    <section id="spring-panel" hidden>
-      <div class="table-wrap">
-        <table aria-label="Spring term schedule">
-          <colgroup>
-            <col class="col-date" />
-            <col class="col-speaker" />
-            <col class="col-title" />
-            <col class="col-abs" />
-          </colgroup>
-          <thead>
-            <tr>
-              <th class="nowrap">Date</th>
-              <th>Speaker</th>
-              <th>Title</th>
-              <th>Abstract</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="nowrap">Jan 7, 2026</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Jan 14, 2026</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Jan 21, 2026</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Jan 28, 2026</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Feb 4, 2026</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Feb 11, 2026</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <!-- Reading week -->
-            <tr>
-              <td class="nowrap">Feb 18, 2026</td>
-              <td colspan="3">Reading week (no seminar)</td>
-            </tr>
-            <tr><td class="nowrap">Feb 25, 2026</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Mar 4, 2026</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Mar 11, 2026</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Mar 18, 2026</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Mar 25, 2026</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Apr 1, 2026</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-            <tr><td class="nowrap">Apr 8, 2026</td><td>TBA</td><td><em>TBA</em></td><td><details class="abs"><summary class="abs__btn">Abstract <svg class="abs__chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBA</div></details></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Subscribe anchor (kept minimal to avoid dead link) -->
-    <section id="subscribe" class="bubble" style="margin-top:1.25em;">
-      <h2>Subscribe</h2>
-      <p>Announcement list: <a href="#" aria-label="mailing list link">Join the mailing list</a> (weekly emails with titles/abstracts).</p>
+    <!-- Spring schedule (also controlled by top button) -->
+    <section id="spring-schedule">
+      <details class="sched" id="spring-details">
+        <summary><!-- hidden on purpose --></summary>
+        <div class="table-wrap" id="spring-panel">
+          <table>
+            <colgroup>
+              <col class="col-date">
+              <col class="col-speaker">
+              <col class="col-title">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="nowrap">Date</th>
+                <th>Speaker</th>
+                <th>Title</th>
+                <th>Abstract</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="nowrap">Jan 7, 2026</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Jan 14, 2026</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Jan 21, 2026</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Jan 28, 2026</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Feb 4, 2026</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Feb 11, 2026</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Feb 18, 2026</td>
+                <td>Reading week (no seminar)</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="nowrap">Feb 25, 2026</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Mar 4, 2026</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Mar 11, 2026</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Mar 18, 2026</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Mar 25, 2026</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Apr 1, 2026</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Apr 8, 2026</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
     </section>
   </main>
 
-  <footer>
+  <footer style="background:var(--primary-color); color:#fff; padding:1em; text-align:center;">
     <p>&copy; 2025 Alex Youcis. All rights reserved.</p>
   </footer>
 
   <script>
     function toggleMenu(){ document.getElementById('myNavbar').classList.toggle('responsive'); }
 
-    // Term dropdown panels (preserve ARIA + chevron rotation)
-    function wireToggle(btnId, panelId){
-      const btn = document.getElementById(btnId);
-      const panel = document.getElementById(panelId);
-      if(!btn || !panel) return;
-      function toggle(open){
-        const state = (typeof open==='boolean') ? open : btn.getAttribute('aria-expanded') !== 'true';
-        btn.setAttribute('aria-expanded', state ? 'true' : 'false');
-        panel.hidden = !state;
+    // Side-by-side top buttons controlling the two details panels.
+    (function(){
+      const fallBtn   = document.getElementById('fall-top');
+      const springBtn = document.getElementById('spring-top');
+      const fallDet   = document.getElementById('fall-details');
+      const springDet = document.getElementById('spring-details');
+
+      function setState(which, open){
+        if(which === 'fall'){
+          fallDet.open = open;
+          fallBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          // Hide the *other* button when open
+          springBtn.classList.toggle('hidden', open);
+          // Always close the other panel
+          if(open){
+            springDet.open = false;
+            springBtn.setAttribute('aria-expanded','false');
+          }
+        }else{
+          springDet.open = open;
+          springBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          fallBtn.classList.toggle('hidden', open);
+          if(open){
+            fallDet.open = false;
+            fallBtn.setAttribute('aria-expanded','false');
+          }
+        }
       }
-      btn.addEventListener('click', () => toggle());
-      btn.addEventListener('keydown', (e) => {
-        if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); }
-      });
-      // Start closed for both per request
-      btn.setAttribute('aria-expanded','false'); panel.hidden = true;
-    }
-    wireToggle('fall-toggle','fall-panel');
-    wireToggle('spring-toggle','spring-panel');
+
+      function toggle(which){
+        const isOpen = (which==='fall') ? fallDet.open : springDet.open;
+        setState(which, !isOpen);
+        // If closing, reveal both buttons
+        if(isOpen){
+          fallBtn.classList.remove('hidden');
+          springBtn.classList.remove('hidden');
+        }
+      }
+
+      fallBtn.addEventListener('click', ()=>toggle('fall'));
+      springBtn.addEventListener('click', ()=>toggle('spring'));
+      fallBtn.addEventListener('keydown', e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggle('fall'); }});
+      springBtn.addEventListener('keydown', e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggle('spring'); }});
+
+      // Start both closed, both buttons visible
+      setState('fall', false);
+      setState('spring', false);
+
+      // Equalize visible term button widths
+      function syncWidths(){
+        const inners = [fallBtn, springBtn].map(b=>b.querySelector('.term-btn__inner'));
+        inners.forEach(el => el.style.minWidth = '');
+        const max = Math.max(...inners.map(el => el.offsetWidth || 0));
+        inners.forEach(el => el.style.minWidth = max + 'px');
+      }
+      window.addEventListener('load', syncWidths);
+      window.addEventListener('resize', () => { clearTimeout(syncWidths._t); syncWidths._t=setTimeout(syncWidths,120); });
+    })();
   </script>
 </body>
 </html>
