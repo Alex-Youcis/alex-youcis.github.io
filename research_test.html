@@ -7,85 +7,42 @@
   <!-- Include Fonts and Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-  <!-- Include CSS Styles -->
   <style>
-    /* Root Variables for Colors */
     :root {
-      --primary-color: #1D1E18; /* Dark color */
-      --secondary-color: #C5C3C6; /* Mid-tone gray */
-      --background-color: #DCDCDD; /* Light gray */
-      --text-color: #1D1E18; /* Dark color */
-      --button-color: #BF0603; /* Button color */
+      --primary-color: #1D1E18;
+      --secondary-color: #C5C3C6;
+      --background-color: #DCDCDD;
+      --text-color: #1D1E18;
+      --button-color: #BF0603;
     }
 
-    /* Global Styles */
-    body {
-      font-family: 'Open Sans', sans-serif;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 0;
-    }
+    body { font-family: 'Open Sans', sans-serif; background: var(--background-color); color: var(--text-color); margin: 0; }
 
-    /* Navbar Styles */
+    /* Navbar */
     header {
-      background-color: var(--primary-color);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background: var(--primary-color);
+      position: sticky; top: 0; z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,.1);
     }
-    .navbar {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 0 1em;
-      height: 60px;
-      position: relative;
-      overflow: hidden;
-    }
-    /* (Espresso art is in the page header below, not in navbar) */
-
-    .nav-links { display: flex; position: relative; z-index: 1; }
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      margin: 0 1em;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      background-color: var(--secondary-color);
-      left: 50%;
-      bottom: -5px;
-      transition: all 0.3s ease;
-    }
-    .nav-links a:hover { color: var(--secondary-color); }
-    .nav-links a:hover::after { left: 0; width: 100%; }
-    .nav-mobile { display: none; }
-
-    /* Mobile Navigation */
-    @media screen and (max-width: 768px) {
-      .navbar { justify-content: flex-end; }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background-color: var(--primary-color);
-        position: absolute; top: 60px; right: 0; width: 200px;
-      }
-      .nav-links a { margin: 0; padding: 1em; text-align: right; border-bottom: 1px solid var(--secondary-color); }
-      .nav-mobile { display: flex; align-items: center; position: relative; z-index: 1; }
-      .nav-text { color: white; margin-right: 0.5em; }
-      .icon { color: white; font-size: 24px; cursor: pointer; }
-      .navbar.responsive .nav-links { display: flex; }
-      .navbar.responsive .nav-mobile .nav-text { display: none; }
+    .navbar { display:flex; justify-content:flex-end; align-items:center; padding:0 1em; height:60px; position:relative; overflow:hidden; }
+    .nav-links { display:flex; position:relative; z-index:1; }
+    .nav-links a { color:#fff; text-decoration:none; margin:0 1em; position:relative; transition:color .3s; }
+    .nav-links a::after { content:''; position:absolute; width:0; height:2px; background:var(--secondary-color); left:50%; bottom:-5px; transition:all .3s; }
+    .nav-links a:hover { color:var(--secondary-color); }
+    .nav-links a:hover::after { left:0; width:100%; }
+    .nav-mobile { display:none; }
+    @media (max-width: 768px) {
+      .navbar { justify-content:flex-end; }
+      .nav-mobile { display:flex; align-items:center; position:relative; z-index:1; }
+      .nav-text { color:#fff; margin-right:.5em; }
+      .icon { color:#fff; font-size:24px; cursor:pointer; }
+      .nav-links { display:none; flex-direction:column; background:var(--primary-color); position:absolute; top:60px; right:0; width:200px; }
+      .nav-links a { margin:0; padding:1em; text-align:right; border-bottom:1px solid var(--secondary-color); }
+      .navbar.responsive .nav-links { display:flex; }
+      .navbar.responsive .nav-mobile .nav-text { display:none; }
     }
 
-    /* Page header with espresso cups */
+    /* Page header with three espresso cups behind the title */
     .page-hero {
       position: relative;
       padding: 1.2em 0;
@@ -101,52 +58,53 @@
         url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path opacity=".35" d="M3 8h13a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3H3z"/><path opacity=".35" d="M3 8v8a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8"/><path opacity=".35" d="M16 9h2a2 2 0 0 1 0 4h-2"/></svg>'),
         url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><path opacity=".35" d="M3 8h13a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3H3z"/><path opacity=".35" d="M3 8v8a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8"/><path opacity=".35" d="M16 9h2a2 2 0 0 1 0 4h-2"/></svg>');
       background-repeat: no-repeat, no-repeat, no-repeat;
-      background-position: 16% center, 50% center, 84% center;
-      background-size: auto 100%, auto 100%, auto 100%;
+      background-position: 16% center, 50% center, 84% center; /* equidistant */
+      background-size: auto 100%, auto 100%, auto 100%;       /* fill header height */
       opacity: .18;
       pointer-events: none;
     }
     .page-hero h1 { margin: 0; position: relative; z-index: 1; }
 
-    /* Main Content Styles */
     main { padding: 2em; max-width: 1200px; margin: 0 auto; }
 
-    /* Filters */
-    .filters {
-      display: flex; gap: .75rem; flex-wrap: wrap; align-items: center;
-      margin: 0 0 1.25rem 0;
-    }
-    .filter-btn {
-      background: #fff; color: var(--text-color);
-      border: 1px solid var(--secondary-color);
-      border-radius: 999px; padding: .45em .9em; cursor: pointer;
-      font-weight: 600;
-      transition: background .2s ease, color .2s ease, border-color .2s ease;
-    }
-    .filter-btn.active { background: var(--button-color); color: #fff; border-color: var(--button-color); }
-    .filter-note { opacity: .8; font-size: .95rem; }
-
-    /* Publication Card Styles */
+    /* Two-column grid (symmetry when collapsed) */
     .publication-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2em;
-      /* Masonry effect via small auto rows and JS-calculated spans */
-      grid-auto-rows: 8px;
-      align-items: start;
+      align-items: start; /* cards control their own height */
     }
     @media (max-width: 900px) { .publication-grid { grid-template-columns: 1fr; } }
 
+    /* Cards */
     .publication-card {
-      background-color: #fff;
+      background: #fff;
       border: 1px solid #ddd;
       border-radius: 10px;
       padding: 16px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.08);
       position: relative;
-      overflow: hidden; /* keeps bg inside rounded corners */
+      overflow: hidden; /* keep bg in rounded corners */
+      /* JS sets min-height per row pair to keep symmetry; expansion won't change neighbor */
     }
     .publication-card h2 { margin: 0 0 .4em 0; }
+
+    /* Low-opacity image: full card width, scaled with 'contain', fixed to initial (collapsed) card height */
+    .publication-card.has-bg::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: var(--bg-h, auto);   /* set by JS to collapsed/equalized height */
+      background-image: var(--card-bg);
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: contain;     /* show the whole image; larger dimension matches card side */
+      opacity: .12;
+      pointer-events: none;
+    }
+    .publication-card.has-bg > * { position: relative; z-index: 1; }
+
+    /* Links/buttons */
     .publication-card .btn {
       background-color: var(--button-color);
       color: white;
@@ -159,55 +117,31 @@
     }
     .publication-card .btn:hover { background-color: #9B0502; }
 
-    .publication-card .collaborator-link {
-      color: var(--button-color);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
+    .publication-card .collaborator-link { color: var(--button-color); text-decoration: none; }
     .publication-card .collaborator-link:hover { text-decoration: underline; }
 
-    .publication-card a:not(.btn):not(.collaborator-link) {
-      color: var(--button-color);
-      text-decoration: none;
-    }
-    .publication-card a:not(.btn):not(.collaborator-link):hover { text-decoration: underline; }
-
+    /* Description dropdown: keep the *button* over the image; show a solid white panel when opened */
     details summary {
       cursor: pointer;
       font-weight: bold;
       margin-bottom: 8px;
       list-style: none;
+      position: relative; z-index: 2; /* ensure over the bg image */
     }
     details summary::-webkit-details-marker { display: none; }
 
-    .links { margin-top: 12px; }
-
-    /* ====== LOW-OPACITY BACKGROUND PER CARD (fixed height; no stretch) ======
-       To enable on a card:
-         1) Add class="has-bg" to .publication-card
-         2) Add style="--card-bg: url('FULL_IMAGE_URL');" on the same element
-    */
-    .publication-card.has-bg {
-      /* Fixed background block height so it DOES NOT grow when details open */
-      --bg-height: 220px;
+    /* White block that "cuts" the background image when expanded */
+    .desc-panel {
+      background: #fff;
+      border-radius: 6px;
+      padding: 10px 12px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 1px 2px rgba(0,0,0,.06);
     }
-    .publication-card.has-bg::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: var(--bg-height);
-      background-image: var(--card-bg);
-      background-size: cover;
-      background-position: center;
-      opacity: .10;
-      pointer-events: none;
-    }
-    .publication-card.has-bg > * { position: relative; z-index: 1; }
 
-    /* Make description content always sit on solid white (no show-through) */
-    .publication-card details { background: #fff; position: relative; z-index: 2; }
+    .links { margin-top: 12px; position: relative; z-index: 2; }
 
-    /* Footer Styles */
     footer {
       background-color: var(--primary-color);
       color: white;
@@ -224,7 +158,6 @@
                  ignoreHtmlClass: 'tex2jax_ignore', processHtmlClass: 'tex2jax_process' }
     };
   </script>
-  <!-- Include MathJax -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
@@ -233,12 +166,10 @@
 <body>
   <header>
     <nav class="navbar" id="myNavbar">
-      <!-- Mobile Navigation -->
       <div class="nav-mobile">
         <span class="nav-text">Navigation</span>
         <span class="icon" onclick="toggleMenu()"><i class="fa fa-bars"></i></span>
       </div>
-      <!-- Navigation links -->
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="#">Preprints and publications</a>
@@ -249,100 +180,98 @@
     </nav>
   </header>
 
-  <!-- Page header with espresso art -->
+  <!-- Restored page header with espresso motif -->
   <div class="page-hero">
     <h1>Preprints and publications</h1>
   </div>
 
   <main>
-
-    <div class="filters">
-      <button class="filter-btn" data-filter="published">Published</button>
-      <button class="filter-btn" data-filter="preprints">Preprints</button>
-      <span class="filter-note">Click a filter to show only those items; click again to clear.</span>
-    </div>
-
     <div class="publication-grid">
 
-      <!-- ===== CARD 1 ===== -->
+      <!-- 1 -->
       <div class="publication-card has-bg"
-           style="--card-bg: url('https://alex-youcis.github.io/An%20integral%20comparison%20of%20crystalline%20and%20de%20Rham%20cohomology.png');"
-           data-status="preprint">
+           style="--card-bg: url('https://alex-youcis.github.io/An%20integral%20comparison%20of%20crystalline%20and%20de%20Rham%20cohomology.png');">
         <h2>An integral comparison of crystalline and de Rham cohomology</h2>
         <p><strong>Collaborators:</strong> <a href="https://abhinandan.perso.math.cnrs.fr/" class="collaborator-link">Abhinandan</a></p>
-        <p class="pub-status"><strong>Status:</strong> Submitted</p>
+        <p><strong>Status:</strong> Submitted</p>
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-gauges, crystalline cohomology, de Rham cohomology</p>
         <details>
           <summary>Description</summary>
-          <p>In this paper we give an integral comparison between <i>twisted</i> crystalline and <i>twisted</i> de Rham cohomology …</p>
+          <div class="desc-panel">
+            <p>In this paper we give an integral comparison between <i>twisted</i> crystalline and <i>twisted</i> de Rham cohomology …</p>
+          </div>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2507.17631" class="btn">arXiv</a>
         </div>
       </div>
 
-      <!-- ===== CARD 2 ===== -->
+      <!-- 2 -->
       <div class="publication-card has-bg"
-           style="--card-bg: url('https://alex-youcis.github.io/Integral%20Dcrys.png');"
-           data-status="preprint">
+           style="--card-bg: url('https://alex-youcis.github.io/Integral%20Dcrys.png');">
         <h2>An integral analogue of Fontaine's crystalline functor</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
-        <p class="pub-status"><strong>Status:</strong> Submitted</p>
+        <p><strong>Status:</strong> Submitted</p>
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-gauges, Fontaine--Laffaille theory.</p>
         <details>
           <summary>Description</summary>
-          <p>In this paper we develop an integral analogue of the functor \(D_\mathrm{crys}\) …</p>
+          <div class="desc-panel">
+            <p>In this paper we develop an integral analogue of the functor \(D_\mathrm{crys}\) …</p>
+          </div>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2504.16282" class="btn">arXiv</a>
         </div>
       </div>
 
-      <!-- ===== CARD 3 ===== -->
+      <!-- 3 -->
       <div class="publication-card has-bg"
-           style="--card-bg: url('https://alex-youcis.github.io/BL.png');"
-           data-status="preprint">
+           style="--card-bg: url('https://alex-youcis.github.io/BL.png');">
         <h2>Beauville—Laszlo gluing of algebraic spaces</h2>
         <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a></p>
-        <p class="pub-status"><strong>Status:</strong> Submitted</p>
+        <p><strong>Status:</strong> Submitted</p>
         <p><strong>Tags:</strong> Rigid analytic geometry</p>
         <details>
           <summary>Description</summary>
-          <p>We show that one may always glue a separated formal algebraic space …</p>
+          <div class="desc-panel">
+            <p>We show that one may always glue a separated formal algebraic space …</p>
+          </div>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2410.20500" class="btn">arXiv</a>
         </div>
       </div>
 
-      <!-- ===== CARD 4 ===== -->
+      <!-- 4 -->
       <div class="publication-card has-bg"
-           style="--card-bg: url('https://alex-youcis.github.io/Tanakian.png');"
-           data-status="preprint">
+           style="--card-bg: url('https://alex-youcis.github.io/Tanakian.png');">
         <h2>A Tannakian Framework for Prismatic \(F\)-crystals</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
-        <p class="pub-status"><strong>Status:</strong> Submitted</p>
+        <p><strong>Status:</strong> Submitted</p>
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-crystals, \(p\)-adic shtukas, Tannakian formalism</p>
         <details>
           <summary>Description</summary>
-          <p>We study some Tannakian aspects of the theory of prismatic \(F\)-crystals …</p>
+          <div class="desc-panel">
+            <p>We study some Tannakian aspects of the theory of prismatic \(F\)-crystals …</p>
+          </div>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2406.08259" class="btn">arXiv</a>
         </div>
       </div>
 
-      <!-- ===== CARD 5 (PUBLISHED) ===== -->
+      <!-- 5 -->
       <div class="publication-card has-bg"
-           style="--card-bg: url('https://alex-youcis.github.io/PR%20for%20AT.png');"
-           data-status="published">
+           style="--card-bg: url('https://alex-youcis.github.io/PR%20for%20AT.png');">
         <h2>Canonical Integral Models of Shimura Varieties of Abelian Type</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.skidmore.edu/mathematics/faculty/daniels.php" class="collaborator-link">Patrick Daniels</a></p>
-        <p class="pub-status"><strong>Status:</strong> <i>Forum of Mathematics, Sigma</i></p>
+        <p><strong>Status:</strong> <i>Forum of Mathematics, Sigma</i></p>
         <p><strong>Tags:</strong> Shimura varieties, integral models, \(p\)-adic Hodge theory, \(p\)-adic shtukas</p>
         <details>
           <summary>Description</summary>
-          <p>We prove a conjecture of Pappas and Rapoport for all Shimura varieties …</p>
+          <div class="desc-panel">
+            <p>We prove a conjecture of Pappas and Rapoport for all Shimura varieties …</p>
+          </div>
         </details>
         <div class="links">
           <a href="https://www.cambridge.org/core/journals/forum-of-mathematics-sigma/article/canonical-integral-models-for-shimura-varieties-of-abelian-type/AC4BFA2A33124AB438004D512BBC64CD" class="btn">Journal</a>
@@ -350,51 +279,54 @@
         </div>
       </div>
 
-      <!-- ===== CARD 6 ===== -->
+      <!-- 6 -->
       <div class="publication-card has-bg"
-           style="--card-bg: url('https://alex-youcis.github.io/realization.png');"
-           data-status="preprint">
+           style="--card-bg: url('https://alex-youcis.github.io/realization.png');">
         <h2>The Prismatic Realization Functor for Shimura Varieties of Abelian Type</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
-        <p class="pub-status"><strong>Status:</strong> Submitted</p>
+        <p><strong>Status:</strong> Submitted</p>
         <p><strong>Tags:</strong> Shimura varieties, integral models, \(p\)-adic Hodge theory, prismatic \(F\)-gauges, Fontaine--Laffaille theory</p>
         <details>
           <summary>Description</summary>
-          <p>In this paper we construct an object on the integral canonical models of Shimura varieties …</p>
+          <div class="desc-panel">
+            <p>In this paper we construct an object on the integral canonical models of Shimura varieties …</p>
+          </div>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2310.08472" class="btn">arXiv</a>
         </div>
       </div>
 
-      <!-- ===== CARD 7 (PUBLISHED) ===== -->
+      <!-- 7 -->
       <div class="publication-card has-bg"
-           style="--card-bg: url('https://alex-youcis.github.io/Bdr.png');"
-           data-status="published">
+           style="--card-bg: url('https://alex-youcis.github.io/Bdr.png');">
         <h2>The Analytic Topology is Enough for the \(B_\mathrm{dR}^+\)-Grassmannian</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.imo.universite-paris-saclay.fr/~kestutis.cesnavicius/" class="collaborator-link">Kęstutis Česnavičius</a></p>
-        <p class="pub-status"><strong>Status:</strong> To appear in the proceedings of the 2023 Simons Symposium on \(p\)-adic Hodge theory</p>
+        <p><strong>Status:</strong> To appear in the proceedings of the 2023 Simons Symposium on \(p\)-adic Hodge theory</p>
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, torsors, Grothendieck--Serre conjecture</p>
         <details>
           <summary>Description</summary>
-          <p>In this paper we show that the \(B_\mathrm{dR}^+\)-affine Grassmannian can be computed …</p>
+          <div class="desc-panel">
+            <p>We show that the \(B_\mathrm{dR}^+\)-affine Grassmannian can be computed …</p>
+          </div>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2303.11710" class="btn">arXiv</a>
         </div>
       </div>
 
-      <!-- ===== CARD 8 (PUBLISHED) ===== -->
+      <!-- 8 -->
       <div class="publication-card has-bg"
-           style="--card-bg: url('https://alex-youcis.github.io/GA.png');"
-           data-status="published">
+           style="--card-bg: url('https://alex-youcis.github.io/GA.png');">
         <h2>The Jacobson--Morozov Morphism for Langlands Parameters in the Relative Setting</h2>
         <p><strong>Collaborators:</strong> <a href="https://math.bu.edu/people/abertolo/" class="collaborator-link">Alexander Bertoloni Meli</a> and <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a></p>
-        <p class="pub-status"><strong>Status:</strong> <i>International Mathematics Research Notices</i></p>
+        <p><strong>Status:</strong> <i>International Mathematics Research Notices</i></p>
         <p><strong>Tags:</strong> Langlands conjecture, \(L\)-parameters, moduli theory</p>
         <details>
           <summary>Description</summary>
-          <p>We define a moduli space of \(L\)-parameters over \(\mathbb{Q}\) …</p>
+          <div class="desc-panel">
+            <p>We define a moduli space of \(L\)-parameters over \(\mathbb{Q}\) …</p>
+          </div>
         </details>
         <div class="links">
           <a href="https://academic.oup.com/imrn/advance-article/doi/10.1093/imrn/rnad217/7277067" class="btn">Journal</a>
@@ -402,17 +334,18 @@
         </div>
       </div>
 
-      <!-- ===== CARD 9 (PUBLISHED) ===== -->
+      <!-- 9 -->
       <div class="publication-card has-bg"
-           style="--card-bg: url('https://alex-youcis.github.io/dJ.png');"
-           data-status="published">
+           style="--card-bg: url('https://alex-youcis.github.io/dJ.png');">
         <h2>Specialization for the Pro-étale Fundamental Group</h2>
         <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></p>
-        <p class="pub-status"><strong>Status:</strong> <i>Compositio Mathematica</i></p>
+        <p><strong>Status:</strong> <i>Compositio Mathematica</i></p>
         <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, de Jong fundamental group, pro-étale fundamental group</p>
         <details>
           <summary>Description</summary>
-          <p>For a formal scheme \(\mathfrak{X}\) over a height \(1\) valuation ring \(\mathcal{O}\) …</p>
+          <div class="desc-panel">
+            <p>For a formal scheme \(\mathfrak{X}\) over a height \(1\) valuation ring \(\mathcal{O}\) …</p>
+          </div>
         </details>
         <div class="links">
           <a href="https://www.cambridge.org/core/journals/compositio-mathematica/article/specialization-for-the-proetale-fundamental-group/9FF5AAC3BAFD65AA505EF8268C8641CB" class="btn">Journal</a>
@@ -420,17 +353,18 @@
         </div>
       </div>
 
-      <!-- ===== CARD 10 (PUBLISHED) ===== -->
+      <!-- 10 -->
       <div class="publication-card has-bg"
-           style="--card-bg: url('https://alex-youcis.github.io/Characterization.png');"
-           data-status="published">
+           style="--card-bg: url('https://alex-youcis.github.io/Characterization.png');">
         <h2>Geometric Arcs and Fundamental Groups of Rigid Spaces</h2>
         <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></p>
-        <p class="pub-status"><strong>Status:</strong> <i>Journal für die reine und angewandte Mathematik</i></p>
+        <p><strong>Status:</strong> <i>Journal für die reine und angewandte Mathematik</i></p>
         <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, de Jong fundamental group, pro-étale fundamental group</p>
         <details>
           <summary>Description</summary>
-          <p>We develop a new notion of covering spaces, called <i>geometric coverings</i>, in rigid geometry …</p>
+          <div class="desc-panel">
+            <p>We develop a new notion of covering spaces, called <i>geometric coverings</i>, in rigid geometry …</p>
+          </div>
         </details>
         <div class="links">
           <a href="https://www.degruyter.com/document/doi/10.1515/crelle-2023-0013/html" class="btn">Journal</a>
@@ -438,33 +372,35 @@
         </div>
       </div>
 
-      <!-- ===== CARD 11 (PUBLISHED) ===== -->
+      <!-- 11 -->
       <div class="publication-card has-bg"
-           style="--card-bg: url('https://alex-youcis.github.io/alcoves.png');"
-           data-status="published">
+           style="--card-bg: url('https://alex-youcis.github.io/alcoves.png');">
         <h2>Variants of the de Jong Fundamental Group</h2>
         <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></p>
-        <p class="pub-status"><strong>Status:</strong> To appear in <i>American Journal of Mathematics</i></p>
+        <p><strong>Status:</strong> To appear in <i>American Journal of Mathematics</i></p>
         <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, geometric arcs, de Jong fundamental group</p>
         <details>
           <summary>Description</summary>
-          <p>This paper, a companion to <i>Geometric Arcs and Fundamental Groups of Rigid Spaces</i>, uses the theory of geometric coverings …</p>
+          <div class="desc-panel">
+            <p>This paper, a companion to <i>Geometric Arcs and Fundamental Groups of Rigid Spaces</i>, uses the theory of geometric coverings …</p>
+          </div>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2203.11750" class="btn">arXiv</a>
         </div>
       </div>
 
-      <!-- ===== CARD 12 (PUBLISHED) ===== -->
-      <div class="publication-card"
-           data-status="published">
+      <!-- 12 (no bg image provided earlier) -->
+      <div class="publication-card">
         <h2>An Approach to the Characterization of the Local Langlands Correspondence</h2>
         <p><strong>Collaborators:</strong> <a href="https://math.bu.edu/people/abertolo/" class="collaborator-link">Alexander Bertoloni Meli</a></p>
-        <p class="pub-status"><strong>Status:</strong> <i>Representation Theory</i></p>
+        <p><strong>Status:</strong> <i>Representation Theory</i></p>
         <p><strong>Tags:</strong> The Langlands program, representation theory, endoscopy</p>
         <details>
           <summary>Description</summary>
-          <p>We show that, under suitable hypotheses, the local Langlands conjecture may be characterized by the so-called <i>Scholze--Shin equations</i>.</p>
+          <div class="desc-panel">
+            <p>We show that, under suitable hypotheses, the local Langlands conjecture may be characterized by the so-called <i>Scholze--Shin equations</i>.</p>
+          </div>
         </details>
         <div class="links">
           <a href="https://www.ams.org/journals/ert/2023-27-12/S1088-4165-2023-00643-7/" class="btn">Journal</a>
@@ -472,16 +408,17 @@
         </div>
       </div>
 
-      <!-- ===== CARD 13 (PUBLISHED) ===== -->
-      <div class="publication-card"
-           data-status="published">
+      <!-- 13 (no bg image provided earlier) -->
+      <div class="publication-card">
         <h2>Bijective Projections on Parabolic Quotients of Affine Weyl Groups</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.haverford.edu/users/emilicevic" class="collaborator-link">Elizabeth (Beazley) Milićević</a>, <a href="https://margaretnichols.me/" class="collaborator-link">Margaret Nichols</a>, Minhea Park, and <a href="https://sites.google.com/view/dannyshi" class="collaborator-link">Xiaolin (Danny) Xi</a></p>
-        <p class="pub-status"><strong>Status:</strong> <i>Journal of Algebraic Combinatorics</i></p>
+        <p><strong>Status:</strong> <i>Journal of Algebraic Combinatorics</i></p>
         <p><strong>Tags:</strong> Algebraic combinatorics, root theory, alcoves</p>
         <details>
           <summary>Description</summary>
-          <p>In previous work of Berg--Jones--Vazirani, a bijection was introduced between two sets of combinatorial objects …</p>
+          <div class="desc-panel">
+            <p>In previous work of Berg--Jones--Vazirani, a bijection was introduced between two sets of combinatorial objects …</p>
+          </div>
         </details>
         <div class="links">
           <a href="https://doi.org/10.1007/s10801-014-0559-9" class="btn">Journal</a>
@@ -500,67 +437,69 @@
     </div>
   </footer>
 
-  <!-- JavaScript for Mobile Menu Toggle + Filters + Masonry sizing -->
   <script>
     function toggleMenu() {
       var navbar = document.getElementById("myNavbar");
       navbar.classList.toggle("responsive");
     }
 
-    // Simple filter logic: uses data-status on each card
-    (function(){
-      const btns = document.querySelectorAll('.filter-btn');
-      const cards = document.querySelectorAll('.publication-card');
-
-      function apply(filter){
-        cards.forEach(card => {
-          const status = card.getAttribute('data-status'); // "published" or "preprint"
-          if(!filter){ card.style.display = ''; return; }
-          card.style.display = (status === filter) ? '' : 'none';
-        });
-        // Recompute masonry after filtering
-        requestAnimationFrame(masonryReflow);
-      }
-
-      btns.forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          const isActive = btn.classList.contains('active');
-          btns.forEach(b=>b.classList.remove('active'));
-          if(isActive){ apply(null); return; }
-          btn.classList.add('active');
-          apply(btn.dataset.filter);
-        });
-      });
-    })();
-
-    // Masonry with CSS Grid: compute row spans so items don't force equal heights in the adjacent column
+    // ---- Pairwise equalize MIN-HEIGHT to keep columns symmetric when collapsed.
+    //      When a details opens, only that card grows; its neighbor keeps the min-height.
     (function(){
       const grid = document.querySelector('.publication-grid');
-      if(!grid) return;
 
-      function masonryReflow(){
-        const rowHeight = parseFloat(getComputedStyle(grid).getPropertyValue('grid-auto-rows')) || 8;
-        const gap = parseFloat(getComputedStyle(grid).getPropertyValue('gap')) || 0;
-        grid.querySelectorAll('.publication-card').forEach(item => {
-          if (getComputedStyle(item).display === 'none') return; // hidden by filter
-          item.style.gridRowEnd = 'span 1'; // reset to measure natural height
-          const h = item.getBoundingClientRect().height;
-          const span = Math.ceil((h + gap) / (rowHeight + gap));
-          item.style.gridRowEnd = 'span ' + span;
-        });
+      function equalizePairs() {
+        const cards = Array.from(grid.querySelectorAll('.publication-card'));
+        // Clear previous min-heights & bg heights
+        cards.forEach(c => { c.style.minHeight = ''; c.style.setProperty('--bg-h',''); });
+
+        // One column: no equalization
+        const twoCols = window.innerWidth > 900;
+        if (!twoCols) return;
+
+        for (let i = 0; i < cards.length; i += 2) {
+          const a = cards[i];
+          const b = cards[i+1];
+
+          // measure with descriptions closed height (collapsed state)
+          const closeAndMeasure = (el) => {
+            if (!el) return 0;
+            const ds = el.querySelectorAll('details');
+            const states = [];
+            ds.forEach(d => { states.push(d.open); d.open = false; });
+            // Force layout
+            const h = el.getBoundingClientRect().height;
+            // restore
+            ds.forEach((d, idx) => d.open = states[idx]);
+            return h;
+          };
+
+          const hA = a ? closeAndMeasure(a) : 0;
+          const hB = b ? closeAndMeasure(b) : 0;
+          const maxH = Math.max(hA, hB);
+
+          if (a) {
+            a.style.minHeight = maxH + 'px';
+            if (a.classList.contains('has-bg')) a.style.setProperty('--bg-h', maxH + 'px'); // fix bg band to collapsed/equalized height
+          }
+          if (b) {
+            b.style.minHeight = maxH + 'px';
+            if (b.classList.contains('has-bg')) b.style.setProperty('--bg-h', maxH + 'px');
+          }
+        }
       }
 
-      // Reflow on load/resize
-      window.addEventListener('load', masonryReflow);
-      window.addEventListener('resize', () => requestAnimationFrame(masonryReflow));
+      window.addEventListener('load', equalizePairs);
+      window.addEventListener('resize', () => { clearTimeout(window.__eqT); window.__eqT = setTimeout(equalizePairs, 120); });
 
-      // Reflow whenever a details is toggled (so only this column moves)
+      // Do NOT re-equalize on toggle; we want only this card to grow.
+      // (But re-run after toggle to ensure bg-h remains the collapsed height for neighbors.)
       grid.querySelectorAll('details').forEach(d => {
-        d.addEventListener('toggle', () => requestAnimationFrame(masonryReflow));
+        d.addEventListener('toggle', () => {
+          // When toggling, just re-apply the collapsed/equalized min-heights & bg bands (no measuring open state)
+          equalizePairs();
+        });
       });
-
-      // Expose for filters to call
-      window.masonryReflow = masonryReflow;
     })();
   </script>
 </body>
