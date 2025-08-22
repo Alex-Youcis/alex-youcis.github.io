@@ -143,25 +143,25 @@
     /* =========================
        NAMESPACED CSS FROM SPEC
        ========================= */
-    /* Grid wrapper: two equal columns, equal height */
+    /* Grid wrapper: two columns, no forced equal height */
     .info-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: var(--space-6, 24px);
-      align-items: stretch;  /* ensure columns stretch to equal height */
+      align-items: start;  /* changed from stretch -> start (no equal height) */
       margin-bottom: 1.25em;
     }
 
-    /* Left column stacks About above Call */
+    /* Left column stacks (now just About) */
     .info-layout__left {
       display: flex;
       flex-direction: column;
       gap: var(--space-6, 24px);
     }
 
-    /* Bold black outline around About / Call / Information bubbles */
+    /* Bold black outline around About / Information bubbles */
     .about-card, .call-card, .speakers-card { border: 3px solid #000; }
-    /* Red left accent on Call bubble */
+    /* Red left accent on Call bubble (unused since call removed) */
     .call-card { border-left: 6px solid var(--button-color) !important; }
 
     /* Speaker subsections spacing (base) */
@@ -270,28 +270,13 @@
             \(p\)-adic Hodge theory, automorphic forms, Galois representations, arithmetic statistics, etc.).
           </p>
         </article>
-
-        <article class="bubble bubble--white call-card" aria-labelledby="call-title">
-          <h2 id="call-title">Call for speakers</h2>
-          <p>
-            To give a talk, send a title/abstract and preferred dates to
-            <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>; include "U of T NT seminar" in your email subject.
-          </p>
-          <!-- Funding section stays here -->
-          <section class="speaker-section">
-            <h3 class="speaker-section__title"><strong>Funding</strong></h3>
-            <div class="speaker-section__body">
-              <p>Funding for travel and lodging is limited and not guaranteed; please contact <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a> for more details.</p>
-            </div>
-          </section>
-        </article>
       </div>
 
       <!-- RIGHT COLUMN -->
       <aside class="bubble bubble--white speakers-card" id="info">
         <h2 id="info-for-speakers-title">Information for speakers</h2>
 
-        <!-- Abstract subsection removed as requested -->
+        <!-- Abstract subsection was previously removed per your instruction -->
 
         <section class="speaker-section">
           <h3 class="speaker-section__title"><strong>Format &amp; length</strong></h3>
