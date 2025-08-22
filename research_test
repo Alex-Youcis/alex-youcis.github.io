@@ -44,7 +44,7 @@
       position: relative;
       overflow: hidden;
     }
-    /* (Moved espresso art out of navbar; now appears in the page header below) */
+    /* (Espresso art is in the page header below, not in navbar) */
 
     .nav-links { display: flex; position: relative; z-index: 1; }
     .nav-links a {
@@ -131,6 +131,9 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2em;
+      /* Masonry effect via small auto rows and JS-calculated spans */
+      grid-auto-rows: 8px;
+      align-items: start;
     }
     @media (max-width: 900px) { .publication-grid { grid-template-columns: 1fr; } }
 
@@ -141,7 +144,7 @@
       padding: 16px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.08);
       position: relative;
-      overflow: hidden; /* so bg stays inside rounded corners */
+      overflow: hidden; /* keeps bg inside rounded corners */
     }
     .publication-card h2 { margin: 0 0 .4em 0; }
     .publication-card .btn {
@@ -179,7 +182,7 @@
 
     .links { margin-top: 12px; }
 
-    /* ====== LOW-OPACITY BACKGROUND PER CARD (template) ======
+    /* ====== LOW-OPACITY BACKGROUND PER CARD (fixed height; no stretch) ======
        To enable on a card:
          1) Add class="has-bg" to .publication-card
          2) Add style="--card-bg: url('FULL_IMAGE_URL');" on the same element
@@ -261,7 +264,7 @@
 
     <div class="publication-grid">
 
-      <!-- ===== CARD 1 (already had background set) ===== -->
+      <!-- ===== CARD 1 ===== -->
       <div class="publication-card has-bg"
            style="--card-bg: url('https://alex-youcis.github.io/An%20integral%20comparison%20of%20crystalline%20and%20de%20Rham%20cohomology.png');"
            data-status="preprint">
@@ -271,7 +274,7 @@
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-gauges, crystalline cohomology, de Rham cohomology</p>
         <details>
           <summary>Description</summary>
-          <p>In this paper we give an integral comparison between <i>twisted</i> crystalline and <i>twisted</i> de Rham cohomology, appropriately defined. This makes use of an analogue of Dwork's trick in the stacky approach to prismatic cohomology, and allows for arbitrary prismatic coefficients. In the case of the structure sheaf, this rationally recovers Berthelot--Ogus's celebrated isomorphism. Finally, we make use of this integral comparison to give a study of the relationship between torsion in crystalline and de Rham cohomology.</p>
+          <p>In this paper we give an integral comparison between <i>twisted</i> crystalline and <i>twisted</i> de Rham cohomology …</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2507.17631" class="btn">arXiv</a>
@@ -288,7 +291,7 @@
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-gauges, Fontaine--Laffaille theory.</p>
         <details>
           <summary>Description</summary>
-          <p>In this paper we develop an integral analogue of the functor \(D_\mathrm{crys}\), and relate it to Fontaine--Lafaille and Dieudonné theory. Notably, we show that in the Fontaine--Laffaille range \([0,p-2]\) that all the most common types of integral \(p\)-adic Hodge theoretic objects (i.e., local systems, Fontaine--Laffaille modules, prismatic \(F\)-crystals, and prismatic \(F\)-gaues) all agree. This helps clarify the sucesses of Fontaine--Laffaille theory in the Fontaine--Laffaille range and its failures outside of that range (as only in that range does it recover the 'correct', more refined, integral \(p\)-adic Hodge theory).</p>
+          <p>In this paper we develop an integral analogue of the functor \(D_\mathrm{crys}\) …</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2504.16282" class="btn">arXiv</a>
@@ -305,7 +308,7 @@
         <p><strong>Tags:</strong> Rigid analytic geometry</p>
         <details>
           <summary>Description</summary>
-          <p>We show that one may always glue a separated formal algebraic space \(\mathfrak{X}\) over \(\mathbb{Z}_p\) to a separated algebraic space \(X\) over \(\mathbb{Q}_p\) via an open embedding \(j\colon \mathfrak{X}_\eta\to X^\mathrm{an}\), resulting in an algebraic space. In fact, we show that this gluing procedure gives rise to an equivalence …</p>
+          <p>We show that one may always glue a separated formal algebraic space …</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2410.20500" class="btn">arXiv</a>
@@ -497,7 +500,7 @@
     </div>
   </footer>
 
-  <!-- JavaScript for Mobile Menu Toggle + Filters -->
+  <!-- JavaScript for Mobile Menu Toggle + Filters + Masonry sizing -->
   <script>
     function toggleMenu() {
       var navbar = document.getElementById("myNavbar");
@@ -515,6 +518,8 @@
           if(!filter){ card.style.display = ''; return; }
           card.style.display = (status === filter) ? '' : 'none';
         });
+        // Recompute masonry after filtering
+        requestAnimationFrame(masonryReflow);
       }
 
       btns.forEach(btn=>{
@@ -526,6 +531,36 @@
           apply(btn.dataset.filter);
         });
       });
+    })();
+
+    // Masonry with CSS Grid: compute row spans so items don't force equal heights in the adjacent column
+    (function(){
+      const grid = document.querySelector('.publication-grid');
+      if(!grid) return;
+
+      function masonryReflow(){
+        const rowHeight = parseFloat(getComputedStyle(grid).getPropertyValue('grid-auto-rows')) || 8;
+        const gap = parseFloat(getComputedStyle(grid).getPropertyValue('gap')) || 0;
+        grid.querySelectorAll('.publication-card').forEach(item => {
+          if (getComputedStyle(item).display === 'none') return; // hidden by filter
+          item.style.gridRowEnd = 'span 1'; // reset to measure natural height
+          const h = item.getBoundingClientRect().height;
+          const span = Math.ceil((h + gap) / (rowHeight + gap));
+          item.style.gridRowEnd = 'span ' + span;
+        });
+      }
+
+      // Reflow on load/resize
+      window.addEventListener('load', masonryReflow);
+      window.addEventListener('resize', () => requestAnimationFrame(masonryReflow));
+
+      // Reflow whenever a details is toggled (so only this column moves)
+      grid.querySelectorAll('details').forEach(d => {
+        d.addEventListener('toggle', () => requestAnimationFrame(masonryReflow));
+      });
+
+      // Expose for filters to call
+      window.masonryReflow = masonryReflow;
     })();
   </script>
 </body>
