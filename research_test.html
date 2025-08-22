@@ -24,13 +24,12 @@
     body{font-family:'Open Sans',sans-serif;background:var(--background-color);color:var(--text-color);margin:0}
     main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
 
-    /* Header / Nav (espresso background added) */
+    /* Header / Nav (espresso background) */
     header{
       background:var(--primary-color);
       position:sticky;top:0;z-index:1000;box-shadow:0 2px 4px rgba(0,0,0,.1);
       position:sticky;
     }
-    header{ position:sticky; }
     header::before{
       content:""; position:absolute; inset:0; pointer-events:none; z-index:0; opacity:.22;
       background-image:
@@ -58,7 +57,7 @@
       .navbar.responsive .nav-mobile .nav-text{display:none}
     }
 
-    /* Hero (clean) */
+    /* Hero */
     .hero{
       background:var(--card);
       border-radius:14px;padding:1.25em 1.5em;margin:1.5em 0 1.25em;
@@ -77,13 +76,12 @@
     .pub-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25em}
     @media (max-width:900px){ .pub-grid{grid-template-columns:1fr} }
 
-    /* Card (bubble) — reduced bottom padding; image moved up */
+    /* Card (bubble) */
     .pub-card{
       --thumb-w:210px;           /* 1.5× previous */
       --thumb-h:150px;
       background:var(--card);border:1px solid var(--border);border-radius:14px;
       box-shadow:0 2px 10px rgba(0,0,0,.05);
-      /* ↓ smaller box: less reserved space at the bottom */
       padding:1em 1.2em 1.2em 1.2em;
       position:relative;display:flex;flex-direction:column
     }
@@ -91,15 +89,23 @@
     /* Title */
     .pub-title{margin:.1em 0 .35em;font-size:1.15rem;line-height:1.25}
 
+    /* === Tags left, image right: prevent overlap === */
+    .tags{
+      display:flex;flex-wrap:wrap;gap:.35em;margin:.15em 0 .6em;
+      /* keep tags left of the thumbnail area */
+      max-width:calc(100% - var(--thumb-w) - 1.8em);
+    }
+    .tag{display:inline-block;background:#f1f1f4;border:1px solid var(--border);border-radius:999px;padding:.25em .6em;font-size:.9rem}
+
     /* Bottom-right thumbnail — raised */
     .pub-thumb{
-      position:absolute; right:1.2em; bottom:2.2em;           /* moved up */
+      position:absolute; right:1.2em; bottom:2.2em;
       width:var(--thumb-w); height:var(--thumb-h);
       border:1px dashed var(--border); border-radius:8px; background:#f6f6f8;
       object-fit:cover;
       transition:opacity .16s ease, visibility .16s ease, transform .16s ease;
     }
-    /* Hide the thumbnail when this card's Description is open (CSS :has plus a JS fallback) */
+    /* Hide the thumbnail when this card's Description is open (CSS :has + JS fallback) */
     .pub-card:has(details.abs[open]) .pub-thumb,
     .pub-card[data-abs-open] .pub-thumb{
       opacity:0; visibility:hidden; pointer-events:none; transform:translateY(6px);
@@ -107,15 +113,12 @@
 
     @media (max-width:560px){
       .pub-card{ --thumb-w:170px; --thumb-h:120px; }
+      .tags{ max-width:calc(100% - var(--thumb-w) - 1.6em); }
     }
 
-    /* Straight meta lines */
+    /* Meta lines */
     .meta-lines p{margin:.2em 0 .2em}
     .meta-lines strong{font-weight:700}
-
-    /* Tags as chips */
-    .tags{display:flex;flex-wrap:wrap;gap:.35em;margin:.15em 0 .6em}
-    .tag{display:inline-block;background:#f1f1f4;border:1px solid var(--border);border-radius:999px;padding:.25em .6em;font-size:.9rem}
 
     /* Links */
     .links{display:flex;flex-wrap:wrap;gap:.5em;margin-top:.7em}
@@ -209,7 +212,6 @@
         <div class="links">
           <a href="https://arxiv.org/abs/2507.17631" class="btn">arXiv</a>
         </div>
-        <!-- Bottom-right thumbnail (placeholder data URI) -->
         <img class="pub-thumb" alt="Figure for ‘An integral comparison of crystalline and de Rham cohomology’"
              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHkAAAC3CAYAAACk1Y8lAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAPElEQVR4nO3BMQEAAADCoPVPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4G8GvwABm0T3bgAAAABJRU5ErkJggg==" />
       </article>
@@ -554,7 +556,7 @@
       apply();
     })();
 
-    // Fallback for browsers that don't support :has — hide thumb when Description is open
+    // Fallback for browsers without :has — hide thumb when Description is open
     document.querySelectorAll('.pub-card details.abs').forEach(dets=>{
       dets.addEventListener('toggle', ()=>{
         const card = dets.closest('.pub-card');
