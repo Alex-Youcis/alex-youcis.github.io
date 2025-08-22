@@ -28,7 +28,6 @@
     header{
       background:var(--primary-color);
       position:sticky;top:0;z-index:1000;box-shadow:0 2px 4px rgba(0,0,0,.1);
-      position:sticky;
     }
     header::before{
       content:""; position:absolute; inset:0; pointer-events:none; z-index:0; opacity:.22;
@@ -76,45 +75,28 @@
     .pub-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25em}
     @media (max-width:900px){ .pub-grid{grid-template-columns:1fr} }
 
-    /* Card (bubble) */
+    /* Card (bubble) — original clean layout */
     .pub-card{
-      --thumb-w:210px;           /* 1.5× previous */
-      --thumb-h:150px;
       background:var(--card);border:1px solid var(--border);border-radius:14px;
       box-shadow:0 2px 10px rgba(0,0,0,.05);
       padding:1em 1.2em 1.2em 1.2em;
       position:relative;display:flex;flex-direction:column
     }
-
-    /* Title */
     .pub-title{margin:.1em 0 .35em;font-size:1.15rem;line-height:1.25}
 
-    /* === Tags left, image right: prevent overlap === */
-    .tags{
-      display:flex;flex-wrap:wrap;gap:.35em;margin:.15em 0 .6em;
-      /* keep tags left of the thumbnail area */
-      max-width:calc(100% - var(--thumb-w) - 1.8em);
+    /* Low-opacity background image (first card only adds .has-bg + --bg-img) */
+    .pub-card.has-bg{overflow:hidden}
+    .pub-card.has-bg::before{
+      content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+      background-image:var(--bg-img);
+      background-size:cover; background-position:center;
+      opacity:.1;  /* low opacity */
     }
+    .pub-card > *{ position:relative; z-index:1; }
+
+    /* Tags (reverted to original, no width cap) */
+    .tags{display:flex;flex-wrap:wrap;gap:.35em;margin:.15em 0 .6em}
     .tag{display:inline-block;background:#f1f1f4;border:1px solid var(--border);border-radius:999px;padding:.25em .6em;font-size:.9rem}
-
-    /* Bottom-right thumbnail — raised */
-    .pub-thumb{
-      position:absolute; right:1.2em; bottom:2.2em;
-      width:var(--thumb-w); height:var(--thumb-h);
-      border:1px dashed var(--border); border-radius:8px; background:#f6f6f8;
-      object-fit:cover;
-      transition:opacity .16s ease, visibility .16s ease, transform .16s ease;
-    }
-    /* Hide the thumbnail when this card's Description is open (CSS :has + JS fallback) */
-    .pub-card:has(details.abs[open]) .pub-thumb,
-    .pub-card[data-abs-open] .pub-thumb{
-      opacity:0; visibility:hidden; pointer-events:none; transform:translateY(6px);
-    }
-
-    @media (max-width:560px){
-      .pub-card{ --thumb-w:170px; --thumb-h:120px; }
-      .tags{ max-width:calc(100% - var(--thumb-w) - 1.6em); }
-    }
 
     /* Meta lines */
     .meta-lines p{margin:.2em 0 .2em}
@@ -190,8 +172,9 @@
 
     <!-- Cards -->
     <section class="pub-grid" id="pubGrid">
-      <!-- 1 -->
-      <article class="pub-card" data-kind="preprint">
+      <!-- 1 — with low-opacity background image -->
+      <article class="pub-card has-bg" data-kind="preprint"
+               style="--bg-img: url('https://alex-youcis.github.io/An%20integral%20comparison%20of%20crystalline%20and%20de%20Rham%20cohomology.png');">
         <h2 class="pub-title">An integral comparison of crystalline and de Rham cohomology</h2>
         <div class="meta-lines">
           <p><strong>Collaborators:</strong> <a href="https://abhinandan.perso.math.cnrs.fr/">Abhinandan</a></p>
@@ -212,8 +195,6 @@
         <div class="links">
           <a href="https://arxiv.org/abs/2507.17631" class="btn">arXiv</a>
         </div>
-        <img class="pub-thumb" alt="Figure for ‘An integral comparison of crystalline and de Rham cohomology’"
-             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHkAAAC3CAYAAACk1Y8lAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAPElEQVR4nO3BMQEAAADCoPVPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4G8GvwABm0T3bgAAAABJRU5ErkJggg==" />
       </article>
 
       <!-- 2 -->
@@ -221,7 +202,7 @@
         <h2 class="pub-title">An integral analogue of Fontaine's crystalline functor</h2>
         <div class="meta-lines">
           <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/">Naoki Imai</a> and Hiroki Kato</p>
-          <p><strong>Status:</strong> Submitted</p>
+        <p><strong>Status:</strong> Submitted</p>
         </div>
         <div class="tags">
           <span class="tag">\(p\)-adic Hodge theory</span>
@@ -237,7 +218,6 @@
         <div class="links">
           <a href="https://arxiv.org/abs/2504.16282" class="btn">arXiv</a>
         </div>
-        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 3 -->
@@ -260,7 +240,6 @@
         <div class="links">
           <a href="https://arxiv.org/abs/2410.20500" class="btn">arXiv</a>
         </div>
-        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 4 -->
@@ -285,7 +264,6 @@
         <div class="links">
           <a href="https://arxiv.org/abs/2406.08259" class="btn">arXiv</a>
         </div>
-        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 5 -->
@@ -311,7 +289,6 @@
           <a href="https://www.cambridge.org/core/journals/forum-of-mathematics-sigma/article/canonical-integral-models-for-shimura-varieties-of-abelian-type/AC4BFA2A33124AB438004D512BBC64CD" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2402.05727" class="btn">arXiv</a>
         </div>
-        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 6 -->
@@ -336,7 +313,6 @@
         <div class="links">
           <a href="https://arxiv.org/abs/2310.08472" class="btn">arXiv</a>
         </div>
-        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 7 -->
@@ -360,7 +336,6 @@
         <div class="links">
           <a href="https://arxiv.org/abs/2303.11710" class="btn">arXiv</a>
         </div>
-        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 8 -->
@@ -385,7 +360,6 @@
           <a href="https://academic.oup.com/imrn/advance-article/doi/10.1093/imrn/rnad217/7277067" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2203.01768" class="btn">arXiv</a>
         </div>
-        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 9 -->
@@ -410,7 +384,6 @@
           <a href="https://www.cambridge.org/core/journals/compositio-mathematica/article/specialization-for-the-proetale-fundamental-group/9FF5AAC3BAFD65AA505EF8268C8641CB" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2107.06761" class="btn">arXiv</a>
         </div>
-        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 10 -->
@@ -435,7 +408,6 @@
           <a href="https://www.degruyter.com/document/doi/10.1515/crelle-2023-0013/html" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2105.05184" class="btn">arXiv</a>
         </div>
-        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 11 -->
@@ -459,7 +431,6 @@
         <div class="links">
           <a href="https://arxiv.org/abs/2203.11750" class="btn">arXiv</a>
         </div>
-        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 12 -->
@@ -484,7 +455,6 @@
           <a href="https://www.ams.org/journals/ert/2023-27-12/S1088-4165-2023-00643-7/" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2003.11484" class="btn">arXiv</a>
         </div>
-        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
 
       <!-- 13 -->
@@ -509,7 +479,6 @@
           <a href="https://doi.org/10.1007/s10801-014-0559-9" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/1212.0771" class="btn">arXiv</a>
         </div>
-        <div class="pub-thumb" aria-hidden="true" title="Image placeholder"></div>
       </article>
     </section>
   </main>
@@ -555,16 +524,6 @@
 
       apply();
     })();
-
-    // Fallback for browsers without :has — hide thumb when Description is open
-    document.querySelectorAll('.pub-card details.abs').forEach(dets=>{
-      dets.addEventListener('toggle', ()=>{
-        const card = dets.closest('.pub-card');
-        if(!card) return;
-        if(dets.open) card.setAttribute('data-abs-open','');
-        else card.removeAttribute('data-abs-open');
-      });
-    });
   </script>
 </body>
 </html>
