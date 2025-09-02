@@ -26,6 +26,10 @@
       color:var(--text-color);
       margin:0;
       position:relative;
+
+      display: flex;
+  flex-direction: column;
+  min-height: 100vh;
     }
     body::before{
       content:"";
@@ -40,6 +44,20 @@
       background-repeat:no-repeat;
       background-color: var(--background-color);
     }
+
+    body{
+  font-family:'Open Sans',sans-serif;
+  background: var(--background-color);
+  color:var(--text-color);
+  margin:0;
+  position:relative;
+
+  /* ADD THESE THREE LINES */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 
     header{
       background:var(--primary-color);
@@ -68,7 +86,7 @@
       .navbar.responsive .nav-mobile .nav-text{display:none}
     }
 
-    main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
+    main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto;  flex: 1 0 auto;}
 
     /* HERO card */
     .hero{
