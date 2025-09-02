@@ -15,8 +15,6 @@
       --button-color:#BF0603;
       --card:#fff;
       --border:#e1e1e6;
-
-      /* shared scale knobs */
       --info-btn-font-size:1rem;
     }
 
@@ -42,22 +40,16 @@
 
     main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
 
-    /* Hero with 3 low-opacity U of T crests */
+    /* HERO with your background image (low opacity) */
     .hero{
       position:relative;overflow:hidden;background:var(--card);border-radius:14px;padding:1.25em 1.5em;
       box-shadow:0 2px 10px rgba(0,0,0,.05);display:grid;gap:.75em;margin-bottom:1.5em
     }
     .hero::before{
-      content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;
-      background-image:
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
-      background-repeat:no-repeat,no-repeat,no-repeat;
-      background-position:16% center,50% center,84% center;
-      background-size:auto 96%,auto 96%,auto 96%;
+      content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;
+      background-image:url('https://2.bp.blogspot.com/-HDBMwAa9Jy8/UGwvGf5KiWI/AAAAAAAABbI/JdYXF6lzgBU/s1600/Volume1-p379.jpg');
+      background-repeat:no-repeat;background-position:center;background-size:cover;
     }
-    @media (max-width:600px){ .hero::before{ background-size:auto 78%,auto 78%,auto 78% } }
     .hero h1{margin:.2em 0 .1em;font-size:clamp(1.6rem,3.2vw,2.1rem);position:relative}
     .meta{display:flex;flex-wrap:wrap;gap:.75em 1.25em;font-size:.98rem;color:#222;position:relative}
     .tag{background:var(--secondary-color);color:#111;border-radius:999px;padding:.25em .7em}
@@ -68,25 +60,18 @@
     .bubble{background:var(--card);border-radius:14px;padding:1em 1.2em;box-shadow:0 2px 10px rgba(0,0,0,.05);display:flex;flex-direction:column;border:3px solid #000}
     h2{margin-top:0}
 
-    /* Two-column info layout (left: Overview + Announcements, right: Quick info) */
-    .info-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:1.25em}
-    @media (max-width:900px){ .info-layout{grid-template-columns:1fr} }
+    /* Info layout: just one column of bubbles (you can add more later) */
+    .info-layout{display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:1.25em}
 
-    .about-card p{margin:.4em 0}
-    .announce-list{margin:.2em 0 0 1em}
-    .announce-list li+li{margin-top:.35em}
+    /* Three side-by-side dropdowns */
+    .drop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:1.1em}
+    @media (max-width:960px){ .drop-grid{grid-template-columns:1fr} }
 
-    /* Quick links grid */
-    .resources-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:.8em}
-    @media (max-width:900px){ .resources-grid{grid-template-columns:1fr 1fr} }
-    @media (max-width:600px){ .resources-grid{grid-template-columns:1fr} }
-    .res-card{border:2px solid #000;border-radius:12px;padding:.9em;background:#fff}
-
-    /* Layered pill schedule button */
-    .sched{padding:0;margin:.3em 0 .8em;border:none;background:transparent;box-shadow:none}
-    .sched>summary{display:flex;justify-content:center;align-items:center;margin:.45em 0;list-style:none}
+    .sched{padding:0;margin:0;border:none;background:transparent;box-shadow:none}
+    .sched>summary{display:flex;justify-content:center;align-items:center;margin:0;list-style:none}
     .sched>summary::-webkit-details-marker{display:none}
 
+    /* Layered pill button */
     .term-btn{
       --label-size: calc(var(--info-btn-font-size)*1.15);
       --btn-h: calc(var(--label-size)*3);
@@ -103,7 +88,7 @@
     .sched[open] .term-btn__chevron{transform:rotate(180deg)}
 
     /* Tables */
-    .table-wrap{overflow-x:auto;background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+    .table-wrap{overflow-x:auto;background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.05);margin-top:.8em}
     table{width:100%;border-collapse:collapse;table-layout:fixed}
     thead{background:#f4f4f6}
     th,td{padding:.85em 1.2em;border-bottom:1px solid #e6e6ea;vertical-align:top;overflow-wrap:anywhere;word-break:break-word}
@@ -111,21 +96,21 @@
     tr:last-child td{border-bottom:none}
     .nowrap{white-space:nowrap}
 
-    /* Abstract/Description toggle inside tables (if needed later) */
+    /* Description toggle inside tables, if you use later */
     details.abs{background:transparent;padding:0;box-shadow:none;border-radius:0}
     .abs__btn{display:inline-flex;align-items:center;gap:.4em;padding:.25em .55em;border:1px solid #cfcfd4;border-radius:8px;font-weight:700;background:#fff;cursor:pointer}
     .abs__chev{width:.9em;height:.9em;transition:transform 160ms ease}
     details.abs[open] .abs__chev{transform:rotate(180deg)}
     .abs__body{margin-top:.5em}
 
-    /* Mobile table sanity */
+    /* Mobile tables */
     @media (max-width:600px){
       .table-wrap{-webkit-overflow-scrolling:touch}
       table{table-layout:auto;min-width:680px}
       .sched>summary{margin:.3em 0}
     }
   </style>
-  <!-- MathJax (in case you include TeX in content) -->
+  <!-- MathJax (in case TeX appears) -->
   <script>
     window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"],ignoreHtmlClass:"tex2jax_ignore",processHtmlClass:"tex2jax_process"}};
   </script>
@@ -155,165 +140,149 @@
     <section class="hero">
       <h1>MAT138 — Introduction to Proofs (Fall 2025)</h1>
       <div class="meta">
-        <span class="tag"><i class="fa fa-university"></i>&nbsp; University of Toronto</span>
-        <span class="tag"><i class="fa fa-calendar"></i>&nbsp; M/W/F · 10:00–10:50 AM</span>
-        <span class="tag"><i class="fa fa-map-marker"></i>&nbsp; Room TBA</span>
-        <span class="tag"><i class="fa fa-user"></i>&nbsp; Instructor: Alex Youcis</span>
-      </div>
-      <div>
-        <a class="btn" href="#syllabus"><i class="fa fa-file-pdf-o"></i> Syllabus</a>
-        <a class="btn" href="mailto:alex.youcis@gmail.com"><i class="fa fa-envelope"></i> Contact</a>
+        <span class="tag"><i class="fa fa-calendar"></i>&nbsp; Mon 4–5 PM; Wed 3–5 PM</span>
+        <span class="tag"><i class="fa fa-map-marker"></i>&nbsp; Mon: Bahen 1200; Wed: Bahen 1210</span>
       </div>
     </section>
 
-    <!-- INFO LAYOUT -->
+    <!-- QUICK INFO -->
     <section class="info-layout">
-      <!-- LEFT: Overview + Announcements -->
-      <article class="bubble about-card">
-        <h2>Course overview</h2>
-        <p>This course introduces rigorous mathematical proof writing and the language of modern mathematics: sets, functions, relations, induction, counting principles, and basic structures. We focus on clarity, precision, and problem-solving.</p>
-        <div class="resources-grid">
-          <div class="res-card">
-            <strong>Practice midterm</strong><br>
-            <a class="btn" href="#" style="margin-top:.5em">PDF</a>
-            <a class="btn" href="#" style="margin-top:.5em">Solutions</a>
-          </div>
-          <div class="res-card">
-            <strong>Midterm</strong><br>
-            <a class="btn" href="#" style="margin-top:.5em">PDF</a>
-            <a class="btn" href="#" style="margin-top:.5em">Solutions</a>
-          </div>
-          <div class="res-card">
-            <strong>Office hours</strong>
-            <p style="margin:.5em 0 0">TBA (posted week 1). Location: TBA.</p>
-          </div>
-        </div>
-      </article>
-
-      <aside class="bubble">
+      <article class="bubble">
         <h2>Quick info</h2>
-        <p><strong>Instructor:</strong> Alex Youcis (<a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>)</p>
-        <p><strong>Teaching assistants:</strong> TBA</p>
-        <p><strong>Grading (illustrative):</strong> Quizzes 20%, Midterm 30%, Final 40%, Participation 10%.</p>
-        <p><strong>Text/notes:</strong> Instructor notes and handouts posted here; see schedule for specifics.</p>
-        <h3 style="margin:.8em 0 .3em">Announcements</h3>
-        <ul class="announce-list">
-          <li>Welcome to MAT138! Check back for updates and posted solutions.</li>
-          <li>Quiz 1 will be announced in week 2.</li>
-        </ul>
-      </aside>
+        <p><strong>Instructor:</strong> Alex Youcis</p>
+        <p><strong>Email:</strong> <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a></p>
+        <p><strong>Syllabus:</strong> <a class="btn" href="#">PDF</a></p>
+        <p><strong>Office hours:</strong> TBA</p>
+        <p><strong>Notes / handouts:</strong> Posted below with schedule as available.</p>
+      </article>
     </section>
 
-    <!-- SYLLABUS -->
-    <section id="syllabus" class="bubble" style="margin-bottom:1.1em">
-      <h2>Syllabus</h2>
-      <p>Download the full syllabus: <a class="btn" href="#">PDF</a></p>
-      <p><strong>Topics preview:</strong> logic and proof techniques (direct, contrapositive, contradiction), sets/functions/relations, induction and recursion, counting principles, and selected applications.</p>
-      <p><strong>Policies (brief):</strong> academic integrity, collaboration rules, late work, and accommodations—see PDF for details.</p>
-    </section>
-
-    <!-- COURSE SCHEDULE -->
-    <section class="bubble" style="margin-bottom:1.1em">
-      <details class="sched" open>
+    <!-- THREE SIDE-BY-SIDE DROPDOWNS (closed by default) -->
+    <section class="drop-grid">
+      <!-- 1) Course schedule / board photos -->
+      <details class="sched" id="panel-schedule">
         <summary>
-          <button class="term-btn" type="button" aria-expanded="true">
-            <span class="term-btn__outer">
-              <span class="term-btn__middle">
-                <span class="term-btn__inner">
-                  <span class="term-btn__label">Course schedule</span>
-                  <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                  </svg>
-                </span>
-              </span>
-            </span>
+          <button class="term-btn" type="button" aria-expanded="false">
+            <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner">
+              <span class="term-btn__label">Course schedule / board photos</span>
+              <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </span></span></span>
           </button>
         </summary>
         <div class="table-wrap">
           <table>
             <colgroup>
-              <col style="width:10ch">
-              <col style="width:30ch">
+              <col style="width:16ch">
               <col>
+              <col style="width:22ch">
             </colgroup>
             <thead>
               <tr>
-                <th class="nowrap">Week</th>
-                <th>Topic</th>
-                <th>Readings / Notes</th>
+                <th class="nowrap">Date</th>
+                <th>Topic / Notes</th>
+                <th>Board photos</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td>Logic, statements, and quantifiers</td><td>TBA</td></tr>
-              <tr><td>2</td><td>Direct proofs &amp; counterexamples</td><td>TBA</td></tr>
-              <tr><td>3</td><td>Contrapositive and contradiction</td><td>TBA</td></tr>
-              <tr><td>4</td><td>Sets and functions</td><td>TBA</td></tr>
-              <tr><td>5</td><td>Induction I</td><td>TBA</td></tr>
-              <tr><td>6</td><td>Induction II · <em>Practice midterm</em> posted</td><td>TBA</td></tr>
-              <tr><td>7</td><td><strong>Midterm</strong> (in class)</td><td>Practice + solutions linked above</td></tr>
-              <tr><td>8</td><td>Relations and equivalence</td><td>TBA</td></tr>
-              <tr><td>9</td><td>Counting and combinatorics I</td><td>TBA</td></tr>
-              <tr><td>10</td><td>Counting and combinatorics II</td><td>TBA</td></tr>
-              <tr><td>11</td><td>Intro to structures (optional topics)</td><td>TBA</td></tr>
-              <tr><td>12</td><td>Review &amp; problem session</td><td>TBA</td></tr>
+              <!-- SEPTEMBER -->
+              <tr><td class="nowrap">Sep 3, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Sep 8, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Sep 10, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Sep 15, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Sep 17, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Sep 22, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Sep 24, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Sep 29, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+
+              <!-- OCTOBER -->
+              <tr><td class="nowrap">Oct 1, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Oct 6, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Oct 8, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Oct 13, 2025 (Mon)</td><td><em>No lecture (holiday)</em></td><td>—</td></tr>
+              <tr><td class="nowrap">Oct 15, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Oct 20, 2025 (Mon)</td><td><strong>Midterm review</strong></td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Oct 22, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Oct 27, 2025 (Mon)</td><td><em>Reading week — no lecture</em></td><td>—</td></tr>
+              <tr><td class="nowrap">Oct 29, 2025 (Wed)</td><td><em>Reading week — no lecture</em></td><td>—</td></tr>
+
+              <!-- NOVEMBER -->
+              <tr><td class="nowrap">Nov 3, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Nov 5, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Nov 10, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Nov 12, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Nov 17, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Nov 19, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Nov 24, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Nov 26, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <!-- 2) Quiz solutions -->
+      <details class="sched" id="panel-quizzes">
+        <summary>
+          <button class="term-btn" type="button" aria-expanded="false">
+            <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner">
+              <span class="term-btn__label">Quiz solutions</span>
+              <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </span></span></span>
+          </button>
+        </summary>
+        <div class="table-wrap">
+          <table>
+            <colgroup>
+              <col style="width:12ch"><col style="width:16ch"><col><col style="width:20ch">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="nowrap">Quiz</th>
+                <th class="nowrap">Date</th>
+                <th>Topics</th>
+                <th>Solutions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Quiz 1</td><td>Sep TBA</td><td>Statements, quantifiers, logical equivalence</td><td><a class="btn" href="#">PDF</a></td></tr>
+              <tr><td>Quiz 2</td><td>Oct TBA</td><td>Direct proofs; sets</td><td><a class="btn" href="#">PDF</a></td></tr>
+              <tr><td>Quiz 3</td><td>Oct TBA</td><td>Contrapositive/contradiction; functions</td><td><a class="btn" href="#">PDF</a></td></tr>
+              <tr><td>Quiz 4</td><td>Nov TBA</td><td>Induction</td><td><a class="btn" href="#">PDF</a></td></tr>
+              <tr><td>Quiz 5</td><td>Nov TBA</td><td>Counting</td><td><a class="btn" href="#">PDF</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <!-- 3) Practice midterm / midterm -->
+      <details class="sched" id="panel-midterm">
+        <summary>
+          <button class="term-btn" type="button" aria-expanded="false">
+            <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner">
+              <span class="term-btn__label">Practice midterm / midterm</span>
+              <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </span></span></span>
+          </button>
+        </summary>
+        <div class="table-wrap">
+          <table>
+            <colgroup><col style="width:28ch"><col><col></colgroup>
+            <thead>
+              <tr><th>Item</th><th>PDF</th><th>Solutions</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Practice midterm</td><td><a class="btn" href="#">PDF</a></td><td><a class="btn" href="#">PDF</a></td></tr>
+              <tr><td>Midterm</td><td><a class="btn" href="#">PDF</a></td><td><a class="btn" href="#">PDF</a></td></tr>
             </tbody>
           </table>
         </div>
       </details>
     </section>
-
-    <!-- QUIZ SOLUTIONS -->
-    <section class="bubble">
-      <h2>Quiz solutions</h2>
-      <div class="table-wrap">
-        <table>
-          <colgroup>
-            <col style="width:12ch"><col style="width:16ch"><col><col style="width:20ch">
-          </colgroup>
-          <thead>
-            <tr>
-              <th class="nowrap">Quiz</th>
-              <th class="nowrap">Date</th>
-              <th>Topics</th>
-              <th>Solutions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Quiz 1</td>
-              <td>Sep TBA</td>
-              <td>Statements, quantifiers, logical equivalence</td>
-              <td><a class="btn" href="#">PDF</a></td>
-            </tr>
-            <tr>
-              <td>Quiz 2</td>
-              <td>Oct TBA</td>
-              <td>Direct proofs; sets</td>
-              <td><a class="btn" href="#">PDF</a></td>
-            </tr>
-            <tr>
-              <td>Quiz 3</td>
-              <td>Oct TBA</td>
-              <td>Contrapositive/contradiction; functions</td>
-              <td><a class="btn" href="#">PDF</a></td>
-            </tr>
-            <tr>
-              <td>Quiz 4</td>
-              <td>Nov TBA</td>
-              <td>Induction</td>
-              <td><a class="btn" href="#">PDF</a></td>
-            </tr>
-            <tr>
-              <td>Quiz 5</td>
-              <td>Nov TBA</td>
-              <td>Counting</td>
-              <td><a class="btn" href="#">PDF</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
   </main>
 
   <footer style="background:var(--primary-color);color:#fff;padding:1em;text-align:center;">
@@ -323,17 +292,45 @@
   <script>
     function toggleMenu(){ document.getElementById('myNavbar').classList.toggle('responsive'); }
 
-    // Wire the pill button so clicking it toggles the details and keeps aria-expanded in sync.
-    (function(){
-      document.querySelectorAll('details.sched').forEach(details=>{
+    // Make the pill buttons toggle their <details> parents and keep aria-expanded in sync.
+    (function () {
+      document.querySelectorAll('details.sched').forEach(details => {
         const btn = details.querySelector('.term-btn');
-        if(!btn) return;
-        const reflect = ()=>btn.setAttribute('aria-expanded', details.open ? 'true':'false');
+        if (!btn) return;
+        const reflect = () => btn.setAttribute('aria-expanded', details.open ? 'true' : 'false');
         reflect();
-        btn.addEventListener('click', e=>{ e.preventDefault(); e.stopPropagation(); details.open=!details.open; reflect(); });
-        btn.addEventListener('keydown', e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); btn.click(); }});
+        btn.addEventListener('click', (e) => {
+          e.preventDefault(); e.stopPropagation();
+          details.open = !details.open; reflect();
+        });
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); btn.click(); }
+        });
         details.addEventListener('toggle', reflect);
       });
+    })();
+
+    // Hide siblings when one dropdown is open; show all when it closes.
+    (function(){
+      const panels = Array.from(document.querySelectorAll('.drop-grid details.sched'));
+      function updateVisibility(){
+        const open = panels.find(p => p.open);
+        panels.forEach(p => {
+          if (!open) { p.style.display = ''; return; }
+          p.style.display = (p === open) ? '' : 'none';
+        });
+      }
+      panels.forEach(p => p.addEventListener('toggle', updateVisibility));
+      // Ensure equal button widths initially (optional, but keeps symmetry)
+      function syncWidths(){
+        const inners = document.querySelectorAll('.drop-grid .term-btn__inner');
+        if (inners.length === 0) return;
+        inners.forEach(i => i.style.minWidth = '');
+        const max = Math.max(...Array.from(inners).map(i => i.offsetWidth));
+        inners.forEach(i => i.style.minWidth = max + 'px');
+      }
+      window.addEventListener('load', ()=>{ syncWidths(); updateVisibility(); });
+      window.addEventListener('resize', ()=>{ syncWidths(); });
     })();
   </script>
 </body>
