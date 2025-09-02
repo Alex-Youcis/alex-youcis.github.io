@@ -92,6 +92,10 @@
     .info-layout > .bubble{
       width:66.666%;      /* ~1/3 narrower horizontally */
     }
+    /* Center the Quick info title ONLY */
+    .info-layout > .bubble h2{
+      text-align:center;
+    }
     @media (max-width:700px){
       .info-layout > .bubble{ width:100%; }
     }
@@ -223,13 +227,10 @@
         <h2>Quick info</h2>
         <div class="quick-grid">
           <p><strong>Instructor:</strong> Alex Youcis</p>
-          <p><strong>Email:</strong> <a href="mailto:alex.youcis@utoronto.ca">alex.youcis@utoronto.ca</a></p>
+          <p><strong>Email:</strong> <a href="mailto:alex.youcis@utoronto.ca">alex.youcis@utoronto.ca</a> (see syllabus for email policy!)</p>
 
-          <p><strong>Office:</strong> TBA</p>
-          <p><strong>Office hours:</strong> TBA</p>
-
+          <p><strong>Office hours:</strong> Mon 2:30–4 (Bahen 6256)</p>
           <p><strong>Syllabus:</strong> <a class="btn" href="#">PDF</a></p>
-          <p><strong>Text:</strong> <em><a href="https://www.uoftbookstore.com/adoption-search-results?ccid=7796217&itemid=522440" target="_blank" rel="noopener">Proof and the Art of Mathematics</a></em> by Joel David Hamkins</p>
         </div>
       </article>
     </section>
@@ -403,7 +404,7 @@
       panels.forEach(p => p.addEventListener('toggle', updateVisibility));
       window.addEventListener('load', updateVisibility);
 
-      // Equalize button widths (after padding change)
+      // Equalize button widths
       function syncWidths(){
         const inners = grid.querySelectorAll('.term-btn__inner');
         inners.forEach(i => i.style.minWidth = '');
