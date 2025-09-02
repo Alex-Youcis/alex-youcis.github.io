@@ -33,12 +33,12 @@
       inset:0;
       z-index:-1;
       pointer-events:none;
-      opacity:.18; /* ~50% higher than .12 */
+      opacity:.18; /* higher visibility */
       background-image:url('https://2.bp.blogspot.com/-HDBMwAa9Jy8/UGwvGf5KiWI/AAAAAAAABbI/JdYXF6lzgBU/s1600/Volume1-p379.jpg');
-      background-size: contain;    /* show more of the image */
-      background-position: center; /* keep centered */
+      background-size: contain;
+      background-position: center;
       background-repeat:no-repeat;
-      background-color: var(--background-color); /* fill any letterbox area */
+      background-color: var(--background-color);
     }
 
     header{background:var(--primary-color);position:sticky;top:0;z-index:1000;box-shadow:0 2px 4px rgba(0,0,0,.1)}
@@ -81,16 +81,16 @@
     }
     h2{margin-top:0}
 
-    /* Quick info: keep layout but make it ~2/3 width and centered */
+    /* Quick info: centered & slightly wider */
     .info-layout{
       display:grid;
       grid-template-columns:1fr;
       gap:24px;
       margin-bottom:1.25em;
-      justify-items:center; /* center the single child */
+      justify-items:center;
     }
     .info-layout > .bubble{
-      width:66.666%;      /* ~1/3 narrower horizontally */
+      width:72%;      /* slightly wider so the email stays on one line */
     }
     /* Center the Quick info title ONLY */
     .info-layout > .bubble h2{
@@ -103,9 +103,12 @@
     .quick-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:8px 24px;
+      gap:6px 24px;                    /* tighter vertical gap */
     }
-    .quick-grid p{margin:.2em 0}
+    .quick-grid p{
+      margin:.1em 0;                   /* smaller margins */
+      line-height:1.2;                 /* tighter line-height to reduce height */
+    }
     @media (max-width:700px){
       .quick-grid{grid-template-columns:1fr}
     }
@@ -132,7 +135,7 @@
     .sched>summary{display:flex;justify-content:center;align-items:center;margin:0;list-style:none}
     .sched>summary::-webkit-details-marker{display:none}
 
-    /* Layered pill button — horizontally 1/3 narrower by reducing horizontal padding */
+    /* Layered pill button — narrower horizontally */
     .term-btn{
       --label-size: calc(var(--info-btn-font-size)*1.15);
       --btn-h: calc(var(--label-size)*3);
@@ -147,7 +150,6 @@
       gap:calc(var(--btn-h)*0.18);
       background:#fff;border-radius:calc(var(--radius) - (2*var(--band)));
       height:var(--btn-h);
-      /* ↓ reduce each side padding from 1.4* to ~0.94* (≈ 2/3 width) */
       padding:0 calc(var(--btn-h) * 0.94);
     }
     .term-btn__label{font:700 var(--label-size)/1.05 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#000;white-space:nowrap}
@@ -172,7 +174,6 @@
     tr:last-child td{border-bottom:none}
     .nowrap{white-space:nowrap}
 
-    /* Description toggles if used later */
     details.abs{background:transparent;padding:0;box-shadow:none;border-radius:0}
     .abs__btn{display:inline-flex;align-items:center;gap:.4em;padding:.25em .55em;border:1px solid #cfcfd4;border-radius:8px;font-weight:700;background:#fff;cursor:pointer}
     .abs__chev{width:.9em;height:.9em;transition:transform 160ms ease}
@@ -221,7 +222,7 @@
       </div>
     </section>
 
-    <!-- QUICK INFO (narrower & centered) -->
+    <!-- QUICK INFO (slightly wider & shorter) -->
     <section class="info-layout">
       <article class="bubble">
         <h2>Quick info</h2>
@@ -327,22 +328,22 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>Quiz 1</td><td>Sep TBA</td><td>Statements, quantifiers, logical equivalence</td><td><a class="btn" href="#">PDF</a></td></tr>
-              <tr><td>Quiz 2</td><td>Oct TBA</td><td>Direct proofs; sets</td><td><a class="btn" href="#">PDF</a></td></tr>
-              <tr><td>Quiz 3</td><td>Oct TBA</td><td>Contrapositive/contradiction; functions</td><td><a class="btn" href="#">PDF</a></td></tr>
-              <tr><td>Quiz 4</td><td>Nov TBA</td><td>Induction</td><td><a class="btn" href="#">PDF</a></td></tr>
-              <tr><td>Quiz 5</td><td>Nov TBA</td><td>Counting</td><td><a class="btn" href="#">PDF</a></td></tr>
+              <tr><td>Quiz 1</td><td>Sep TBA</td><td>Statements, quantifiers, logical equivalence</td><td><a class="btn" href="#">To be posted</a></td></tr>
+              <tr><td>Quiz 2</td><td>Oct TBA</td><td>Direct proofs; sets</td><td><a class="btn" href="#">To be posted</a></td></tr>
+              <tr><td>Quiz 3</td><td>Oct TBA</td><td>Contrapositive/contradiction; functions</td><td><a class="btn" href="#">To be posted</a></td></tr>
+              <tr><td>Quiz 4</td><td>Nov TBA</td><td>Induction</td><td><a class="btn" href="#">To be posted</a></td></tr>
+              <tr><td>Quiz 5</td><td>Nov TBA</td><td>Counting</td><td><a class="btn" href="#">To be posted</a></td></tr>
             </tbody>
           </table>
         </div>
       </details>
 
-      <!-- 3) Practice midterm / midterm -->
+      <!-- 3) Practice exams / exams -->
       <details class="sched" id="panel-midterm">
         <summary>
           <button class="term-btn" type="button" aria-expanded="false">
             <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner">
-              <span class="term-btn__label">Practice midterm / midterm</span>
+              <span class="term-btn__label">Practice exams / exams</span>
               <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
               </svg>
@@ -353,11 +354,13 @@
           <table>
             <colgroup><col style="width:28ch"><col><col></colgroup>
             <thead>
-              <tr><th>Item</th><th>PDF</th><th>Solutions</th></tr>
+              <tr><th>Item</th><th>Exam</th><th>Solutions</th></tr>
             </thead>
             <tbody>
-              <tr><td>Practice midterm</td><td><a class="btn" href="#">PDF</a></td><td><a class="btn" href="#">PDF</a></td></tr>
-              <tr><td>Midterm</td><td><a class="btn" href="#">PDF</a></td><td><a class="btn" href="#">PDF</a></td></tr>
+              <tr><td>Practice midterm</td><td><a class="btn" href="#">To be posted</a></td><td><a class="btn" href="#">To be posted</a></td></tr>
+              <tr><td>Midterm</td><td><a class="btn" href="#">To be posted</a></td><td><a class="btn" href="#">To be posted</a></td></tr>
+              <tr><td>Practice final</td><td><a class="btn" href="#">To be posted</a></td><td><a class="btn" href="#">To be posted</a></td></tr>
+              <tr><td>Final</td><td><a class="btn" href="#">To be posted</a></td><td><a class="btn" href="#">To be posted</a></td></tr>
             </tbody>
           </table>
         </div>
