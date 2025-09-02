@@ -47,24 +47,9 @@
       top:0;
       z-index:1000;
       box-shadow:0 2px 4px rgba(0,0,0,.1);
-      /* allow background crests */
       overflow:hidden;
     }
-    /* Three low-opacity U of T crests inside the header (like seminar page) */
-    header::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      opacity:.22;
-      background-image:
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
-      background-repeat: no-repeat, no-repeat, no-repeat;
-      background-position: 16% center, 50% center, 84% center;
-      background-size: auto 96%, auto 96%, auto 96%;
-    }
+    /* (Removed header crests; now placed on hero) */
 
     .navbar{position:relative; display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px}
     .nav-links{display:flex}
@@ -90,6 +75,22 @@
       position:relative;overflow:hidden;background:var(--card);border-radius:14px;padding:1.25em 1.5em;
       box-shadow:0 2px 10px rgba(0,0,0,.05);display:grid;gap:.75em;margin-bottom:1.5em;border:3px solid #000;
     }
+    /* Three low-opacity U of T crests inside the hero (like seminar page) */
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:.22;
+      background-image:
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
+      background-repeat: no-repeat, no-repeat, no-repeat;
+      background-position: 16% center, 50% center, 84% center;
+      background-size: auto 96%, auto 96%, auto 96%;
+    }
+
     .hero h1{margin:.2em 0 .1em;font-size:clamp(1.6rem,3.2vw,2.1rem);position:relative}
     .meta{display:flex;flex-wrap:wrap;gap:.75em 1.25em;font-size:.98rem;color:#222;position:relative}
     .tag{background:var(--secondary-color);color:#111;border-radius:999px;padding:.25em .7em}
@@ -117,7 +118,6 @@
       width:80%;          /* slightly wider so email stays on one line */
       padding-top:0.5em;  /* halve space above "Quick info" title */
     }
-    /* Center the Quick info title ONLY */
     .info-layout > .bubble h2{
       text-align:center;
     }
@@ -128,11 +128,11 @@
     .quick-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:6px 24px;           /* tight vertical gap */
+      gap:6px 24px;
     }
     .quick-grid p{
       margin:.1em 0;
-      line-height:1.2;        /* tighter */
+      line-height:1.2;
     }
     @media (max-width:700px){
       .quick-grid{grid-template-columns:1fr}
@@ -252,14 +252,13 @@
       </div>
     </section>
 
-    <!-- QUICK INFO (slightly wider & top whitespace halved) -->
+    <!-- QUICK INFO -->
     <section class="info-layout">
       <article class="bubble">
         <h2>Quick info</h2>
         <div class="quick-grid">
           <p><strong>Instructor:</strong> Alex Youcis</p>
           <p><strong>Email:</strong> <a href="mailto:alex.youcis@utoronto.ca">alex.youcis@utoronto.ca</a> (see syllabus for email policy!)</p>
-
           <p><strong>Office hours:</strong> Mon 2:30–4 (Bahen 6256)</p>
           <p><strong>Syllabus:</strong> <a class="btn" href="#">PDF</a></p>
         </div>
@@ -268,12 +267,12 @@
 
     <!-- TRIANGULAR DROPDOWNS -->
     <section class="drop-grid" id="dropGrid">
-      <!-- 1) Course schedule / board photos -->
+      <!-- 1) Course schedule -->
       <details class="sched" id="panel-schedule">
         <summary>
           <button class="term-btn" type="button" aria-expanded="false">
             <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner">
-              <span class="term-btn__label">Course schedule / board photos</span>
+              <span class="term-btn__label">Course schedule</span>
               <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
               </svg>
@@ -313,20 +312,20 @@
               <tr><td class="nowrap">Lecture 11 — Oct 8, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
               <tr><td class="nowrap">— Oct 13, 2025 (Mon)</td><td><em>No lecture (holiday)</em></td><td>—</td><td>—</td></tr>
               <tr><td class="nowrap">Lecture 12 — Oct 15, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 13 — Oct 20, 2025 (Mon)</td><td><strong>Midterm review</strong></td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 14 — Oct 22, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">— Oct 20, 2025 (Mon)</td><td><strong>Midterm review</strong></td><td>—</td><td>—</td></tr>
+              <tr><td class="nowrap">— Oct 22, 2025 (Wed)</td><td><strong>Midterm</strong></td><td>—</td><td>—</td></tr>
               <tr><td class="nowrap">— Oct 27, 2025 (Mon)</td><td><em>Reading week — no lecture</em></td><td>—</td><td>—</td></tr>
               <tr><td class="nowrap">— Oct 29, 2025 (Wed)</td><td><em>Reading week — no lecture</em></td><td>—</td><td>—</td></tr>
 
               <!-- NOVEMBER -->
-              <tr><td class="nowrap">Lecture 15 — Nov 3, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 16 — Nov 5, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 17 — Nov 10, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 18 — Nov 12, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 19 — Nov 17, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 20 — Nov 19, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 21 — Nov 24, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 22 — Nov 26, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 13 — Nov 3, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 14 — Nov 5, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 15 — Nov 10, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 16 — Nov 12, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 17 — Nov 17, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 18 — Nov 19, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 19 — Nov 24, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 20 — Nov 26, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
             </tbody>
           </table>
         </div>
