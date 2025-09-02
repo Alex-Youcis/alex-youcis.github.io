@@ -3,228 +3,231 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MAT138 — Introduction to Proofs (Fall 2025)</title>
+  <title>MAT138 — Introduction to Proofs (U of T)</title>
+
+  <!-- Fonts & Icons (match site) -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+
   <style>
-    :root{
-      --primary-color:#1D1E18;
-      --secondary-color:#C5C3C6;
-      --background-color:#DCDCDD;
-      --text-color:#1D1E18;
-      --button-color:#BF0603;
-      --card:#fff;
-      --border:#e1e1e6;
-      --info-btn-font-size:1rem;
+    /* ===== Site palette (match your site) ===== */
+    :root {
+      --primary-color: #1D1E18;
+      --secondary-color: #C5C3C6;
+      --background-color: #DCDCDD;
+      --text-color: #1D1E18;
+      --button-color: #BF0603; /* red accent */
+      --card: #ffffff;
+      --border: #e1e1e6;
+
+      /* master text size for info buttons */
+      --info-btn-font-size: 1rem;
     }
 
-    /* Page-wide background image (outside bubbles only) */
-    html, body { min-height:100%; }
-    body{
-      font-family:'Open Sans',sans-serif;
-      background: var(--background-color);
-      color:var(--text-color);
-      margin:0;
-      position:relative;
-    }
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      z-index:-1;
-      pointer-events:none;
-      opacity:.18; /* higher visibility */
-      background-image:url('https://2.bp.blogspot.com/-HDBMwAa9Jy8/UGwvGf5KiWI/AAAAAAAABbI/JdYXF6lzgBU/s1600/Volume1-p379.jpg');
-      background-size: contain;
-      background-position: center;
-      background-repeat:no-repeat;
+    /* ===== Global ===== */
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+
+      /* RESTORED: page-wide background image */
       background-color: var(--background-color);
+      background-image: url('https://2.bp.blogspot.com/-HDBMwAa9Jy8/UGwvGf5KiWI/AAAAAAAABbI/JdYXF6lzgBU/s1600/Volume1-p379.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
     }
 
-    header{
-      background:var(--primary-color);
-      position:sticky;
-      top:0;
-      z-index:1000;
-      box-shadow:0 2px 4px rgba(0,0,0,.1);
-      overflow:hidden;
+    /* ===== Header / Navbar (identical behavior to your other pages) ===== */
+    header { background: var(--primary-color); position: sticky; top: 0; z-index: 1000; }
+    .navbar { display:flex; justify-content:flex-end; align-items:center; padding:0 1em; height:60px; }
+    .nav-links { display:flex; }
+    .nav-links a {
+      color:#fff; text-decoration:none; margin:0 1em; position:relative; transition:color .3s ease;
     }
-    /* (Removed header crests; now placed on hero) */
+    .nav-links a::after {
+      content:''; position:absolute; width:0; height:2px; background:var(--secondary-color);
+      left:50%; bottom:-5px; transition:all .3s ease;
+    }
+    .nav-links a:hover { color: var(--secondary-color); }
+    .nav-links a:hover::after { left:0; width:100%; }
 
-    .navbar{position:relative; display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px}
-    .nav-links{display:flex}
-    .nav-links a{color:#fff;text-decoration:none;margin:0 1em;position:relative;transition:color .3s}
-    .nav-links a::after{content:'';position:absolute;width:0;height:2px;background:var(--secondary-color);left:50%;bottom:-5px;transition:all .3s}
-    .nav-links a:hover{color:var(--secondary-color)}
-    .nav-links a:hover::after{left:0;width:100%}
-    .nav-mobile{display:none}
+    /* Mobile nav (same as Home/NT) */
+    .nav-mobile { display:none; }
     @media (max-width:768px){
-      .nav-links{display:none;flex-direction:column;background:var(--primary-color);position:absolute;top:60px;right:0;width:220px}
-      .nav-links a{margin:0;padding:1em;text-align:right;border-bottom:1px solid var(--secondary-color)}
-      .nav-mobile{display:flex;align-items:center}
-      .nav-text{color:#fff;margin-right:.5em}
-      .icon{color:#fff;font-size:24px;cursor:pointer}
-      .navbar.responsive .nav-links{display:flex}
-      .navbar.responsive .nav-mobile .nav-text{display:none}
+      .nav-links{ display:none; flex-direction:column; background:var(--primary-color); position:absolute; top:60px; right:0; width:220px; }
+      .nav-links a{ margin:0; padding:1em; text-align:right; border-bottom:1px solid var(--secondary-color); }
+      .nav-mobile{ display:flex; align-items:center; }
+      .nav-text{ color:#fff; margin-right:.5em; }
+      .icon{ color:#fff; font-size:24px; cursor:pointer; }
+      .navbar.responsive .nav-links{ display:flex; }
+      .navbar.responsive .nav-mobile .nav-text{ display:none; }
     }
 
-    main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
+    /* ===== Main container ===== */
+    main { padding: 2em 1.25em 3em; max-width: 1200px; margin: 0 auto; }
 
-    /* HERO card */
-    .hero{
-      position:relative;overflow:hidden;background:var(--card);border-radius:14px;padding:1.25em 1.5em;
-      box-shadow:0 2px 10px rgba(0,0,0,.05);display:grid;gap:.75em;margin-bottom:1.5em;border:3px solid #000;
+    /* ===== Reusable white bubble ===== */
+    .bubble {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 1.1em 1.25em;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05);
+      position: relative;
     }
-    /* Three low-opacity U of T crests inside the hero (like seminar page) */
+    h1, h2 { margin-top: 0; }
+
+    /* ===== Hero (title card) with three U of T crests ===== */
+    .hero {
+      position: relative; overflow: hidden;
+      display: grid; gap: .75em;
+      margin-bottom: 1.25em;
+    }
     .hero::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      opacity:.22;
+      /* three crests, equi-spaced horizontally, low opacity */
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.22;
       background-image:
         url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
         url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
         url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
       background-repeat: no-repeat, no-repeat, no-repeat;
-      background-position: 16% center, 50% center, 84% center;
+      background-position: 16% center, 50% center, 84% center; /* equidistributed */
       background-size: auto 96%, auto 96%, auto 96%;
     }
-
-    .hero h1{margin:.2em 0 .1em;font-size:clamp(1.6rem,3.2vw,2.1rem);position:relative}
-    .meta{display:flex;flex-wrap:wrap;gap:.75em 1.25em;font-size:.98rem;color:#222;position:relative}
-    .tag{background:var(--secondary-color);color:#111;border-radius:999px;padding:.25em .7em}
-
-    /* Reusable bubble */
-    .bubble{
-      background:var(--card);
-      border-radius:14px;
-      padding:1em 1.2em;
-      box-shadow:0 2px 10px rgba(0,0,0,.05);
-      display:flex;flex-direction:column;
-      border:3px solid #000;
+    /* Scale the crests down on small screens so they aren't cramped */
+    @media (max-width: 900px){
+      .hero::before{ background-size: auto 75%, auto 75%, auto 75%; }
     }
-    h2{margin-top:0}
+    @media (max-width: 600px){
+      .hero::before{ background-size: auto 60%, auto 60%, auto 60%; background-position: 18% center, 50% center, 82% center; }
+    }
+    @media (max-width: 420px){
+      .hero::before{ background-size: auto 48%, auto 48%, auto 48%; }
+    }
 
-    /* Quick info: centered & slightly wider; halve top whitespace */
-    .info-layout{
+    .hero h1 { margin: .2em 0 .1em; font-size: clamp(1.6rem, 3.2vw, 2.1rem); position: relative; }
+    .meta { position: relative; display:flex; flex-wrap:wrap; gap:.55em 1em; font-size: .98rem; color:#222; }
+    .meta .tag { background: var(--secondary-color); color:#111; border-radius: 999px; padding: .25em .7em; }
+
+    /* ===== Quick info (centered, 2-column list) ===== */
+    .quick-wrap { display:flex; justify-content:center; }
+    .quick-info {
+      width: 100%;
+      max-width: 720px; /* kept from your previous “fits on one line” tuning */
+      margin: 0 auto 1.2em;
+    }
+    .quick-info h2 { text-align:center; margin: .35em 0 .6em; }
+    .quick-grid {
+      display:grid; grid-template-columns: 1fr 1fr; gap:.3em 1.2em;
+      align-items: start;
+    }
+    .quick-grid div { padding: .15em 0; }
+    @media (max-width: 640px){
+      .quick-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Triangular button layout (two top, one centered bottom) ===== */
+    .tri-grid {
       display:grid;
-      grid-template-columns:1fr;
-      gap:24px;
-      margin-bottom:1.25em;
-      justify-items:center;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: start;
     }
-    .info-layout > .bubble{
-      width:80%;          /* slightly wider so email stays on one line */
-      padding-top:0.5em;  /* halve space above "Quick info" title */
-    }
-    .info-layout > .bubble h2{
-      text-align:center;
-    }
-    @media (max-width:700px){
-      .info-layout > .bubble{ width:100%; }
+    .tri-grid > .tri-center { grid-column: 1 / -1; justify-self: center; }
+    @media (max-width: 720px){
+      .tri-grid { grid-template-columns: 1fr; }
+      .tri-grid > .tri-center { grid-column: auto; }
     }
 
-    .quick-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:6px 24px;
-    }
-    .quick-grid p{
-      margin:.1em 0;
-      line-height:1.2;
-    }
-    @media (max-width:700px){
-      .quick-grid{grid-template-columns:1fr}
-    }
+    /* ===== Exact layered pill buttons (unchanged proportions on desktop) ===== */
+    .sched > summary { list-style:none; }
+    .sched > summary::-webkit-details-marker { display:none; }
+    .sched > summary { display:flex; justify-content:center; align-items:center; margin:.45em 0; }
 
-    /* Triangular formation for three dropdowns */
-    .drop-grid{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(260px, 1fr));
-      gap:16px;
-      margin-bottom:1.1em;
-      align-items:start;
-      justify-items:center;
+    .term-btn {
+      --label-size: var(--info-btn-font-size); /* keep the established scale */
+      --btn-h: calc(var(--label-size) * 3);
+      --band: calc(var(--btn-h) * 0.075);
+      --radius: calc(var(--btn-h) * 0.5);
+      border: 0; background: transparent; padding: 0; cursor: pointer; line-height: 0;
     }
-    .drop-grid > details:nth-child(3){
-      grid-column:1 / -1;
-      justify-self:center;
+    .term-btn__outer { display:inline-block; background:#000; padding: var(--band); border-radius: var(--radius); }
+    .term-btn__middle{ display:inline-block; background: var(--button-color); padding: var(--band); border-radius: calc(var(--radius) - var(--band)); }
+    .term-btn__inner {
+      display:inline-flex; align-items:center; justify-content:center;
+      gap: calc(var(--btn-h) * 0.18);
+      background:#fff; border-radius: calc(var(--radius) - (2 * var(--band)));
+      height: var(--btn-h);
+      /* RESTORED: original width feel */
+      padding: 0 calc(var(--btn-h) * 1.4);
+      min-width: 0; /* allow equalize script to set min-width */
     }
-    @media (max-width:960px){
-      .drop-grid{grid-template-columns:1fr}
-      .drop-grid > details:nth-child(3){grid-column:auto;justify-self:stretch}
+    .term-btn__label {
+      font: 700 var(--label-size)/1.05 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:#000; white-space:nowrap;
     }
-
-    .sched{padding:0;margin:0;border:none;background:transparent;box-shadow:none}
-    .sched>summary{display:flex;justify-content:center;align-items:center;margin:0;list-style:none}
-    .sched>summary::-webkit-details-marker{display:none}
-
-    /* Layered pill button — narrower horizontally */
-    .term-btn{
-      --label-size: calc(var(--info-btn-font-size)*1.15);
-      --btn-h: calc(var(--label-size)*3);
-      --band: calc(var(--btn-h)*0.075);
-      --radius: calc(var(--btn-h)*0.5);
-      border:0;background:transparent;padding:0;cursor:pointer;line-height:0
+    .term-btn__chevron {
+      width: calc(var(--btn-h) * 0.28); height: calc(var(--btn-h) * 0.28);
+      flex:0 0 auto; transition: transform 160ms ease; color:#000;
     }
-    .term-btn__outer{display:inline-block;background:#000;padding:var(--band);border-radius:var(--radius)}
-    .term-btn__middle{display:inline-block;background:var(--button-color);padding:var(--band);border-radius:calc(var(--radius) - var(--band))}
-    .term-btn__inner{
-      display:inline-flex;align-items:center;justify-content:center;
-      gap:calc(var(--btn-h)*0.18);
-      background:#fff;border-radius:calc(var(--radius) - (2*var(--band)));
-      height:var(--btn-h);
-      padding:0 calc(var(--btn-h) * 0.94);
+    .term-btn:focus-visible .term-btn__inner { outline: 2px solid #333; outline-offset: 3px; }
+    .term-btn:hover .term-btn__inner { background:#f7f7f7; }
+    .term-btn[aria-expanded="true"] .term-btn__chevron { transform: rotate(180deg); }
+    .sched[open] .term-btn__chevron { transform: rotate(180deg); }
+
+    /* Equalize widths (JS sets min-width) so two top buttons align nicely */
+    .term-row { display:grid; grid-template-columns: 1fr 1fr; gap:12px; align-items: start; }
+    .term-row .cell { display:flex; justify-content:center; }
+    @media (max-width:720px){ .term-row { grid-template-columns: 1fr; } }
+
+    /* Hide siblings when one is open + center the open one */
+    .tri-grid.solo,
+    .term-row.solo { grid-template-columns: 1fr !important; }
+    .tri-grid.solo > *:not(.is-open),
+    .term-row.solo > .cell:not(.is-open) { display:none; }
+    .is-open { justify-self: center; }
+
+    /* ===== Tables (course schedule / quizzes) ===== */
+    .table-wrap { overflow-x:auto; background:var(--card); border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+    table { width:100%; border-collapse: collapse; table-layout: fixed; }
+    thead { background: #f4f4f6; }
+    th, td { padding: .85em 1.2em; border-bottom: 1px solid #e6e6ea; vertical-align: top; overflow-wrap:anywhere; word-break:break-word; }
+    th { text-align:left; font-weight:700; }
+    tr:last-child td { border-bottom: none; }
+    .nowrap { white-space: nowrap; }
+
+    /* Column width preferences for course schedule */
+    .col-lecture { width: 16ch; } /* widened first column */
+    .col-chapter { width: 14ch; }
+    /* others flex */
+
+    /* Abstract/Description toggles inside tables */
+    details.abs { background: transparent; padding: 0; box-shadow: none; border-radius: 0; }
+    .abs__btn {
+      display: inline-flex; align-items: center; gap: .4em;
+      padding: .25em .55em; border: 1px solid #cfcfd4; border-radius: 8px;
+      font-weight: 700; background: #fff; cursor: pointer;
     }
-    .term-btn__label{font:700 var(--label-size)/1.05 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#000;white-space:nowrap}
-    .term-btn__chevron{width:calc(var(--btn-h)*0.28);height:calc(var(--btn-h)*0.28);flex:0 0 auto;transition:transform 160ms ease;color:#000}
-    .term-btn:hover .term-btn__inner{background:#f7f7f7}
-    .sched[open] .term-btn__chevron{transform:rotate(180deg)}
+    .abs__chev { width: 0.9em; height: 0.9em; transition: transform 160ms ease; }
+    details.abs[open] .abs__chev { transform: rotate(180deg); }
+    .abs__body { margin-top: .5em; }
 
-    /* When only one panel is visible, center it */
-    .drop-grid.single-open{
-      display:flex;
-      justify-content:center;
-      align-items:flex-start;
-      gap:16px;
-    }
-
-    /* Tables */
-    .table-wrap{overflow-x:auto;background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.05);margin-top:.8em}
-    table{width:100%;border-collapse:collapse;table-layout:fixed}
-    thead{background:#f4f4f6}
-    th,td{padding:.85em 1.2em;border-bottom:1px solid #e6e6ea;vertical-align:top;overflow-wrap:anywhere;word-break:break-word}
-    th{text-align:left;font-weight:700}
-    tr:last-child td{border-bottom:none}
-    .nowrap{white-space:nowrap}
-
-    /* Course schedule column widths (first wider) */
-    .sched-course col:first-child { width: 28ch; } /* increased */
-    .sched-course col:nth-child(3){ width: 20ch; }
-    .sched-course col:nth-child(4){ width: 18ch; }
-
-    details.abs{background:transparent;padding:0;box-shadow:none;border-radius:0}
-    .abs__btn{display:inline-flex;align-items:center;gap:.4em;padding:.25em .55em;border:1px solid #cfcfd4;border-radius:8px;font-weight:700;background:#fff;cursor:pointer}
-    .abs__chev{width:.9em;height:.9em;transition:transform 160ms ease}
-    details.abs[open] .abs__chev{transform:rotate(180deg)}
-    .abs__body{margin-top:.5em}
-
-    /* Mobile tables */
-    @media (max-width:600px){
-      .table-wrap{-webkit-overflow-scrolling:touch}
-      table{table-layout:auto;min-width:680px}
-      .sched>summary{margin:.3em 0}
+    /* ===== Mobile polish (without changing desktop) ===== */
+    @media (max-width: 600px) {
+      .hero { text-align: center; padding: 1.1em 1em 1.4em; }
+      .meta { justify-content: center; gap: .5em .6em; }
+      .term-btn__inner { width: 100%; padding: 0 calc(var(--btn-h) * 0.6); min-width: 0 !important; }
+      .table-wrap { -webkit-overflow-scrolling: touch; }
+      .table-wrap table { table-layout: auto; min-width: 680px; } /* scroll instead of squish */
+      .table-wrap th, .table-wrap td { word-break: normal; overflow-wrap: break-word; }
+      .abs__btn { padding: .35em .7em; }
     }
   </style>
-  <!-- MathJax (in case TeX appears) -->
-  <script>
-    window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"],ignoreHtmlClass:"tex2jax_ignore",processHtmlClass:"tex2jax_process"}};
-  </script>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
+  <!-- ===== Header / Nav (same markup/behavior as your other pages; no inline active color) ===== -->
   <header>
     <nav class="navbar" id="myNavbar">
       <div class="nav-mobile">
@@ -237,121 +240,159 @@
         <a href="notes.html">Expository material</a>
         <a href="friends.html">Friends</a>
         <a href="nt-seminar.html">U of T number theory seminar</a>
-        <a href="MAT138.html" aria-current="page">MAT138</a>
+        <a href="#">MAT138</a>
       </div>
     </nav>
   </header>
 
   <main>
-    <!-- HERO -->
-    <section class="hero">
-      <h1>MAT138 — Introduction to Proofs (Fall 2025)</h1>
+    <!-- ===== Title card with crests in background ===== -->
+    <section class="bubble hero">
+      <h1>MAT138 — Introduction to Proofs</h1>
       <div class="meta">
-        <span class="tag"><i class="fa fa-calendar"></i>&nbsp; Mon 4–5 PM; Wed 3–5 PM</span>
-        <span class="tag"><i class="fa fa-map-marker"></i>&nbsp; Mon: Bahen 1200; Wed: Bahen 1210</span>
+        <span class="tag"><i class="fa fa-calendar"></i>&nbsp; Schedule: Mon 4–5, Wed 3–5</span>
+        <span class="tag"><i class="fa fa-map-marker"></i>&nbsp; Rooms: Bahen 1200 (Mon), Bahen 1210 (Wed)</span>
       </div>
     </section>
 
-    <!-- QUICK INFO -->
-    <section class="info-layout">
-      <article class="bubble">
+    <!-- ===== Quick info ===== -->
+    <section class="quick-wrap">
+      <article class="bubble quick-info">
         <h2>Quick info</h2>
         <div class="quick-grid">
-          <p><strong>Instructor:</strong> Alex Youcis</p>
-          <p><strong>Email:</strong> <a href="mailto:alex.youcis@utoronto.ca">alex.youcis@utoronto.ca</a> (see syllabus for email policy!)</p>
-          <p><strong>Office hours:</strong> Mon 2:30–4 (Bahen 6256)</p>
-          <p><strong>Syllabus:</strong> <a class="btn" href="https://alex-youcis.github.io/Course%20syllabus.pdf">PDF</a></p>
+          <div><strong>Instructor:</strong> Alex Youcis</div>
+          <div><strong>Email:</strong> alex.youcis@utoronto.ca <em>(see syllabus for email policy!)</em></div>
+          <div><strong>Office hours:</strong> Mon 2:30–4:00 <em>(Bahen 6256)</em></div>
+          <div><strong>Syllabus:</strong> <span>To be posted</span></div>
         </div>
       </article>
     </section>
 
-    <!-- TRIANGULAR DROPDOWNS -->
-    <section class="drop-grid" id="dropGrid">
-      <!-- 1) Course schedule -->
-      <details class="sched" id="panel-schedule">
+    <!-- ===== Triangular buttons (two top, one centered bottom). 
+           When one opens, the others hide; when closed, they reappear. ===== -->
+    <section class="tri-grid" id="triGrid">
+      <!-- Row 1: two buttons -->
+      <details class="sched" id="btnCourse">
         <summary>
           <button class="term-btn" type="button" aria-expanded="false">
-            <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner">
-              <span class="term-btn__label">Course schedule</span>
-              <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-              </svg>
-            </span></span></span>
-          </button>
-        </summary>
-        <div class="table-wrap">
-          <table class="sched-course">
-            <colgroup>
-              <col>  <!-- wider first column via CSS above -->
-              <col>
-              <col>
-              <col>
-            </colgroup>
-            <thead>
-              <tr>
-                <th class="nowrap">Lecture — Date</th>
-                <th>Topic / Notes</th>
-                <th>Text (chapter)</th>
-                <th>Board photos</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- SEPTEMBER -->
-              <tr><td class="nowrap">Lecture 1 — Sep 3, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 2 — Sep 8, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 3 — Sep 10, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 4 — Sep 15, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 5 — Sep 17, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 6 — Sep 22, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 7 — Sep 24, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 8 — Sep 29, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-
-              <!-- OCTOBER -->
-              <tr><td class="nowrap">Lecture 9 — Oct 1, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 10 — Oct 6, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 11 — Oct 8, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">— Oct 13, 2025 (Mon)</td><td><em>No lecture (holiday)</em></td><td>—</td><td>—</td></tr>
-              <tr><td class="nowrap">Lecture 12 — Oct 15, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">— Oct 20, 2025 (Mon)</td><td><strong>Midterm review</strong></td><td>—</td><td>—</td></tr>
-              <tr><td class="nowrap">— Oct 22, 2025 (Wed)</td><td><strong>Midterm</strong></td><td>—</td><td>—</td></tr>
-              <tr><td class="nowrap">— Oct 27, 2025 (Mon)</td><td><em>Reading week — no lecture</em></td><td>—</td><td>—</td></tr>
-              <tr><td class="nowrap">— Oct 29, 2025 (Wed)</td><td><em>Reading week — no lecture</em></td><td>—</td><td>—</td></tr>
-
-              <!-- NOVEMBER -->
-              <tr><td class="nowrap">Lecture 13 — Nov 3, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 14 — Nov 5, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 15 — Nov 10, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 16 — Nov 12, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 17 — Nov 17, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 18 — Nov 19, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 19 — Nov 24, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-              <tr><td class="nowrap">Lecture 20 — Nov 26, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-      <!-- 2) Quiz solutions -->
-      <details class="sched" id="panel-quizzes">
-        <summary>
-          <button class="term-btn" type="button" aria-expanded="false">
-            <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner">
-              <span class="term-btn__label">Quiz solutions</span>
-              <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-              </svg>
-            </span></span></span>
+            <span class="term-btn__outer">
+              <span class="term-btn__middle">
+                <span class="term-btn__inner">
+                  <span class="term-btn__label">Course schedule</span>
+                  <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </span>
+              </span>
+            </span>
           </button>
         </summary>
         <div class="table-wrap">
           <table>
             <colgroup>
-              <col style="width:12ch"><col style="width:16ch"><col><col style="width:20ch">
+              <col class="col-lecture">
+              <col>
+              <col class="col-chapter">
+              <col>
             </colgroup>
             <thead>
               <tr>
-                <th class="nowrap">Quiz</th>
-                <th class="nowrap">Date</th>
+                <th class="nowrap">Lecture</th>
+                <th>Date</th>
+                <th>Chapter</th>
+                <th>Board photos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Generate M/W from Sep 3 to Nov 26 with exceptions:
+                   Oct 13 (no class), Oct 20 (Midterm review; not counted),
+                   Oct 27 & Oct 30 (Reading week; not counted),
+                   Oct 22 (Midterm; not counted) -->
+              <tr><td>Lecture 1</td><td>Wed Sep 3</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 2</td><td>Mon Sep 8</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 3</td><td>Wed Sep 10</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 4</td><td>Mon Sep 15</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 5</td><td>Wed Sep 17</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 6</td><td>Mon Sep 22</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 7</td><td>Wed Sep 24</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 8</td><td>Mon Sep 29</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 9</td><td>Wed Oct 1</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 10</td><td>Mon Oct 6</td><td>—</td><td>To be posted</td></tr>
+              <tr><td><!-- no class count --></td><td>Mon Oct 13</td><td colspan="2">Thanksgiving (no class)</td></tr>
+              <tr><td>Lecture 11</td><td>Wed Oct 15</td><td>—</td><td>To be posted</td></tr>
+              <tr><td><!-- not counted --></td><td>Mon Oct 20</td><td colspan="2">Midterm review</td></tr>
+              <tr><td><!-- not counted --></td><td>Wed Oct 22</td><td colspan="2">Midterm</td></tr>
+              <tr><td><!-- not counted --></td><td>Mon Oct 27</td><td colspan="2">Reading week (no class)</td></tr>
+              <tr><td><!-- not counted --></td><td>Wed Oct 30</td><td colspan="2">Reading week (no class)</td></tr>
+              <tr><td>Lecture 12</td><td>Mon Nov 3</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 13</td><td>Wed Nov 5</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 14</td><td>Mon Nov 10</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 15</td><td>Wed Nov 12</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 16</td><td>Mon Nov 17</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 17</td><td>Wed Nov 19</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 18</td><td>Mon Nov 24</td><td>—</td><td>To be posted</td></tr>
+              <tr><td>Lecture 19</td><td>Wed Nov 26</td><td>—</td><td>To be posted</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details class="sched">
+        <summary>
+          <button class="term-btn" type="button" aria-expanded="false">
+            <span class="term-btn__outer">
+              <span class="term-btn__middle">
+                <span class="term-btn__inner">
+                  <span class="term-btn__label">Practice exams / exams</span>
+                  <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </span>
+              </span>
+            </span>
+          </button>
+        </summary>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Exam</th>
+                <th>Solutions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Practice midterm</td><td>To be posted</td><td>To be posted</td></tr>
+              <tr><td>Midterm</td><td>To be posted</td><td>To be posted</td></tr>
+              <tr><td>Practice final</td><td>To be posted</td><td>To be posted</td></tr>
+              <tr><td>Final</td><td>To be posted</td><td>To be posted</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <!-- Row 2: one centered button -->
+      <details class="sched tri-center">
+        <summary>
+          <button class="term-btn" type="button" aria-expanded="false">
+            <span class="term-btn__outer">
+              <span class="term-btn__middle">
+                <span class="term-btn__inner">
+                  <span class="term-btn__label">Quiz solutions</span>
+                  <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </span>
+              </span>
+            </span>
+          </button>
+        </summary>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Quiz</th>
+                <th>Date</th>
                 <th>Topics</th>
                 <th>Solutions</th>
               </tr>
@@ -366,86 +407,59 @@
           </table>
         </div>
       </details>
-
-      <!-- 3) Practice exams / exams -->
-      <details class="sched" id="panel-midterm">
-        <summary>
-          <button class="term-btn" type="button" aria-expanded="false">
-            <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner">
-              <span class="term-btn__label">Practice exams / exams</span>
-              <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-              </svg>
-            </span></span></span>
-          </button>
-        </summary>
-        <div class="table-wrap">
-          <table>
-            <colgroup><col style="width:28ch"><col><col></colgroup>
-            <thead>
-              <tr><th>Item</th><th>Exam</th><th>Solutions</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Practice midterm</td><td>To be posted</td><td>To be posted</td></tr>
-              <tr><td>Midterm</td><td>To be posted</td><td>To be posted</td></tr>
-              <tr><td>Practice final</td><td>To be posted</td><td>To be posted</td></tr>
-              <tr><td>Final</td><td>To be posted</td><td>To be posted</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
     </section>
   </main>
 
-  <footer style="background:var(--primary-color);color:#fff;padding:1em;text-align:center;">
+  <footer style="background:var(--primary-color); color:#fff; padding:1em; text-align:center;">
     <p>&copy; 2025 Alex Youcis. All rights reserved.</p>
   </footer>
 
   <script>
+    // Mobile nav toggle (same as your other pages)
     function toggleMenu(){ document.getElementById('myNavbar').classList.toggle('responsive'); }
 
-    // Make each pill button toggle its <details> and sync aria-expanded
+    // Make pill buttons toggle their <details> parent and keep ARIA in sync (unchanged behavior)
     (function () {
-      document.querySelectorAll('details.sched').forEach(details => {
+      function wire(details) {
         const btn = details.querySelector('.term-btn');
         if (!btn) return;
         const reflect = () => btn.setAttribute('aria-expanded', details.open ? 'true' : 'false');
         reflect();
         btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); details.open = !details.open; reflect(); });
-        btn.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); btn.click(); }});
+        btn.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); btn.click(); } });
         details.addEventListener('toggle', reflect);
-      });
+      }
+      document.querySelectorAll('details.sched').forEach(wire);
     })();
 
-    // Triangular layout with "disappear siblings" and center the open panel
-    (function(){
-      const grid = document.getElementById('dropGrid');
-      const panels = Array.from(grid.querySelectorAll('details.sched'));
+    // Triangular layout: when one opens, hide the others & center the open one; re-show on close
+    (function () {
+      const container = document.getElementById('triGrid');
+      const groups = container.querySelectorAll('details.sched');
 
-      function updateVisibility(){
-        const open = panels.find(p => p.open);
-        if (!open) {
-          grid.classList.remove('single-open');
-          panels.forEach(p => p.style.display = '');
-          return;
-        }
-        grid.classList.add('single-open');
-        panels.forEach(p => { p.style.display = (p === open) ? '' : 'none'; });
+      function update() {
+        const open = Array.from(groups).find(d => d.open);
+        container.classList.toggle('solo', !!open);
+        groups.forEach(d => {
+          const cell = d.closest('.tri-center') ? d.parentElement : d.parentElement; // stable
+          if (d.open) d.classList.add('is-open'); else d.classList.remove('is-open');
+        });
       }
+      groups.forEach(d => d.addEventListener('toggle', update));
+      update();
+    })();
 
-      panels.forEach(p => p.addEventListener('toggle', updateVisibility));
-      window.addEventListener('load', updateVisibility);
-
-      // Equalize button widths
-      function syncWidths(){
-        const inners = grid.querySelectorAll('.term-btn__inner');
-        inners.forEach(i => i.style.minWidth = '');
-        let max = 0;
-        inners.forEach(i => { max = Math.max(max, i.offsetWidth); });
-        inners.forEach(i => { i.style.minWidth = max + 'px'; });
+    // Equalize widths of the top two buttons without changing height/text size
+    (function () {
+      function sync() {
+        const inners = document.querySelectorAll('.term-row .term-btn__inner, .tri-grid > details:not(.tri-center) .term-btn__inner');
+        if (!inners.length) return;
+        inners.forEach(el => el.style.minWidth = '');
+        const max = Math.max(...Array.from(inners).map(el => el.offsetWidth));
+        inners.forEach(el => el.style.minWidth = max + 'px');
       }
-      window.addEventListener('load', syncWidths);
-      window.addEventListener('resize', syncWidths);
+      window.addEventListener('load', sync);
+      window.addEventListener('resize', () => { clearTimeout(window.__eqW); window.__eqW = setTimeout(sync, 120); });
     })();
   </script>
 </body>
