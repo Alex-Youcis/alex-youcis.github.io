@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MAT138 — Introduction to Proofs (Fall 2025)</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+  <style>
+    :root{
+      --primary-color:#1D1E18;
+      --secondary-color:#C5C3C6;
+      --background-color:#DCDCDD;
+      --text-color:#1D1E18;
+      --button-color:#BF0603;
+      --card:#fff;
+      --border:#e1e1e6;
+
+      /* shared scale knobs */
+      --info-btn-font-size:1rem;
+    }
+
+    /* Base */
+    body{font-family:'Open Sans',sans-serif;background:var(--background-color);color:var(--text-color);margin:0}
+    header{background:var(--primary-color);position:sticky;top:0;z-index:1000;box-shadow:0 2px 4px rgba(0,0,0,.1)}
+    .navbar{display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px}
+    .nav-links{display:flex}
+    .nav-links a{color:#fff;text-decoration:none;margin:0 1em;position:relative;transition:color .3s}
+    .nav-links a::after{content:'';position:absolute;width:0;height:2px;background:var(--secondary-color);left:50%;bottom:-5px;transition:all .3s}
+    .nav-links a:hover{color:var(--secondary-color)}
+    .nav-links a:hover::after{left:0;width:100%}
+    .nav-mobile{display:none}
+    @media (max-width:768px){
+      .nav-links{display:none;flex-direction:column;background:var(--primary-color);position:absolute;top:60px;right:0;width:220px}
+      .nav-links a{margin:0;padding:1em;text-align:right;border-bottom:1px solid var(--secondary-color)}
+      .nav-mobile{display:flex;align-items:center}
+      .nav-text{color:#fff;margin-right:.5em}
+      .icon{color:#fff;font-size:24px;cursor:pointer}
+      .navbar.responsive .nav-links{display:flex}
+      .navbar.responsive .nav-mobile .nav-text{display:none}
+    }
+
+    main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
+
+    /* Hero with 3 low-opacity U of T crests */
+    .hero{
+      position:relative;overflow:hidden;background:var(--card);border-radius:14px;padding:1.25em 1.5em;
+      box-shadow:0 2px 10px rgba(0,0,0,.05);display:grid;gap:.75em;margin-bottom:1.5em
+    }
+    .hero::before{
+      content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;
+      background-image:
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
+      background-repeat:no-repeat,no-repeat,no-repeat;
+      background-position:16% center,50% center,84% center;
+      background-size:auto 96%,auto 96%,auto 96%;
+    }
+    @media (max-width:600px){ .hero::before{ background-size:auto 78%,auto 78%,auto 78% } }
+    .hero h1{margin:.2em 0 .1em;font-size:clamp(1.6rem,3.2vw,2.1rem);position:relative}
+    .meta{display:flex;flex-wrap:wrap;gap:.75em 1.25em;font-size:.98rem;color:#222;position:relative}
+    .tag{background:var(--secondary-color);color:#111;border-radius:999px;padding:.25em .7em}
+    .btn{display:inline-flex;align-items:center;gap:.4em;background:var(--button-color);color:#fff;text-decoration:none;padding:.6em .9em;border-radius:10px;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.15);position:relative}
+    .btn:hover{filter:brightness(1.05)}
+
+    /* Bubbles */
+    .bubble{background:var(--card);border-radius:14px;padding:1em 1.2em;box-shadow:0 2px 10px rgba(0,0,0,.05);display:flex;flex-direction:column;border:3px solid #000}
+    h2{margin-top:0}
+
+    /* Two-column info layout (left: Overview + Announcements, right: Quick info) */
+    .info-layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:1.25em}
+    @media (max-width:900px){ .info-layout{grid-template-columns:1fr} }
+
+    .about-card p{margin:.4em 0}
+    .announce-list{margin:.2em 0 0 1em}
+    .announce-list li+li{margin-top:.35em}
+
+    /* Quick links grid */
+    .resources-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:.8em}
+    @media (max-width:900px){ .resources-grid{grid-template-columns:1fr 1fr} }
+    @media (max-width:600px){ .resources-grid{grid-template-columns:1fr} }
+    .res-card{border:2px solid #000;border-radius:12px;padding:.9em;background:#fff}
+
+    /* Layered pill schedule button */
+    .sched{padding:0;margin:.3em 0 .8em;border:none;background:transparent;box-shadow:none}
+    .sched>summary{display:flex;justify-content:center;align-items:center;margin:.45em 0;list-style:none}
+    .sched>summary::-webkit-details-marker{display:none}
+
+    .term-btn{
+      --label-size: calc(var(--info-btn-font-size)*1.15);
+      --btn-h: calc(var(--label-size)*3);
+      --band: calc(var(--btn-h)*0.075);
+      --radius: calc(var(--btn-h)*0.5);
+      border:0;background:transparent;padding:0;cursor:pointer;line-height:0
+    }
+    .term-btn__outer{display:inline-block;background:#000;padding:var(--band);border-radius:var(--radius)}
+    .term-btn__middle{display:inline-block;background:var(--button-color);padding:var(--band);border-radius:calc(var(--radius) - var(--band))}
+    .term-btn__inner{display:inline-flex;align-items:center;justify-content:center;gap:calc(var(--btn-h)*0.18);background:#fff;border-radius:calc(var(--radius) - (2*var(--band)));height:var(--btn-h);padding:0 calc(var(--btn-h)*1.4)}
+    .term-btn__label{font:700 var(--label-size)/1.05 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#000;white-space:nowrap}
+    .term-btn__chevron{width:calc(var(--btn-h)*0.28);height:calc(var(--btn-h)*0.28);flex:0 0 auto;transition:transform 160ms ease;color:#000}
+    .term-btn:hover .term-btn__inner{background:#f7f7f7}
+    .sched[open] .term-btn__chevron{transform:rotate(180deg)}
+
+    /* Tables */
+    .table-wrap{overflow-x:auto;background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+    table{width:100%;border-collapse:collapse;table-layout:fixed}
+    thead{background:#f4f4f6}
+    th,td{padding:.85em 1.2em;border-bottom:1px solid #e6e6ea;vertical-align:top;overflow-wrap:anywhere;word-break:break-word}
+    th{text-align:left;font-weight:700}
+    tr:last-child td{border-bottom:none}
+    .nowrap{white-space:nowrap}
+
+    /* Abstract/Description toggle inside tables (if needed later) */
+    details.abs{background:transparent;padding:0;box-shadow:none;border-radius:0}
+    .abs__btn{display:inline-flex;align-items:center;gap:.4em;padding:.25em .55em;border:1px solid #cfcfd4;border-radius:8px;font-weight:700;background:#fff;cursor:pointer}
+    .abs__chev{width:.9em;height:.9em;transition:transform 160ms ease}
+    details.abs[open] .abs__chev{transform:rotate(180deg)}
+    .abs__body{margin-top:.5em}
+
+    /* Mobile table sanity */
+    @media (max-width:600px){
+      .table-wrap{-webkit-overflow-scrolling:touch}
+      table{table-layout:auto;min-width:680px}
+      .sched>summary{margin:.3em 0}
+    }
+  </style>
+  <!-- MathJax (in case you include TeX in content) -->
+  <script>
+    window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"],ignoreHtmlClass:"tex2jax_ignore",processHtmlClass:"tex2jax_process"}};
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="navbar" id="myNavbar">
+      <div class="nav-mobile">
+        <span class="nav-text">Navigation</span>
+        <span class="icon" onclick="toggleMenu()"><i class="fa fa-bars"></i></span>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="research.html">Publications and preprints</a>
+        <a href="notes.html">Expository material</a>
+        <a href="friends.html">Friends</a>
+        <a href="nt-seminar.html">U of T number theory seminar</a>
+        <a href="#" style="color: var(--secondary-color);">MAT138</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <h1>MAT138 — Introduction to Proofs (Fall 2025)</h1>
+      <div class="meta">
+        <span class="tag"><i class="fa fa-university"></i>&nbsp; University of Toronto</span>
+        <span class="tag"><i class="fa fa-calendar"></i>&nbsp; M/W/F · 10:00–10:50 AM</span>
+        <span class="tag"><i class="fa fa-map-marker"></i>&nbsp; Room TBA</span>
+        <span class="tag"><i class="fa fa-user"></i>&nbsp; Instructor: Alex Youcis</span>
+      </div>
+      <div>
+        <a class="btn" href="#syllabus"><i class="fa fa-file-pdf-o"></i> Syllabus</a>
+        <a class="btn" href="mailto:alex.youcis@gmail.com"><i class="fa fa-envelope"></i> Contact</a>
+      </div>
+    </section>
+
+    <!-- INFO LAYOUT -->
+    <section class="info-layout">
+      <!-- LEFT: Overview + Announcements -->
+      <article class="bubble about-card">
+        <h2>Course overview</h2>
+        <p>This course introduces rigorous mathematical proof writing and the language of modern mathematics: sets, functions, relations, induction, counting principles, and basic structures. We focus on clarity, precision, and problem-solving.</p>
+        <div class="resources-grid">
+          <div class="res-card">
+            <strong>Practice midterm</strong><br>
+            <a class="btn" href="#" style="margin-top:.5em">PDF</a>
+            <a class="btn" href="#" style="margin-top:.5em">Solutions</a>
+          </div>
+          <div class="res-card">
+            <strong>Midterm</strong><br>
+            <a class="btn" href="#" style="margin-top:.5em">PDF</a>
+            <a class="btn" href="#" style="margin-top:.5em">Solutions</a>
+          </div>
+          <div class="res-card">
+            <strong>Office hours</strong>
+            <p style="margin:.5em 0 0">TBA (posted week 1). Location: TBA.</p>
+          </div>
+        </div>
+      </article>
+
+      <aside class="bubble">
+        <h2>Quick info</h2>
+        <p><strong>Instructor:</strong> Alex Youcis (<a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>)</p>
+        <p><strong>Teaching assistants:</strong> TBA</p>
+        <p><strong>Grading (illustrative):</strong> Quizzes 20%, Midterm 30%, Final 40%, Participation 10%.</p>
+        <p><strong>Text/notes:</strong> Instructor notes and handouts posted here; see schedule for specifics.</p>
+        <h3 style="margin:.8em 0 .3em">Announcements</h3>
+        <ul class="announce-list">
+          <li>Welcome to MAT138! Check back for updates and posted solutions.</li>
+          <li>Quiz 1 will be announced in week 2.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- SYLLABUS -->
+    <section id="syllabus" class="bubble" style="margin-bottom:1.1em">
+      <h2>Syllabus</h2>
+      <p>Download the full syllabus: <a class="btn" href="#">PDF</a></p>
+      <p><strong>Topics preview:</strong> logic and proof techniques (direct, contrapositive, contradiction), sets/functions/relations, induction and recursion, counting principles, and selected applications.</p>
+      <p><strong>Policies (brief):</strong> academic integrity, collaboration rules, late work, and accommodations—see PDF for details.</p>
+    </section>
+
+    <!-- COURSE SCHEDULE -->
+    <section class="bubble" style="margin-bottom:1.1em">
+      <details class="sched" open>
+        <summary>
+          <button class="term-btn" type="button" aria-expanded="true">
+            <span class="term-btn__outer">
+              <span class="term-btn__middle">
+                <span class="term-btn__inner">
+                  <span class="term-btn__label">Course schedule</span>
+                  <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </span>
+              </span>
+            </span>
+          </button>
+        </summary>
+        <div class="table-wrap">
+          <table>
+            <colgroup>
+              <col style="width:10ch">
+              <col style="width:30ch">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="nowrap">Week</th>
+                <th>Topic</th>
+                <th>Readings / Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Logic, statements, and quantifiers</td><td>TBA</td></tr>
+              <tr><td>2</td><td>Direct proofs &amp; counterexamples</td><td>TBA</td></tr>
+              <tr><td>3</td><td>Contrapositive and contradiction</td><td>TBA</td></tr>
+              <tr><td>4</td><td>Sets and functions</td><td>TBA</td></tr>
+              <tr><td>5</td><td>Induction I</td><td>TBA</td></tr>
+              <tr><td>6</td><td>Induction II · <em>Practice midterm</em> posted</td><td>TBA</td></tr>
+              <tr><td>7</td><td><strong>Midterm</strong> (in class)</td><td>Practice + solutions linked above</td></tr>
+              <tr><td>8</td><td>Relations and equivalence</td><td>TBA</td></tr>
+              <tr><td>9</td><td>Counting and combinatorics I</td><td>TBA</td></tr>
+              <tr><td>10</td><td>Counting and combinatorics II</td><td>TBA</td></tr>
+              <tr><td>11</td><td>Intro to structures (optional topics)</td><td>TBA</td></tr>
+              <tr><td>12</td><td>Review &amp; problem session</td><td>TBA</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <!-- QUIZ SOLUTIONS -->
+    <section class="bubble">
+      <h2>Quiz solutions</h2>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width:12ch"><col style="width:16ch"><col><col style="width:20ch">
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="nowrap">Quiz</th>
+              <th class="nowrap">Date</th>
+              <th>Topics</th>
+              <th>Solutions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Quiz 1</td>
+              <td>Sep TBA</td>
+              <td>Statements, quantifiers, logical equivalence</td>
+              <td><a class="btn" href="#">PDF</a></td>
+            </tr>
+            <tr>
+              <td>Quiz 2</td>
+              <td>Oct TBA</td>
+              <td>Direct proofs; sets</td>
+              <td><a class="btn" href="#">PDF</a></td>
+            </tr>
+            <tr>
+              <td>Quiz 3</td>
+              <td>Oct TBA</td>
+              <td>Contrapositive/contradiction; functions</td>
+              <td><a class="btn" href="#">PDF</a></td>
+            </tr>
+            <tr>
+              <td>Quiz 4</td>
+              <td>Nov TBA</td>
+              <td>Induction</td>
+              <td><a class="btn" href="#">PDF</a></td>
+            </tr>
+            <tr>
+              <td>Quiz 5</td>
+              <td>Nov TBA</td>
+              <td>Counting</td>
+              <td><a class="btn" href="#">PDF</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="background:var(--primary-color);color:#fff;padding:1em;text-align:center;">
+    <p>&copy; 2025 Alex Youcis. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleMenu(){ document.getElementById('myNavbar').classList.toggle('responsive'); }
+
+    // Wire the pill button so clicking it toggles the details and keeps aria-expanded in sync.
+    (function(){
+      document.querySelectorAll('details.sched').forEach(details=>{
+        const btn = details.querySelector('.term-btn');
+        if(!btn) return;
+        const reflect = ()=>btn.setAttribute('aria-expanded', details.open ? 'true':'false');
+        reflect();
+        btn.addEventListener('click', e=>{ e.preventDefault(); e.stopPropagation(); details.open=!details.open; reflect(); });
+        btn.addEventListener('keydown', e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); btn.click(); }});
+        details.addEventListener('toggle', reflect);
+      });
+    })();
+  </script>
+</body>
+</html>
