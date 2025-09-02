@@ -18,8 +18,28 @@
       --info-btn-font-size:1rem;
     }
 
-    /* Base */
-    body{font-family:'Open Sans',sans-serif;background:var(--background-color);color:var(--text-color);margin:0}
+    /* Page-wide background image (low opacity), bubbles in foreground */
+    html, body { min-height:100%; }
+    body{
+      font-family:'Open Sans',sans-serif;
+      background: var(--background-color);
+      color:var(--text-color);
+      margin:0;
+      position:relative;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      opacity:.12; /* low opacity */
+      background-image:url('https://2.bp.blogspot.com/-HDBMwAa9Jy8/UGwvGf5KiWI/AAAAAAAABbI/JdYXF6lzgBU/s1600/Volume1-p379.jpg');
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    }
+
     header{background:var(--primary-color);position:sticky;top:0;z-index:1000;box-shadow:0 2px 4px rgba(0,0,0,.1)}
     .navbar{display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px}
     .nav-links{display:flex}
@@ -40,32 +60,56 @@
 
     main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
 
-    /* HERO with your background image (low opacity) */
+    /* HERO card (bubbled; page bg shows around it) */
     .hero{
       position:relative;overflow:hidden;background:var(--card);border-radius:14px;padding:1.25em 1.5em;
-      box-shadow:0 2px 10px rgba(0,0,0,.05);display:grid;gap:.75em;margin-bottom:1.5em
-    }
-    .hero::before{
-      content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;
-      background-image:url('https://2.bp.blogspot.com/-HDBMwAa9Jy8/UGwvGf5KiWI/AAAAAAAABbI/JdYXF6lzgBU/s1600/Volume1-p379.jpg');
-      background-repeat:no-repeat;background-position:center;background-size:cover;
+      box-shadow:0 2px 10px rgba(0,0,0,.05);display:grid;gap:.75em;margin-bottom:1.5em;border:3px solid #000;
     }
     .hero h1{margin:.2em 0 .1em;font-size:clamp(1.6rem,3.2vw,2.1rem);position:relative}
     .meta{display:flex;flex-wrap:wrap;gap:.75em 1.25em;font-size:.98rem;color:#222;position:relative}
     .tag{background:var(--secondary-color);color:#111;border-radius:999px;padding:.25em .7em}
-    .btn{display:inline-flex;align-items:center;gap:.4em;background:var(--button-color);color:#fff;text-decoration:none;padding:.6em .9em;border-radius:10px;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.15);position:relative}
-    .btn:hover{filter:brightness(1.05)}
 
-    /* Bubbles */
-    .bubble{background:var(--card);border-radius:14px;padding:1em 1.2em;box-shadow:0 2px 10px rgba(0,0,0,.05);display:flex;flex-direction:column;border:3px solid #000}
+    /* Reusable bubble */
+    .bubble{
+      background:var(--card);
+      border-radius:14px;
+      padding:1em 1.2em;
+      box-shadow:0 2px 10px rgba(0,0,0,.05);
+      display:flex;flex-direction:column;
+      border:3px solid #000;
+    }
     h2{margin-top:0}
 
-    /* Info layout: just one column of bubbles (you can add more later) */
+    /* Quick info: 2-column compact grid */
     .info-layout{display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:1.25em}
+    .quick-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px 24px;
+    }
+    .quick-grid p{margin:.2em 0}
+    @media (max-width:700px){
+      .quick-grid{grid-template-columns:1fr}
+    }
 
-    /* Three side-by-side dropdowns */
-    .drop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:1.1em}
-    @media (max-width:960px){ .drop-grid{grid-template-columns:1fr} }
+    /* Triangular formation for three dropdowns */
+    .drop-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(260px, 1fr));
+      gap:16px;
+      margin-bottom:1.1em;
+      align-items:start;
+      justify-items:center;
+    }
+    /* Third item centered on its own row */
+    .drop-grid > details:nth-child(3){
+      grid-column:1 / -1;
+      justify-self:center;
+    }
+    @media (max-width:960px){
+      .drop-grid{grid-template-columns:1fr}
+      .drop-grid > details:nth-child(3){grid-column:auto;justify-self:stretch}
+    }
 
     .sched{padding:0;margin:0;border:none;background:transparent;box-shadow:none}
     .sched>summary{display:flex;justify-content:center;align-items:center;margin:0;list-style:none}
@@ -87,6 +131,14 @@
     .term-btn:hover .term-btn__inner{background:#f7f7f7}
     .sched[open] .term-btn__chevron{transform:rotate(180deg)}
 
+    /* When only one panel is visible, center it */
+    .drop-grid.single-open{
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      gap:16px;
+    }
+
     /* Tables */
     .table-wrap{overflow-x:auto;background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.05);margin-top:.8em}
     table{width:100%;border-collapse:collapse;table-layout:fixed}
@@ -96,7 +148,7 @@
     tr:last-child td{border-bottom:none}
     .nowrap{white-space:nowrap}
 
-    /* Description toggle inside tables, if you use later */
+    /* Description toggles if used later */
     details.abs{background:transparent;padding:0;box-shadow:none;border-radius:0}
     .abs__btn{display:inline-flex;align-items:center;gap:.4em;padding:.25em .55em;border:1px solid #cfcfd4;border-radius:8px;font-weight:700;background:#fff;cursor:pointer}
     .abs__chev{width:.9em;height:.9em;transition:transform 160ms ease}
@@ -149,16 +201,21 @@
     <section class="info-layout">
       <article class="bubble">
         <h2>Quick info</h2>
-        <p><strong>Instructor:</strong> Alex Youcis</p>
-        <p><strong>Email:</strong> <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a></p>
-        <p><strong>Syllabus:</strong> <a class="btn" href="#">PDF</a></p>
-        <p><strong>Office hours:</strong> TBA</p>
-        <p><strong>Notes / handouts:</strong> Posted below with schedule as available.</p>
+        <div class="quick-grid">
+          <p><strong>Instructor:</strong> Alex Youcis</p>
+          <p><strong>Email:</strong> <a href="mailto:alex.youcis@utoronto.ca">alex.youcis@utoronto.ca</a></p>
+
+          <p><strong>Office:</strong> TBA</p>
+          <p><strong>Office hours:</strong> TBA</p>
+
+          <p><strong>Syllabus:</strong> <a class="btn" href="#">PDF</a></p>
+          <p><strong>Text:</strong> <em><a href="https://www.uoftbookstore.com/adoption-search-results?ccid=7796217&itemid=522440" target="_blank" rel="noopener">Proof and the Art of Mathematics</a></em> by Joel David Hamkins</p>
+        </div>
       </article>
     </section>
 
-    <!-- THREE SIDE-BY-SIDE DROPDOWNS (closed by default) -->
-    <section class="drop-grid">
+    <!-- TRIANGULAR DROPDOWNS -->
+    <section class="drop-grid" id="dropGrid">
       <!-- 1) Course schedule / board photos -->
       <details class="sched" id="panel-schedule">
         <summary>
@@ -176,46 +233,48 @@
             <colgroup>
               <col style="width:16ch">
               <col>
-              <col style="width:22ch">
+              <col style="width:20ch">
+              <col style="width:18ch">
             </colgroup>
             <thead>
               <tr>
                 <th class="nowrap">Date</th>
                 <th>Topic / Notes</th>
+                <th>Text (chapter)</th>
                 <th>Board photos</th>
               </tr>
             </thead>
             <tbody>
               <!-- SEPTEMBER -->
-              <tr><td class="nowrap">Sep 3, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Sep 8, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Sep 10, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Sep 15, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Sep 17, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Sep 22, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Sep 24, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Sep 29, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Sep 3, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Sep 8, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Sep 10, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Sep 15, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Sep 17, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Sep 22, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Sep 24, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Sep 29, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
 
               <!-- OCTOBER -->
-              <tr><td class="nowrap">Oct 1, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Oct 6, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Oct 8, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Oct 13, 2025 (Mon)</td><td><em>No lecture (holiday)</em></td><td>—</td></tr>
-              <tr><td class="nowrap">Oct 15, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Oct 20, 2025 (Mon)</td><td><strong>Midterm review</strong></td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Oct 22, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Oct 27, 2025 (Mon)</td><td><em>Reading week — no lecture</em></td><td>—</td></tr>
-              <tr><td class="nowrap">Oct 29, 2025 (Wed)</td><td><em>Reading week — no lecture</em></td><td>—</td></tr>
+              <tr><td class="nowrap">Oct 1, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Oct 6, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Oct 8, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Oct 13, 2025 (Mon)</td><td><em>No lecture (holiday)</em></td><td>—</td><td>—</td></tr>
+              <tr><td class="nowrap">Oct 15, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Oct 20, 2025 (Mon)</td><td><strong>Midterm review</strong></td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Oct 22, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Oct 27, 2025 (Mon)</td><td><em>Reading week — no lecture</em></td><td>—</td><td>—</td></tr>
+              <tr><td class="nowrap">Oct 29, 2025 (Wed)</td><td><em>Reading week — no lecture</em></td><td>—</td><td>—</td></tr>
 
               <!-- NOVEMBER -->
-              <tr><td class="nowrap">Nov 3, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Nov 5, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Nov 10, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Nov 12, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Nov 17, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Nov 19, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Nov 24, 2025 (Mon)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Nov 26, 2025 (Wed)</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Nov 3, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Nov 5, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Nov 10, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Nov 12, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Nov 17, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Nov 19, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Nov 24, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Nov 26, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
             </tbody>
           </table>
         </div>
@@ -292,45 +351,50 @@
   <script>
     function toggleMenu(){ document.getElementById('myNavbar').classList.toggle('responsive'); }
 
-    // Make the pill buttons toggle their <details> parents and keep aria-expanded in sync.
+    // Make each pill button toggle its <details> and sync aria-expanded
     (function () {
       document.querySelectorAll('details.sched').forEach(details => {
         const btn = details.querySelector('.term-btn');
         if (!btn) return;
         const reflect = () => btn.setAttribute('aria-expanded', details.open ? 'true' : 'false');
         reflect();
-        btn.addEventListener('click', (e) => {
-          e.preventDefault(); e.stopPropagation();
-          details.open = !details.open; reflect();
-        });
-        btn.addEventListener('keydown', (e) => {
-          if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); btn.click(); }
-        });
+        btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); details.open = !details.open; reflect(); });
+        btn.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); btn.click(); }});
         details.addEventListener('toggle', reflect);
       });
     })();
 
-    // Hide siblings when one dropdown is open; show all when it closes.
+    // Triangular layout with "disappear siblings" and center the open panel
     (function(){
-      const panels = Array.from(document.querySelectorAll('.drop-grid details.sched'));
+      const grid = document.getElementById('dropGrid');
+      const panels = Array.from(grid.querySelectorAll('details.sched'));
+
       function updateVisibility(){
         const open = panels.find(p => p.open);
-        panels.forEach(p => {
-          if (!open) { p.style.display = ''; return; }
-          p.style.display = (p === open) ? '' : 'none';
-        });
+        if (!open) {
+          // restore triangular grid
+          grid.classList.remove('single-open');
+          panels.forEach(p => p.style.display = '');
+          return;
+        }
+        // only show the open one, center it
+        grid.classList.add('single-open');
+        panels.forEach(p => { p.style.display = (p === open) ? '' : 'none'; });
       }
+
       panels.forEach(p => p.addEventListener('toggle', updateVisibility));
-      // Ensure equal button widths initially (optional, but keeps symmetry)
+      window.addEventListener('load', updateVisibility);
+
+      // Equalize button widths for a tidy look in triangular layout
       function syncWidths(){
-        const inners = document.querySelectorAll('.drop-grid .term-btn__inner');
-        if (inners.length === 0) return;
+        const inners = grid.querySelectorAll('.term-btn__inner');
         inners.forEach(i => i.style.minWidth = '');
-        const max = Math.max(...Array.from(inners).map(i => i.offsetWidth));
-        inners.forEach(i => i.style.minWidth = max + 'px');
+        let max = 0;
+        inners.forEach(i => { max = Math.max(max, i.offsetWidth); });
+        inners.forEach(i => { i.style.minWidth = max + 'px'; });
       }
-      window.addEventListener('load', ()=>{ syncWidths(); updateVisibility(); });
-      window.addEventListener('resize', ()=>{ syncWidths(); });
+      window.addEventListener('load', syncWidths);
+      window.addEventListener('resize', syncWidths);
     })();
   </script>
 </body>
