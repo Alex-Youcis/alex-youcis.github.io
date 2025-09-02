@@ -18,7 +18,7 @@
       --info-btn-font-size:1rem;
     }
 
-    /* Page-wide background image (more visible, higher opacity), bubbles in foreground */
+    /* Page-wide background image (outside bubbles only) */
     html, body { min-height:100%; }
     body{
       font-family:'Open Sans',sans-serif;
@@ -41,8 +41,32 @@
       background-color: var(--background-color);
     }
 
-    header{background:var(--primary-color);position:sticky;top:0;z-index:1000;box-shadow:0 2px 4px rgba(0,0,0,.1)}
-    .navbar{display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px}
+    header{
+      background:var(--primary-color);
+      position:sticky;
+      top:0;
+      z-index:1000;
+      box-shadow:0 2px 4px rgba(0,0,0,.1);
+      /* allow background crests */
+      overflow:hidden;
+    }
+    /* Three low-opacity U of T crests inside the header (like seminar page) */
+    header::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:.22;
+      background-image:
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
+      background-repeat: no-repeat, no-repeat, no-repeat;
+      background-position: 16% center, 50% center, 84% center;
+      background-size: auto 96%, auto 96%, auto 96%;
+    }
+
+    .navbar{position:relative; display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px}
     .nav-links{display:flex}
     .nav-links a{color:#fff;text-decoration:none;margin:0 1em;position:relative;transition:color .3s}
     .nav-links a::after{content:'';position:absolute;width:0;height:2px;background:var(--secondary-color);left:50%;bottom:-5px;transition:all .3s}
@@ -81,7 +105,7 @@
     }
     h2{margin-top:0}
 
-    /* Quick info: centered & slightly wider */
+    /* Quick info: centered & slightly wider; halve top whitespace */
     .info-layout{
       display:grid;
       grid-template-columns:1fr;
@@ -90,7 +114,8 @@
       justify-items:center;
     }
     .info-layout > .bubble{
-      width:72%;      /* slightly wider so the email stays on one line */
+      width:80%;          /* slightly wider so email stays on one line */
+      padding-top:0.5em;  /* halve space above "Quick info" title */
     }
     /* Center the Quick info title ONLY */
     .info-layout > .bubble h2{
@@ -103,11 +128,11 @@
     .quick-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:6px 24px;                    /* tighter vertical gap */
+      gap:6px 24px;           /* tight vertical gap */
     }
     .quick-grid p{
-      margin:.1em 0;                   /* smaller margins */
-      line-height:1.2;                 /* tighter line-height to reduce height */
+      margin:.1em 0;
+      line-height:1.2;        /* tighter */
     }
     @media (max-width:700px){
       .quick-grid{grid-template-columns:1fr}
@@ -174,6 +199,11 @@
     tr:last-child td{border-bottom:none}
     .nowrap{white-space:nowrap}
 
+    /* Course schedule column widths (first wider) */
+    .sched-course col:first-child { width: 28ch; } /* increased */
+    .sched-course col:nth-child(3){ width: 20ch; }
+    .sched-course col:nth-child(4){ width: 18ch; }
+
     details.abs{background:transparent;padding:0;box-shadow:none;border-radius:0}
     .abs__btn{display:inline-flex;align-items:center;gap:.4em;padding:.25em .55em;border:1px solid #cfcfd4;border-radius:8px;font-weight:700;background:#fff;cursor:pointer}
     .abs__chev{width:.9em;height:.9em;transition:transform 160ms ease}
@@ -222,7 +252,7 @@
       </div>
     </section>
 
-    <!-- QUICK INFO (slightly wider & shorter) -->
+    <!-- QUICK INFO (slightly wider & top whitespace halved) -->
     <section class="info-layout">
       <article class="bubble">
         <h2>Quick info</h2>
@@ -251,16 +281,16 @@
           </button>
         </summary>
         <div class="table-wrap">
-          <table>
+          <table class="sched-course">
             <colgroup>
-              <col style="width:16ch">
+              <col>  <!-- wider first column via CSS above -->
               <col>
-              <col style="width:20ch">
-              <col style="width:18ch">
+              <col>
+              <col>
             </colgroup>
             <thead>
               <tr>
-                <th class="nowrap">Date</th>
+                <th class="nowrap">Lecture — Date</th>
                 <th>Topic / Notes</th>
                 <th>Text (chapter)</th>
                 <th>Board photos</th>
@@ -268,35 +298,35 @@
             </thead>
             <tbody>
               <!-- SEPTEMBER -->
-              <tr><td class="nowrap">Sep 3, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Sep 8, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Sep 10, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Sep 15, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Sep 17, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Sep 22, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Sep 24, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Sep 29, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Lecture 1 — Sep 3, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 2 — Sep 8, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 3 — Sep 10, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 4 — Sep 15, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 5 — Sep 17, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 6 — Sep 22, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 7 — Sep 24, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 8 — Sep 29, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
 
               <!-- OCTOBER -->
-              <tr><td class="nowrap">Oct 1, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Oct 6, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Oct 8, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Oct 13, 2025 (Mon)</td><td><em>No lecture (holiday)</em></td><td>—</td><td>—</td></tr>
-              <tr><td class="nowrap">Oct 15, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Oct 20, 2025 (Mon)</td><td><strong>Midterm review</strong></td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Oct 22, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Oct 27, 2025 (Mon)</td><td><em>Reading week — no lecture</em></td><td>—</td><td>—</td></tr>
-              <tr><td class="nowrap">Oct 29, 2025 (Wed)</td><td><em>Reading week — no lecture</em></td><td>—</td><td>—</td></tr>
+              <tr><td class="nowrap">Lecture 9 — Oct 1, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 10 — Oct 6, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 11 — Oct 8, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">— Oct 13, 2025 (Mon)</td><td><em>No lecture (holiday)</em></td><td>—</td><td>—</td></tr>
+              <tr><td class="nowrap">Lecture 12 — Oct 15, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 13 — Oct 20, 2025 (Mon)</td><td><strong>Midterm review</strong></td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 14 — Oct 22, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">— Oct 27, 2025 (Mon)</td><td><em>Reading week — no lecture</em></td><td>—</td><td>—</td></tr>
+              <tr><td class="nowrap">— Oct 29, 2025 (Wed)</td><td><em>Reading week — no lecture</em></td><td>—</td><td>—</td></tr>
 
               <!-- NOVEMBER -->
-              <tr><td class="nowrap">Nov 3, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Nov 5, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Nov 10, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Nov 12, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Nov 17, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Nov 19, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Nov 24, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
-              <tr><td class="nowrap">Nov 26, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td><a href="#">Add link</a></td></tr>
+              <tr><td class="nowrap">Lecture 15 — Nov 3, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 16 — Nov 5, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 17 — Nov 10, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 18 — Nov 12, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 19 — Nov 17, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 20 — Nov 19, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 21 — Nov 24, 2025 (Mon)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
+              <tr><td class="nowrap">Lecture 22 — Nov 26, 2025 (Wed)</td><td>TBA</td><td>TBA</td><td>To be posted</td></tr>
             </tbody>
           </table>
         </div>
@@ -328,11 +358,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td>Quiz 1</td><td>Sep TBA</td><td>Statements, quantifiers, logical equivalence</td><td><a class="btn" href="#">To be posted</a></td></tr>
-              <tr><td>Quiz 2</td><td>Oct TBA</td><td>Direct proofs; sets</td><td><a class="btn" href="#">To be posted</a></td></tr>
-              <tr><td>Quiz 3</td><td>Oct TBA</td><td>Contrapositive/contradiction; functions</td><td><a class="btn" href="#">To be posted</a></td></tr>
-              <tr><td>Quiz 4</td><td>Nov TBA</td><td>Induction</td><td><a class="btn" href="#">To be posted</a></td></tr>
-              <tr><td>Quiz 5</td><td>Nov TBA</td><td>Counting</td><td><a class="btn" href="#">To be posted</a></td></tr>
+              <tr><td>Quiz 1</td><td>Sep 12</td><td>Lectures 1–3</td><td>To be posted</td></tr>
+              <tr><td>Quiz 2</td><td>Sep 26</td><td>Lectures 4–7</td><td>To be posted</td></tr>
+              <tr><td>Quiz 3</td><td>Oct 10</td><td>Lectures 8–11</td><td>To be posted</td></tr>
+              <tr><td>Quiz 4</td><td>Nov 7</td><td>Lectures 14 &amp; 15</td><td>To be posted</td></tr>
+              <tr><td>Quiz 5</td><td>Nov 21</td><td>Lectures 16–19</td><td>To be posted</td></tr>
             </tbody>
           </table>
         </div>
@@ -357,10 +387,10 @@
               <tr><th>Item</th><th>Exam</th><th>Solutions</th></tr>
             </thead>
             <tbody>
-              <tr><td>Practice midterm</td><td><a class="btn" href="#">To be posted</a></td><td><a class="btn" href="#">To be posted</a></td></tr>
-              <tr><td>Midterm</td><td><a class="btn" href="#">To be posted</a></td><td><a class="btn" href="#">To be posted</a></td></tr>
-              <tr><td>Practice final</td><td><a class="btn" href="#">To be posted</a></td><td><a class="btn" href="#">To be posted</a></td></tr>
-              <tr><td>Final</td><td><a class="btn" href="#">To be posted</a></td><td><a class="btn" href="#">To be posted</a></td></tr>
+              <tr><td>Practice midterm</td><td>To be posted</td><td>To be posted</td></tr>
+              <tr><td>Midterm</td><td>To be posted</td><td>To be posted</td></tr>
+              <tr><td>Practice final</td><td>To be posted</td><td>To be posted</td></tr>
+              <tr><td>Final</td><td>To be posted</td><td>To be posted</td></tr>
             </tbody>
           </table>
         </div>
