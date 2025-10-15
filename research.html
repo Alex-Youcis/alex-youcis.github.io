@@ -1,242 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Alex Youcis</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Include Fonts and Icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-  <!-- Include CSS Styles -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Publications & preprints — Alex Youcis</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+
   <style>
-    /* Root Variables for Colors */
-    :root {
-      --primary-color: #1D1E18; /* Dark color */
-      --secondary-color: #C5C3C6; /* Mid-tone gray */
-      --background-color: #DCDCDD; /* Light gray */
-      --text-color: #1D1E18; /* Dark color */
-      --button-color: #BF0603; /* Button and collaborator link color */
+    :root{
+      --primary-color:#1D1E18;
+      --secondary-color:#C5C3C6;
+      --background-color:#DCDCDD;
+      --text-color:#1D1E18;
+      --button-color:#BF0603;
+      --card:#fff;
+      --border:#e1e1e6;
+      --filter-label-size:1rem; /* matches arXiv button font-size */
     }
-    /* Global Styles */
-    body {
-      font-family: 'Open Sans', sans-serif;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 0;
+
+    *,:before,:after{box-sizing:border-box}
+    body{font-family:'Open Sans',sans-serif;background:var(--background-color);color:var(--text-color);margin:0}
+
+    /* Header/nav */
+    header{background:var(--primary-color);position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+    .navbar{display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px}
+    .nav-links{display:flex}
+    .nav-links a{color:#fff;text-decoration:none;margin:0 1em;position:relative;transition:color .3s}
+    .nav-links a::after{content:'';position:absolute;width:0;height:2px;background:var(--secondary-color);left:50%;bottom:-5px;transition:all .3s}
+    .nav-links a:hover{color:var(--secondary-color)}
+    .nav-links a:hover::after{left:0;width:100%}
+    /* Keep current page link WHITE when idle (not permanently grey) */
+    .nav-links a[aria-current="page"]{color:#fff}
+    .nav-mobile{display:none}
+    @media (max-width:768px){
+      .nav-links{display:none;flex-direction:column;background:var(--primary-color);position:absolute;top:60px;right:0;width:220px}
+      .nav-links a{margin:0;padding:1em;text-align:right;border-bottom:1px solid var(--secondary-color)}
+      .nav-mobile{display:flex;align-items:center}
+      .nav-text{color:#fff;margin-right:.5em}
+      .icon{color:#fff;font-size:24px;cursor:pointer}
+      .navbar.responsive .nav-links{display:flex}
+      .navbar.responsive .nav-mobile .nav-text{display:none}
     }
-    /* Navbar Styles */
-    header {
-      background-color: var(--primary-color);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      /* Removed border-bottom */
-      /* Add subtle shadow */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
+
+    /* HERO – larger height; BORDER width doubled */
+    .hero{
+      position:relative;overflow:hidden;background:var(--card);border-radius:14px;
+      padding:1.25em 1.5em;
+      box-shadow:0 2px 10px rgba(0,0,0,.05);
+      display:grid;gap:.6em;margin-bottom:.9em;align-items:start;
+      min-height:200px;
+      border:2px solid #000; /* was 1px; now 2x as requested */
     }
-    .navbar {
-      display: flex;
-      justify-content: flex-end; /* Right-aligned navigation links */
-      align-items: center;
-      padding: 0 1em;
-      height: 60px;
+    .hero::before{
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
+      background-image:
+        url('https://alex-youcis.github.io/coffee.png'),
+        url('https://alex-youcis.github.io/coffee.png'),
+        url('https://alex-youcis.github.io/coffee.png');
+      background-repeat:no-repeat,no-repeat,no-repeat;
+      background-position:16% center, 50% center, 84% center;
+      background-size:auto 106%, auto 106%, auto 106%;
     }
-    .nav-links {
-      display: flex;
+    @media (max-width:600px){
+      .hero{ padding:1em 1em 1.1em; }
+      .hero::before{ background-size:auto 78%, auto 78%, auto 78%; }
     }
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      margin: 0 1em;
-      position: relative; /* For underline effect */
-      transition: color 0.3s ease; /* Smooth color transition */
+    .hero h1{
+      margin:.1em 0 .1em;
+      font-size:clamp(1.6rem,3.2vw,2.1rem);
+      position:relative;z-index:1;justify-self:start;
     }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      background-color: var(--secondary-color);
-      left: 50%;
-      bottom: -5px;
-      transition: all 0.3s ease;
+
+    /* ===== Filter & search — layered pill that expands to full-width header ===== */
+    .filters-wrap{display:flex;justify-content:center;margin:0 auto 10px}
+    .filters-card{
+      display:inline-block; /* compact while closed */
+      max-width:980px;border-radius:14px;overflow:hidden;
+      transition: width .22s ease, box-shadow .2s ease, background .2s ease;
+      background:transparent;box-shadow:none;border:0;
     }
-    .nav-links a:hover {
-      color: var(--secondary-color); /* Change text color on hover */
+    .filters-card.open{display:block;width:100%;background:var(--card)}
+    .filters-header-btn{
+      --label-size: var(--filter-label-size);
+      --btn-h: calc(var(--label-size) * 3);
+      --band: calc(var(--btn-h) * 0.075);
+      --radius: calc(var(--btn-h) * 0.5);
+      border:0;background:transparent;padding:0;cursor:pointer;line-height:0;display:inline-block;
     }
-    .nav-links a:hover::after {
-      left: 0;
-      width: 100%;
+    .filters-header-btn:focus-visible .term-btn__inner{outline:2px solid #333;outline-offset:3px}
+    .term-btn__outer{display:inline-block;background:#000;padding:var(--band);border-radius:var(--radius)}
+    .term-btn__middle{display:inline-block;background:var(--button-color);padding:var(--band);border-radius:calc(var(--radius) - var(--band))}
+    .term-btn__inner{
+      display:inline-flex;align-items:center;justify-content:center;
+      gap: calc(var(--btn-h) * 0.18);
+      background:#fff;border-radius:calc(var(--radius) - (2 * var(--band)));
+      height:var(--btn-h); padding:0 calc(var(--btn-h) * 1.0);
     }
-    .nav-mobile {
-      display: none;
+    .term-btn__label{
+      font:700 var(--label-size)/1.05 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:#000; white-space:nowrap;
     }
-    /* Mobile Navigation Styles */
-    @media screen and (max-width: 768px) {
-      .navbar {
-        justify-content: flex-end; /* Keep items right-aligned */
-      }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background-color: var(--primary-color);
-        position: absolute;
-        top: 60px; /* Place below the header */
-        right: 0;
-        width: 200px;
-      }
-      .nav-links a {
-        margin: 0;
-        padding: 1em;
-        text-align: right;
-        border-bottom: 1px solid var(--secondary-color);
-      }
-      .nav-mobile {
-        display: flex;
-        align-items: center;
-      }
-      .nav-text {
-        color: white;
-        margin-right: 0.5em;
-      }
-      .icon {
-        color: white;
-        font-size: 24px;
-        cursor: pointer;
-      }
-      .navbar.responsive .nav-links {
-        display: flex;
-      }
-      .navbar.responsive .nav-mobile .nav-text {
-        display: none;
-      }
+    .term-btn__chevron{width:calc(var(--btn-h) * 0.28);height:calc(var(--btn-h) * 0.28);flex:0 0 auto;transition:transform 160ms ease;color:#000}
+    .filters-header-btn[aria-expanded="true"] .term-btn__chevron{transform:rotate(180deg)}
+    .filters-header-btn:hover .term-btn__inner{background:#f7f7f7}
+
+    .filters-card.open .filters-header-btn{display:block;width:100%}
+    .filters-card.open .term-btn__outer{display:block;width:100%;border-radius:14px 14px 0 0}
+    .filters-card.open .term-btn__middle{display:block;width:100%;border-radius:12px 12px 0 0}
+    .filters-card.open .term-btn__inner{display:flex;width:100%;border-radius:10px 10px 0 0;justify-content:center;padding:0}
+
+    .filters-inner{padding:12px}
+    .filters-inner.hidden{display:none}
+
+    .filters-row{display:flex;gap:.8em;align-items:center;flex-wrap:wrap;margin:.35em 0}
+    .filters-row label{font-weight:600}
+    .search{display:flex;align-items:center;gap:.4em}
+    .search input{border:1px solid #cfcfd4;border-radius:10px;padding:.55em .7em;min-width:280px;background:#fff}
+    .chips{display:flex;flex-wrap:wrap;gap:.5em}
+    .chip{border:1px solid #cfcfd4;background:#fff;border-radius:999px;padding:.25em .7em;font-weight:600;cursor:pointer}
+    .chip[aria-pressed="true"]{background:#f2f2f6}
+
+    /* ===== Publications grid ===== */
+    .publication-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:2em;
+      align-items:stretch; /* grid items stretch to equal row height */
     }
-    /* Main Content Styles */
-    main {
-      padding: 2em;
+    @media (max-width:900px){
+      .publication-grid{grid-template-columns:1fr}
     }
-    /* Publication Card Styles */
-    .publication-card {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    .publication-card{
+      background:#fff;border:1px solid var(--border);border-radius:12px;
+      box-shadow:0 1px 4px rgba(0,0,0,.06); padding:16px;
+      display:flex;flex-direction:column;height:100%; /* fill row height */
     }
-    .publication-card h2 {
-      margin-top: 0;
-    }
-    .publication-card .btn {
-      background-color: var(--button-color);
-      color: white;
-      padding: 8px 12px;
-      text-decoration: none;
-      border-radius: 4px;
-      margin-right: 8px;
-      transition: background-color 0.3s ease; /* Smooth transition */
-    }
-    .publication-card .btn:hover {
-      background-color: #9B0502; /* Darker shade of button color on hover */
-    }
-    /* Collaborator Links Styles */
-    .publication-card .collaborator-link {
-      color: var(--button-color);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    .publication-card .collaborator-link:hover {
-      text-decoration: underline;
-    }
-    /* Footer Styles */
-    footer {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 1em;
-      text-align: center;
-    }
-    /* Responsive Grid */
-    .publication-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2em;
-    }
-    @media (max-width: 768px) {
-      .publication-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    /* Links inside publication-card */
-    .publication-card a:not(.btn):not(.collaborator-link) {
-      color: var(--secondary-color);
-      text-decoration: none;
-    }
-    .publication-card a:not(.btn):not(.collaborator-link):hover {
-      text-decoration: underline;
-    }
-    /* Details summary */
-    details summary {
-      cursor: pointer;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-    /* Increased spacing between description and links */
-    .links {
-      margin-top: 16px;
-    }
+    .publication-card h2{margin:.15em 0 .35em;font-size:1.15rem;line-height:1.25;min-height:calc(1.25em * 2)} /* reserve space for up to 2 lines to stabilize layout */
+    .publication-card p{margin:.25em 0}
+    details summary{cursor:pointer;font-weight:700;margin-bottom:8px}
+
+    /* Align buttons across row by pinning links block to bottom of the card */
+    .links{display:flex;gap:.5em;flex-wrap:wrap;margin-top:auto;padding-top:.65em}
+    .btn{background:var(--button-color);color:#fff;text-decoration:none;border-radius:8px;padding:.45em .7em;font-weight:700;font-size:1rem}
+    .btn:hover{filter:brightness(1.05)}
+    .collaborator-link{color:var(--button-color);text-decoration:none}
+    .collaborator-link:hover{text-decoration:underline}
+    .publication-card a:not(.btn):not(.collaborator-link){color:#0f62fe;text-decoration:none}
+    .publication-card a:not(.btn):not(.collaborator-link):hover{text-decoration:underline}
+
+    /* Footer */
+    footer{background:var(--primary-color);color:#fff;padding:1em;text-align:center}
+    footer .social-icons a{color:#fff;margin:0 .33em}
   </style>
-  <!-- MathJax Configuration -->
+
+  <!-- MathJax -->
   <script>
     window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\[', '\\]']],
-        processEscapes: true,
-      },
-      options: {
-        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-        ignoreHtmlClass: 'tex2jax_ignore',
-        processHtmlClass: 'tex2jax_process',
-      }
+      tex:{ inlineMath:[['\\(','\\)']], displayMath:[['\\[','\\]']], processEscapes:true },
+      options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' }
     };
   </script>
-  <!-- Include MathJax -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
   <header>
     <nav class="navbar" id="myNavbar">
-      <!-- Mobile Navigation -->
       <div class="nav-mobile">
         <span class="nav-text">Navigation</span>
-        <span class="icon" onclick="toggleMenu()">
+        <span class="icon" role="button" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
           <i class="fa fa-bars"></i>
         </span>
       </div>
-      <!-- Navigation links -->
       <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="#">Preprints and publications</a>
+        <a href="research.html" aria-current="page">Publications and preprints</a>
         <a href="notes.html">Expository material</a>
         <a href="friends.html">Friends</a>
-         <a href="nt-seminar.html">U of T number theory seminar</a>
+        <a href="nt-seminar.html">U of T number theory seminar</a>
         <a href="MAT138.html">MAT138</a>
       </div>
     </nav>
   </header>
-  <main>
-    <h1><i class="fa fa-book"></i> Publications and preprints</h1>
-    <div class="publication-grid">
-      <!-- Publication Cards -->
 
-      <div class="publication-card">
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Publications &amp; preprints</h1>
+    </section>
+
+    <!-- Filter & search -->
+    <div class="filters-wrap">
+      <aside class="filters-card" id="filters-card">
+        <button id="filters-toggle" class="filters-header-btn" type="button" aria-expanded="false" aria-controls="filters-inner">
+          <span class="term-btn__outer">
+            <span class="term-btn__middle">
+              <span class="term-btn__inner">
+                <span class="term-btn__label">Filter &amp; search</span>
+                <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </span>
+            </span>
+          </span>
+        </button>
+        <div id="filters-inner" class="filters-inner hidden" aria-hidden="true">
+          <!-- Row 1: Search -->
+          <div class="filters-row">
+            <label for="q">Search:</label>
+            <div class="search" role="search">
+              <input id="q" type="search" placeholder="Title, collaborator, tag…" aria-label="Search publications">
+            </div>
+          </div>
+          <!-- Row 2: Status -->
+          <div class="filters-row" role="group" aria-label="Filter by status">
+            <span style="font-weight:600">Status:</span>
+            <div class="chips">
+              <button class="chip" data-status="all" aria-pressed="true">All</button>
+              <button class="chip" data-status="journal" aria-pressed="false">Published</button>
+              <button class="chip" data-status="to-appear" aria-pressed="false">To appear</button>
+              <button class="chip" data-status="submitted" aria-pressed="false">Preprint</button>
+            </div>
+          </div>
+          <!-- Row 3: Quick tags -->
+          <div class="filters-row" role="group" aria-label="Filter by tag">
+            <span style="font-weight:600">Quick tags:</span>
+            <div class="chips">
+              <button class="chip" data-tag="p-adic hodge" aria-pressed="false">\(p\)-adic Hodge theory</button>
+              <button class="chip" data-tag="shimura" aria-pressed="false">Shimura varieties</button>
+              <button class="chip" data-tag="rigid" aria-pressed="false">Rigid geometry</button>
+              <button class="chip" data-tag="langlands" aria-pressed="false">Langlands</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ===== Publications grid (full descriptions) ===== -->
+    <section class="publication-grid" id="pub-grid">
+      <!-- 1 -->
+      <div class="publication-card" data-status="submitted"
+        data-tags="p-adic hodge theory, prismatic f-gauges, crystalline cohomology, de rham cohomology"
+        data-title="An integral comparison of crystalline and de Rham cohomology"
+        data-collab="abhinandan">
         <h2>An integral comparison of crystalline and de Rham cohomology</h2>
         <p><strong>Collaborators:</strong> <a href="https://abhinandan.perso.math.cnrs.fr/" class="collaborator-link">Abhinandan</a></p>
-        <p><strong>Journal/Status:</strong> Submitted </p>
+        <p><strong>Status:</strong> Submitted</p>
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-gauges, crystalline cohomology, de Rham cohomology</p>
         <details>
           <summary>Description</summary>
@@ -247,10 +259,14 @@
         </div>
       </div>
 
-      <div class="publication-card">
-        <h2>An integral analogue of Fontaine's crystalline functor</h2>
+      <!-- 2 -->
+      <div class="publication-card" data-status="submitted"
+        data-tags="p-adic hodge theory, prismatic f-gauges, fontaine-laffaille"
+        data-title="An integral analogue of Fontaine's crystalline functor"
+        data-collab="naoki imai, hiroki kato">
+        <h2>An integral analogue of Fontaine’s crystalline functor</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
-        <p><strong>Journal/Status:</strong> Submitted </p>
+        <p><strong>Status:</strong> Submitted</p>
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-gauges, Fontaine--Laffaille theory.</p>
         <details>
           <summary>Description</summary>
@@ -262,12 +278,14 @@
         </div>
       </div>
 
-      
-      <!-- First Publication -->
-      <div class="publication-card">
+      <!-- 3 -->
+      <div class="publication-card" data-status="submitted"
+        data-tags="rigid analytic geometry"
+        data-title="Beauville—Laszlo gluing of algebraic spaces"
+        data-collab="piotr achinger">
         <h2>Beauville—Laszlo gluing of algebraic spaces</h2>
         <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a></p>
-        <p><strong>Journal/Status:</strong> Submitted </p>
+        <p><strong>Status:</strong> Submitted </p>
         <p><strong>Tags:</strong> Rigid analytic geometry</p>
         <details>
           <summary>Description</summary>
@@ -277,11 +295,15 @@
           <a href="https://arxiv.org/abs/2410.20500" class="btn">arXiv</a>
         </div>
       </div>
-      <!-- Second Publication -->
-      <div class="publication-card">
+
+      <!-- 4 -->
+      <div class="publication-card" data-status="submitted"
+        data-tags="p-adic hodge theory, prismatic f-crystals, p-adic shtukas, tannakian formalism"
+        data-title="A Tannakian Framework for Prismatic F-crystals"
+        data-collab="naoki imai, hiroki kato">
         <h2>A Tannakian Framework for Prismatic \(F\)-crystals</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
-        <p><strong>Journal/Status:</strong> Submitted</p>
+        <p><strong>Status:</strong> Submitted</p>
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-crystals, \(p\)-adic shtukas, Tannakian formalism</p>
         <details>
           <summary>Description</summary>
@@ -291,11 +313,15 @@
           <a href="https://arxiv.org/abs/2406.08259" class="btn">arXiv</a>
         </div>
       </div>
-      <!-- Third Publication -->
-      <div class="publication-card">
+
+      <!-- 5 -->
+      <div class="publication-card" data-status="journal"
+        data-tags="shimura varieties, integral models, p-adic hodge theory, p-adic shtukas"
+        data-title="Canonical Integral Models of Shimura Varieties of Abelian Type"
+        data-collab="patrick daniels">
         <h2>Canonical Integral Models of Shimura Varieties of Abelian Type</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.skidmore.edu/mathematics/faculty/daniels.php" class="collaborator-link">Patrick Daniels</a></p>
-        <p><strong>Journal/Status:</strong> <i>Forum of Mathematics, Sigma</i></p>
+        <p><strong>Status:</strong> <i>Forum of Mathematics, Sigma</i></p>
         <p><strong>Tags:</strong> Shimura varieties, integral models, \(p\)-adic Hodge theory, \(p\)-adic shtukas</p>
         <details>
           <summary>Description</summary>
@@ -306,11 +332,15 @@
           <a href="https://arxiv.org/abs/2402.05727" class="btn">arXiv</a>
         </div>
       </div>
-      <!-- Fourth Publication -->
-      <div class="publication-card">
+
+      <!-- 6 -->
+      <div class="publication-card" data-status="submitted"
+        data-tags="shimura varieties, integral models, p-adic hodge theory, prismatic f-gauges, fontaine--laffaille theory"
+        data-title="The Prismatic Realization Functor for Shimura Varieties of Abelian Type"
+        data-collab="naoki imai, hiroki kato">
         <h2>The Prismatic Realization Functor for Shimura Varieties of Abelian Type</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
-        <p><strong>Journal/Status:</strong> Submitted</p>
+        <p><strong>Status:</strong> Submitted</p>
         <p><strong>Tags:</strong> Shimura varieties, integral models, \(p\)-adic Hodge theory, prismatic \(F\)-gauges, Fontaine--Laffaille theory</p>
         <details>
           <summary>Description</summary>
@@ -320,11 +350,15 @@
           <a href="https://arxiv.org/abs/2310.08472" class="btn">arXiv</a>
         </div>
       </div>
-      <!-- Fifth Publication -->
-      <div class="publication-card">
+
+      <!-- 7 -->
+      <div class="publication-card" data-status="to-appear"
+        data-tags="p-adic hodge theory, torsors, grothendieck--serre conjecture"
+        data-title="The Analytic Topology is Enough for the B_dR^+-Grassmannian"
+        data-collab="kestutis cesnavicius">
         <h2>The Analytic Topology is Enough for the \(B_\mathrm{dR}^+\)-Grassmannian</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.imo.universite-paris-saclay.fr/~kestutis.cesnavicius/" class="collaborator-link">Kęstutis Česnavičius</a></p>
-        <p><strong>Journal/Status:</strong> To appear in the proceedings of the 2023 Simons Symposium on \(p\)-adic Hodge theory</p>
+        <p><strong>Status:</strong> To appear in the proceedings of the 2023 Simons Symposium on \(p\)-adic Hodge theory</p>
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, torsors, Grothendieck--Serre conjecture</p>
         <details>
           <summary>Description</summary>
@@ -334,11 +368,15 @@
           <a href="https://arxiv.org/abs/2303.11710" class="btn">arXiv</a>
         </div>
       </div>
-      <!-- Sixth Publication -->
-      <div class="publication-card">
+
+      <!-- 8 -->
+      <div class="publication-card" data-status="journal"
+        data-tags="langlands conjecture, l-parameters, moduli theory"
+        data-title="The Jacobson--Morozov Morphism for Langlands Parameters in the Relative Setting"
+        data-collab="alexander bertoloni meli, naoki imai">
         <h2>The Jacobson--Morozov Morphism for Langlands Parameters in the Relative Setting</h2>
         <p><strong>Collaborators:</strong> <a href="https://math.bu.edu/people/abertolo/" class="collaborator-link">Alexander Bertoloni Meli</a> and <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a></p>
-        <p><strong>Journal/Status:</strong> <i>International Mathematics Research Notices</i></p>
+        <p><strong>Status:</strong> <i>International Mathematics Research Notices</i></p>
         <p><strong>Tags:</strong> Langlands conjecture, \(L\)-parameters, moduli theory</p>
         <details>
           <summary>Description</summary>
@@ -349,11 +387,15 @@
           <a href="https://arxiv.org/abs/2203.01768" class="btn">arXiv</a>
         </div>
       </div>
-      <!-- Seventh Publication -->
-      <div class="publication-card">
+
+      <!-- 9 -->
+      <div class="publication-card" data-status="journal"
+        data-tags="rigid analytic geometry, covering space theory, de jong fundamental group, pro-étale fundamental group"
+        data-title="Specialization for the Pro-étale Fundamental Group"
+        data-collab="piotr achinger, marcin lara">
         <h2>Specialization for the Pro-étale Fundamental Group</h2>
         <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></p>
-        <p><strong>Journal/Status:</strong> <i>Compositio Mathematica</i></p>
+        <p><strong>Status:</strong> <i>Compositio Mathematica</i></p>
         <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, de Jong fundamental group, pro-étale fundamental group</p>
         <details>
           <summary>Description</summary>
@@ -364,11 +406,15 @@
           <a href="https://arxiv.org/abs/2107.06761" class="btn">arXiv</a>
         </div>
       </div>
-      <!-- Eighth Publication -->
-      <div class="publication-card">
+
+      <!-- 10 -->
+      <div class="publication-card" data-status="journal"
+        data-tags="rigid analytic geometry, covering space theory, de jong fundamental group, pro-étale fundamental group"
+        data-title="Geometric Arcs and Fundamental Groups of Rigid Spaces"
+        data-collab="piotr achinger, marcin lara">
         <h2>Geometric Arcs and Fundamental Groups of Rigid Spaces</h2>
         <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></p>
-        <p><strong>Journal/Status:</strong> <i>Journal für die reine und angewandte Mathematik</i></p>
+        <p><strong>Status:</strong> <i>Journal für die reine und angewandte Mathematik</i></p>
         <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, de Jong fundamental group, pro-étale fundamental group</p>
         <details>
           <summary>Description</summary>
@@ -379,11 +425,15 @@
           <a href="https://arxiv.org/abs/2105.05184" class="btn">arXiv</a>
         </div>
       </div>
-      <!-- Ninth Publication -->
-      <div class="publication-card">
+
+      <!-- 11 -->
+      <div class="publication-card" data-status="to-appear"
+        data-tags="rigid analytic geometry, covering space theory, geometric arcs, de jong fundamental group"
+        data-title="Variants of the de Jong Fundamental Group"
+        data-collab="piotr achinger, marcin lara">
         <h2>Variants of the de Jong Fundamental Group</h2>
         <p><strong>Collaborators:</strong> <a href="http://achinger.impan.pl/" class="collaborator-link">Piotr Achinger</a> and <a href="https://marcin-lara.github.io/" class="collaborator-link">Marcin Lara</a></p>
-        <p><strong>Journal/Status:</strong> To appear in <i>American Journal of Mathematics</i></p>
+        <p><strong>Status:</strong> To appear in <i>American Journal of Mathematics</i></p>
         <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, geometric arcs, de Jong fundamental group</p>
         <details>
           <summary>Description</summary>
@@ -393,11 +443,15 @@
           <a href="https://arxiv.org/abs/2203.11750" class="btn">arXiv</a>
         </div>
       </div>
-      <!-- Tenth Publication -->
-      <div class="publication-card">
+
+      <!-- 12 -->
+      <div class="publication-card" data-status="journal"
+        data-tags="the langlands program, representation theory, endoscopy"
+        data-title="An Approach to the Characterization of the Local Langlands Correspondence"
+        data-collab="alexander bertoloni meli">
         <h2>An Approach to the Characterization of the Local Langlands Correspondence</h2>
         <p><strong>Collaborators:</strong> <a href="https://math.bu.edu/people/abertolo/" class="collaborator-link">Alexander Bertoloni Meli</a></p>
-        <p><strong>Journal/Status:</strong> <i>Representation Theory</i></p>
+        <p><strong>Status:</strong> <i>Representation Theory</i></p>
         <p><strong>Tags:</strong> The Langlands program, representation theory, endoscopy</p>
         <details>
           <summary>Description</summary>
@@ -408,11 +462,15 @@
           <a href="https://arxiv.org/abs/2003.11484" class="btn">arXiv</a>
         </div>
       </div>
-      <!-- Eleventh Publication -->
-      <div class="publication-card">
+
+      <!-- 13 -->
+      <div class="publication-card" data-status="journal"
+        data-tags="algebraic combinatorics, root theory, alcoves"
+        data-title="Bijective Projections on Parabolic Quotients of Affine Weyl Groups"
+        data-collab="elizabeth milicevic, margaret nichols, mihnea park, xiaolin xi">
         <h2>Bijective Projections on Parabolic Quotients of Affine Weyl Groups</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.haverford.edu/users/emilicevic" class="collaborator-link">Elizabeth (Beazley) Milićević</a>, <a href="https://margaretnichols.me/" class="collaborator-link">Margaret Nichols</a>, Minhea Park, and <a href="https://sites.google.com/view/dannyshi" class="collaborator-link">Xiaolin (Danny) Xi</a></p>
-        <p><strong>Journal/Status:</strong> <i>Journal of Algebraic Combinatorics</i></p>
+        <p><strong>Status:</strong> <i>Journal of Algebraic Combinatorics</i></p>
         <p><strong>Tags:</strong> Algebraic combinatorics, root theory, alcoves</p>
         <details>
           <summary>Description</summary>
@@ -423,22 +481,88 @@
           <a href="https://arxiv.org/abs/1212.0771" class="btn">arXiv</a>
         </div>
       </div>
-    </div>
+    </section>
   </main>
+
   <footer>
     <p>&copy; 2025 Alex Youcis. All rights reserved.</p>
     <div class="social-icons">
       <a href="#"><i class="fa fa-linkedin"></i></a>
       <a href="#"><i class="fa fa-github"></i></a>
-      <!-- Add more icons as needed -->
     </div>
   </footer>
-  <!-- JavaScript for Mobile Menu Toggle -->
+
   <script>
-    function toggleMenu() {
-      var navbar = document.getElementById("myNavbar");
-      navbar.classList.toggle("responsive");
+    function toggleMenu(){
+      const nav = document.getElementById('myNavbar');
+      nav.classList.toggle('responsive');
+      const btn = nav.querySelector('.nav-mobile .icon');
+      const expanded = nav.classList.contains('responsive');
+      if(btn) btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     }
+
+    // Filter button: compact -> full-width layered header
+    (function(){
+      const card = document.getElementById('filters-card');
+      const btn  = document.getElementById('filters-toggle');
+      const inner= document.getElementById('filters-inner');
+      btn.addEventListener('click', ()=>{
+        const willOpen = !card.classList.contains('open');
+        card.classList.toggle('open', willOpen);
+        inner.classList.toggle('hidden', !willOpen);
+        btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        inner.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
+      });
+    })();
+
+    // Simple filters on the original grid cards
+    (function(){
+      const q = document.getElementById('q');
+      const statusChips = Array.from(document.querySelectorAll('.chip[data-status]'));
+      const tagChips = Array.from(document.querySelectorAll('.chip[data-tag]'));
+      const cards = Array.from(document.querySelectorAll('.publication-card'));
+
+      let activeStatus = 'all';
+      const activeTags = new Set();
+      const norm = s => (s||'').toLowerCase();
+
+      function tagHit(cardTags){
+        if(activeTags.size===0) return true;
+        const tags = norm(cardTags).split(',').map(s=>s.trim());
+        for(const t of activeTags){ if(!tags.some(x=>x.includes(t))) return false; }
+        return true;
+      }
+      function matches(card){
+        if(activeStatus!=='all' && card.dataset.status!==activeStatus) return false;
+        if(!tagHit(card.dataset.tags)) return false;
+        const query = norm(q?.value);
+        if(!query) return true;
+        const hay = [card.dataset.title, card.dataset.collab, card.dataset.tags].map(norm).join(' ');
+        return hay.includes(query);
+      }
+      function render(){
+        cards.forEach(c => { c.style.display = matches(c) ? '' : 'none'; });
+      }
+      statusChips.forEach(chip=>{
+        chip.addEventListener('click', ()=>{
+          statusChips.forEach(c=>c.setAttribute('aria-pressed','false'));
+          chip.setAttribute('aria-pressed','true');
+          activeStatus = chip.dataset.status;
+          render();
+        });
+      });
+      tagChips.forEach(chip=>{
+        chip.addEventListener('click', ()=>{
+          const t = chip.dataset.tag;
+          const on = chip.getAttribute('aria-pressed')==='true';
+          chip.setAttribute('aria-pressed', on ? 'false' : 'true');
+          if(on) activeTags.delete(t); else activeTags.add(t);
+          render();
+        });
+      });
+      if(q){ q.addEventListener('input', render); }
+      window.addEventListener('load', render, {once:true});
+    })();
   </script>
 </body>
 </html>
