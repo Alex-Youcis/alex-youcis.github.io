@@ -19,7 +19,7 @@
       --card:#fff;
       --border:#e1e1e6;
       --m-gap:16px;
-      --filter-label-size:1rem; /* equal to arXiv button font-size */
+      --filter-label-size:1rem; /* equals arXiv button font-size */
     }
 
     *,:before,:after{box-sizing:border-box}
@@ -47,14 +47,13 @@
 
     main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
 
-    /* HERO – use your coffee.png, 3 copies, 1.25× size, text toward top-left */
+    /* HERO – back to original box size; keep 3 coffee marks at 1.25×; title top-left */
     .hero{
       position:relative;overflow:hidden;background:var(--card);border-radius:14px;
-      padding:1.15em 1.5em 1.5em; /* tighter top padding to push title up */
-      min-height:210px;           /* sized for 1.25× coffee marks */
+      padding:1.25em 1.5em;         /* original padding */
       box-shadow:0 2px 10px rgba(0,0,0,.05);
       display:grid;gap:.6em;margin-bottom:.9em;
-      align-items:start;          /* content toward top */
+      align-items:start;            /* keep content near the top */
     }
     .hero::before{
       content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
@@ -64,22 +63,21 @@
         url('https://alex-youcis.github.io/coffee.png');
       background-repeat:no-repeat,no-repeat,no-repeat;
       background-position:16% center, 50% center, 84% center;
-      /* 1.25 × original (≈ 85% → 106%) */
+      /* 1.25 × relative height */
       background-size:auto 106%, auto 106%, auto 106%;
     }
     @media (max-width:600px){
-      .hero{ min-height:180px; padding:1em 1em 1.4em; }
-      /* 1.25 × mobile base (≈ 62% → ~78%) */
+      .hero{ padding:1em 1em 1.1em; } /* compact on small screens */
       .hero::before{ background-size:auto 78%, auto 78%, auto 78%; }
     }
     .hero h1{
       margin:.1em 0 .1em;
       font-size:clamp(1.6rem,3.2vw,2.1rem);
       position:relative;z-index:1;
-      justify-self:start;         /* left aligned inside grid */
+      justify-self:start;
     }
 
-    /* ===== Filter & search — NT-style layered pill, expands to full-width header ===== */
+    /* ===== Filter & search — layered pill that expands to full-width header ===== */
     .filters-wrap{display:flex;justify-content:center;margin:0 auto 10px}
     .filters-card{
       display:inline-block; /* compact while closed */
@@ -87,19 +85,13 @@
       transition: width .22s ease, box-shadow .2s ease, background .2s ease;
       background:transparent; box-shadow:none; border:0;
     }
-    .filters-card.open{
-      display:block; width:100%;
-      background:var(--card); /* the layered pill will be the header */
-    }
-
-    /* Layered pill pieces (copied/adapted from NT seminar) */
+    .filters-card.open{display:block;width:100%;background:var(--card)}
     .filters-header-btn{
       --label-size: var(--filter-label-size);
       --btn-h: calc(var(--label-size) * 3);
       --band: calc(var(--btn-h) * 0.075);
       --radius: calc(var(--btn-h) * 0.5);
-      border:0;background:transparent;padding:0;cursor:pointer;line-height:0;
-      display:inline-block; /* small button */
+      border:0;background:transparent;padding:0;cursor:pointer;line-height:0;display:inline-block;
     }
     .filters-header-btn:focus-visible .term-btn__inner{outline:2px solid #333;outline-offset:3px}
     .term-btn__outer{display:inline-block;background:#000;padding:var(--band);border-radius:var(--radius)}
@@ -118,14 +110,10 @@
     .filters-header-btn[aria-expanded="true"] .term-btn__chevron{transform:rotate(180deg)}
     .filters-header-btn:hover .term-btn__inner{background:#f7f7f7}
 
-    /* When open, expand the ENTIRE layered pill to full width (not squished) */
     .filters-card.open .filters-header-btn{display:block;width:100%}
     .filters-card.open .term-btn__outer{display:block;width:100%;border-radius:14px 14px 0 0}
     .filters-card.open .term-btn__middle{display:block;width:100%;border-radius:12px 12px 0 0}
-    .filters-card.open .term-btn__inner{
-      display:flex;width:100%;border-radius:10px 10px 0 0;justify-content:center;
-      padding:0; /* keep height locked to --btn-h */
-    }
+    .filters-card.open .term-btn__inner{display:flex;width:100%;border-radius:10px 10px 0 0;justify-content:center;padding:0}
 
     .filters-inner{padding:12px}
     .filters-inner.hidden{display:none}
@@ -145,12 +133,10 @@
 
     .pub-card{
       position:absolute;border:1px solid var(--border);border-radius:12px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.06);
-      padding:0;overflow:hidden;will-change:transform,height;
-      --bg:none; /* set by JS after preload */
+      padding:0;overflow:hidden;will-change:transform,height;--bg:none;
     }
     .no-js .pub-card{position:static}
 
-    /* Low-opacity fixed background image that does NOT resize when content grows */
     .pub-card::before{
       content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
       width:clamp(180px,70%,380px); height:clamp(140px,45vw,260px);
@@ -569,7 +555,7 @@
       });
     })();
 
-    // ===== WHERE CARD BACKGROUND IMAGES ARE SET =====
+    // Card background images
     function setCardBgFromUrl(card, url){
       const img = new Image();
       img.onload = function(){
@@ -582,7 +568,7 @@
       img.src = url;
     }
 
-    // DOM-order → filename mapping you provided
+    // DOM-order → filename mapping
     (function(){
       const orderNames = [
         "An integral comparison of crystalline and de Rham cohomology",
