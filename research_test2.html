@@ -46,12 +46,14 @@
 
     main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
 
-    /* HERO – original box size; 3 coffee marks at 1.25×; title top-left */
+    /* HERO – reverted to larger size from earlier iteration; thin black border added */
     .hero{
       position:relative;overflow:hidden;background:var(--card);border-radius:14px;
-      padding:1.25em 1.5em; /* original */
+      padding:1.25em 1.5em;
       box-shadow:0 2px 10px rgba(0,0,0,.05);
       display:grid;gap:.6em;margin-bottom:.9em;align-items:start;
+      min-height:200px;                /* larger height like the earlier version */
+      border:1px solid #000;           /* thin black border */
     }
     .hero::before{
       content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
@@ -233,7 +235,7 @@
       </aside>
     </div>
 
-    <!-- ===== ORIGINAL-FORMAT PUBLICATIONS GRID ===== -->
+    <!-- ===== ORIGINAL-FORMAT PUBLICATIONS GRID (FULL DESCRIPTIONS) ===== -->
     <section class="publication-grid" id="pub-grid">
       <!-- 1 -->
       <div class="publication-card" data-status="submitted"
@@ -246,7 +248,7 @@
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-gauges, crystalline cohomology, de Rham cohomology</p>
         <details>
           <summary>Description</summary>
-          <p>In this paper we give an integral comparison between <i>twisted</i> crystalline and <i>twisted</i> de Rham cohomology…</p>
+          <p>In this paper we give an integral comparison between <i>twisted</i> crystalline and <i>twisted</i> de Rham cohomology, appropriately defined. This makes use of an analogue of Dwork's trick in the stacky approach to prismatic cohomology, and allows for arbitrary prismatic coefficients. In the case of the structure sheaf, this rationally recovers Berthelot--Ogus's celebrated isomorphism. Finally, we make use of this integral comparison to give a study of the relationship between torsion in crystalline and de Rham cohomology.</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2507.17631" class="btn">arXiv</a>
@@ -261,10 +263,11 @@
         <h2>An integral analogue of Fontaine’s crystalline functor</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
         <p><strong>Status:</strong> Submitted</p>
-        <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-gauges, Fontaine–Laffaille theory</p>
+        <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-gauges, Fontaine--Laffaille theory.</p>
         <details>
           <summary>Description</summary>
-          <p>We develop an integral analogue of the functor \(D_{\mathrm{crys}}\)…</p>
+          <p>In this paper we develop an integral analogue of the functor \(D_\mathrm{crys}\), and relate it to Fontaine--Lafaille and Dieudonné theory. Notably, we show that in the Fontaine--Laffaille range \([0,p-2]\) that all the most common types of integral \(p\)-adic Hodge theoretic objects (i.e., local systems, Fontaine--Laffaille modules, prismatic \(F
+          \)-crystals, and prismatic \(F\)-gaues) all agree. This helps clarify the sucesses of Fontaine--Laffaille theory in the Fontaine--Laffaille range and its failures outside of that range (as only in that range does it recover the 'correct', more refined, integral \(p\)-adic Hodge theory).</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2504.16282" class="btn">arXiv</a>
@@ -273,7 +276,7 @@
 
       <!-- 3 -->
       <div class="publication-card" data-status="submitted"
-        data-tags="rigid analytic geometry, algebraic spaces, gluing"
+        data-tags="rigid analytic geometry"
         data-title="Beauville—Laszlo gluing of algebraic spaces"
         data-collab="piotr achinger">
         <h2>Beauville—Laszlo gluing of algebraic spaces</h2>
@@ -282,7 +285,7 @@
         <p><strong>Tags:</strong> Rigid analytic geometry</p>
         <details>
           <summary>Description</summary>
-          <p>We show that one may always glue a separated formal algebraic space…</p>
+          <p>We show that one may always glue a separated formal algebraic space \(\mathfrak{X}\) over \(\mathbb{Z}_p\) to a separated algebraic space \(X\) over \(\mathbb{Q}_p\) via an open embedding \(j\colon \mathfrak{X}_\eta\to X^\mathrm{an}\), resulting in an algebraic space. In fact, we show that this gluing procedure gives rise to an equivalence between such gluing triples \((X,\mathfrak{X},j)\) and the category of separated algebraic spaces over \(\mathbb{Z}_p\). Moreover, one may replace \(\mathbb{Z}_p\) by an essentially arbitrary base. This is a sort of Beauville--Laszlo theorem but for (algebraic) spaces, opposed to sheaves. We apply this to better understand some well-documented phenomena in arithmetic geometry.</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2410.20500" class="btn">arXiv</a>
@@ -291,7 +294,7 @@
 
       <!-- 4 -->
       <div class="publication-card" data-status="submitted"
-        data-tags="p-adic hodge theory, prismatic f-crystals, p-adic shtukas, tannakian"
+        data-tags="p-adic hodge theory, prismatic f-crystals, p-adic shtukas, tannakian formalism"
         data-title="A Tannakian Framework for Prismatic F-crystals"
         data-collab="naoki imai, hiroki kato">
         <h2>A Tannakian Framework for Prismatic \(F\)-crystals</h2>
@@ -300,7 +303,7 @@
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-crystals, \(p\)-adic shtukas, Tannakian formalism</p>
         <details>
           <summary>Description</summary>
-          <p>We study Tannakian aspects of prismatic \(F\)-crystals…</p>
+          <p>We study some Tannakian aspects of the theory of prismatic \(F\)-crystals, a recent notion in integral \(p\)-adic Hodge theory developed by Bhatt--Scholze and others. Additionally, we explain how to connect this Tannakian theory to the previous Tannakian theory of shtukas studied by Scholze et al.</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2406.08259" class="btn">arXiv</a>
@@ -309,7 +312,7 @@
 
       <!-- 5 -->
       <div class="publication-card" data-status="journal"
-        data-tags="shimura, integral models, p-adic hodge theory, p-adic shtukas"
+        data-tags="shimura varieties, integral models, p-adic hodge theory, p-adic shtukas"
         data-title="Canonical Integral Models of Shimura Varieties of Abelian Type"
         data-collab="patrick daniels">
         <h2>Canonical Integral Models of Shimura Varieties of Abelian Type</h2>
@@ -318,7 +321,7 @@
         <p><strong>Tags:</strong> Shimura varieties, integral models, \(p\)-adic Hodge theory, \(p\)-adic shtukas</p>
         <details>
           <summary>Description</summary>
-          <p>We prove a conjecture of Pappas–Rapoport…</p>
+          <p>We prove a conjecture of Pappas and Rapoport for all Shimura varieties of abelian type with parahoric level structure when \(p > 3\) by showing that the Kisin–Pappas–Zhou integral models of Shimura varieties of abelian type are canonical. In particular, this shows that these models are independent of the choices made during their construction, and that they satisfy functoriality with respect to morphisms of Shimura data.</p>
         </details>
         <div class="links">
           <a href="https://www.cambridge.org/core/journals/forum-of-mathematics-sigma/article/canonical-integral-models-for-shimura-varieties-of-abelian-type/AC4BFA2A33124AB438004D512BBC64CD" class="btn">Journal</a>
@@ -328,16 +331,16 @@
 
       <!-- 6 -->
       <div class="publication-card" data-status="submitted"
-        data-tags="shimura, integral models, p-adic hodge theory, prismatic f-gauges, fontaine-laffaille"
+        data-tags="shimura varieties, integral models, p-adic hodge theory, prismatic f-gauges, fontaine--laffaille theory"
         data-title="The Prismatic Realization Functor for Shimura Varieties of Abelian Type"
         data-collab="naoki imai, hiroki kato">
         <h2>The Prismatic Realization Functor for Shimura Varieties of Abelian Type</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
         <p><strong>Status:</strong> Submitted</p>
-        <p><strong>Tags:</strong> Shimura varieties, integral models, \(p\)-adic Hodge theory, prismatic \(F\)-gauges, Fontaine–Laffaille theory</p>
+        <p><strong>Tags:</strong> Shimura varieties, integral models, \(p\)-adic Hodge theory, prismatic \(F\)-gauges, Fontaine--Laffaille theory</p>
         <details>
           <summary>Description</summary>
-          <p>We construct a prismatic \(F\)-gauge realization…</p>
+          <p>In this paper we construct an object on the integral canonical models of Shimura varieties of abelian type (and hyperspecial level) which should be thought of as the prismatic \(F\)-gauge realization of the universal \(\mathcal{G}\)-motive on such an object. We use this to obtain new \(p\)-adic Hodge-theoretic information about such Shimura varieties, notably an analogue of the Serre--Tate theorem, as well as characterizing them (even at finite levels). </p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2310.08472" class="btn">arXiv</a>
@@ -346,16 +349,16 @@
 
       <!-- 7 -->
       <div class="publication-card" data-status="to-appear"
-        data-tags="p-adic hodge theory, torsors, grassmannian"
+        data-tags="p-adic hodge theory, torsors, grothendieck--serre conjecture"
         data-title="The Analytic Topology is Enough for the B_dR^+-Grassmannian"
         data-collab="kestutis cesnavicius">
         <h2>The Analytic Topology is Enough for the \(B_\mathrm{dR}^+\)-Grassmannian</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.imo.universite-paris-saclay.fr/~kestutis.cesnavicius/" class="collaborator-link">Kęstutis Česnavičius</a></p>
-        <p><strong>Status:</strong> To appear (Simons Symposium proceedings, 2023)</p>
-        <p><strong>Tags:</strong> \(p\)-adic Hodge theory, torsors, Grothendieck–Serre conjecture</p>
+        <p><strong>Status:</strong> To appear in the proceedings of the 2023 Simons Symposium on \(p\)-adic Hodge theory</p>
+        <p><strong>Tags:</strong> \(p\)-adic Hodge theory, torsors, Grothendieck--Serre conjecture</p>
         <details>
           <summary>Description</summary>
-          <p>We compute the \(B_\mathrm{dR}^+\)-affine Grassmannian…</p>
+          <p>In this paper we show that the \(B_\mathrm{dR}^+\)-affine Grassmannian can be computed as the sheafification of the presheaf quotient \(LG/L^+G\) for the analytic open topology (as opposed to the étale topology) for a reductive group \(G\).</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2303.11710" class="btn">arXiv</a>
@@ -364,16 +367,16 @@
 
       <!-- 8 -->
       <div class="publication-card" data-status="journal"
-        data-tags="langlands, l-parameters, moduli"
-        data-title="The Jacobson–Morozov Morphism for Langlands Parameters in the Relative Setting"
+        data-tags="langlands conjecture, l-parameters, moduli theory"
+        data-title="The Jacobson--Morozov Morphism for Langlands Parameters in the Relative Setting"
         data-collab="alexander bertoloni meli, naoki imai">
-        <h2>The Jacobson–Morozov Morphism for Langlands Parameters in the Relative Setting</h2>
+        <h2>The Jacobson--Morozov Morphism for Langlands Parameters in the Relative Setting</h2>
         <p><strong>Collaborators:</strong> <a href="https://math.bu.edu/people/abertolo/" class="collaborator-link">Alexander Bertoloni Meli</a> and <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a></p>
         <p><strong>Status:</strong> <i>International Mathematics Research Notices</i></p>
         <p><strong>Tags:</strong> Langlands conjecture, \(L\)-parameters, moduli theory</p>
         <details>
           <summary>Description</summary>
-          <p>We define a moduli space of \(L\)-parameters…</p>
+          <p>In this paper we define a moduli space of \(L\)-parameters over \(\mathbb{Q}\), show it has good geometric properties (i.e., is smooth with explicitly parameterized geometric connected components), and show that there is a morphism from this moduli space to the moduli space of Weil--Deligne parameters which is an isomorphism over a dense open subset of the target.</p>
         </details>
         <div class="links">
           <a href="https://academic.oup.com/imrn/advance-article/doi/10.1093/imrn/rnad217/7277067" class="btn">Journal</a>
@@ -383,7 +386,7 @@
 
       <!-- 9 -->
       <div class="publication-card" data-status="journal"
-        data-tags="rigid, covering spaces, de jong group, pro-etale group"
+        data-tags="rigid analytic geometry, covering space theory, de jong fundamental group, pro-étale fundamental group"
         data-title="Specialization for the Pro-étale Fundamental Group"
         data-collab="piotr achinger, marcin lara">
         <h2>Specialization for the Pro-étale Fundamental Group</h2>
@@ -392,7 +395,7 @@
         <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, de Jong fundamental group, pro-étale fundamental group</p>
         <details>
           <summary>Description</summary>
-          <p>We construct a continuous specialization homomorphism…</p>
+          <p>For a formal scheme \(\mathfrak{X}\) over a height \(1\) valuation ring \(\mathcal{O}\), we construct a continuous specialization homomorphism \(\pi_1^\mathrm{dJ}(\mathfrak{X}_\eta)\to \pi_1^\mathrm{proet}(\mathfrak{X}_s)\) from the de Jong fundamental group of the generic fiber to the Bhatt--Scholze pro-étale fundamental group of the special fiber. We show that it is surjective in good cases. We also show that the notion of a de Jong covering space is étale local on the target for a smooth quasi-compact rigid space over an equicharacteristic \(0\) non-archimedean field \(K\).</p>
         </details>
         <div class="links">
           <a href="https://www.cambridge.org/core/journals/compositio-mathematica/article/specialization-for-the-proetale-fundamental-group/9FF5AAC3BAFD65AA505EF8268C8641CB" class="btn">Journal</a>
@@ -402,7 +405,7 @@
 
       <!-- 10 -->
       <div class="publication-card" data-status="journal"
-        data-tags="rigid, covering spaces, geometric arcs, pro-etale"
+        data-tags="rigid analytic geometry, covering space theory, de jong fundamental group, pro-étale fundamental group"
         data-title="Geometric Arcs and Fundamental Groups of Rigid Spaces"
         data-collab="piotr achinger, marcin lara">
         <h2>Geometric Arcs and Fundamental Groups of Rigid Spaces</h2>
@@ -411,7 +414,7 @@
         <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, de Jong fundamental group, pro-étale fundamental group</p>
         <details>
           <summary>Description</summary>
-          <p>We develop a notion of geometric coverings in rigid geometry…</p>
+          <p>In this paper we develop a new notion of covering spaces, called <i>geometric coverings</i>, in rigid geometry. Our definition is modeled after the notion of geometric coverings developed by Bhatt--Scholze but must be modified to account for the more subtle topology of rigid spaces. We show that geometric coverings are closed under composition, disjoint union, and are étale local on the target. We also show that the category of geometric coverings is a tame infinite Galois category, and so supports a notion of fundamental group.</p>
         </details>
         <div class="links">
           <a href="https://www.degruyter.com/document/doi/10.1515/crelle-2023-0013/html" class="btn">Journal</a>
@@ -421,7 +424,7 @@
 
       <!-- 11 -->
       <div class="publication-card" data-status="to-appear"
-        data-tags="rigid, covering spaces, de jong, galois categories"
+        data-tags="rigid analytic geometry, covering space theory, geometric arcs, de jong fundamental group"
         data-title="Variants of the de Jong Fundamental Group"
         data-collab="piotr achinger, marcin lara">
         <h2>Variants of the de Jong Fundamental Group</h2>
@@ -430,7 +433,7 @@
         <p><strong>Tags:</strong> Rigid analytic geometry, covering space theory, geometric arcs, de Jong fundamental group</p>
         <details>
           <summary>Description</summary>
-          <p>Companion to “Geometric Arcs…”. We show de Jong coverings…</p>
+          <p>This paper, a companion to <i>Geometric Arcs and Fundamental Groups of Rigid Spaces</i>, uses the theory of geometric coverings to study some previously introduced objects. For a (Grothendieck) topology \(\tau\) on a rigid space \(X\), write \(\mathbf{Cov}^\tau_X\) for the category of morphisms \(Y\to X\) which split into a disjoint union of finite étale pieces \(\tau\)-locally. We answer two questions of de Jong by showing that his notion of covering space is not admissible (and thus certainly not étale) local on the target in general, but that the resulting enlarged categories \(\mathbf{Cov}^\mathrm{adm}_X\) and \(\mathbf{Cov}^\mathrm{et}_X\) are still (essentially) tame infinite Galois categories. We also show that the category \(\mathbf{Loc}(X_\mathrm{proet})\) of pro-étale local systems on \(X\) is equivalent to the category \(\mathbf{Cov}^\mathrm{et}_X\), making the former (essentially) a tame infinite Galois category.</p>
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2203.11750" class="btn">arXiv</a>
@@ -439,7 +442,7 @@
 
       <!-- 12 -->
       <div class="publication-card" data-status="journal"
-        data-tags="langlands, representation theory, endoscopy"
+        data-tags="the langlands program, representation theory, endoscopy"
         data-title="An Approach to the Characterization of the Local Langlands Correspondence"
         data-collab="alexander bertoloni meli">
         <h2>An Approach to the Characterization of the Local Langlands Correspondence</h2>
@@ -448,7 +451,7 @@
         <p><strong>Tags:</strong> The Langlands program, representation theory, endoscopy</p>
         <details>
           <summary>Description</summary>
-          <p>Under suitable hypotheses, the local Langlands conjecture…</p>
+          <p>We show that, under suitable hypotheses, the local Langlands conjecture may be characterized by the so-called <i>Scholze--Shin equations</i>.</p>
         </details>
         <div class="links">
           <a href="https://www.ams.org/journals/ert/2023-27-12/S1088-4165-2023-00643-7/" class="btn">Journal</a>
@@ -462,12 +465,12 @@
         data-title="Bijective Projections on Parabolic Quotients of Affine Weyl Groups"
         data-collab="elizabeth milicevic, margaret nichols, mihnea park, xiaolin xi">
         <h2>Bijective Projections on Parabolic Quotients of Affine Weyl Groups</h2>
-        <p><strong>Collaborators:</strong> <a href="https://www.haverford.edu/users/emilicevic" class="collaborator-link">Elizabeth (Beazley) Milićević</a>, <a href="https://margaretnichols.me/" class="collaborator-link">Margaret Nichols</a>, Mihnea Park, and <a href="https://sites.google.com/view/dannyshi" class="collaborator-link">Xiaolin (Danny) Xi</a></p>
+        <p><strong>Collaborators:</strong> <a href="https://www.haverford.edu/users/emilicevic" class="collaborator-link">Elizabeth (Beazley) Milićević</a>, <a href="https://margaretnichols.me/" class="collaborator-link">Margaret Nichols</a>, Minhea Park, and <a href="https://sites.google.com/view/dannyshi" class="collaborator-link">Xiaolin (Danny) Xi</a></p>
         <p><strong>Status:</strong> <i>Journal of Algebraic Combinatorics</i></p>
         <p><strong>Tags:</strong> Algebraic combinatorics, root theory, alcoves</p>
         <details>
           <summary>Description</summary>
-          <p>We reinterpret the Berg–Jones–Vazirani bijection…</p>
+          <p>In previous work of Berg--Jones--Vazirani, a bijection was introduced between two sets of combinatorial objects of representation-theoretic significance: \(n\)-cores with first part equal to \(k\) and \((n-1)\)-cores with first part less than or equal to \(k\). In this article, we develop techniques using the associated affine hyperplane arrangement to interpret this bijection geometrically as a projection of alcoves onto the hyperplane containing their coroot lattice points.</p>
         </details>
         <div class="links">
           <a href="https://doi.org/10.1007/s10801-014-0559-9" class="btn">Journal</a>
