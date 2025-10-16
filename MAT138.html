@@ -26,10 +26,9 @@
       color:var(--text-color);
       margin:0;
       position:relative;
-
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
     }
     body::before{
       content:"";
@@ -37,25 +36,12 @@
       inset:0;
       z-index:-1;
       pointer-events:none;
-      opacity:.18; /* higher visibility */
+      opacity:.18;
       background-image:url('https://2.bp.blogspot.com/-HDBMwAa9Jy8/UGwvGf5KiWI/AAAAAAAABbI/JdYXF6lzgBU/s1600/Volume1-p379.jpg');
       background-size: contain;
       background-position: center;
       background-repeat:no-repeat;
       background-color: var(--background-color);
-    }
-
-    body{
-      font-family:'Open Sans',sans-serif;
-      background: var(--background-color);
-      color:var(--text-color);
-      margin:0;
-      position:relative;
-
-      /* ADD THESE THREE LINES */
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
     }
 
     header{
@@ -66,7 +52,6 @@
       box-shadow:0 2px 4px rgba(0,0,0,.1);
       overflow:hidden;
     }
-    /* (Removed header crests; now placed on hero) */
 
     .navbar{position:relative; display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px}
     .nav-links{display:flex}
@@ -85,14 +70,13 @@
       .navbar.responsive .nav-mobile .nav-text{display:none}
     }
 
-    main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto;  flex: 1 0 auto;}
+    main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto;flex:1 0 auto;}
 
     /* HERO card */
     .hero{
       position:relative;overflow:hidden;background:var(--card);border-radius:14px;padding:1.25em 1.5em;
       box-shadow:0 2px 10px rgba(0,0,0,.05);display:grid;gap:.75em;margin-bottom:1.5em;border:3px solid #000;
     }
-    /* Three low-opacity U of T crests inside the hero (like seminar page) */
     .hero::before{
       content:"";
       position:absolute;
@@ -123,7 +107,7 @@
     }
     h2{margin-top:0}
 
-    /* Quick info: centered & slightly wider; halve top whitespace */
+    /* Quick info: constrain width so it doesn't look stretched */
     .info-layout{
       display:grid;
       grid-template-columns:1fr;
@@ -132,14 +116,13 @@
       justify-items:center;
     }
     .info-layout > .bubble{
-      width:80%;          /* slightly wider so email stays on one line */
-      padding-top:0.5em;  /* halve space above "Quick info" title */
+      width:100%;
+      max-width: 920px;   /* keeps it readable and consistent */
+      padding-top:0.5em;
     }
-    .info-layout > .bubble h2{
-      text-align:center;
-    }
+    .info-layout > .bubble h2{ text-align:center; }
     @media (max-width:700px){
-      .info-layout > .bubble{ width:100%; }
+      .info-layout > .bubble{ max-width: 100%; }
     }
 
     .quick-grid{
@@ -147,13 +130,8 @@
       grid-template-columns:1fr 1fr;
       gap:6px 24px;
     }
-    .quick-grid p{
-      margin:.1em 0;
-      line-height:1.2;
-    }
-    @media (max-width:700px){
-      .quick-grid{grid-template-columns:1fr}
-    }
+    .quick-grid p{ margin:.1em 0; line-height:1.2; }
+    @media (max-width:700px){ .quick-grid{grid-template-columns:1fr} }
 
     /* Triangular formation for three dropdowns */
     .drop-grid{
@@ -164,10 +142,7 @@
       align-items:start;
       justify-items:center;
     }
-    .drop-grid > details:nth-child(3){
-      grid-column:1 / -1;
-      justify-self:center;
-    }
+    .drop-grid > details:nth-child(3){ grid-column:1 / -1; justify-self:center; }
     @media (max-width:960px){
       .drop-grid{grid-template-columns:1fr}
       .drop-grid > details:nth-child(3){grid-column:auto;justify-self:stretch}
@@ -217,7 +192,7 @@
     .nowrap{white-space:nowrap}
 
     /* Course schedule column widths (first wider) */
-    .sched-course col:first-child { width: 28ch; } /* increased */
+    .sched-course col:first-child { width: 28ch; }
     .sched-course col:nth-child(3){ width: 20ch; }
     .sched-course col:nth-child(4){ width: 18ch; }
 
@@ -234,30 +209,24 @@
       .sched>summary{margin:.3em 0}
     }
 
-    /* --- Normalize hero across pages (allow growth, consistent outline) --- */
+    /* --- Normalize hero across pages (width + min height; keeps thick outline without changing layout) --- */
     :root{
-      --content-max: 1100px;   /* keep this the same across pages */
-      --hero-height: 260px;    /* shared minimum height */
+      --content-max: 1200px;   /* align with other pages */
+      --hero-height: 220px;    /* shorter, consistent min height */
     }
-
     body.normalize-hero main{
       max-width: var(--content-max);
       margin-inline: auto;
     }
-
     body.normalize-hero .hero{
       width: 100%;
       min-height: var(--hero-height);
-      height: auto; /* allow the hero to grow if content needs it */
-      /* Use an outline that doesn't change box size; override any real border */
-      box-shadow: 0 2px 10px rgba(0,0,0,.05), 0 0 0 2px #000 !important;
+      height: auto; /* let it grow if content wraps */
+      box-shadow: 0 2px 10px rgba(0,0,0,.05), 0 0 0 3px #000 !important; /* thick outline, no box-size change */
       border: 0 !important;
     }
-
     @media (max-width: 600px){
-      body.normalize-hero .hero{
-        min-height: 180px;
-      }
+      body.normalize-hero .hero{ min-height: 180px; }
     }
   </style>
   <!-- MathJax (in case TeX appears) -->
@@ -325,7 +294,7 @@
         <div class="table-wrap">
           <table class="sched-course">
             <colgroup>
-              <col>  <!-- wider first column via CSS above -->
+              <col>
               <col>
               <col>
               <col>
