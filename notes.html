@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Friends — Alex Youcis</title>
+  <title>Expository material — Alex Youcis</title>
 
   <!-- Fonts & Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
@@ -23,7 +23,7 @@
     *,:before,:after{box-sizing:border-box}
     body{font-family:'Open Sans',sans-serif;background:var(--background-color);color:var(--text-color);margin:0}
 
-    /* Header/nav (consistent) */
+    /* Header/nav */
     header{background:var(--primary-color);position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.08)}
     .navbar{display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px}
     .nav-links{display:flex}
@@ -31,7 +31,7 @@
     .nav-links a::after{content:'';position:absolute;width:0;height:2px;background:var(--secondary-color);left:50%;bottom:-5px;transition:all .3s}
     .nav-links a:hover{color:var(--secondary-color)}
     .nav-links a:hover::after{left:0;width:100%}
-    /* Keep current page link WHITE when idle */
+    /* Keep current page link WHITE when idle (not permanently grey) */
     .nav-links a[aria-current="page"]{color:#fff}
     .nav-mobile{display:none}
     @media (max-width:768px){
@@ -46,21 +46,21 @@
 
     main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
 
-    /* HERO (clean card with 2px border, subtle triptych background) */
+    /* HERO (pen background triptych, 2px black border) */
     .hero{
       position:relative;overflow:hidden;background:var(--card);border-radius:14px;
       padding:1.25em 1.5em;
       box-shadow:0 2px 10px rgba(0,0,0,.05);
-      display:grid;gap:.6em;margin-bottom:.9em;align-items:start;min-height:200px;
+      display:grid;gap:.6em;margin-bottom:.9em;align-items:start;
+      min-height:200px;
       border:2px solid #000;
     }
     .hero::before{
       content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
-      /* Minimal “network” motif as inline SVG (tasteful, non-cheesy) */
       background-image:
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' fill='none' stroke='%23000' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'><circle cx='30' cy='60' r='10'/><circle cx='90' cy='40' r='10'/><circle cx='80' cy='90' r='10'/><line x1='30' y1='60' x2='90' y2='40'/><line x1='90' y1='40' x2='80' y2='90'/><line x1='80' y1='90' x2='30' y2='60'/></svg>"),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' fill='none' stroke='%23000' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'><circle cx='30' cy='60' r='10'/><circle cx='90' cy='40' r='10'/><circle cx='80' cy='90' r='10'/><line x1='30' y1='60' x2='90' y2='40'/><line x1='90' y1='40' x2='80' y2='90'/><line x1='80' y1='90' x2='30' y2='60'/></svg>"),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' fill='none' stroke='%23000' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'><circle cx='30' cy='60' r='10'/><circle cx='90' cy='40' r='10'/><circle cx='80' cy='90' r='10'/><line x1='30' y1='60' x2='90' y2='40'/><line x1='90' y1='40' x2='80' y2='90'/><line x1='80' y1='90' x2='30' y2='60'/></svg>");
+        url('https://alex-youcis.github.io/pen.png'),
+        url('https://alex-youcis.github.io/pen.png'),
+        url('https://alex-youcis.github.io/pen.png');
       background-repeat:no-repeat,no-repeat,no-repeat;
       background-position:16% center, 50% center, 84% center;
       background-size:auto 106%, auto 106%, auto 106%;
@@ -72,32 +72,64 @@
     .hero h1{
       margin:.1em 0 .1em;
       font-size:clamp(1.6rem,3.2vw,2.1rem);
-      justify-self:center; align-self:center; text-align:center;
+      position:relative;z-index:1;justify-self:start;
     }
 
-    /* Friends list – quick to scan */
-    .friends-wrap{
+    /* Section headings: clearer, more readable */
+    h2.section-title{
+      margin:1.2em 0 .9em;
+      font-size:1.35rem;
+      line-height:1.2;
+      font-weight:800;
+      letter-spacing:.2px;
+      position:relative;
+      display:inline-block;
+      padding-bottom:.3em;
+    }
+    h2.section-title::after{
+      content:'';
+      position:absolute;
+      left:0; bottom:-6px;
+      width:160px; height:6px;
+      border-radius:999px;
+      background:linear-gradient(90deg,#000 0%, var(--button-color) 100%);
+      opacity:.95;
+    }
+
+    /* Grids & cards (equal heights per row, buttons aligned) */
+    .publication-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:2em;
+      align-items:stretch;
+    }
+    @media (max-width:900px){
+      .publication-grid{grid-template-columns:1fr}
+    }
+    .publication-card{
       background:#fff;border:1px solid var(--border);border-radius:12px;
       box-shadow:0 1px 4px rgba(0,0,0,.06); padding:16px;
+      display:flex;flex-direction:column;height:100%;
     }
-    .friends-list{
-      list-style:none;padding:0;margin:0;
-      column-count:3; column-gap:2em;
-    }
-    .friends-list li{break-inside:avoid;margin-bottom:.45em}
-    .friends-list a{
-      color:var(--button-color); text-decoration:none; font-weight:600;
-      transition:color .2s, text-decoration-color .2s;
-    }
-    .friends-list a:hover{color:#9B0502; text-decoration:underline}
+    .publication-card h3{margin:.15em 0 .35em;font-size:1.15rem;line-height:1.25;min-height:calc(1.25em * 2)}
+    .publication-card p{margin:.25em 0}
+    details summary{cursor:pointer;font-weight:700;margin-bottom:8px}
+    .links{display:flex;gap:.5em;flex-wrap:wrap;margin-top:auto;padding-top:.65em}
+    .btn{background:var(--button-color);color:#fff;text-decoration:none;border-radius:8px;padding:.45em .7em;font-weight:700;font-size:1rem}
+    .btn:hover{filter:brightness(1.05)}
+    .publication-card a:not(.btn){color:#0f62fe;text-decoration:none}
+    .publication-card a:not(.btn):hover{text-decoration:underline}
 
-    @media (max-width:900px){ .friends-list{column-count:2} }
-    @media (max-width:540px){ .friends-list{column-count:1} }
-
+    /* Blog & footer */
+    .blog-post{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:16px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
     footer{background:var(--primary-color);color:#fff;padding:1em;text-align:center}
+    footer .social-icons a{color:#fff;margin:0 .33em}
+    .hero h1{
+  justify-self: center;  /* horizontal */
+  text-align: center;
+  align-self: center;    /* vertical */
+}
   </style>
 
-  <!-- MathJax (kept for consistency) -->
+  <!-- MathJax -->
   <script>
     window.MathJax = {
       tex:{ inlineMath:[['\\(','\\)']], displayMath:[['\\[','\\]']], processEscapes:true },
@@ -112,15 +144,15 @@
     <nav class="navbar" id="myNavbar">
       <div class="nav-mobile">
         <span class="nav-text">Navigation</span>
-        <span class="icon" onclick="toggleMenu()" role="button" aria-label="Open menu" aria-expanded="false">
+        <span class="icon" role="button" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
           <i class="fa fa-bars"></i>
         </span>
       </div>
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="research.html">Publications and preprints</a>
-        <a href="notes.html">Expository material</a>
-        <a href="#" aria-current="page">Friends</a>
+        <a href="#" aria-current="page">Expository material</a>
+        <a href="friends.html">Friends</a>
         <a href="nt-seminar.html">U of T number theory seminar</a>
         <a href="MAT138.html">MAT138</a>
       </div>
@@ -130,46 +162,127 @@
   <main>
     <!-- HERO -->
     <section class="hero">
-      <h1>Friends &amp; collaborators</h1>
+      <h1>Expository material</h1>
     </section>
 
-    <div class="friends-wrap">
-      <ul class="friends-list">
-        <li><a href="https://abhinandan.perso.math.cnrs.fr/">Abhinandan</a></li>
-        <li><a href="http://achinger.impan.pl/">Piotr Achinger</a></li>
-        <li><a href="https://math.bu.edu/people/abertolo/">Alexander Bertoloni Meli</a></li>
-        <li><a href="https://www.imo.universite-paris-saclay.fr/~kestutis.cesnavičius/">Kęstutis Česnavičius</a></li>
-        <li><a href="https://www.skidmore.edu/mathematics/faculty/daniels.php">Patrick Daniels</a></li>
-        <li><a href="https://peterdillery8.github.io/">Peter Dillery</a></li>
-        <li><a href="https://eldenelmanto.com/">Elden Elmanto</a></li>
-        <li><a href="https://sites.google.com/umich.edu/hyg">Haoyang Guo</a></li>
-        <li><a href="http://www.davidrenshawhansen.net/">David Hansen</a></li>
-        <li><a href="https://web.stanford.edu/~pvhoften/">Pol van Hoften</a></li>
-        <li><a href="https://www.ms.u-tokyo.ac.jp/~naoki/">Naoki Imai</a></li>
-        <li><a href="https://arxiv.org/search/math?query=Kato%2C+Hiroki&searchtype=author&abstracts=show&order=-announced_date_first&size=50">Hiroki Kato</a></li>
-        <li><a href="https://sites.google.com/site/wansukimmaths/">Wansu Kim</a></li>
-        <li><a href="https://marcin-lara.github.io/">Marcin Lara</a></li>
-        <li><a href="https://math.berkeley.edu/~jleake/">Jonathan Leake</a></li>
-        <li><a href="http://shizhang.li/about%20me.html">Shizhang Li</a></li>
-        <li><a href="https://masaooi.github.io/">Masao Oi</a></li>
-        <li><a href="https://sites.google.com/view/arghyas0">Arghya Sadhukhan</a></li>
-        <li><a href="https://sites.google.com/view/alexander-sherman/home">Alex Sherman</a></li>
-        <li><a href="https://ymsc.tsinghua.edu.cn/en/info/1033/2461.htm">Koji Shimizu</a></li>
-        <li><a href="https://sites.google.com/view/alexanderstokes">Alexander Stokes</a></li>
-        <li><a href="http://finnwiersig.de/">Finn Wiersig</a></li>
-        <li><a href="https://bogdanzavyalov.com/">Bogdan Zavyalov</a></li>
-        <!-- New additions -->
-        <li><a href="https://math.berkeley.edu/~zeliu/">Zeyu Liu</a></li>
-        <li><a href="https://sites.google.com/site/georgepappashomepage/home">George Pappas</a></li>
-        <li><a href="https://sites.google.com/a/bc.edu/keerthi/home">Keerthi Madapusi</a></li>
-      </ul>
-    </div>
+    <!-- ===== Notes ===== -->
+    <h2 class="section-title">Expository notes</h2>
+    <section class="publication-grid" id="notes-grid">
+      <!-- 1 -->
+      <div class="publication-card">
+        <h3>Matsushima's Formula and the Langlands Conjecture</h3>
+        <details>
+          <summary>Description</summary>
+          <p>These are informal notes meant to briefly summarize some of the ideas surrounding the work of my thesis and my work with A. Bertoloni Meli. As an added bonus, I try to motivate the Langlands conjecture via the cohomology of Shimura varieties.</p>
+        </details>
+        <div class="links">
+          <a href="MatsushimaNotes.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="publication-card">
+        <h3>Representations of \(p\)-adic Reductive Groups</h3>
+        <details>
+          <summary>Description</summary>
+          <p>These are very old notes written for a seminar on automorphic representations. They discuss some examples of representations of reductive \(p\)-adic groups.</p>
+        </details>
+        <div class="links">
+          <a href="Notes for p-adic reps.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div class="publication-card">
+        <h3>Representations of Adelic Groups</h3>
+        <details>
+          <summary>Description</summary>
+          <p>These are very old notes written for a seminar on automorphic representations. They discuss some examples of automorphic representations for \(\mathrm{GL}_2\).</p>
+        </details>
+        <div class="links">
+          <a href="gl2reps.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="publication-card">
+        <h3>Galois Groups of Local and Global Fields</h3>
+        <details>
+          <summary>Description</summary>
+          <p>These are very old notes written for a seminar on Galois representations. The goal is to essentially discuss some basic aspects of the Galois groups of local and global fields, give some geometric intuition for these objects, and explain why one would expect them to be difficult to study.</p>
+        </details>
+        <div class="links">
+          <a href="localglobalgalois.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- 5 -->
+      <div class="publication-card">
+        <h3>Weil–Deligne Representations and \(p\)-adic Hodge Theory</h3>
+        <details>
+          <summary>Description</summary>
+          <p>These are very old notes written for a seminar on Galois representations. The goal is to motivate Weil–Deligne representations (i.e., why they naturally show up), \(p\)-adic Hodge theory, and how the two notions connect.</p>
+        </details>
+        <div class="links">
+          <a href="weilnotes.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- 6 -->
+      <div class="publication-card">
+        <h3>Modular Representations of \(p\)-adic Reductive Groups</h3>
+        <details>
+          <summary>Description</summary>
+          <p>These notes are a discussion on the theory of characteristic \(p\) representations of \(p\)-adic and \(t\)-adic reductive groups and their relationship with the characteristic 0 theory. There is, in particular, a discussion of Kazhdan's theorem which relates Hecke algebras of \(p\)-adic and \(t\)-adic groups.</p>
+        </details>
+        <div class="links">
+          <a href="Modularreps.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Slides ===== -->
+    <h2 class="section-title">Some talk slides</h2>
+    <section class="publication-grid" id="slides-grid">
+      <!-- 1 -->
+      <div class="publication-card">
+        <h3>Talk at the CARTOON Conference</h3>
+        <details>
+          <summary>Description</summary>
+          <p>My talk at the CARTOON Conference on my work with Bertoloni Meli on characterizing the local Langlands conjecture.</p>
+        </details>
+        <div class="links">
+          <a href="CARTOON.pdf" class="btn">Slides</a>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="publication-card">
+        <h3>Talk at the University of Tokyo Number Theory Seminar</h3>
+        <details>
+          <summary>Description</summary>
+          <p>My talk at the University of Tokyo number theory seminar.</p>
+        </details>
+        <div class="links">
+          <a href="TodaiTalk.pdf" class="btn">Slides</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog -->
+    <h2 class="section-title">My blog</h2>
+    <p>I also have a blog: <a href="https://ayoucis.wordpress.com/">Hard Arithmetic</a>. In addition to the notes listed above, it contains many other informal posts aimed at various levels, mostly about algebraic geometry and/or number theory.</p>
+
+    <h3>Most recent post</h3>
+    <div id="most-recent-post" class="blog-post">Loading...</div>
+
+    <!-- Forum -->
+    <h2 class="section-title">Forum accounts</h2>
+    <p>I occasionally contribute to <a href="https://math.stackexchange.com/">Math Stack Exchange</a>.</p>
+    <p>
+      <a href="https://math.stackexchange.com/users/16497/alex-youcis"><img src="https://math.stackexchange.com/users/flair/16497.png" width="208" height="58" alt="profile for Alex Youcis at Mathematics Stack Exchange, Q&amp;A for people studying math at any level and professionals in related fields" title="profile for Alex Youcis at Mathematics Stack Exchange, Q&amp;A for people studying math at any level and professionals in related fields"></a>
+    </p>
   </main>
 
   <footer>
     <p>&copy; 2025 Alex Youcis. All rights reserved.</p>
   </footer>
 
+  <!-- JS -->
   <script>
     function toggleMenu(){
       const nav = document.getElementById('myNavbar');
@@ -178,6 +291,40 @@
       const expanded = nav.classList.contains('responsive');
       if(btn) btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     }
+
+    // Most recent blog post (same approach you had)
+    (function() {
+      const rssUrl = 'https://ayoucis.wordpress.com/feed';
+      const proxyUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl);
+
+      fetch(proxyUrl)
+        .then(response => response.json())
+        .then(data => {
+          if(data.status === 'ok') {
+            const post = data.items[0];
+            const title = post.title;
+            const link = post.link;
+            const content = post.content;
+
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = content;
+            const firstParagraph = tempDiv.querySelector('p');
+            const description = firstParagraph ? firstParagraph.innerText : '';
+
+            const postHtml = `
+              <h3><a href="${link}" target="_blank" rel="noopener">${title}</a></h3>
+              <p>${description}</p>
+            `;
+            document.getElementById('most-recent-post').innerHTML = postHtml;
+          } else {
+            document.getElementById('most-recent-post').innerHTML = 'Unable to load the most recent post.';
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching the RSS feed:', error);
+          document.getElementById('most-recent-post').innerHTML = 'Unable to load the most recent post.';
+        });
+    })();
   </script>
 </body>
 </html>
