@@ -1,270 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Alex Youcis</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Include Fonts and Icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-  <!-- Include CSS Styles -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Expository material — Alex Youcis</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+
   <style>
-    /* Root Variables for Colors */
-    :root {
-      --primary-color: #1D1E18; /* Dark color */
-      --secondary-color: #C5C3C6; /* Mid-tone gray */
-      --background-color: #DCDCDD; /* Light gray */
-      --text-color: #1D1E18; /* Dark color */
-      --button-color: #BF0603; /* Button and collaborator link color */
+    :root{
+      --primary-color:#1D1E18;
+      --secondary-color:#C5C3C6;
+      --background-color:#DCDCDD;
+      --text-color:#1D1E18;
+      --button-color:#BF0603;
+      --card:#fff;
+      --border:#e1e1e6;
     }
-    /* Global Styles */
-    body {
-      font-family: 'Open Sans', sans-serif;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 0;
+
+    *,:before,:after{box-sizing:border-box}
+    body{font-family:'Open Sans',sans-serif;background:var(--background-color);color:var(--text-color);margin:0}
+
+    /* Header/nav */
+    header{background:var(--primary-color);position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+    .navbar{display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px}
+    .nav-links{display:flex}
+    .nav-links a{color:#fff;text-decoration:none;margin:0 1em;position:relative;transition:color .3s}
+    .nav-links a::after{content:'';position:absolute;width:0;height:2px;background:var(--secondary-color);left:50%;bottom:-5px;transition:all .3s}
+    .nav-links a:hover{color:var(--secondary-color)}
+    .nav-links a:hover::after{left:0;width:100%}
+    /* Keep current page link WHITE when idle (not permanently grey) */
+    .nav-links a[aria-current="page"]{color:#fff}
+    .nav-mobile{display:none}
+    @media (max-width:768px){
+      .nav-links{display:none;flex-direction:column;background:var(--primary-color);position:absolute;top:60px;right:0;width:220px}
+      .nav-links a{margin:0;padding:1em;text-align:right;border-bottom:1px solid var(--secondary-color)}
+      .nav-mobile{display:flex;align-items:center}
+      .nav-text{color:#fff;margin-right:.5em}
+      .icon{color:#fff;font-size:24px;cursor:pointer}
+      .navbar.responsive .nav-links{display:flex}
+      .navbar.responsive .nav-mobile .nav-text{display:none}
     }
-    /* Navbar Styles */
-    header {
-      background-color: var(--primary-color);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      /* Removed border-bottom */
-      /* Add subtle shadow */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
+
+    /* HERO (pen background triptych, 2px black border) */
+    .hero{
+      position:relative;overflow:hidden;background:var(--card);border-radius:14px;
+      padding:1.25em 1.5em;
+      box-shadow:0 2px 10px rgba(0,0,0,.05);
+      display:grid;gap:.6em;margin-bottom:.9em;align-items:start;
+      min-height:200px;
+      border:2px solid #000;
     }
-    .navbar {
-      display: flex;
-      justify-content: flex-end; /* Align items to the right */
-      align-items: center;
-      padding: 0 1em;
-      height: 60px;
+    .hero::before{
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
+      background-image:
+        url('https://alex-youcis.github.io/pen.png'),
+        url('https://alex-youcis.github.io/pen.png'),
+        url('https://alex-youcis.github.io/pen.png');
+      background-repeat:no-repeat,no-repeat,no-repeat;
+      background-position:16% center, 50% center, 84% center;
+      background-size:auto 106%, auto 106%, auto 106%;
     }
-    .nav-links {
-      display: flex;
+    @media (max-width:600px){
+      .hero{ padding:1em 1em 1.1em; }
+      .hero::before{ background-size:auto 78%, auto 78%, auto 78%; }
     }
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      margin: 0 1em;
-      position: relative; /* For underline effect */
-      transition: color 0.3s ease; /* Smooth color transition */
+    .hero h1{
+      margin:.1em 0 .1em;
+      font-size:clamp(1.6rem,3.2vw,2.1rem);
+      position:relative;z-index:1;justify-self:start;
     }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      background-color: var(--secondary-color);
-      left: 50%;
-      bottom: -5px;
-      transition: all 0.3s ease;
+
+    /* Section headings: clearer, more readable */
+    h2.section-title{
+      margin:1.2em 0 .9em;
+      font-size:1.35rem;
+      line-height:1.2;
+      font-weight:800;
+      letter-spacing:.2px;
+      position:relative;
+      display:inline-block;
+      padding-bottom:.3em;
     }
-    .nav-links a:hover {
-      color: var(--secondary-color); /* Change text color on hover */
+    h2.section-title::after{
+      content:'';
+      position:absolute;
+      left:0; bottom:-6px;
+      width:160px; height:6px;
+      border-radius:999px;
+      background:linear-gradient(90deg,#000 0%, var(--button-color) 100%);
+      opacity:.95;
     }
-    .nav-links a:hover::after {
-      left: 0;
-      width: 100%;
+
+    /* Grids & cards (equal heights per row, buttons aligned) */
+    .publication-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:2em;
+      align-items:stretch;
     }
-    .nav-mobile {
-      display: none;
+    @media (max-width:900px){
+      .publication-grid{grid-template-columns:1fr}
     }
-    /* Mobile Navigation Styles */
-    @media screen and (max-width: 768px) {
-      .navbar {
-        justify-content: flex-end;
-      }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background-color: var(--primary-color);
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 200px;
-      }
-      .nav-links a {
-        margin: 0;
-        padding: 1em;
-        text-align: right;
-        border-bottom: 1px solid var(--secondary-color);
-      }
-      .nav-mobile {
-        display: flex;
-        align-items: center;
-      }
-      .nav-text {
-        color: white;
-        margin-right: 0.5em;
-      }
-      .icon {
-        color: white;
-        font-size: 24px;
-        cursor: pointer;
-      }
-      .navbar.responsive .nav-links {
-        display: flex;
-      }
-      .navbar.responsive .nav-mobile .nav-text {
-        display: none;
-      }
+    .publication-card{
+      background:#fff;border:1px solid var(--border);border-radius:12px;
+      box-shadow:0 1px 4px rgba(0,0,0,.06); padding:16px;
+      display:flex;flex-direction:column;height:100%;
     }
-    /* Main Content Styles */
-    main {
-      padding: 2em;
-    }
-    /* Publication Card Styles */
-    .publication-card {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .publication-card h2 {
-      margin-top: 0;
-    }
-    .publication-card .btn {
-      background-color: var(--button-color);
-      color: white;
-      padding: 8px 12px;
-      text-decoration: none;
-      border-radius: 4px;
-      margin-right: 8px;
-      transition: background-color 0.3s ease; /* Smooth transition */
-    }
-    .publication-card .btn:hover {
-      background-color: #9B0502; /* Darker shade of button color on hover */
-    }
-    /* Footer Styles */
-    footer {
-      background-color: var(--primary-color);
-      color: white;
-      padding: 1em;
-      text-align: center;
-    }
-    /* Responsive Grid */
-    .publication-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2em;
-    }
-    @media (max-width: 768px) {
-      .publication-grid {
-        grid-template-columns: 1fr;
-      }
-      .navbar {
-        justify-content: flex-end;
-      }
-      .nav-links {
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 200px;
-      }
-    }
-    /* Links inside publication-card */
-    .publication-card a:not(.btn) {
-      color: var(--secondary-color);
-      text-decoration: none;
-    }
-    .publication-card a:not(.btn):hover {
-      text-decoration: underline;
-    }
-    /* Details summary */
-    details summary {
-      cursor: pointer;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-    /* Increased spacing between description and links */
-    .links {
-      margin-top: 16px;
-    }
-    /* Centered Content */
-    .centered {
-      text-align: center;
-    }
-    /* Image Styles */
-    .profile-image {
-      display: block;
-      margin: 0 auto;
-      width: 250px;
-      height: 375px;
-      object-fit: cover;
-    }
-    /* Styles for the Most Recent Post */
-    .blog-post {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 16px;
-      margin-top: 16px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .blog-post h3 {
-      margin-top: 0;
-    }
-    .blog-post a {
-      color: var(--button-color);
-      text-decoration: none;
-    }
-    .blog-post a:hover {
-      text-decoration: underline;
-    }
+    .publication-card h3{margin:.15em 0 .35em;font-size:1.15rem;line-height:1.25;min-height:calc(1.25em * 2)}
+    .publication-card p{margin:.25em 0}
+    details summary{cursor:pointer;font-weight:700;margin-bottom:8px}
+    .links{display:flex;gap:.5em;flex-wrap:wrap;margin-top:auto;padding-top:.65em}
+    .btn{background:var(--button-color);color:#fff;text-decoration:none;border-radius:8px;padding:.45em .7em;font-weight:700;font-size:1rem}
+    .btn:hover{filter:brightness(1.05)}
+    .publication-card a:not(.btn){color:#0f62fe;text-decoration:none}
+    .publication-card a:not(.btn):hover{text-decoration:underline}
+
+    /* Blog & footer */
+    .blog-post{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:16px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+    footer{background:var(--primary-color);color:#fff;padding:1em;text-align:center}
+    footer .social-icons a{color:#fff;margin:0 .33em}
+    .hero h1{
+  justify-self: center;  /* horizontal */
+  text-align: center;
+  align-self: center;    /* vertical */
+}
   </style>
-  <!-- MathJax Configuration -->
+
+  <!-- MathJax -->
   <script>
     window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\[', '\\]']],
-        processEscapes: true,
-      },
-      options: {
-        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-        ignoreHtmlClass: 'tex2jax_ignore',
-        processHtmlClass: 'tex2jax_process',
-      }
+      tex:{ inlineMath:[['\\(','\\)']], displayMath:[['\\[','\\]']], processEscapes:true },
+      options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' }
     };
   </script>
-  <!-- Include MathJax -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
   <header>
     <nav class="navbar" id="myNavbar">
-      <!-- Mobile Navigation -->
       <div class="nav-mobile">
         <span class="nav-text">Navigation</span>
-        <span class="icon" onclick="toggleMenu()">
+        <span class="icon" role="button" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
           <i class="fa fa-bars"></i>
         </span>
       </div>
-      <!-- Navigation links -->
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="research.html">Publications and preprints</a>
-        <a href="#">Expository material</a>
+        <a href="#" aria-current="page">Expository material</a>
         <a href="friends.html">Friends</a>
-         <a href="nt-seminar.html">U of T number theory seminar</a>
+        <a href="nt-seminar.html">U of T number theory seminar</a>
         <a href="MAT138.html">MAT138</a>
       </div>
     </nav>
   </header>
+
   <main>
-    <h1><i class="fa fa-pencil"></i> Expository Notes</h1>
-    <div class="publication-grid">
-      <!-- Note 1 -->
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Expository material</h1>
+    </section>
+
+    <!-- ===== Notes ===== -->
+    <h2 class="section-title">Expository notes</h2>
+    <section class="publication-grid" id="notes-grid">
+      <!-- 1 -->
       <div class="publication-card">
-        <h2>Matsushima's Formula and the Langlands Conjecture</h2>
+        <h3>Matsushima's Formula and the Langlands Conjecture</h3>
         <details>
           <summary>Description</summary>
           <p>These are informal notes meant to briefly summarize some of the ideas surrounding the work of my thesis and my work with A. Bertoloni Meli. As an added bonus, I try to motivate the Langlands conjecture via the cohomology of Shimura varieties.</p>
@@ -273,9 +179,9 @@
           <a href="MatsushimaNotes.pdf" class="btn">PDF</a>
         </div>
       </div>
-      <!-- Note 2 -->
+      <!-- 2 -->
       <div class="publication-card">
-        <h2>Representations of \(p\)-adic Reductive Groups</h2>
+        <h3>Representations of \(p\)-adic Reductive Groups</h3>
         <details>
           <summary>Description</summary>
           <p>These are very old notes written for a seminar on automorphic representations. They discuss some examples of representations of reductive \(p\)-adic groups.</p>
@@ -284,9 +190,9 @@
           <a href="Notes for p-adic reps.pdf" class="btn">PDF</a>
         </div>
       </div>
-      <!-- Note 3 -->
+      <!-- 3 -->
       <div class="publication-card">
-        <h2>Representations of Adelic Groups</h2>
+        <h3>Representations of Adelic Groups</h3>
         <details>
           <summary>Description</summary>
           <p>These are very old notes written for a seminar on automorphic representations. They discuss some examples of automorphic representations for \(\mathrm{GL}_2\).</p>
@@ -295,9 +201,9 @@
           <a href="gl2reps.pdf" class="btn">PDF</a>
         </div>
       </div>
-      <!-- Note 4 -->
+      <!-- 4 -->
       <div class="publication-card">
-        <h2>Galois Groups of Local and Global Fields</h2>
+        <h3>Galois Groups of Local and Global Fields</h3>
         <details>
           <summary>Description</summary>
           <p>These are very old notes written for a seminar on Galois representations. The goal is to essentially discuss some basic aspects of the Galois groups of local and global fields, give some geometric intuition for these objects, and explain why one would expect them to be difficult to study.</p>
@@ -306,9 +212,9 @@
           <a href="localglobalgalois.pdf" class="btn">PDF</a>
         </div>
       </div>
-      <!-- Note 5 -->
+      <!-- 5 -->
       <div class="publication-card">
-        <h2>Weil–Deligne Representations and \(p\)-adic Hodge Theory</h2>
+        <h3>Weil–Deligne Representations and \(p\)-adic Hodge Theory</h3>
         <details>
           <summary>Description</summary>
           <p>These are very old notes written for a seminar on Galois representations. The goal is to motivate Weil–Deligne representations (i.e., why they naturally show up), \(p\)-adic Hodge theory, and how the two notions connect.</p>
@@ -317,9 +223,9 @@
           <a href="weilnotes.pdf" class="btn">PDF</a>
         </div>
       </div>
-      <!-- Note 6 -->
+      <!-- 6 -->
       <div class="publication-card">
-        <h2>Modular Representations of \(p\)-adic Reductive Groups</h2>
+        <h3>Modular Representations of \(p\)-adic Reductive Groups</h3>
         <details>
           <summary>Description</summary>
           <p>These notes are a discussion on the theory of characteristic \(p\) representations of \(p\)-adic and \(t\)-adic reductive groups and their relationship with the characteristic 0 theory. There is, in particular, a discussion of Kazhdan's theorem which relates Hecke algebras of \(p\)-adic and \(t\)-adic groups.</p>
@@ -328,24 +234,14 @@
           <a href="Modularreps.pdf" class="btn">PDF</a>
         </div>
       </div>
-      <!-- Note 7 -->
-      <div class="publication-card">
-        <h2>A 'Brief' Discussion of Torsors</h2>
-        <details>
-          <summary>Description</summary>
-          <p>These are notes written for two mentees I had in an independent study concerning the étale fundamental group. The goal was to motivate cohomology (in particular étale cohomology) via torsors. I think that the notes are well-intentioned and do genuinely have interesting didactic value buried deep inside them. Unfortunately, they are long-winded, meandering, and overly self-indulgent. One day I intend to go back and tighten them up.</p>
-        </details>
-        <div class="links">
-          <a href="torsors.pdf" class="btn">PDF</a>
-        </div>
-      </div>
-    </div>
+    </section>
 
-    <h1><i class="fa fa-slideshare"></i> Some Talk Slides</h1>
-    <div class="publication-grid">
-      <!-- Talk 1 -->
+    <!-- ===== Slides ===== -->
+    <h2 class="section-title">Some talk slides</h2>
+    <section class="publication-grid" id="slides-grid">
+      <!-- 1 -->
       <div class="publication-card">
-        <h2>Talk at the CARTOON Conference</h2>
+        <h3>Talk at the CARTOON Conference</h3>
         <details>
           <summary>Description</summary>
           <p>My talk at the CARTOON Conference on my work with Bertoloni Meli on characterizing the local Langlands conjecture.</p>
@@ -354,9 +250,9 @@
           <a href="CARTOON.pdf" class="btn">Slides</a>
         </div>
       </div>
-      <!-- Talk 2 -->
+      <!-- 2 -->
       <div class="publication-card">
-        <h2>Talk at the University of Tokyo Number Theory Seminar</h2>
+        <h3>Talk at the University of Tokyo Number Theory Seminar</h3>
         <details>
           <summary>Description</summary>
           <p>My talk at the University of Tokyo number theory seminar.</p>
@@ -365,63 +261,60 @@
           <a href="TodaiTalk.pdf" class="btn">Slides</a>
         </div>
       </div>
-    </div>
+    </section>
 
-    <h1><i class="fa fa-rss"></i> My Blog</h1>
+    <!-- Blog -->
+    <h2 class="section-title">My blog</h2>
     <p>I also have a blog: <a href="https://ayoucis.wordpress.com/">Hard Arithmetic</a>. In addition to the notes listed above, it contains many other informal posts aimed at various levels, mostly about algebraic geometry and/or number theory.</p>
-    
-    <!-- Added Most Recent Post Section -->
-    <h2>Most Recent Post</h2>
-    <div id="most-recent-post" class="blog-post">
-      Loading...
-    </div>
 
-    <h1><i class="fa fa-users"></i> Forum Accounts</h1>
+    <h3>Most recent post</h3>
+    <div id="most-recent-post" class="blog-post">Loading...</div>
+
+    <!-- Forum -->
+    <h2 class="section-title">Forum accounts</h2>
     <p>I occasionally contribute to <a href="https://math.stackexchange.com/">Math Stack Exchange</a>.</p>
     <p>
       <a href="https://math.stackexchange.com/users/16497/alex-youcis"><img src="https://math.stackexchange.com/users/flair/16497.png" width="208" height="58" alt="profile for Alex Youcis at Mathematics Stack Exchange, Q&amp;A for people studying math at any level and professionals in related fields" title="profile for Alex Youcis at Mathematics Stack Exchange, Q&amp;A for people studying math at any level and professionals in related fields"></a>
     </p>
-
   </main>
+
   <footer>
     <p>&copy; 2025 Alex Youcis. All rights reserved.</p>
   </footer>
-  <!-- JavaScript for Mobile Menu Toggle -->
+
+  <!-- JS -->
   <script>
-    function toggleMenu() {
-      var navbar = document.getElementById("myNavbar");
-      navbar.classList.toggle("responsive");
+    function toggleMenu(){
+      const nav = document.getElementById('myNavbar');
+      nav.classList.toggle('responsive');
+      const btn = nav.querySelector('.nav-mobile .icon');
+      const expanded = nav.classList.contains('responsive');
+      if(btn) btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     }
-  </script>
-  <!-- JavaScript to Fetch Most Recent Blog Post -->
-  <script>
+
+    // Most recent blog post (same approach you had)
     (function() {
       const rssUrl = 'https://ayoucis.wordpress.com/feed';
-
-      // Use a proxy to avoid CORS issues
       const proxyUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl);
 
       fetch(proxyUrl)
         .then(response => response.json())
         .then(data => {
           if(data.status === 'ok') {
-            const post = data.items[0]; // Get the most recent post
+            const post = data.items[0];
             const title = post.title;
             const link = post.link;
-            const content = post.content; // Full content
+            const content = post.content;
 
-            // Extract the first full paragraph
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = content;
             const firstParagraph = tempDiv.querySelector('p');
             const description = firstParagraph ? firstParagraph.innerText : '';
 
-            // Construct the HTML
             const postHtml = `
-              <h3><a href="${link}" target="_blank">${title}</a></h3>
+              <h3><a href="${link}" target="_blank" rel="noopener">${title}</a></h3>
               <p>${description}</p>
             `;
-
             document.getElementById('most-recent-post').innerHTML = postHtml;
           } else {
             document.getElementById('most-recent-post').innerHTML = 'Unable to load the most recent post.';
