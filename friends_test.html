@@ -46,7 +46,7 @@
 
     main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
 
-    /* HERO (clean card with 2px border) */
+    /* HERO (clean card with 2px border, subtle triptych background) */
     .hero{
       position:relative;overflow:hidden;background:var(--card);border-radius:14px;
       padding:1.25em 1.5em;
@@ -54,13 +54,28 @@
       display:grid;gap:.6em;margin-bottom:.9em;align-items:start;min-height:200px;
       border:2px solid #000;
     }
+    .hero::before{
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
+      /* Minimal “network” motif as inline SVG (tasteful, non-cheesy) */
+      background-image:
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' fill='none' stroke='%23000' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'><circle cx='30' cy='60' r='10'/><circle cx='90' cy='40' r='10'/><circle cx='80' cy='90' r='10'/><line x1='30' y1='60' x2='90' y2='40'/><line x1='90' y1='40' x2='80' y2='90'/><line x1='80' y1='90' x2='30' y2='60'/></svg>"),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' fill='none' stroke='%23000' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'><circle cx='30' cy='60' r='10'/><circle cx='90' cy='40' r='10'/><circle cx='80' cy='90' r='10'/><line x1='30' y1='60' x2='90' y2='40'/><line x1='90' y1='40' x2='80' y2='90'/><line x1='80' y1='90' x2='30' y2='60'/></svg>"),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120' fill='none' stroke='%23000' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'><circle cx='30' cy='60' r='10'/><circle cx='90' cy='40' r='10'/><circle cx='80' cy='90' r='10'/><line x1='30' y1='60' x2='90' y2='40'/><line x1='90' y1='40' x2='80' y2='90'/><line x1='80' y1='90' x2='30' y2='60'/></svg>");
+      background-repeat:no-repeat,no-repeat,no-repeat;
+      background-position:16% center, 50% center, 84% center;
+      background-size:auto 106%, auto 106%, auto 106%;
+    }
+    @media (max-width:600px){
+      .hero{ padding:1em 1em 1.1em; }
+      .hero::before{ background-size:auto 78%, auto 78%, auto 78%; }
+    }
     .hero h1{
       margin:.1em 0 .1em;
       font-size:clamp(1.6rem,3.2vw,2.1rem);
       justify-self:center; align-self:center; text-align:center;
     }
 
-    /* Section heading (same underline style you liked) */
+    /* Section heading underline (clear but restrained) */
     h2.section-title{
       margin:1.2em 0 .9em;
       font-size:1.35rem;
@@ -80,17 +95,6 @@
       background:linear-gradient(90deg,#000 0%, var(--button-color) 100%);
       opacity:.95;
     }
-
-    /* A–Z quick filter (lightweight chips) */
-    .alpha-bar{
-      display:flex;flex-wrap:wrap;gap:.4em;align-items:center;margin:.4em 0 1.1em;
-    }
-    .alpha-chip{
-      border:1px solid #cfcfd4;background:#fff;border-radius:999px;
-      padding:.25em .65em;font-weight:700;cursor:pointer;user-select:none;
-    }
-    .alpha-chip[aria-pressed="true"]{background:#f2f2f6}
-    .alpha-chip:focus-visible{outline:2px solid #333;outline-offset:2px}
 
     /* Friends list – quick to scan */
     .friends-wrap{
@@ -152,39 +156,8 @@
 
     <h2 class="section-title">Directory</h2>
 
-    <!-- A–Z quick filter -->
-    <div class="alpha-bar" role="group" aria-label="Filter by initial">
-      <button class="alpha-chip" data-letter="all" aria-pressed="true">All</button>
-      <button class="alpha-chip" data-letter="A">A</button>
-      <button class="alpha-chip" data-letter="B">B</button>
-      <button class="alpha-chip" data-letter="C">C</button>
-      <button class="alpha-chip" data-letter="D">D</button>
-      <button class="alpha-chip" data-letter="E">E</button>
-      <button class="alpha-chip" data-letter="F">F</button>
-      <button class="alpha-chip" data-letter="G">G</button>
-      <button class="alpha-chip" data-letter="H">H</button>
-      <button class="alpha-chip" data-letter="I">I</button>
-      <button class="alpha-chip" data-letter="J">J</button>
-      <button class="alpha-chip" data-letter="K">K</button>
-      <button class="alpha-chip" data-letter="L">L</button>
-      <button class="alpha-chip" data-letter="M">M</button>
-      <button class="alpha-chip" data-letter="N">N</button>
-      <button class="alpha-chip" data-letter="O">O</button>
-      <button class="alpha-chip" data-letter="P">P</button>
-      <button class="alpha-chip" data-letter="Q">Q</button>
-      <button class="alpha-chip" data-letter="R">R</button>
-      <button class="alpha-chip" data-letter="S">S</button>
-      <button class="alpha-chip" data-letter="T">T</button>
-      <button class="alpha-chip" data-letter="U">U</button>
-      <button class="alpha-chip" data-letter="V">V</button>
-      <button class="alpha-chip" data-letter="W">W</button>
-      <button class="alpha-chip" data-letter="X">X</button>
-      <button class="alpha-chip" data-letter="Y">Y</button>
-      <button class="alpha-chip" data-letter="Z">Z</button>
-    </div>
-
     <div class="friends-wrap">
-      <ul class="friends-list" id="friends">
+      <ul class="friends-list">
         <li><a href="https://abhinandan.perso.math.cnrs.fr/">Abhinandan</a></li>
         <li><a href="http://achinger.impan.pl/">Piotr Achinger</a></li>
         <li><a href="https://math.bu.edu/people/abertolo/">Alexander Bertoloni Meli</a></li>
@@ -224,35 +197,6 @@
       const expanded = nav.classList.contains('responsive');
       if(btn) btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     }
-
-    // Lightweight A–Z filter (diacritics-safe)
-    (function(){
-      const chips = Array.from(document.querySelectorAll('.alpha-chip'));
-      const list  = document.getElementById('friends');
-      const items = Array.from(list.querySelectorAll('li'));
-
-      function normalizeFirst(s){
-        if(!s) return '';
-        const plain = s.normalize('NFD').replace(/\p{Diacritic}/gu,'');
-        return plain.trim().charAt(0).toUpperCase();
-      }
-
-      function filter(letter){
-        items.forEach(li=>{
-          const name = li.textContent || '';
-          const first = normalizeFirst(name);
-          li.style.display = (letter==='all' || first===letter) ? '' : 'none';
-        });
-      }
-
-      chips.forEach(ch=>{
-        ch.addEventListener('click', ()=>{
-          chips.forEach(c=>c.setAttribute('aria-pressed','false'));
-          ch.setAttribute('aria-pressed','true');
-          filter(ch.dataset.letter);
-        });
-      });
-    })();
   </script>
 </body>
 </html>
