@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Alex Youcis</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Include Fonts and Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <!-- Include CSS Styles -->
+  <style>
+    /* Root Variables for Colors */
+    :root {
+      --primary-color: #1D1E18;   /* Dark color */
+      --secondary-color: #C5C3C6; /* Mid-tone gray */
+      --background-color: #DCDCDD;/* Light gray */
+      --text-color: #1D1E18;      /* Dark color */
+      --button-color: #BF0603;    /* Accent red */
+      --card: #ffffff;
+    }
+
+    /* Global Styles */
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Navbar Styles */
+    header {
+      background-color: var(--primary-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: flex-end; /* Align items to the right */
+      align-items: center;
+      padding: 0 1em;
+      height: 60px;
+    }
+
+    .nav-links { display: flex; }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1em;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: var(--secondary-color);
+      left: 50%;
+      bottom: -5px;
+      transition: all 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--secondary-color); }
+    .nav-links a:hover::after { left: 0; width: 100%; }
+
+    .nav-mobile { display: none; }
+
+    /* Mobile Navigation Styles */
+    @media screen and (max-width: 768px) {
+      .navbar { justify-content: flex-end; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: var(--primary-color);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+      }
+      .nav-links a {
+        margin: 0;
+        padding: 1em;
+        text-align: right;
+        border-bottom: 1px solid var(--secondary-color);
+      }
+      .nav-mobile { display: flex; align-items: center; }
+      .nav-text { color: white; margin-right: 0.5em; }
+      .icon { color: white; font-size: 24px; cursor: pointer; }
+      .navbar.responsive .nav-links { display: flex; }
+      .navbar.responsive .nav-mobile .nav-text { display: none; }
+    }
+
+    /* Main Content Styles — normalized width to match other pages */
+    main {
+      padding: 2em 1.25em 3em;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Minimal hero card to match the site, kept very quiet */
+    .hero {
+      position: relative;
+      background: var(--card);
+      border-radius: 14px;
+      padding: 1.25em 1.5em;
+      margin-bottom: 1.5em;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05), 0 0 0 2px #000; /* thin black outline like other pages */
+      min-height: 200px; /* same vertical rhythm as other heroes */
+      overflow: hidden;
+    }
+    /* Ultra-subtle crest watermark to tie in aesthetics, but nearly invisible */
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0; pointer-events: none;
+      opacity: .06; /* very faint */
+      background-image:
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: auto 80%;
+    }
+    @media (max-width: 600px){
+      .hero::before { background-size: auto 70%; opacity: .08; }
+    }
+    .hero h1 { margin: .2em 0 .1em; font-size: clamp(1.8rem, 4vw, 2.4rem); position: relative; }
+
+    /* Image Styles (unchanged) */
+    .profile-image {
+      display: block;
+      margin: 0 auto;
+      width: 250px;
+      height: 375px;
+      object-fit: cover;
+      border: 5px solid white; /* White frame around the picture */
+    }
+
+    /* Centered Content */
+    .centered { text-align: center; }
+
+    /* Publications and Preprints Styles */
+    section { margin-top: 1.25em; }
+    .publications, .preprints {
+      list-style-type: none;
+      padding-left: 1em;
+    }
+    .publications li::before, .preprints li::before {
+      content: "\25CA"; /* Small diamond */
+      color: var(--text-color);
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+    .publications li, .preprints li { margin-bottom: 0.5em; }
+    .publications i, .preprints i { font-style: italic; }
+
+    /* Footer Styles */
+    footer {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+  </style>
+
+  <!-- MathJax Configuration -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']], processEscapes: true },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
+        ignoreHtmlClass: 'tex2jax_ignore',
+        processHtmlClass: 'tex2jax_process',
+      }
+    };
+  </script>
+  <!-- Include MathJax -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
+<body>
+  <header>
+    <nav class="navbar" id="myNavbar">
+      <!-- Mobile Navigation -->
+      <div class="nav-mobile">
+        <span class="nav-text">Navigation</span>
+        <span class="icon" onclick="toggleMenu()">
+          <i class="fa fa-bars"></i>
+        </span>
+      </div>
+      <!-- Navigation links -->
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="research.html">Publications and preprints</a>
+        <a href="notes.html">Expository material</a>
+        <a href="friends.html">Friends</a>
+        <a href="nt-seminar.html">U of T number theory seminar</a>
+        <a href="MAT138.html">MAT138</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Minimal hero to match the rest of the site without fuss -->
+    <section class="hero">
+      <h1>Alex Youcis</h1>
+    </section>
+
+    <!-- Keep the portrait simple and separate from the hero -->
+    <div class="centered">
+      <img src="speech.jpg" alt="Alex Youcis" class="profile-image">
+    </div>
+
+    <section>
+      <h2>About Me</h2>
+      <p>My name is Alex Youcis (the IPA transcription for my last name is juːkɪs). Currently, I am a postdoc at the University of Toronto.</p>
+    </section>
+
+    <section>
+      <h2>My Research Interests</h2>
+      <p>Broadly speaking, my research interests are arithmetic geometry, rigid geometry, and \(p\)-adic Hodge theory. I am particularly interested in interactions of these topics with the theory of Shimura varieties and the Langlands program.</p>
+    </section>
+
+    <section>
+      <h2>My CV</h2>
+      <p>A more detailed account of my professional activities can be found in my <a href="CV092625.pdf">CV</a>.</p>
+    </section>
+
+    <section>
+      <h2>Published Articles</h2>
+      <ul class="publications">
+        <li>P. Daniels and A. Youcis. <i>Canonical Integral Models of Shimura Varieties of Abelian Type. </i> <strong>Forum of Mathematics, Sigma</strong> DOI: <a href="https://doi.org/10.1017/fms.2025.27 ">10.1017/fms.2025.27</a></li>
+        <li>K. Česnavičius and A. Youcis. <i>The analytic topology suffices for the \(B_{\mathrm{dR}}^+\)-Grassmannian.</i> To appear in <strong>\(p\)-adic Hodge Theory (2022 Simons Symposium)</strong> DOI: <a href="https://doi.org/10.48550/arXiv.2303.11710">arXiv.2303.11710</a></li>
+        <li>P. Achinger, M. Lara, and A. Youcis. <i>Variants of the de Jong fundamental group</i>. To appear in <strong>American Journal of Mathematics</strong>. DOI: <a href="https://doi.org/10.48550/arXiv.2203.11750">10.48550/arXiv.2203.11750</a></li>
+        <li>A. Bertoloni Meli, N. Imai, and A. Youcis. <i>The Jacobson–Morozov Morphism for Langlands Parameters in the Relative Setting</i>. <strong>International Mathematics Research Notices (2023)</strong> . DOI: <a href="https://doi.org/10.1093/imrn/rnad217">10.1093/imrn/rnad217</a></li>
+        <li>A. Bertoloni Meli and A Youcis. <i>An approach to the characterization of the local Langlands correspondence</i>. <strong>Represent. Theory 27 (2023), 415--430. </strong> DOI: <a href="https://doi.org/10.1090/ert/643">10.1090/ert/643</a></li>
+        <li>P. Achinger, M. Lara, and A. Youcis. <i>Geometric arcs and fundamental groups of rigid spaces</i>. <strong>J. Reine Angew. Math. 799 (2023), 57--107.</strong> DOI: <a href="https://doi.org/10.1515/crelle-2023-0013">10.1515/crelle-2023-0013</a></li>
+        <li>P.  Achinger, M. Lara, and A. Youcis. <i>Specialization for the pro-étale fundamental group.</i>. <strong>Compos. Math. 158 (2022), no. 8, 1713--1745.</strong> DOI: <a href="https://doi.org/10.1112/S0010437X2200759X">10.1112/S0010437X2200759X</a></li>
+        <li>E. Beazley, M. Nichols, M. Park, X. Shi, and A. Youcis.  <i>Bijective projections on parabolic quotients of affine Weyl groups</i>. <strong>Journal of Algebraic Combinatorics (2014).</strong> DOI: <a href="https://doi.org/10.1007/s10801-014-0559-9">0.1007/s10801-014-0559-9</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Preprints</h2>
+      <ul class="preprints">
+        <li>Abhinandan and A. Youcis. <i>An integral comparison of crystalline and de Rham cohomology.</i> DOI: <a href="https://arxiv.org/abs/2507.17631">arXiv.2504.16282</a></li>
+        <li>N. Imai, H. Kato, and A. Youcis. <i>An Integral Analogue of Fontaine's Crystalline Functor.</i> DOI: <a href="https://arxiv.org/abs/2504.16282">arXiv.2504.16282</a></li>
+        <li>P. Achinger and A. Youcis. <i>Beauville—Laszlo Gluing of Algebraic Spaces.</i> <a href="https://doi.org/10.48550/arXiv.2410.20500">arXiv.2410.20500</a></li>
+        <li>N. Imai, H. Kato, and A. Youcis. <i>A Tannakian Framework for Prismatic F-crystals.</i> DOI: <a href="https://doi.org/10.48550/arXiv.2406.08259">arXiv.2406.08259</a></li>
+        <li>N. Imai, H. Kato, and A. Youcis. <i>The Prismatic Realization Functor for Shimura Varieties of Abelian Type.</i> DOI: <a href=" https://doi.org/10.48550/arXiv.2310.08472">arXiv.2310.08472</a></li>
+        <li>A. Bertoloni Meli and A. Youcis. <i>The Scholze-Shin conjecture for Unramified Unitary Groups I: The No Endoscopy Case.</i> <a href="https://alex-youcis.github.io/ScholzeShinIMPAN.pdf">PDF</a></li>
+        <li>A. Youcis. <i> The Langlands-Kottwitz Method and Deformation Spaces of p-Divisible Groups of Abelian Type (Thesis).</i> <a href="https://escholarship.org/uc/item/8z65r6wd">ProQuest</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Alex Youcis. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript for Mobile Menu Toggle -->
+  <script>
+    function toggleMenu() {
+      var navbar = document.getElementById("myNavbar");
+      navbar.classList.toggle("responsive");
+    }
+  </script>
+</body>
+</html>
