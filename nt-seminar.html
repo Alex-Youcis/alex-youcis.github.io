@@ -48,6 +48,8 @@
       box-shadow: 0 2px 10px rgba(0,0,0,.05); display:grid; gap: .75em; margin-bottom: 1.5em;
       box-shadow: 0 2px 10px rgba(0,0,0,.05), 0 0 0 2px #000; /* keeps size, respects border-radius */
 
+      /* NEW to match other pages' hero sizing */
+      min-height: 200px;
     }
     .hero::before{
       content:""; position:absolute; inset:0; pointer-events:none; opacity:.22;
@@ -62,7 +64,13 @@
     @media (max-width: 600px){
       .hero::before{ background-size: auto 78%, auto 78%, auto 78%; }
     }
-    .hero h1 { margin: .2em 0 .1em; font-size: clamp(1.6rem, 3.2vw, 2.1rem); position: relative; }
+    .hero h1 {
+      margin: .2em 0 .1em; font-size: clamp(1.6rem, 3.2vw, 2.1rem); position: relative;
+
+      /* NEW: center the title text like other pages */
+      text-align: center;
+      justify-self: center;
+    }
     .meta { display:flex; flex-wrap:wrap; gap:.75em 1.25em; font-size: .98rem; color:#222; position: relative; }
     .meta .tag { background: var(--secondary-color); color:#111; border-radius: 999px; padding: .25em .7em; }
     .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.6em .9em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); position: relative; }
@@ -427,7 +435,7 @@ Witt vectors.</div>
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">In 1972, Katz proved the Grothendieck-Katz \(p\)-curvature conjecture for linear differential equations arising from algebraic geometry—that is, Gauss-Manin connections. His proof made use of the structures and properties of the cohomology of a family of varieties: for example, the Hodge and conjugate filtrations, the Hodge index theorem, etc. I'll explain analogues of these structures and properties for non-abelian cohomology (that is, the moduli of representations of \(\pi_1\)) and how to use them to prove a version of the Grothendieck-Katz \(p\)-curvature conjecture in the non-abelian setting.</div>
+                    <div class="abs__body">In 1972, Katz proved the Grothendieck-Katz \(p\)-curvature conjecture for linear differential equations arising from algebraic geometry—that is, Gauss-Manin connections. His proof made use of the structures and properties of the cohomology of a family of varieties: for example, the Hodge and conjugate filtrations, the Hodge index theorem, etc. I'll explain analogues of these structures and properties for non-abelian cohomology (that is, the moduli of representations of \(\pi_1\)) and how to use them to prove a version of the Grothendieck-Katz \(p\)-curvature conjecture in the non-abelian setting.</div>
                   </details>
                 </td>
               </tr>
