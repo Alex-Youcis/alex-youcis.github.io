@@ -159,6 +159,31 @@
   text-align: center;
   align-self: center;    /* vertical */
 }
+
+    /* add class="normalize-hero" to your <body> on pages you want normalized */
+:root{
+  --content-max: 1100px;
+  --hero-height: 260px;
+}
+
+body.normalize-hero main{
+  max-width: var(--content-max);
+  margin-inline: auto;
+}
+
+body.normalize-hero .hero{
+  width: 100%;
+  min-height: var(--hero-height);
+  height: var(--hero-height);
+}
+
+@media (max-width: 600px){
+  body.normalize-hero .hero{
+    height: auto;
+    min-height: 180px;
+  }
+}
+
   </style>
 
   <!-- MathJax -->
