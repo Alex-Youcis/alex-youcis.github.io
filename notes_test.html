@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Expository material — Alex Youcis</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+
+  <style>
+    :root{
+      --primary-color:#1D1E18;
+      --secondary-color:#C5C3C6;
+      --background-color:#DCDCDD;
+      --text-color:#1D1E18;
+      --button-color:#BF0603;
+      --card:#fff;
+      --border:#e1e1e6;
+      --filter-label-size:1rem;
+    }
+
+    *,:before,:after{box-sizing:border-box}
+    body{font-family:'Open Sans',sans-serif;background:var(--background-color);color:var(--text-color);margin:0}
+
+    /* Header/nav */
+    header{background:var(--primary-color);position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+    .navbar{display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px}
+    .nav-links{display:flex}
+    .nav-links a{color:#fff;text-decoration:none;margin:0 1em;position:relative;transition:color .3s}
+    .nav-links a::after{content:'';position:absolute;width:0;height:2px;background:var(--secondary-color);left:50%;bottom:-5px;transition:all .3s}
+    .nav-links a:hover{color:var(--secondary-color)}
+    .nav-links a:hover::after{left:0;width:100%}
+    /* Keep current page link WHITE when idle (not permanently grey) */
+    .nav-links a[aria-current="page"]{color:#fff}
+    .nav-mobile{display:none}
+    @media (max-width:768px){
+      .nav-links{display:none;flex-direction:column;background:var(--primary-color);position:absolute;top:60px;right:0;width:220px}
+      .nav-links a{margin:0;padding:1em;text-align:right;border-bottom:1px solid var(--secondary-color)}
+      .nav-mobile{display:flex;align-items:center}
+      .nav-text{color:#fff;margin-right:.5em}
+      .icon{color:#fff;font-size:24px;cursor:pointer}
+      .navbar.responsive .nav-links{display:flex}
+      .navbar.responsive .nav-mobile .nav-text{display:none}
+    }
+
+    main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
+
+    /* HERO (coffee background, 2px black border) */
+    .hero{
+      position:relative;overflow:hidden;background:var(--card);border-radius:14px;
+      padding:1.25em 1.5em;
+      box-shadow:0 2px 10px rgba(0,0,0,.05);
+      display:grid;gap:.6em;margin-bottom:.9em;align-items:start;
+      min-height:200px;
+      border:2px solid #000;
+    }
+    .hero::before{
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
+      background-image:
+        url('https://alex-youcis.github.io/coffee.png'),
+        url('https://alex-youcis.github.io/coffee.png'),
+        url('https://alex-youcis.github.io/coffee.png');
+      background-repeat:no-repeat,no-repeat,no-repeat;
+      background-position:16% center, 50% center, 84% center;
+      background-size:auto 106%, auto 106%, auto 106%;
+    }
+    @media (max-width:600px){
+      .hero{ padding:1em 1em 1.1em; }
+      .hero::before{ background-size:auto 78%, auto 78%, auto 78%; }
+    }
+    .hero h1{
+      margin:.1em 0 .1em;
+      font-size:clamp(1.6rem,3.2vw,2.1rem);
+      position:relative;z-index:1;justify-self:start;
+    }
+
+    /* ===== Filter & search — layered pill that expands to full-width header ===== */
+    .filters-wrap{display:flex;justify-content:center;margin:0 auto 10px}
+    .filters-card{
+      display:inline-block; /* compact while closed */
+      max-width:980px;border-radius:14px;overflow:hidden;
+      transition: width .22s ease, box-shadow .2s ease, background .2s ease;
+      background:transparent;box-shadow:none;border:0;
+    }
+    .filters-card.open{display:block;width:100%;background:var(--card)}
+    .filters-header-btn{
+      --label-size: var(--filter-label-size);
+      --btn-h: calc(var(--label-size) * 3);
+      --band: calc(var(--btn-h) * 0.075);
+      --radius: calc(var(--btn-h) * 0.5);
+      border:0;background:transparent;padding:0;cursor:pointer;line-height:0;display:inline-block;
+    }
+    .filters-header-btn:focus-visible .term-btn__inner{outline:2px solid #333;outline-offset:3px}
+    .term-btn__outer{display:inline-block;background:#000;padding:var(--band);border-radius:var(--radius)}
+    .term-btn__middle{display:inline-block;background:var(--button-color);padding:var(--band);border-radius:calc(var(--radius) - var(--band))}
+    .term-btn__inner{
+      display:inline-flex;align-items:center;justify-content:center;
+      gap: calc(var(--btn-h) * 0.18);
+      background:#fff;border-radius:calc(var(--radius) - (2 * var(--band)));
+      height:var(--btn-h); padding:0 calc(var(--btn-h) * 1.0);
+    }
+    .term-btn__label{
+      font:700 var(--label-size)/1.05 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:#000; white-space:nowrap;
+    }
+    .term-btn__chevron{width:calc(var(--btn-h) * 0.28);height:calc(var(--btn-h) * 0.28);flex:0 0 auto;transition:transform 160ms ease;color:#000}
+    .filters-header-btn[aria-expanded="true"] .term-btn__chevron{transform:rotate(180deg)}
+    .filters-header-btn:hover .term-btn__inner{background:#f7f7f7}
+
+    .filters-card.open .filters-header-btn{display:block;width:100%}
+    .filters-card.open .term-btn__outer{display:block;width:100%;border-radius:14px 14px 0 0}
+    .filters-card.open .term-btn__middle{display:block;width:100%;border-radius:12px 12px 0 0}
+    .filters-card.open .term-btn__inner{display:flex;width:100%;border-radius:10px 10px 0 0;justify-content:center;padding:0}
+
+    .filters-inner{padding:12px}
+    .filters-inner.hidden{display:none}
+
+    .filters-row{display:flex;gap:.8em;align-items:center;flex-wrap:wrap;margin:.35em 0}
+    .filters-row label{font-weight:600}
+    .search{display:flex;align-items:center;gap:.4em}
+    .search input{border:1px solid #cfcfd4;border-radius:10px;padding:.55em .7em;min-width:280px;background:#fff}
+    .chips{display:flex;flex-wrap:wrap;gap:.5em}
+    .chip{border:1px solid #cfcfd4;background:#fff;border-radius:999px;padding:.25em .7em;font-weight:600;cursor:pointer}
+    .chip[aria-pressed="true"]{background:#f2f2f6}
+
+    /* Section headings */
+    h2.section-title{margin:1.1em 0 .6em;font-size:1.25rem}
+
+    /* ===== Grids & cards (equal heights per row, buttons aligned) ===== */
+    .publication-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:2em;
+      align-items:stretch;
+    }
+    @media (max-width:900px){
+      .publication-grid{grid-template-columns:1fr}
+    }
+    .publication-card{
+      background:#fff;border:1px solid var(--border);border-radius:12px;
+      box-shadow:0 1px 4px rgba(0,0,0,.06); padding:16px;
+      display:flex;flex-direction:column;height:100%;
+    }
+    .publication-card h3{margin:.15em 0 .35em;font-size:1.15rem;line-height:1.25;min-height:calc(1.25em * 2)}
+    .publication-card p{margin:.25em 0}
+    details summary{cursor:pointer;font-weight:700;margin-bottom:8px}
+    .links{display:flex;gap:.5em;flex-wrap:wrap;margin-top:auto;padding-top:.65em}
+    .btn{background:var(--button-color);color:#fff;text-decoration:none;border-radius:8px;padding:.45em .7em;font-weight:700;font-size:1rem}
+    .btn:hover{filter:brightness(1.05)}
+    .publication-card a:not(.btn){color:#0f62fe;text-decoration:none}
+    .publication-card a:not(.btn):hover{text-decoration:underline}
+
+    /* Blog & footer */
+    .blog-post{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:16px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+    footer{background:var(--primary-color);color:#fff;padding:1em;text-align:center}
+    footer .social-icons a{color:#fff;margin:0 .33em}
+  </style>
+
+  <!-- MathJax -->
+  <script>
+    window.MathJax = {
+      tex:{ inlineMath:[['\\(','\\)']], displayMath:[['\\[','\\]']], processEscapes:true },
+      options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' }
+    };
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="navbar" id="myNavbar">
+      <div class="nav-mobile">
+        <span class="nav-text">Navigation</span>
+        <span class="icon" role="button" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
+          <i class="fa fa-bars"></i>
+        </span>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="research.html">Publications and preprints</a>
+        <a href="#" aria-current="page">Expository material</a>
+        <a href="friends.html">Friends</a>
+        <a href="nt-seminar.html">U of T number theory seminar</a>
+        <a href="MAT138.html">MAT138</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Expository material</h1>
+    </section>
+
+    <!-- Filter & search -->
+    <div class="filters-wrap">
+      <aside class="filters-card" id="filters-card">
+        <button id="filters-toggle" class="filters-header-btn" type="button" aria-expanded="false" aria-controls="filters-inner">
+          <span class="term-btn__outer">
+            <span class="term-btn__middle">
+              <span class="term-btn__inner">
+                <span class="term-btn__label">Filter &amp; search</span>
+                <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </span>
+            </span>
+          </span>
+        </button>
+        <div id="filters-inner" class="filters-inner hidden" aria-hidden="true">
+          <!-- Row 1: Search -->
+          <div class="filters-row">
+            <label for="q">Search:</label>
+            <div class="search" role="search">
+              <input id="q" type="search" placeholder="Title, tag…" aria-label="Search notes and slides">
+            </div>
+          </div>
+          <!-- Row 2: Type -->
+          <div class="filters-row" role="group" aria-label="Filter by type">
+            <span style="font-weight:600">Type:</span>
+            <div class="chips">
+              <button class="chip" data-type="all" aria-pressed="true">All</button>
+              <button class="chip" data-type="note" aria-pressed="false">Notes</button>
+              <button class="chip" data-type="slide" aria-pressed="false">Slides</button>
+            </div>
+          </div>
+          <!-- Row 3: Quick tags -->
+          <div class="filters-row" role="group" aria-label="Filter by tag">
+            <span style="font-weight:600">Quick tags:</span>
+            <div class="chips">
+              <button class="chip" data-tag="langlands" aria-pressed="false">Langlands</button>
+              <button class="chip" data-tag="shimura" aria-pressed="false">Shimura varieties</button>
+              <button class="chip" data-tag="p-adic hodge" aria-pressed="false">\(p\)-adic Hodge theory</button>
+              <button class="chip" data-tag="galois" aria-pressed="false">Galois</button>
+              <button class="chip" data-tag="representations" aria-pressed="false">Representations</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ===== Notes ===== -->
+    <h2 class="section-title">Expository notes</h2>
+    <section class="publication-grid" id="notes-grid">
+      <!-- 1 -->
+      <div class="publication-card" data-type="note"
+           data-title="Matsushima's Formula and the Langlands Conjecture"
+           data-tags="langlands, shimura, cohomology">
+        <h3>Matsushima's Formula and the Langlands Conjecture</h3>
+        <details>
+          <summary>Description</summary>
+          <p>These are informal notes meant to briefly summarize some of the ideas surrounding the work of my thesis and my work with A. Bertoloni Meli. As an added bonus, I try to motivate the Langlands conjecture via the cohomology of Shimura varieties.</p>
+        </details>
+        <div class="links">
+          <a href="MatsushimaNotes.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="publication-card" data-type="note"
+           data-title="Representations of p-adic Reductive Groups"
+           data-tags="representations, p-adic, reductive groups, automorphic">
+        <h3>Representations of \(p\)-adic Reductive Groups</h3>
+        <details>
+          <summary>Description</summary>
+          <p>These are very old notes written for a seminar on automorphic representations. They discuss some examples of representations of reductive \(p\)-adic groups.</p>
+        </details>
+        <div class="links">
+          <a href="Notes for p-adic reps.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div class="publication-card" data-type="note"
+           data-title="Representations of Adelic Groups"
+           data-tags="representations, automorphic, gl2">
+        <h3>Representations of Adelic Groups</h3>
+        <details>
+          <summary>Description</summary>
+          <p>These are very old notes written for a seminar on automorphic representations. They discuss some examples of automorphic representations for \(\mathrm{GL}_2\).</p>
+        </details>
+        <div class="links">
+          <a href="gl2reps.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="publication-card" data-type="note"
+           data-title="Galois Groups of Local and Global Fields"
+           data-tags="galois, local fields, global fields">
+        <h3>Galois Groups of Local and Global Fields</h3>
+        <details>
+          <summary>Description</summary>
+          <p>These are very old notes written for a seminar on Galois representations. The goal is to essentially discuss some basic aspects of the Galois groups of local and global fields, give some geometric intuition for these objects, and explain why one would expect them to be difficult to study.</p>
+        </details>
+        <div class="links">
+          <a href="localglobalgalois.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- 5 -->
+      <div class="publication-card" data-type="note"
+           data-title="Weil–Deligne Representations and p-adic Hodge Theory"
+           data-tags="weil–deligne, p-adic hodge, galois">
+        <h3>Weil–Deligne Representations and \(p\)-adic Hodge Theory</h3>
+        <details>
+          <summary>Description</summary>
+          <p>These are very old notes written for a seminar on Galois representations. The goal is to motivate Weil–Deligne representations (i.e., why they naturally show up), \(p\)-adic Hodge theory, and how the two notions connect.</p>
+        </details>
+        <div class="links">
+          <a href="weilnotes.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+      <!-- 6 -->
+      <div class="publication-card" data-type="note"
+           data-title="Modular Representations of p-adic Reductive Groups"
+           data-tags="modular representations, p-adic, reductive groups, kazhdan">
+        <h3>Modular Representations of \(p\)-adic Reductive Groups</h3>
+        <details>
+          <summary>Description</summary>
+          <p>These notes are a discussion on the theory of characteristic \(p\) representations of \(p\)-adic and \(t\)-adic reductive groups and their relationship with the characteristic 0 theory. There is, in particular, a discussion of Kazhdan's theorem which relates Hecke algebras of \(p\)-adic and \(t\)-adic groups.</p>
+        </details>
+        <div class="links">
+          <a href="Modularreps.pdf" class="btn">PDF</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Slides ===== -->
+    <h2 class="section-title">Some talk slides</h2>
+    <section class="publication-grid" id="slides-grid">
+      <!-- 1 -->
+      <div class="publication-card" data-type="slide"
+           data-title="Talk at the CARTOON Conference"
+           data-tags="langlands, slides">
+        <h3>Talk at the CARTOON Conference</h3>
+        <details>
+          <summary>Description</summary>
+          <p>My talk at the CARTOON Conference on my work with Bertoloni Meli on characterizing the local Langlands conjecture.</p>
+        </details>
+        <div class="links">
+          <a href="CARTOON.pdf" class="btn">Slides</a>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="publication-card" data-type="slide"
+           data-title="Talk at the University of Tokyo Number Theory Seminar"
+           data-tags="number theory, seminar, slides">
+        <h3>Talk at the University of Tokyo Number Theory Seminar</h3>
+        <details>
+          <summary>Description</summary>
+          <p>My talk at the University of Tokyo number theory seminar.</p>
+        </details>
+        <div class="links">
+          <a href="TodaiTalk.pdf" class="btn">Slides</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog -->
+    <h2 class="section-title">My blog</h2>
+    <p>I also have a blog: <a href="https://ayoucis.wordpress.com/">Hard Arithmetic</a>. In addition to the notes listed above, it contains many other informal posts aimed at various levels, mostly about algebraic geometry and/or number theory.</p>
+
+    <h3>Most recent post</h3>
+    <div id="most-recent-post" class="blog-post">Loading...</div>
+
+    <!-- Forum -->
+    <h2 class="section-title">Forum accounts</h2>
+    <p>I occasionally contribute to <a href="https://math.stackexchange.com/">Math Stack Exchange</a>.</p>
+    <p>
+      <a href="https://math.stackexchange.com/users/16497/alex-youcis"><img src="https://math.stackexchange.com/users/flair/16497.png" width="208" height="58" alt="profile for Alex Youcis at Mathematics Stack Exchange, Q&amp;A for people studying math at any level and professionals in related fields" title="profile for Alex Youcis at Mathematics Stack Exchange, Q&amp;A for people studying math at any level and professionals in related fields"></a>
+    </p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Alex Youcis. All rights reserved.</p>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    function toggleMenu(){
+      const nav = document.getElementById('myNavbar');
+      nav.classList.toggle('responsive');
+      const btn = nav.querySelector('.nav-mobile .icon');
+      const expanded = nav.classList.contains('responsive');
+      if(btn) btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    }
+
+    // Filter button: compact -> full-width layered header
+    (function(){
+      const card = document.getElementById('filters-card');
+      const btn  = document.getElementById('filters-toggle');
+      const inner= document.getElementById('filters-inner');
+      btn.addEventListener('click', ()=>{
+        const willOpen = !card.classList.contains('open');
+        card.classList.toggle('open', willOpen);
+        inner.classList.toggle('hidden', !willOpen);
+        btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        inner.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
+      });
+    })();
+
+    // Unified filtering across both grids
+    (function(){
+      const q = document.getElementById('q');
+      const typeChips = Array.from(document.querySelectorAll('.chip[data-type]'));
+      const tagChips  = Array.from(document.querySelectorAll('.chip[data-tag]'));
+      const cards = Array.from(document.querySelectorAll('.publication-card'));
+
+      let activeType = 'all';
+      const activeTags = new Set();
+      const norm = s => (s||'').toLowerCase();
+
+      function tagHit(cardTags){
+        if(activeTags.size===0) return true;
+        const tags = norm(cardTags||'').split(',').map(s=>s.trim());
+        for(const t of activeTags){ if(!tags.some(x=>x.includes(t))) return false; }
+        return true;
+      }
+      function matches(card){
+        if(activeType!=='all' && (card.dataset.type!==activeType)) return false;
+        if(!tagHit(card.dataset.tags)) return false;
+        const query = norm(q?.value);
+        if(!query) return true;
+        const hay = [card.dataset.title, card.dataset.tags].map(norm).join(' ');
+        return hay.includes(query);
+      }
+      function render(){
+        cards.forEach(c => { c.style.display = matches(c) ? '' : 'none'; });
+      }
+
+      typeChips.forEach(chip=>{
+        chip.addEventListener('click', ()=>{
+          typeChips.forEach(c=>c.setAttribute('aria-pressed','false'));
+          chip.setAttribute('aria-pressed','true');
+          activeType = chip.dataset.type;
+          render();
+        });
+      });
+      tagChips.forEach(chip=>{
+        chip.addEventListener('click', ()=>{
+          const t = chip.dataset.tag;
+          const on = chip.getAttribute('aria-pressed')==='true';
+          chip.setAttribute('aria-pressed', on ? 'false' : 'true');
+          if(on) activeTags.delete(t); else activeTags.add(t);
+          render();
+        });
+      });
+      if(q){ q.addEventListener('input', render); }
+      window.addEventListener('load', render, {once:true});
+    })();
+
+    // Most recent blog post (same approach you had)
+    (function() {
+      const rssUrl = 'https://ayoucis.wordpress.com/feed';
+      const proxyUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl);
+
+      fetch(proxyUrl)
+        .then(response => response.json())
+        .then(data => {
+          if(data.status === 'ok') {
+            const post = data.items[0];
+            const title = post.title;
+            const link = post.link;
+            const content = post.content;
+
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = content;
+            const firstParagraph = tempDiv.querySelector('p');
+            const description = firstParagraph ? firstParagraph.innerText : '';
+
+            const postHtml = `
+              <h3><a href="${link}" target="_blank" rel="noopener">${title}</a></h3>
+              <p>${description}</p>
+            `;
+            document.getElementById('most-recent-post').innerHTML = postHtml;
+          } else {
+            document.getElementById('most-recent-post').innerHTML = 'Unable to load the most recent post.';
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching the RSS feed:', error);
+          document.getElementById('most-recent-post').innerHTML = 'Unable to load the most recent post.';
+        });
+    })();
+  </script>
+</body>
+</html>
