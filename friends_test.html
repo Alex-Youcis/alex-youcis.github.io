@@ -75,26 +75,8 @@
       justify-self:center; align-self:center; text-align:center;
     }
 
-    /* Section heading underline (clear but restrained) */
-    h2.section-title{
-      margin:1.2em 0 .9em;
-      font-size:1.35rem;
-      line-height:1.2;
-      font-weight:800;
-      letter-spacing:.2px;
-      position:relative;
-      display:inline-block;
-      padding-bottom:.3em;
-    }
-    h2.section-title::after{
-      content:'';
-      position:absolute;
-      left:0; bottom:-6px;
-      width:160px; height:6px;
-      border-radius:999px;
-      background:linear-gradient(90deg,#000 0%, var(--button-color) 100%);
-      opacity:.95;
-    }
+    /* (Section-title style kept for consistency if you add headers later)
+    h2.section-title{ ... } */
 
     /* Friends list – quick to scan */
     .friends-wrap{
@@ -153,8 +135,6 @@
     <section class="hero">
       <h1>Friends &amp; collaborators</h1>
     </section>
-
-    <h2 class="section-title">Directory</h2>
 
     <div class="friends-wrap">
       <ul class="friends-list">
