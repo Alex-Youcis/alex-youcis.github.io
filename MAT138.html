@@ -28,8 +28,8 @@
       position:relative;
 
       display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+      flex-direction: column;
+      min-height: 100vh;
     }
     body::before{
       content:"";
@@ -46,18 +46,17 @@
     }
 
     body{
-  font-family:'Open Sans',sans-serif;
-  background: var(--background-color);
-  color:var(--text-color);
-  margin:0;
-  position:relative;
+      font-family:'Open Sans',sans-serif;
+      background: var(--background-color);
+      color:var(--text-color);
+      margin:0;
+      position:relative;
 
-  /* ADD THESE THREE LINES */
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
+      /* ADD THESE THREE LINES */
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
     header{
       background:var(--primary-color);
@@ -235,30 +234,31 @@
       .sched>summary{margin:.3em 0}
     }
 
-    /* add class="normalize-hero" to your <body> on pages you want normalized */
-:root{
-  --content-max: 1100px;
-  --hero-height: 260px;
-}
+    /* --- Normalize hero across pages (allow growth, consistent outline) --- */
+    :root{
+      --content-max: 1100px;   /* keep this the same across pages */
+      --hero-height: 260px;    /* shared minimum height */
+    }
 
-body.normalize-hero main{
-  max-width: var(--content-max);
-  margin-inline: auto;
-}
+    body.normalize-hero main{
+      max-width: var(--content-max);
+      margin-inline: auto;
+    }
 
-body.normalize-hero .hero{
-  width: 100%;
-  min-height: var(--hero-height);
-  height: var(--hero-height);
-}
+    body.normalize-hero .hero{
+      width: 100%;
+      min-height: var(--hero-height);
+      height: auto; /* allow the hero to grow if content needs it */
+      /* Use an outline that doesn't change box size; override any real border */
+      box-shadow: 0 2px 10px rgba(0,0,0,.05), 0 0 0 2px #000 !important;
+      border: 0 !important;
+    }
 
-@media (max-width: 600px){
-  body.normalize-hero .hero{
-    height: auto;
-    min-height: 180px;
-  }
-}
-
+    @media (max-width: 600px){
+      body.normalize-hero .hero{
+        min-height: 180px;
+      }
+    }
   </style>
   <!-- MathJax (in case TeX appears) -->
   <script>
