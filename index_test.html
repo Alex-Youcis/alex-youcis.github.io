@@ -107,19 +107,22 @@
     /* Subtle photo frame: white inner border + red ring + black ring */
     .profile-image{
   display:block;
-  margin:0 auto 0.5em;
+  margin:0 auto .5em;
   width:250px;
   height:375px;
   object-fit:cover;
   border-radius:10px;
 
-  /* three equal rings: 14px each (white, red, black) */
-  border:14px solid #fff;                             /* inner white */
+  /* set this to the thickness of your old single black outline */
+  --ring: 6px;  /* change to 5px if that matches your “last last” attempt */
+
+  border: var(--ring) solid #fff;                /* inner white */
   box-shadow:
-    0 0 0 14px var(--button-color),                  /* middle red */
-    0 0 0 28px #000,                                 /* outer black = 14px beyond red */
-    0 8px 18px rgba(0,0,0,.15);                      /* soft drop shadow */
+    0 0 0 var(--ring) var(--button-color),       /* middle red */
+    0 0 0 calc(var(--ring) * 2) #000,            /* outer black */
+    0 6px 14px rgba(0,0,0,.12);                  /* subtle drop shadow */
 }
+
 
 
     /* Section headings with a tiny gradient bar */
