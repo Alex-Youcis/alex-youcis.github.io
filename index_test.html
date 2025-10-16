@@ -16,7 +16,6 @@
       --background-color: #DCDCDD;/* Light gray */
       --text-color: #1D1E18;      /* Dark color */
       --button-color: #BF0603;    /* Accent red */
-      --card: #ffffff;
     }
 
     /* Global Styles */
@@ -53,6 +52,7 @@
       position: relative;
       transition: color 0.3s ease;
     }
+
     .nav-links a::after {
       content: '';
       position: absolute;
@@ -63,6 +63,7 @@
       bottom: -5px;
       transition: all 0.3s ease;
     }
+
     .nav-links a:hover { color: var(--secondary-color); }
     .nav-links a:hover::after { left: 0; width: 100%; }
 
@@ -76,7 +77,7 @@
         flex-direction: column;
         background-color: var(--primary-color);
         position: absolute;
-        top: 60px;
+        top: 60px; /* Place below the header */
         right: 0;
         width: 200px;
       }
@@ -93,58 +94,47 @@
       .navbar.responsive .nav-mobile .nav-text { display: none; }
     }
 
-    /* Main Content Styles — normalized width to match other pages */
+    /* Main Content Styles */
     main {
       padding: 2em 1.25em 3em;
-      max-width: 1200px;
+      max-width: 1200px;      /* matches other pages’ width */
       margin: 0 auto;
-    }
-
-    /* Minimal hero card to match the site, kept very quiet */
-    .hero {
-      position: relative;
-      background: var(--card);
-      border-radius: 14px;
-      padding: 1.25em 1.5em;
-      margin-bottom: 1.5em;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,.05), 0 0 0 2px #000; /* thin black outline like other pages */
-      min-height: 200px; /* same vertical rhythm as other heroes */
-      overflow: hidden;
-    }
-    /* Ultra-subtle crest watermark to tie in aesthetics, but nearly invisible */
-    .hero::before {
-      content: "";
-      position: absolute; inset: 0; pointer-events: none;
-      opacity: .06; /* very faint */
-      background-image:
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: auto 80%;
-    }
-    @media (max-width: 600px){
-      .hero::before { background-size: auto 70%; opacity: .08; }
-    }
-    .hero h1 { margin: .2em 0 .1em; font-size: clamp(1.8rem, 4vw, 2.4rem); position: relative; }
-
-    /* Image Styles (unchanged) */
-    .profile-image {
-      display: block;
-      margin: 0 auto;
-      width: 250px;
-      height: 375px;
-      object-fit: cover;
-      border: 5px solid white; /* White frame around the picture */
     }
 
     /* Centered Content */
     .centered { text-align: center; }
 
+    /* Subtle photo frame: white inner border + red ring + black ring */
+    .profile-image {
+      display: block;
+      margin: 0 auto 0.5em;
+      width: 250px;
+      height: 375px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 6px solid #fff;                       /* white inner ring */
+      box-shadow:
+        0 0 0 10px var(--button-color),            /* red middle ring */
+        0 0 0 14px #000,                           /* black outer ring */
+        0 8px 18px rgba(0,0,0,.15);                /* soft drop shadow */
+    }
+
+    /* Section headings with a tiny gradient bar */
+    main h2 {
+      margin: 1.25em 0 .4em;
+      font-weight: 700;
+    }
+    main h2::after {
+      content: "";
+      display: block;
+      height: 4px;
+      width: min(180px, 40%);
+      border-radius: 6px;
+      margin-top: .35em;
+      background: linear-gradient(90deg, #000 0%, var(--button-color) 100%);
+    }
+
     /* Publications and Preprints Styles */
-    section { margin-top: 1.25em; }
     .publications, .preprints {
       list-style-type: none;
       padding-left: 1em;
@@ -173,7 +163,7 @@
     window.MathJax = {
       tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']], processEscapes: true },
       options: {
-        skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
         ignoreHtmlClass: 'tex2jax_ignore',
         processHtmlClass: 'tex2jax_process',
       }
@@ -182,8 +172,7 @@
   <!-- Include MathJax -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
   <header>
@@ -208,13 +197,8 @@
   </header>
 
   <main>
-    <!-- Minimal hero to match the rest of the site without fuss -->
-    <section class="hero">
-      <h1>Alex Youcis</h1>
-    </section>
-
-    <!-- Keep the portrait simple and separate from the hero -->
     <div class="centered">
+      <h1>Alex Youcis</h1>
       <img src="speech.jpg" alt="Alex Youcis" class="profile-image">
     </div>
 
