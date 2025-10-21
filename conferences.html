@@ -49,7 +49,7 @@
 
     main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
 
-    /* HERO — blackboard triptych (shrunk & spaced, no overlap) */
+    /* HERO — blackboard triptych (restored sizing/spacing) */
     .hero{
       position:relative;overflow:hidden;background:var(--card);border-radius:14px;
       padding:1.25em 1.5em; box-shadow:0 2px 10px rgba(0,0,0,.05);
@@ -63,9 +63,9 @@
         url('https://alex-youcis.github.io/blackboard.png'),
         url('https://alex-youcis.github.io/blackboard.png');
       background-repeat:no-repeat,no-repeat,no-repeat;
-      /* more spacing + smaller height */
-      background-position:12% center, 50% center, 88% center;
-      background-size:auto 42%, auto 42%, auto 42%;
+      /* restored */
+      background-position:16% center, 50% center, 84% center;
+      background-size:auto 48%, auto 48%, auto 48%;
     }
     .hero h1{
       margin:.1em 0 .1em; font-size:clamp(1.6rem,3.2vw,2.1rem);
@@ -73,7 +73,7 @@
     }
     @media (max-width:600px){
       .hero{ padding:1em 1em 1.1em; }
-      .hero::before{ background-size:auto 32%, auto 32%, auto 32%; }
+      .hero::before{ background-size:auto 38%, auto 38%, auto 38%; }
     }
 
     /* Section titles with accent bar */
@@ -86,8 +86,8 @@
       border-radius:999px; background:linear-gradient(90deg,#000 0%, var(--button-color) 100%); opacity:.95;
     }
 
-    /* Centered layered pill (matches research aesthetic) */
-    .filter-controls{ display:flex; justify-content:center; margin:.6em 0 .2em; }
+    /* Centered layered pill (research-style) */
+    .filter-controls{ display:flex; justify-content:center; margin:.6em auto .2em; max-width:var(--content-max); }
     .term-btn{
       --label-size: 1.15rem;
       --btn-h: calc(var(--label-size) * 3);
@@ -109,25 +109,36 @@
     .term-btn:hover .term-btn__inner{background:#f7f7f7}
     details.filters[open] .term-btn__chevron{transform:rotate(180deg)}
 
-    /* Collapsible filter box — full bubble width, no whitespace when closed */
+    /* Expand pill to full bubble width when open */
     details.filters{ max-width:var(--content-max); margin:.0 auto .6em; }
     details.filters > summary{
       list-style:none; display:flex; justify-content:center; align-items:center;
       cursor:pointer; outline: none;
     }
     details.filters > summary::-webkit-details-marker{display:none}
+    details.filters[open] .term-btn,
+    details.filters[open] .term-btn__outer,
+    details.filters[open] .term-btn__middle,
+    details.filters[open] .term-btn__inner{
+      display:block; width:100%;
+    }
+    details.filters[open] .term-btn__inner{
+      height:auto; padding:.8em 1.1em;
+      border-bottom-left-radius:0; border-bottom-right-radius:0; /* seamless with bubble */
+    }
 
+    /* Collapsible filter box — full bubble width, no whitespace when closed */
     .filters-shell{
-      background:#fff;border:1px solid var(--border);border-radius:12px;
+      background:#fff;border:1px solid var(--border);border-radius:0 0 12px 12px;
       box-shadow:0 2px 6px rgba(0,0,0,.05); overflow:hidden;
     }
     .filters-collapsible{
       max-height:0; overflow:hidden;
       transition:max-height 240ms ease, padding 240ms ease;
-      padding:0 0;  /* no stray top whitespace when closed */
+      padding:0 0;  /* no stray space when closed */
     }
     details.filters[open] .filters-collapsible{
-      /* max-height is set inline via JS to content height; padding fades in */
+      /* max-height set via JS; padding fades in */
       padding:.6em .5em .9em;
     }
 
@@ -144,19 +155,18 @@
     }
     .chip.active{ background:var(--button-color); color:#fff; }
 
-    /* Right-margin legend (fixed to gutter; small; always visible on desktop) */
+    /* Legend entirely in margin to the right of the hero (fixed) */
     .legend-gutter{
       position:fixed;
       top:92px;
-      /* stays fully in the right margin beside the content */
-      right: calc(max((100vw - var(--content-max))/2, 12px));
+      left: calc(50% + (var(--content-max) / 2) + 16px); /* start beyond right edge of content */
       z-index:5;
       background:#fff; border:1px solid var(--border); border-radius:10px;
       padding:.35em .6em; font-size:.92rem; box-shadow:0 1px 4px rgba(0,0,0,.06); opacity:.9;
       white-space:nowrap;
     }
     .legend-gutter .legend-mark{ font-weight:900; color:var(--button-color); margin-right:.25em; }
-    @media (max-width:900px){ .legend-gutter{ display:none; } }
+    @media (max-width:1280px){ .legend-gutter{ display:none; } }
 
     /* Grid & cards */
     .grid{ display:grid; grid-template-columns:1fr 1fr; gap:2em; align-items:stretch; }
@@ -381,7 +391,7 @@
     }
 
     (function(){
-      /* Animate <details> open/close to full bubble width, no whitespace when closed */
+      /* Animate <details> open/close; ensure pill expands to full width; no stray space when closed */
       const det   = document.getElementById('filters');
       const pill  = document.getElementById('filter-pill');
       const panel = document.getElementById('filters-panel');
@@ -399,19 +409,16 @@
 
       det.addEventListener('toggle', ()=>{
         setExpanded();
-        // when opening, measure; when closing, collapse
         setPanelHeight();
       });
 
       window.addEventListener('resize', ()=>{
-        // keep height in sync while open
         if(det.open){
-          panel.style.maxHeight = 'none';   // let it grow for a tick
+          panel.style.maxHeight = 'none';
           requestAnimationFrame(()=>{ panel.style.maxHeight = panel.scrollHeight + 'px'; });
         }
       });
 
-      // initialize collapsed with no stray space
       setExpanded();
       setPanelHeight();
 
