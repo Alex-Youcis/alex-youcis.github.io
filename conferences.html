@@ -103,6 +103,7 @@
       background:#fff;border-radius:calc(var(--radius) - (2*var(--band)));
       height:var(--btn-h);
       padding:0 calc(var(--btn-h) * 1.1);
+      box-shadow: inset 0 0 0 1px #fff; /* keep white inset */
     }
     .term-btn__label{font:700 var(--label-size)/1.05 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#000;white-space:nowrap}
     .term-btn__chevron{width:calc(var(--btn-h)*0.28);height:calc(var(--btn-h)*0.28);flex:0 0 auto;transition:transform 160ms ease;color:#000}
@@ -122,9 +123,15 @@
     details.filters[open] .term-btn__inner{
       display:block; width:100%;
     }
+    /* square-off all layers so the inner white never overlaps the ring */
     details.filters[open] .term-btn__inner{
       height:auto; padding:.8em 1.1em;
-      border-bottom-left-radius:0; border-bottom-right-radius:0; /* seamless with bubble */
+      border-bottom-left-radius:0; border-bottom-right-radius:0;
+    }
+    details.filters[open] .term-btn__outer,
+    details.filters[open] .term-btn__middle{
+      border-bottom-left-radius:0; border-bottom-right-radius:0;
+      box-shadow:none;
     }
 
     /* Collapsible filter box — full bubble width, no whitespace when closed */
@@ -133,9 +140,10 @@
       box-shadow:0 2px 6px rgba(0,0,0,.05); overflow:hidden;
     }
     .filters-collapsible{
+      display: flow-root;          /* kill first-child margin-collapsing */
       max-height:0; overflow:hidden;
       transition:max-height 240ms ease, padding 240ms ease;
-      padding:0 0;  /* no stray space when closed */
+      padding:0 0;                 /* no stray space when closed */
     }
     details.filters[open] .filters-collapsible{
       /* max-height set via JS; padding fades in */
@@ -158,209 +166,7 @@
     /* Legend entirely in margin to the right of the hero (fixed) */
     .legend-gutter{
       position:fixed;
-      top:92px;
-      left: calc(50% + (var(--content-max) / 2) + 16px); /* start beyond right edge of content */
-      z-index:5;
-      background:#fff; border:1px solid var(--border); border-radius:10px;
-      padding:.35em .6em; font-size:.92rem; box-shadow:0 1px 4px rgba(0,0,0,.06); opacity:.9;
-      white-space:nowrap;
-    }
-    .legend-gutter .legend-mark{ font-weight:900; color:var(--button-color); margin-right:.25em; }
-    @media (max-width:1280px){ .legend-gutter{ display:none; } }
-
-    /* Grid & cards */
-    .grid{ display:grid; grid-template-columns:1fr 1fr; gap:2em; align-items:stretch; }
-    @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
-    .conf-card{
-      position:relative;
-      background:#fff; border:1px solid var(--border); border-radius:12px;
-      box-shadow:0 1px 4px rgba(0,0,0,.06); padding:16px;
-      display:flex; flex-direction:column; height:100%;
-    }
-    /* Top-right asterisk mark */
-    .conf-card[data-attending="1"]::after{
-      content:"*"; position:absolute; top:10px; right:12px;
-      font-size:28px; font-weight:900; color:var(--button-color); line-height:1;
-    }
-    @media (max-width:600px){
-      .conf-card[data-attending="1"]::after{ font-size:24px; top:8px; right:10px; }
-    }
-    .conf-card h3{ margin:.15em 0 .35em; font-size:1.15rem; line-height:1.25; }
-    .conf-meta{ display:flex; flex-wrap:wrap; gap:.45em .7em; font-size:.98rem; color:#222; margin-bottom:.4em; }
-    .tag{ background:var(--secondary-color); color:#111; border-radius:999px; padding:.22em .6em; }
-    .desc{ margin:.35em 0 .5em; }
-    .links{ display:flex; gap:.5em; flex-wrap:wrap; margin-top:auto; padding-top:.65em; }
-    .btn{ background:var(--button-color); color:#fff; text-decoration:none; border-radius:8px; padding:.45em .7em; font-weight:700; font-size:1rem; }
-    .btn:hover{ filter:brightness(1.05); }
-
-    /* Normalize hero width/height */
-    body.normalize-hero main{ max-width: var(--content-max); margin-inline: auto; }
-    body.normalize-hero .hero{ width:100%; min-height:var(--hero-height); height:var(--hero-height); }
-    @media (max-width:600px){
-      body.normalize-hero .hero{ height:auto; min-height:180px; }
-    }
-
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Conferences — Alex Youcis</title>
-
-  <!-- Fonts & Icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
-
-  <style>
-    :root{
-      --primary-color:#1D1E18;
-      --secondary-color:#C5C3C6;
-      --background-color:#DCDCDD;
-      --text-color:#1D1E18;
-      --button-color:#BF0603;
-      --card:#fff;
-      --border:#e1e1e6;
-
-      --content-max:1100px;
-      --hero-height:260px;
-      --chip-gap:6px;
-    }
-
-    *,:before,:after{box-sizing:border-box}
-    body{font-family:'Open Sans',sans-serif;background:var(--background-color);color:var(--text-color);margin:0}
-
-    /* Header/nav */
-    header{background:var(--primary-color);position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-    .navbar{display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px}
-    .nav-links{display:flex}
-    .nav-links a{color:#fff;text-decoration:none;margin:0 1em;position:relative;transition:color .3s}
-    .nav-links a::after{content:'';position:absolute;width:0;height:2px;background:var(--secondary-color);left:50%;bottom:-5px;transition:all .3s}
-    .nav-links a:hover{color:var(--secondary-color)}
-    .nav-links a:hover::after{left:0;width:100%}
-    .nav-links a[aria-current="page"]{color:#fff}
-    .nav-mobile{display:none}
-    @media (max-width:768px){
-      .nav-links{display:none;flex-direction:column;background:var(--primary-color);position:absolute;top:60px;right:0;width:220px}
-      .nav-links a{margin:0;padding:1em;text-align:right;border-bottom:1px solid var(--secondary-color)}
-      .nav-mobile{display:flex;align-items:center}
-      .nav-text{color:#fff;margin-right:.5em}
-      .icon{color:#fff;font-size:24px;cursor:pointer}
-      .navbar.responsive .nav-links{display:flex}
-      .navbar.responsive .nav-mobile .nav-text{display:none}
-    }
-
-    main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
-
-    /* HERO — blackboard triptych (restored sizing/spacing) */
-    .hero{
-      position:relative;overflow:hidden;background:var(--card);border-radius:14px;
-      padding:1.25em 1.5em; box-shadow:0 2px 10px rgba(0,0,0,.05);
-      display:grid;gap:.6em;margin-bottom:.9em;align-items:center;
-      min-height:200px;border:2px solid #000;
-    }
-    .hero::before{
-      content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
-      background-image:
-        url('https://alex-youcis.github.io/blackboard.png'),
-        url('https://alex-youcis.github.io/blackboard.png'),
-        url('https://alex-youcis.github.io/blackboard.png');
-      background-repeat:no-repeat,no-repeat,no-repeat;
-      /* restored */
-      background-position:16% center, 50% center, 84% center;
-      background-size:auto 48%, auto 48%, auto 48%;
-    }
-    .hero h1{
-      margin:.1em 0 .1em; font-size:clamp(1.6rem,3.2vw,2.1rem);
-      position:relative; z-index:1; text-align:center; justify-self:center; align-self:center;
-    }
-    @media (max-width:600px){
-      .hero{ padding:1em 1em 1.1em; }
-      .hero::before{ background-size:auto 38%, auto 38%, auto 38%; }
-    }
-
-    /* Section titles with accent bar */
-    h2.section-title{
-      margin:1.2em 0 .9em; font-size:1.35rem; line-height:1.2; font-weight:800; letter-spacing:.2px;
-      position:relative; display:inline-block; padding-bottom:.3em;
-    }
-    h2.section-title::after{
-      content:''; position:absolute; left:0; bottom:-6px; width:160px; height:6px;
-      border-radius:999px; background:linear-gradient(90deg,#000 0%, var(--button-color) 100%); opacity:.95;
-    }
-
-    /* Centered layered pill (research-style) */
-    .filter-controls{ display:flex; justify-content:center; margin:.6em auto .2em; max-width:var(--content-max); }
-    .term-btn{
-      --label-size: 1.15rem;
-      --btn-h: calc(var(--label-size) * 3);
-      --band: calc(var(--btn-h) * 0.075);
-      --radius: calc(var(--btn-h) * 0.5);
-      border:0;background:transparent;padding:0;cursor:pointer;line-height:0
-    }
-    .term-btn__outer{display:inline-block;background:#000;padding:var(--band);border-radius:var(--radius)}
-    .term-btn__middle{display:inline-block;background:var(--button-color);padding:var(--band);border-radius:calc(var(--radius) - var(--band))}
-    .term-btn__inner{
-      display:inline-flex;align-items:center;justify-content:center;
-      gap:calc(var(--btn-h)*0.18);
-      background:#fff;border-radius:calc(var(--radius) - (2*var(--band)));
-      height:var(--btn-h);
-      padding:0 calc(var(--btn-h) * 1.1);
-    }
-    .term-btn__label{font:700 var(--label-size)/1.05 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#000;white-space:nowrap}
-    .term-btn__chevron{width:calc(var(--btn-h)*0.28);height:calc(var(--btn-h)*0.28);flex:0 0 auto;transition:transform 160ms ease;color:#000}
-    .term-btn:hover .term-btn__inner{background:#f7f7f7}
-    details.filters[open] .term-btn__chevron{transform:rotate(180deg)}
-
-    /* Expand pill to full bubble width when open */
-    details.filters{ max-width:var(--content-max); margin:.0 auto .6em; }
-    details.filters > summary{
-      list-style:none; display:flex; justify-content:center; align-items:center;
-      cursor:pointer; outline: none;
-    }
-    details.filters > summary::-webkit-details-marker{display:none}
-    details.filters[open] .term-btn,
-    details.filters[open] .term-btn__outer,
-    details.filters[open] .term-btn__middle,
-    details.filters[open] .term-btn__inner{
-      display:block; width:100%;
-    }
-    details.filters[open] .term-btn__inner{
-      height:auto; padding:.8em 1.1em;
-      border-bottom-left-radius:0; border-bottom-right-radius:0; /* seamless with bubble */
-    }
-
-    /* Collapsible filter box — full bubble width, no whitespace when closed */
-    .filters-shell{
-      background:#fff;border:1px solid var(--border);border-radius:0 0 12px 12px;
-      box-shadow:0 2px 6px rgba(0,0,0,.05); overflow:hidden;
-    }
-    .filters-collapsible{
-      max-height:0; overflow:hidden;
-      transition:max-height 240ms ease, padding 240ms ease;
-      padding:0 0;  /* no stray space when closed */
-    }
-    details.filters[open] .filters-collapsible{
-      /* max-height set via JS; padding fades in */
-      padding:.6em .5em .9em;
-    }
-
-    .filter-tools{display:flex; gap:.5em; align-items:center; flex-wrap:wrap; margin-bottom:.5em; justify-content:center}
-    .tag-search{padding:.5em .65em; border:1px solid #cfcfd4; border-radius:8px; min-width:260px}
-    .btn-lite{
-      background:#fff; border:1px solid #cfcfd4; border-radius:8px; padding:.45em .7em;
-      font-weight:700; cursor:pointer;
-    }
-    .chip-wrap{display:flex; gap:var(--chip-gap); flex-wrap:wrap; justify-content:center}
-    .chip{
-      background:#fff; border:1px solid #000; border-radius:999px;
-      padding:.28em .7em; font-weight:700; cursor:pointer; user-select:none;
-    }
-    .chip.active{ background:var(--button-color); color:#fff; }
-
-    /* Legend entirely in margin to the right of the hero (fixed) */
-    .legend-gutter{
-      position:fixed;
-      top:92px;
+      top:92px; /* JS will overwrite to align with first row of cards */
       left: calc(50% + (var(--content-max) / 2) + 16px); /* start beyond right edge of content */
       z-index:5;
       background:#fff; border:1px solid var(--border); border-radius:10px;
@@ -682,354 +488,20 @@
 
       relocateByDate();
       applyFilters();
-    })();
-  </script>
 
-  <script>
-/* === Conferences page: filter open/close height & legend positioning === */
-(function(){
-  const det   = document.getElementById('filters');
-  const pill  = document.getElementById('filter-pill');
-  const panel = document.getElementById('filters-panel');
-
-  if (pill && det && panel){
-    // Clicking the pill toggles the <details>
-    pill.addEventListener('click', (e)=>{
-      e.preventDefault(); e.stopPropagation();
-      det.open = !det.open;
-      pill.setAttribute('aria-expanded', det.open ? 'true' : 'false');
-      if(det.open) openPanelSmooth(); else closePanelSmooth();
-    });
-
-    // Double-rAF ensures the first open measures after layout settles
-    function openPanelSmooth(){
-      panel.style.maxHeight = 'none';
-      requestAnimationFrame(()=>{ requestAnimationFrame(()=>{
-        panel.style.maxHeight = panel.scrollHeight + 'px';
-      });});
-    }
-    function closePanelSmooth(){ panel.style.maxHeight = '0px'; }
-
-    det.addEventListener('toggle', ()=>{
-      pill.setAttribute('aria-expanded', det.open ? 'true' : 'false');
-      if(det.open) openPanelSmooth(); else closePanelSmooth();
-    });
-    panel.addEventListener('transitionend', (e)=>{
-      if(e.propertyName === 'max-height' && det.open){
-        panel.style.maxHeight = 'none'; // unlock so contents can grow/shrink
+      /* Position the margin legend at the top of the first row of cards */
+      const legend = document.querySelector('.legend-gutter');
+      const anchor = document.getElementById('grid-coorg') || document.querySelector('.grid');
+      function positionLegend(){
+        if(!legend || !anchor) return;
+        const rect = anchor.getBoundingClientRect();
+        const pageTop = window.scrollY + rect.top;
+        legend.style.top = Math.round(pageTop) + 'px';
       }
-    });
-    window.addEventListener('resize', ()=>{
-      if(det.open){
-        panel.style.maxHeight = 'none';
-        requestAnimationFrame(()=>{ panel.style.maxHeight = panel.scrollHeight + 'px'; });
-      }
-    });
-  }
-
-  // —— Make the margin legend start at the top of the FIRST row of cards ——
-  const legend = document.querySelector('.margin-legend');
-  const anchor = document.getElementById('coorg-grid') || document.querySelector('.conf-grid');
-
-  function positionLegend(){
-    if(!legend || !anchor) return;
-    const rect = anchor.getBoundingClientRect();
-    const pageTop = window.scrollY + rect.top;
-    legend.style.top = Math.round(pageTop) + 'px';
-  }
-
-  window.addEventListener('load', positionLegend);
-  window.addEventListener('resize', positionLegend);
-  window.addEventListener('orientationchange', positionLegend);
-  // one more nudge after images/fonts settle
-  setTimeout(positionLegend, 200);
-})();
-</script>
-
-</body>
-</html>
-
-  </style>
-</head>
-<body class="normalize-hero">
-  <header>
-    <nav class="navbar" id="myNavbar">
-      <div class="nav-mobile">
-        <span class="nav-text">Navigation</span>
-        <span class="icon" role="button" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()"><i class="fa fa-bars"></i></span>
-      </div>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="research.html">Publications and preprints</a>
-        <a href="notes.html">Expository material</a>
-        <a href="friends.html">Friends</a>
-        <a href="nt-seminar.html">U of T number theory seminar</a>
-        <a href="MAT138.html">MAT138</a>
-        <a href="#" aria-current="page">Conferences</a>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <!-- HERO -->
-    <section class="hero">
-      <h1>Conferences</h1>
-    </section>
-
-    <!-- Legend in right margin -->
-    <div class="legend-gutter" aria-hidden="true">
-      <span class="legend-mark">*</span> I’m likely to attend
-    </div>
-
-    <!-- Filters: research-style pill + collapsible bubble -->
-    <details class="filters" id="filters">
-      <summary class="filter-controls">
-        <span class="term-btn" id="filter-pill" aria-expanded="false" aria-controls="filters-panel">
-          <span class="term-btn__outer">
-            <span class="term-btn__middle">
-              <span class="term-btn__inner">
-                <span class="term-btn__label">Filter by topic</span>
-                <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                </svg>
-              </span>
-            </span>
-          </span>
-        </span>
-      </summary>
-
-      <div class="filters-shell">
-        <div class="filters-collapsible" id="filters-panel">
-          <div class="filter-body">
-            <div class="filter-tools">
-              <input type="search" id="tag-search" class="tag-search" placeholder="Search topics… (e.g. Shimura)">
-              <button type="button" id="clear-tags" class="btn-lite">Clear</button>
-            </div>
-            <div id="chip-wrap" class="chip-wrap" aria-label="Topic chips">
-              <button type="button" class="chip" data-tag="Number theory">Number theory</button>
-              <button type="button" class="chip" data-tag="Algebraic geometry">Algebraic geometry</button>
-              <button type="button" class="chip" data-tag="p-adic Hodge theory">p-adic Hodge theory</button>
-              <button type="button" class="chip" data-tag="Shimura varieties">Shimura varieties</button>
-              <button type="button" class="chip" data-tag="Langlands">Langlands</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </details>
-
-    <!-- Co-organizing -->
-    <h2 class="section-title">Conferences I’m co-organizing</h2>
-    <section class="grid" id="grid-coorg">
-      <article
-        class="conf-card"
-        data-id="co-aim-canonical-shimura"
-        data-type="coorg"
-        data-topics="Shimura varieties, Canonical models, Arithmetic geometry"
-        data-start="2026-01-01"
-        data-end=""
-        data-attending="1"
-      >
-        <div class="conf-meta">
-          <span class="tag"><i class="fa fa-calendar"></i> Dates TBA</span>
-          <span class="tag"><i class="fa fa-map-marker"></i> AIM</span>
-        </div>
-        <h3>Canonical Integral Models of Shimura Varieties (AIM Workshop)</h3>
-        <p class="desc">A research workshop on canonical models and their arithmetic applications.</p>
-        <div class="links">
-          <a class="btn" href="https://aimath.org/workshops/upcoming/canonicalshimura/" target="_blank" rel="noopener"><i class="fa fa-external-link"></i> Website</a>
-        </div>
-      </article>
-
-      <article
-        class="conf-card"
-        data-id="co-ams-bc-session"
-        data-type="coorg"
-        data-topics="Shimura varieties, Arithmetic geometry"
-        data-start="2026-03-28"
-        data-end="2026-03-29"
-        data-attending="1"
-      >
-        <div class="conf-meta">
-          <span class="tag"><i class="fa fa-calendar"></i> Mar 28–29, 2026</span>
-          <span class="tag"><i class="fa fa-map-marker"></i> Boston College</span>
-        </div>
-        <h3>Special Session on Shimura Varieties and Arithmetic (AMS Spring Sectional @ BC)</h3>
-        <p class="desc">Session details, schedule, and logistics are posted here as they’re finalized.</p>
-        <div class="links">
-          <a class="btn" href="bc-session.html"><i class="fa fa-file-text-o"></i> Session page</a>
-        </div>
-      </article>
-    </section>
-
-    <!-- Other upcoming -->
-    <h2 class="section-title">Other upcoming conferences</h2>
-    <section class="grid" id="grid-other">
-      <article
-        class="conf-card"
-        data-id="oth-shimura-galois-2026"
-        data-type="other"
-        data-topics="Shimura varieties, Galois representations, Langlands"
-        data-start="2026-03-10"
-        data-end="2026-03-14"
-      >
-        <div class="conf-meta">
-          <span class="tag"><i class="fa fa-calendar"></i> Mar 10–14, 2026</span>
-          <span class="tag"><i class="fa fa-map-marker"></i> Cambridge</span>
-        </div>
-        <h3>Workshop on Shimura Varieties and Galois Representations</h3>
-        <p class="desc">Talks on the geometry of Shimura varieties and connections with Galois representations.</p>
-        <div class="links">
-          <a class="btn" href="#" target="_blank" rel="noopener"><i class="fa fa-external-link"></i> Website</a>
-        </div>
-      </article>
-
-      <article
-        class="conf-card"
-        data-id="oth-langlands-llfns-2026"
-        data-type="other"
-        data-topics="Langlands, L-functions, Automorphic forms"
-        data-start="2026-06-01"
-        data-end="2026-06-05"
-      >
-        <div class="conf-meta">
-          <span class="tag"><i class="fa fa-calendar"></i> Jun 1–5, 2026</span>
-          <span class="tag"><i class="fa fa-map-marker"></i> Bonn</span>
-        </div>
-        <h3>Langlands, \(L\)-functions, and Arithmetic</h3>
-        <p class="desc">A summer meeting featuring developments across the Langlands program.</p>
-        <div class="links">
-          <a class="btn" href="#" target="_blank" rel="noopener"><i class="fa fa-external-link"></i> Website</a>
-        </div>
-      </article>
-    </section>
-
-    <!-- Past conferences (auto-filled by JS) -->
-    <h2 class="section-title">Past conferences</h2>
-    <section class="grid" id="grid-past">
-      <article
-        class="conf-card"
-        data-id="oth-arith-kyoto-2025"
-        data-type="other"
-        data-topics="Arithmetic geometry"
-        data-start="2025-04-15"
-        data-end="2025-04-18"
-      >
-        <div class="conf-meta">
-          <span class="tag"><i class="fa fa-calendar"></i> Apr 15–18, 2025</span>
-          <span class="tag"><i class="fa fa-map-marker"></i> Kyoto</span>
-        </div>
-        <h3>Arithmetic Geometry Spring Meeting</h3>
-        <p class="desc">Kept here as a template for past events.</p>
-        <div class="links">
-          <a class="btn" href="#" target="_blank" rel="noopener"><i class="fa fa-external-link"></i> Website</a>
-        </div>
-      </article>
-    </section>
-  </main>
-
-  <footer style="background:var(--primary-color);color:#fff;padding:1em;text-align:center;">
-    <p>&copy; 2025 Alex Youcis. All rights reserved.</p>
-  </footer>
-
-  <script>
-    function toggleMenu(){
-      const nav = document.getElementById('myNavbar');
-      nav.classList.toggle('responsive');
-      const btn = nav.querySelector('.nav-mobile .icon');
-      const expanded = nav.classList.contains('responsive');
-      if(btn) btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-    }
-
-    (function(){
-      /* Animate <details> open/close; ensure pill expands to full width; no stray space when closed */
-      const det   = document.getElementById('filters');
-      const pill  = document.getElementById('filter-pill');
-      const panel = document.getElementById('filters-panel');
-
-      function setExpanded(){
-        pill.setAttribute('aria-expanded', det.open ? 'true' : 'false');
-      }
-      function setPanelHeight(){
-        if(det.open){
-          panel.style.maxHeight = panel.scrollHeight + 'px';
-        }else{
-          panel.style.maxHeight = '0px';
-        }
-      }
-
-      det.addEventListener('toggle', ()=>{
-        setExpanded();
-        setPanelHeight();
-      });
-
-      window.addEventListener('resize', ()=>{
-        if(det.open){
-          panel.style.maxHeight = 'none';
-          requestAnimationFrame(()=>{ panel.style.maxHeight = panel.scrollHeight + 'px'; });
-        }
-      });
-
-      setExpanded();
-      setPanelHeight();
-
-      /* Filter logic */
-      const chipWrap = document.getElementById('chip-wrap');
-      const chips = Array.from(chipWrap.querySelectorAll('.chip'));
-      const search = document.getElementById('tag-search');
-      const clearBtn = document.getElementById('clear-tags');
-
-      const gridCo   = document.getElementById('grid-coorg');
-      const gridOth  = document.getElementById('grid-other');
-      const gridPast = document.getElementById('grid-past');
-
-      const allCards = Array.from(document.querySelectorAll('.conf-card'));
-      const selectedTopics = new Set();
-
-      chips.forEach(chip=>{
-        chip.addEventListener('click', ()=>{
-          const tag = chip.dataset.tag;
-          if(selectedTopics.has(tag)) selectedTopics.delete(tag); else selectedTopics.add(tag);
-          chip.classList.toggle('active');
-          applyFilters();
-        });
-      });
-
-      clearBtn.addEventListener('click', ()=>{
-        selectedTopics.clear();
-        chips.forEach(c=>c.classList.remove('active'));
-        search.value='';
-        applyFilters();
-      });
-
-      function relocateByDate(){
-        const today = new Date(); today.setHours(0,0,0,0);
-        allCards.forEach(card=>{
-          const end = card.dataset.end ? new Date(card.dataset.end) : null;
-          const type = card.dataset.type;
-          if(end && !isNaN(end) && end < today){
-            if(card.parentElement !== gridPast) gridPast.appendChild(card);
-          }else{
-            if(type === 'coorg' && card.parentElement !== gridCo) gridCo.appendChild(card);
-            if(type === 'other' && card.parentElement !== gridOth) gridOth.appendChild(card);
-          }
-        });
-      }
-
-      function applyFilters(){
-        const q = search.value.trim().toLowerCase();
-        allCards.forEach(card=>{
-          const topics = (card.dataset.topics||'').toLowerCase();
-          const chipMatch = (selectedTopics.size === 0) ||
-                            Array.from(selectedTopics).some(t => topics.includes(t.toLowerCase()));
-          const textMatch = (q === '') || topics.includes(q);
-          card.style.display = (chipMatch && textMatch) ? '' : 'none';
-        });
-      }
-
-      search.addEventListener('input', applyFilters);
-
-      relocateByDate();
-      applyFilters();
+      window.addEventListener('load', positionLegend);
+      window.addEventListener('resize', positionLegend);
+      window.addEventListener('orientationchange', positionLegend);
+      setTimeout(positionLegend, 200);
     })();
   </script>
 </body>
