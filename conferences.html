@@ -49,7 +49,7 @@
 
     main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
 
-    /* HERO with subtle blackboard, shrink 1.5× */
+    /* HERO — blackboard triptych spaced & smaller (no overlap) */
     .hero{
       position:relative;overflow:hidden;background:var(--card);border-radius:14px;
       padding:1.25em 1.5em; box-shadow:0 2px 10px rgba(0,0,0,.05);
@@ -63,9 +63,9 @@
         url('https://alex-youcis.github.io/blackboard.png'),
         url('https://alex-youcis.github.io/blackboard.png');
       background-repeat:no-repeat,no-repeat,no-repeat;
-      background-position:16% center, 50% center, 84% center;
-      /* 96% → 64% (shrunk by factor 1.5) */
-      background-size:auto 64%, auto 64%, auto 64%;
+      /* widened spacing + smaller height to prevent overlap */
+      background-position:14% center, 50% center, 86% center;
+      background-size:auto 50%, auto 50%, auto 50%;
     }
     .hero h1{
       margin:.1em 0 .1em; font-size:clamp(1.6rem,3.2vw,2.1rem);
@@ -73,8 +73,7 @@
     }
     @media (max-width:600px){
       .hero{ padding:1em 1em 1.1em; }
-      /* 78% → 52% on mobile */
-      .hero::before{ background-size:auto 52%, auto 52%, auto 52%; }
+      .hero::before{ background-size:auto 38%, auto 38%, auto 38%; }
     }
 
     /* Section titles with accent bar */
@@ -87,8 +86,8 @@
       border-radius:999px; background:linear-gradient(90deg,#000 0%, var(--button-color) 100%); opacity:.95;
     }
 
-    /* Centered layered pill button (matches research page) */
-    .filter-controls{ display:flex; justify-content:center; margin:.6em 0 .4em; }
+    /* Centered layered pill filter button (matches research page) */
+    .filter-controls{ display:flex; justify-content:center; margin:.6em 0 .2em; }
     .term-btn{
       --label-size: 1.15rem;
       --btn-h: calc(var(--label-size) * 3);
@@ -110,21 +109,21 @@
     .term-btn:hover .term-btn__inner{background:#f7f7f7}
     .term-btn[aria-expanded="true"] .term-btn__chevron{transform:rotate(180deg)}
 
-    /* Collapsible filter panel body */
-    details.filters{
+    /* Collapsible filter box — hidden when closed, no stray space; animated height */
+    .filters-box{ max-width:820px; margin:.0 auto .3em; }
+    .filters-shell{
       background:#fff;border:1px solid var(--border);border-radius:12px;
-      box-shadow:0 2px 6px rgba(0,0,0,.05); margin:.4em auto 0; padding:.25em .5em; max-width:820px;
+      box-shadow:0 2px 6px rgba(0,0,0,.05); overflow:hidden;
     }
-    details.filters > summary{display:none}
-    .filter-body{padding:.6em .5em .9em}
+    .filters-collapsible{ height:0; overflow:hidden; transition:height 220ms ease; }
+    .filter-body{ padding:.6em .5em .9em }
+
     .filter-tools{display:flex; gap:.5em; align-items:center; flex-wrap:wrap; margin-bottom:.5em; justify-content:center}
     .tag-search{padding:.5em .65em; border:1px solid #cfcfd4; border-radius:8px; min-width:260px}
     .btn-lite{
       background:#fff; border:1px solid #cfcfd4; border-radius:8px; padding:.45em .7em;
       font-weight:700; cursor:pointer;
     }
-
-    /* Only preset chips, centered */
     .chip-wrap{display:flex; gap:var(--chip-gap); flex-wrap:wrap; justify-content:center}
     .chip{
       background:#fff; border:1px solid #000; border-radius:999px;
@@ -132,17 +131,19 @@
     }
     .chip.active{ background:var(--button-color); color:#fff; }
 
-    /* Legend card */
-    .legend-card{
-      margin:.6em auto 1.1em; max-width:820px;
-      background:#fff; border:1px solid var(--border); border-radius:12px;
-      box-shadow:0 1px 4px rgba(0,0,0,.06); padding:.55em .8em;
-      display:flex; align-items:center; justify-content:center; gap:.5em; font-size:.98rem;
+    /* Floating legend in right margin (desktop); subtle footer note on mobile */
+    .legend-float{
+      position:fixed;
+      right:calc(max((100vw - var(--content-max))/2, 12px));
+      top:92px; z-index:5;
+      background:#fff; border:1px solid var(--border); border-radius:10px;
+      padding:.35em .6em; font-size:.92rem; box-shadow:0 1px 4px rgba(0,0,0,.06); opacity:.85;
     }
-    .legend-mark{
-      font-size:1.35rem; font-weight:900; color:var(--button-color); line-height:1;
-    }
-    .legend-text{ opacity:.8 }
+    .legend-float .legend-mark{ font-weight:900; color:var(--button-color); margin-right:.25em; }
+    @media (max-width:900px){ .legend-float{ display:none; } }
+    .legend-end{ display:none; margin:1.2em auto 0; text-align:center; font-size:.95rem; opacity:.7; }
+    .legend-end .legend-mark{ font-weight:900; color:var(--button-color); margin-right:.25em; }
+    @media (max-width:900px){ .legend-end{ display:block; } }
 
     /* Grid & cards */
     .grid{ display:grid; grid-template-columns:1fr 1fr; gap:2em; align-items:stretch; }
@@ -169,7 +170,7 @@
     .btn{ background:var(--button-color); color:#fff; text-decoration:none; border-radius:8px; padding:.45em .7em; font-weight:700; font-size:1rem; }
     .btn:hover{ filter:brightness(1.05); }
 
-    /* Normalize hero width/height like your other pages */
+    /* Normalize hero width/height */
     body.normalize-hero main{ max-width: var(--content-max); margin-inline: auto; }
     body.normalize-hero .hero{ width:100%; min-height:var(--hero-height); height:var(--hero-height); }
     @media (max-width:600px){
@@ -202,9 +203,14 @@
       <h1>Conferences</h1>
     </section>
 
+    <!-- Floating legend (desktop) -->
+    <div class="legend-float" aria-hidden="true">
+      <span class="legend-mark">*</span> likely attending
+    </div>
+
     <!-- Centered pill toggle -->
     <div class="filter-controls">
-      <button class="term-btn" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filters-body">
+      <button class="term-btn" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filters-panel">
         <span class="term-btn__outer">
           <span class="term-btn__middle">
             <span class="term-btn__inner">
@@ -218,29 +224,25 @@
       </button>
     </div>
 
-    <!-- Collapsible filter panel -->
-    <details class="filters" id="filters">
-      <summary>Filter</summary>
-      <div class="filter-body" id="filters-body">
-        <div class="filter-tools">
-          <input type="search" id="tag-search" class="tag-search" placeholder="Search topics… (e.g. Shimura)">
-          <button type="button" id="clear-tags" class="btn-lite">Clear</button>
-        </div>
-        <div id="chip-wrap" class="chip-wrap" aria-label="Topic chips">
-          <!-- Only the five preset chips -->
-          <button type="button" class="chip" data-tag="Number theory">Number theory</button>
-          <button type="button" class="chip" data-tag="Algebraic geometry">Algebraic geometry</button>
-          <button type="button" class="chip" data-tag="p-adic Hodge theory">p-adic Hodge theory</button>
-          <button type="button" class="chip" data-tag="Shimura varieties">Shimura varieties</button>
-          <button type="button" class="chip" data-tag="Langlands">Langlands</button>
+    <!-- Collapsible filter box (no whitespace when closed) -->
+    <div class="filters-box" id="filters-box" hidden>
+      <div class="filters-shell">
+        <div class="filters-collapsible" id="filters-panel" aria-hidden="true">
+          <div class="filter-body">
+            <div class="filter-tools">
+              <input type="search" id="tag-search" class="tag-search" placeholder="Search topics… (e.g. Shimura)">
+              <button type="button" id="clear-tags" class="btn-lite">Clear</button>
+            </div>
+            <div id="chip-wrap" class="chip-wrap" aria-label="Topic chips">
+              <button type="button" class="chip" data-tag="Number theory">Number theory</button>
+              <button type="button" class="chip" data-tag="Algebraic geometry">Algebraic geometry</button>
+              <button type="button" class="chip" data-tag="p-adic Hodge theory">p-adic Hodge theory</button>
+              <button type="button" class="chip" data-tag="Shimura varieties">Shimura varieties</button>
+              <button type="button" class="chip" data-tag="Langlands">Langlands</button>
+            </div>
+          </div>
         </div>
       </div>
-    </details>
-
-    <!-- Asterisk legend (clean card) -->
-    <div class="legend-card" aria-hidden="true">
-      <span class="legend-mark" aria-hidden="true">*</span>
-      <span class="legend-text">I’m likely attending</span>
     </div>
 
     <!-- Co-organizing -->
@@ -332,7 +334,6 @@
     <!-- Past conferences (auto-filled by JS) -->
     <h2 class="section-title">Past conferences</h2>
     <section class="grid" id="grid-past">
-      <!-- Cards with data-end in the past will move here automatically -->
       <article
         class="conf-card"
         data-id="oth-arith-kyoto-2025"
@@ -352,6 +353,11 @@
         </div>
       </article>
     </section>
+
+    <!-- Mobile-only legend -->
+    <div class="legend-end" aria-hidden="true">
+      <span class="legend-mark">*</span> I’m likely attending
+    </div>
   </main>
 
   <footer style="background:var(--primary-color);color:#fff;padding:1em;text-align:center;">
@@ -368,21 +374,37 @@
     }
 
     (function(){
-      const filterBtn = document.getElementById('filter-toggle');
-      const filters = document.getElementById('filters');
-      const filterBody = document.getElementById('filters-body');
+      /* Filter pill -> animated collapsible (no whitespace when closed) */
+      const filterBtn   = document.getElementById('filter-toggle');
+      const box         = document.getElementById('filters-box');
+      const panel       = document.getElementById('filters-panel');
 
-      // Toggle details via pill button
-      function reflect(){
-        filterBtn.setAttribute('aria-expanded', filters.open ? 'true' : 'false');
+      function openPanel(){
+        box.hidden = false;
+        panel.style.height = '0px';
+        panel.setAttribute('aria-hidden','false');
+        requestAnimationFrame(()=>{
+          panel.style.height = panel.scrollHeight + 'px';
+        });
+        filterBtn.setAttribute('aria-expanded','true');
       }
-      filterBtn.addEventListener('click', ()=>{
-        filters.open = !filters.open;
-        reflect();
-      });
-      filters.addEventListener('toggle', reflect);
-      reflect();
+      function closePanel(){
+        // animate from current height to 0, then hide container
+        panel.style.height = panel.scrollHeight + 'px';
+        requestAnimationFrame(()=>{
+          panel.style.height = '0px';
+        });
+        panel.setAttribute('aria-hidden','true');
+        filterBtn.setAttribute('aria-expanded','false');
+        panel.addEventListener('transitionend', ()=>{ box.hidden = true; }, {once:true});
+      }
+      function isOpen(){ return !box.hidden; }
 
+      filterBtn.addEventListener('click', ()=>{
+        if(isOpen()) closePanel(); else openPanel();
+      });
+
+      /* Filter logic */
       const chipWrap = document.getElementById('chip-wrap');
       const chips = Array.from(chipWrap.querySelectorAll('.chip'));
       const search = document.getElementById('tag-search');
@@ -395,7 +417,6 @@
       const allCards = Array.from(document.querySelectorAll('.conf-card'));
       const selectedTopics = new Set();
 
-      // Chip toggle
       chips.forEach(chip=>{
         chip.addEventListener('click', ()=>{
           const tag = chip.dataset.tag;
@@ -405,7 +426,6 @@
         });
       });
 
-      // Clear all
       clearBtn.addEventListener('click', ()=>{
         selectedTopics.clear();
         chips.forEach(c=>c.classList.remove('active'));
@@ -413,12 +433,11 @@
         applyFilters();
       });
 
-      // Move past cards automatically by data-end (empty => upcoming)
       function relocateByDate(){
         const today = new Date(); today.setHours(0,0,0,0);
         allCards.forEach(card=>{
           const end = card.dataset.end ? new Date(card.dataset.end) : null;
-          const type = card.dataset.type; // 'coorg' | 'other'
+          const type = card.dataset.type;
           if(end && !isNaN(end) && end < today){
             if(card.parentElement !== gridPast) gridPast.appendChild(card);
           }else{
@@ -428,7 +447,6 @@
         });
       }
 
-      // Apply topic filters (chips OR) + search text (also OR against topics)
       function applyFilters(){
         const q = search.value.trim().toLowerCase();
         allCards.forEach(card=>{
@@ -443,10 +461,18 @@
 
       search.addEventListener('input', applyFilters);
 
-      // Init
       relocateByDate();
       applyFilters();
-      window.addEventListener('focus', relocateByDate);
+
+      // Make sure the panel ends at 'auto' height after opening (for responsive content)
+      panel.addEventListener('transitionend', ()=>{
+        if(!box.hidden){ panel.style.height = 'auto'; }
+      });
+      window.addEventListener('resize', ()=>{
+        if(!box.hidden){
+          panel.style.height = 'auto';
+        }
+      });
     })();
   </script>
 </body>
