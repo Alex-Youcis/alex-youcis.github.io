@@ -19,16 +19,17 @@
       --card:#fff;
       --border:#e1e1e6;
 
-      --content-max:1100px;
+      --content-max:1200px;
       --hero-height:260px;
-      --chip-gap:6px;
+      --ring-band: 8px;      /* ring thickness used for filter pill */
+      --ring-radius: 999px;  /* rounded pill */
     }
 
     *,:before,:after{box-sizing:border-box}
     body{font-family:'Open Sans',sans-serif;background:var(--background-color);color:var(--text-color);margin:0}
 
-    /* Header/nav */
-    header{background:var(--primary-color);position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+    /* Header/nav (same as other pages) */
+    header{background:var(--primary-color);position:sticky;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.08)}
     .navbar{display:flex;justify-content:flex-end;align-items:center;padding:0 1em;height:60px}
     .nav-links{display:flex}
     .nav-links a{color:#fff;text-decoration:none;margin:0 1em;position:relative;transition:color .3s}
@@ -47,14 +48,16 @@
       .navbar.responsive .nav-mobile .nav-text{display:none}
     }
 
-    main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
+    main{padding:2em 1.25em 3em;max-width:var(--content-max);margin:0 auto;position:relative}
 
-    /* HERO — blackboard triptych (restored sizing/spacing) */
+    /* HERO (triplicate blackboard, low opacity) */
     .hero{
       position:relative;overflow:hidden;background:var(--card);border-radius:14px;
-      padding:1.25em 1.5em; box-shadow:0 2px 10px rgba(0,0,0,.05);
-      display:grid;gap:.6em;margin-bottom:.9em;align-items:center;
-      min-height:200px;border:2px solid #000;
+      padding:1.25em 1.5em;
+      box-shadow:0 2px 10px rgba(0,0,0,.05);
+      display:grid;gap:.6em;margin-bottom:1.2em;align-items:center;
+      min-height:var(--hero-height);
+      border:2px solid #000;
     }
     .hero::before{
       content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
@@ -63,150 +66,112 @@
         url('https://alex-youcis.github.io/blackboard.png'),
         url('https://alex-youcis.github.io/blackboard.png');
       background-repeat:no-repeat,no-repeat,no-repeat;
-      /* restored */
       background-position:16% center, 50% center, 84% center;
-      background-size:auto 48%, auto 48%, auto 48%;
-    }
-    .hero h1{
-      margin:.1em 0 .1em; font-size:clamp(1.6rem,3.2vw,2.1rem);
-      position:relative; z-index:1; text-align:center; justify-self:center; align-self:center;
+      /* Spacing/sizing tuned to avoid overlap (the “good” sizing) */
+      background-size:auto 80%, auto 80%, auto 80%;
     }
     @media (max-width:600px){
       .hero{ padding:1em 1em 1.1em; }
-      .hero::before{ background-size:auto 38%, auto 38%, auto 38%; }
+      .hero::before{ background-size:auto 70%, auto 70%, auto 70%; }
+    }
+    .hero h1{
+      margin:.1em 0 .1em;
+      font-size:clamp(1.6rem,3.2vw,2.1rem);
+      position:relative;z-index:1;justify-self:center;text-align:center;
     }
 
-    /* Section titles with accent bar */
+    /* Section titles with subtle bar (same style as notes/research) */
     h2.section-title{
-      margin:1.2em 0 .9em; font-size:1.35rem; line-height:1.2; font-weight:800; letter-spacing:.2px;
-      position:relative; display:inline-block; padding-bottom:.3em;
+      margin:1.2em 0 .9em;font-size:1.35rem;line-height:1.2;font-weight:800;letter-spacing:.2px;position:relative;display:inline-block;padding-bottom:.3em
     }
     h2.section-title::after{
-      content:''; position:absolute; left:0; bottom:-6px; width:160px; height:6px;
-      border-radius:999px; background:linear-gradient(90deg,#000 0%, var(--button-color) 100%); opacity:.95;
+      content:'';position:absolute;left:0;bottom:-6px;width:160px;height:6px;border-radius:999px;background:linear-gradient(90deg,#000 0%, var(--button-color) 100%);opacity:.95
     }
 
-    /* Centered layered pill (research-style) */
-    .filter-controls{ display:flex; justify-content:center; margin:.6em auto .2em; max-width:var(--content-max); }
+    /* Filter block (collapsible pill that docks on top of a white bubble) */
+    .filters{margin-bottom:1.1em;border:none;padding:0;background:transparent}
+    .filters > summary{list-style:none;margin:0;cursor:pointer}
+    .filters > summary::-webkit-details-marker{display:none}
+
+    /* Pill with black/red ring (same aesthetic as research page) */
     .term-btn{
-      --label-size: 1.15rem;
-      --btn-h: calc(var(--label-size) * 3);
-      --band: calc(var(--btn-h) * 0.075);
-      --radius: calc(var(--btn-h) * 0.5);
       border:0;background:transparent;padding:0;cursor:pointer;line-height:0
     }
-    .term-btn__outer{display:inline-block;background:#000;padding:var(--band);border-radius:var(--radius)}
-    .term-btn__middle{display:inline-block;background:var(--button-color);padding:var(--band);border-radius:calc(var(--radius) - var(--band))}
+    .term-btn__outer{display:inline-block;background:#000;padding:var(--ring-band);border-radius:var(--ring-radius);width:100%}
+    .term-btn__middle{display:inline-block;background:var(--button-color);padding:var(--ring-band);border-radius:calc(var(--ring-radius) - var(--ring-band));width:100%}
     .term-btn__inner{
-      display:inline-flex;align-items:center;justify-content:center;
-      gap:calc(var(--btn-h)*0.18);
-      background:#fff;border-radius:calc(var(--radius) - (2*var(--band)));
-      height:var(--btn-h);
-      padding:0 calc(var(--btn-h) * 1.1);
+      display:inline-flex;align-items:center;justify-content:flex-start;
+      gap:.5em;background:#fff;border-radius:calc(var(--ring-radius) - (2*var(--ring-band)));
+      width:100%;height:58px;padding:0 16px
     }
-    .term-btn__label{font:700 var(--label-size)/1.05 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#000;white-space:nowrap}
-    .term-btn__chevron{width:calc(var(--btn-h)*0.28);height:calc(var(--btn-h)*0.28);flex:0 0 auto;transition:transform 160ms ease;color:#000}
-    .term-btn:hover .term-btn__inner{background:#f7f7f7}
-    details.filters[open] .term-btn__chevron{transform:rotate(180deg)}
+    .term-btn__label{font:700 1.05rem/1.1 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#000}
+    .term-btn__chevron{margin-left:auto;width:22px;height:22px;transition:transform 160ms ease}
 
-    /* Expand pill to full bubble width when open */
-    details.filters{ max-width:var(--content-max); margin:.0 auto .6em; }
-    details.filters > summary{
-      list-style:none; display:flex; justify-content:center; align-items:center;
-      cursor:pointer; outline: none;
-    }
-    details.filters > summary::-webkit-details-marker{display:none}
-    details.filters[open] .term-btn,
+    /* When open, make summary occupy full width & flatten bottom radii to dock */
+    details.filters[open] > summary.filter-controls{display:block;width:100%}
     details.filters[open] .term-btn__outer,
     details.filters[open] .term-btn__middle,
     details.filters[open] .term-btn__inner{
-      display:block; width:100%;
+      border-bottom-left-radius:0 !important;border-bottom-right-radius:0 !important;
     }
-    details.filters[open] .term-btn__inner{
-      height:auto; padding:.8em 1.1em;
-      border-bottom-left-radius:0; border-bottom-right-radius:0; /* seamless with bubble */
+    details.filters[open] .term-btn__chevron{transform:rotate(180deg)}
+
+    /* The white bubble underneath the pill */
+    .filters-panel{
+      overflow:hidden; max-height:0; transition:max-height 260ms ease;
+      background:#fff;border:1px solid var(--border);border-top:none;border-radius:0 0 14px 14px;
+      padding: var(--panel-pad, 0); /* closed => 0, open => real padding set below */
+      box-shadow:0 2px 10px rgba(0,0,0,.05)
+    }
+    details.filters[open] .filters-panel{ --panel-pad: 16px; }
+
+    .filters-grid{display:flex;flex-wrap:wrap;gap:.6em 1em;align-items:center}
+    .filters-grid input[type="search"]{
+      flex:1 1 340px;min-width:260px;height:44px;border:1px solid #cfd3d6;border-radius:10px;padding:0 .9em;font-size:1rem
+    }
+    .btn-clear{
+      height:44px;border:2px solid #000;background:#fff;border-radius:12px;padding:.3em .9em;font-weight:800
     }
 
-    /* Collapsible filter box — full bubble width, no whitespace when closed */
-    .filters-shell{
-      background:#fff;border:1px solid var(--border);border-radius:0 0 12px 12px;
-      box-shadow:0 2px 6px rgba(0,0,0,.05); overflow:hidden;
-    }
-    .filters-collapsible{
-      max-height:0; overflow:hidden;
-      transition:max-height 240ms ease, padding 240ms ease;
-      padding:0 0;  /* no stray space when closed */
-    }
-    details.filters[open] .filters-collapsible{
-      /* max-height set via JS; padding fades in */
-      padding:.6em .5em .9em;
-    }
+    /* Topic chips */
+    .chip{display:inline-flex;align-items:center;border:2px solid #000;border-radius:999px;padding:.35em .9em;font-weight:800;background:#fff;cursor:pointer}
+    .chip.active{background:var(--button-color);color:#fff;border-color:#000}
 
-    .filter-tools{display:flex; gap:.5em; align-items:center; flex-wrap:wrap; margin-bottom:.5em; justify-content:center}
-    .tag-search{padding:.5em .65em; border:1px solid #cfcfd4; border-radius:8px; min-width:260px}
-    .btn-lite{
-      background:#fff; border:1px solid #cfcfd4; border-radius:8px; padding:.45em .7em;
-      font-weight:700; cursor:pointer;
-    }
-    .chip-wrap{display:flex; gap:var(--chip-gap); flex-wrap:wrap; justify-content:center}
-    .chip{
-      background:#fff; border:1px solid #000; border-radius:999px;
-      padding:.28em .7em; font-weight:700; cursor:pointer; user-select:none;
-    }
-    .chip.active{ background:var(--button-color); color:#fff; }
-
-    /* Legend entirely in margin to the right of the hero (fixed) */
-    .legend-gutter{
-      position:fixed;
-      top:92px;
-      left: calc(50% + (var(--content-max) / 2) + 16px); /* start beyond right edge of content */
-      z-index:5;
-      background:#fff; border:1px solid var(--border); border-radius:10px;
-      padding:.35em .6em; font-size:.92rem; box-shadow:0 1px 4px rgba(0,0,0,.06); opacity:.9;
-      white-space:nowrap;
-    }
-    .legend-gutter .legend-mark{ font-weight:900; color:var(--button-color); margin-right:.25em; }
-    @media (max-width:1280px){ .legend-gutter{ display:none; } }
-
-    /* Grid & cards */
-    .grid{ display:grid; grid-template-columns:1fr 1fr; gap:2em; align-items:stretch; }
-    @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
+    /* Conference card bubbles */
+    .conf-grid{display:grid;grid-template-columns:1fr 1fr;gap:1em}
+    @media (max-width:900px){ .conf-grid{grid-template-columns:1fr} }
     .conf-card{
-      position:relative;
-      background:#fff; border:1px solid var(--border); border-radius:12px;
-      box-shadow:0 1px 4px rgba(0,0,0,.06); padding:16px;
-      display:flex; flex-direction:column; height:100%;
+      position:relative;background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 16px 12px;
+      box-shadow:0 2px 8px rgba(0,0,0,.05)
     }
-    /* Top-right asterisk mark */
-    .conf-card[data-attending="1"]::after{
-      content:"*"; position:absolute; top:10px; right:12px;
-      font-size:28px; font-weight:900; color:var(--button-color); line-height:1;
-    }
-    @media (max-width:600px){
-      .conf-card[data-attending="1"]::after{ font-size:24px; top:8px; right:10px; }
-    }
-    .conf-card h3{ margin:.15em 0 .35em; font-size:1.15rem; line-height:1.25; }
-    .conf-meta{ display:flex; flex-wrap:wrap; gap:.45em .7em; font-size:.98rem; color:#222; margin-bottom:.4em; }
-    .tag{ background:var(--secondary-color); color:#111; border-radius:999px; padding:.22em .6em; }
-    .desc{ margin:.35em 0 .5em; }
-    .links{ display:flex; gap:.5em; flex-wrap:wrap; margin-top:auto; padding-top:.65em; }
-    .btn{ background:var(--button-color); color:#fff; text-decoration:none; border-radius:8px; padding:.45em .7em; font-weight:700; font-size:1rem; }
-    .btn:hover{ filter:brightness(1.05); }
+    .conf-card h3{margin:.1em 0 .35em;font-size:1.12rem}
+    .conf-meta{font-size:.95rem;color:#333;margin:.15em 0 .5em}
+    .conf-card a{color:#0f62fe;text-decoration:none}
+    .conf-card a:hover{text-decoration:underline}
+    .topics{display:flex;flex-wrap:wrap;gap:.4em;margin-top:.6em}
+    .badge{font-weight:700;border:1px solid #cfd3d6;border-radius:999px;padding:.2em .55em;background:#f8f8fb;font-size:.88rem}
+    .attend-star{position:absolute;right:10px;top:8px;color:var(--button-color);font-weight:800;font-size:1.4rem;line-height:1}
 
-    /* Normalize hero width/height */
-    body.normalize-hero main{ max-width: var(--content-max); margin-inline: auto; }
-    body.normalize-hero .hero{ width:100%; min-height:var(--hero-height); height:var(--hero-height); }
-    @media (max-width:600px){
-      body.normalize-hero .hero{ height:auto; min-height:180px; }
+    /* Legend in the right margin; hides on narrow screens */
+    .margin-legend{
+      position:fixed; top:150px; left: calc(50% + (var(--content-max)/2) + 20px);
+      background:rgba(255,255,255,.96); border:1px solid var(--border); border-radius:10px;
+      padding:.4em .7em; font-weight:800; color:#222; box-shadow:0 2px 8px rgba(0,0,0,.08); z-index:10
     }
+    .margin-legend .star{color:var(--button-color); font-weight:900; margin-right:.25em}
+    @media (max-width:1350px){ .margin-legend{display:none} }
+
+    footer{background:var(--primary-color);color:#fff;padding:1em;text-align:center}
   </style>
 </head>
-<body class="normalize-hero">
+<body>
   <header>
     <nav class="navbar" id="myNavbar">
       <div class="nav-mobile">
         <span class="nav-text">Navigation</span>
-        <span class="icon" role="button" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()"><i class="fa fa-bars"></i></span>
+        <span class="icon" role="button" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
+          <i class="fa fa-bars"></i>
+        </span>
       </div>
       <div class="nav-links">
         <a href="index.html">Home</a>
@@ -221,47 +186,39 @@
   </header>
 
   <main>
+    <!-- legend in the outer margin -->
+    <aside class="margin-legend" aria-hidden="true"><span class="star">*</span>= I’m likely to attend</aside>
+
     <!-- HERO -->
     <section class="hero">
       <h1>Conferences</h1>
     </section>
 
-    <!-- Legend in right margin -->
-    <div class="legend-gutter" aria-hidden="true">
-      <span class="legend-mark">*</span> I’m likely to attend
-    </div>
-
-    <!-- Filters: research-style pill + collapsible bubble -->
+    <!-- FILTERS (topic search + chips; collapsible like research page) -->
     <details class="filters" id="filters">
       <summary class="filter-controls">
-        <span class="term-btn" id="filter-pill" aria-expanded="false" aria-controls="filters-panel">
-          <span class="term-btn__outer">
-            <span class="term-btn__middle">
-              <span class="term-btn__inner">
-                <span class="term-btn__label">Filter by topic</span>
-                <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                </svg>
-              </span>
-            </span>
-          </span>
-        </span>
+        <button class="term-btn" id="filter-pill" type="button" aria-expanded="false">
+          <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner">
+            <span class="term-btn__label">Filter <span style="font-weight:400">by topic</span></span>
+            <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </span></span></span>
+        </button>
       </summary>
 
-      <div class="filters-shell">
-        <div class="filters-collapsible" id="filters-panel">
-          <div class="filter-body">
-            <div class="filter-tools">
-              <input type="search" id="tag-search" class="tag-search" placeholder="Search topics… (e.g. Shimura)">
-              <button type="button" id="clear-tags" class="btn-lite">Clear</button>
-            </div>
-            <div id="chip-wrap" class="chip-wrap" aria-label="Topic chips">
-              <button type="button" class="chip" data-tag="Number theory">Number theory</button>
-              <button type="button" class="chip" data-tag="Algebraic geometry">Algebraic geometry</button>
-              <button type="button" class="chip" data-tag="p-adic Hodge theory">p-adic Hodge theory</button>
-              <button type="button" class="chip" data-tag="Shimura varieties">Shimura varieties</button>
-              <button type="button" class="chip" data-tag="Langlands">Langlands</button>
-            </div>
+      <div class="filters-panel" id="filters-panel" role="region" aria-label="Filter by topic">
+        <div class="filters-grid">
+          <input id="search-input" type="search" placeholder="Search topics… (e.g., Shimura)" />
+          <button class="btn-clear" id="btn-clear" type="button">Clear</button>
+
+          <!-- Visible topic chips -->
+          <div class="chips-row" style="flex:1 1 100%; display:flex; flex-wrap:wrap; gap:.6em;">
+            <span class="chip" data-topic="number theory">Number theory</span>
+            <span class="chip" data-topic="algebraic geometry">Algebraic geometry</span>
+            <span class="chip" data-topic="p-adic hodge theory">p-adic Hodge theory</span>
+            <span class="chip" data-topic="shimura varieties">Shimura varieties</span>
+            <span class="chip" data-topic="langlands">Langlands</span>
           </div>
         </div>
       </div>
@@ -269,115 +226,87 @@
 
     <!-- Co-organizing -->
     <h2 class="section-title">Conferences I’m co-organizing</h2>
-    <section class="grid" id="grid-coorg">
-      <article
-        class="conf-card"
-        data-id="co-aim-canonical-shimura"
-        data-type="coorg"
-        data-topics="Shimura varieties, Canonical models, Arithmetic geometry"
-        data-start="2026-01-01"
-        data-end=""
-        data-attending="1"
-      >
-        <div class="conf-meta">
-          <span class="tag"><i class="fa fa-calendar"></i> Dates TBA</span>
-          <span class="tag"><i class="fa fa-map-marker"></i> AIM</span>
-        </div>
-        <h3>Canonical Integral Models of Shimura Varieties (AIM Workshop)</h3>
-        <p class="desc">A research workshop on canonical models and their arithmetic applications.</p>
-        <div class="links">
-          <a class="btn" href="https://aimath.org/workshops/upcoming/canonicalshimura/" target="_blank" rel="noopener"><i class="fa fa-external-link"></i> Website</a>
+    <section class="conf-grid" id="coorg-grid">
+      <!-- AIM workshop -->
+      <article class="conf-card" data-topics="shimura varieties, langlands, number theory">
+        <h3><a href="https://aimath.org/workshops/upcoming/canonicalshimura/" target="_blank" rel="noopener">Canonical Integral Models of Shimura Varieties (AIM Workshop)</a></h3>
+        <div class="conf-meta">AIM · San Jose, CA · Dates TBA</div>
+        <p>Workshop focused on canonical integral models and related questions in the theory of Shimura varieties.</p>
+        <div class="topics">
+          <span class="badge">Shimura varieties</span>
+          <span class="badge">Langlands</span>
+          <span class="badge">Number theory</span>
         </div>
       </article>
 
-      <article
-        class="conf-card"
-        data-id="co-ams-bc-session"
-        data-type="coorg"
-        data-topics="Shimura varieties, Arithmetic geometry"
-        data-start="2026-03-28"
-        data-end="2026-03-29"
-        data-attending="1"
-      >
-        <div class="conf-meta">
-          <span class="tag"><i class="fa fa-calendar"></i> Mar 28–29, 2026</span>
-          <span class="tag"><i class="fa fa-map-marker"></i> Boston College</span>
-        </div>
-        <h3>Special Session on Shimura Varieties and Arithmetic (AMS Spring Sectional @ BC)</h3>
-        <p class="desc">Session details, schedule, and logistics are posted here as they’re finalized.</p>
-        <div class="links">
-          <a class="btn" href="bc-session.html"><i class="fa fa-file-text-o"></i> Session page</a>
+      <!-- AMS Spring Sectional special session -->
+      <article class="conf-card" data-topics="shimura varieties, algebraic geometry, number theory">
+        <h3><a href="bc-sectional.html">AMS Spring Sectional — Special Session on Shimura Varieties &amp; Arithmetic</a></h3>
+        <div class="conf-meta">Boston College · Mar 28–29, 2026</div>
+        <p>Special session at the AMS Spring Sectional (BC) on Shimura varieties and arithmetic. Speakers TBA.</p>
+        <div class="topics">
+          <span class="badge">Shimura varieties</span>
+          <span class="badge">Algebraic geometry</span>
+          <span class="badge">Number theory</span>
         </div>
       </article>
     </section>
 
-    <!-- Other upcoming -->
+    <!-- Other upcoming conferences -->
     <h2 class="section-title">Other upcoming conferences</h2>
-    <section class="grid" id="grid-other">
-      <article
-        class="conf-card"
-        data-id="oth-shimura-galois-2026"
-        data-type="other"
-        data-topics="Shimura varieties, Galois representations, Langlands"
-        data-start="2026-03-10"
-        data-end="2026-03-14"
-      >
-        <div class="conf-meta">
-          <span class="tag"><i class="fa fa-calendar"></i> Mar 10–14, 2026</span>
-          <span class="tag"><i class="fa fa-map-marker"></i> Cambridge</span>
-        </div>
-        <h3>Workshop on Shimura Varieties and Galois Representations</h3>
-        <p class="desc">Talks on the geometry of Shimura varieties and connections with Galois representations.</p>
-        <div class="links">
-          <a class="btn" href="#" target="_blank" rel="noopener"><i class="fa fa-external-link"></i> Website</a>
+    <section class="conf-grid" id="upcoming-grid">
+      <!-- Example items (edit/replace freely) -->
+      <article class="conf-card" data-start="2026-02-10" data-end="2026-02-14" data-topics="p-adic hodge theory, number theory, algebraic geometry" data-attend="likely">
+        <span class="attend-star" title="Likely attending">*</span>
+        <h3>p-adic Hodge Theory Week</h3>
+        <div class="conf-meta">Somewhere · Feb 10–14, 2026</div>
+        <p>A focused program on recent developments in p-adic Hodge theory.</p>
+        <div class="topics">
+          <span class="badge">p-adic Hodge theory</span>
+          <span class="badge">Number theory</span>
+          <span class="badge">Algebraic geometry</span>
         </div>
       </article>
 
-      <article
-        class="conf-card"
-        data-id="oth-langlands-llfns-2026"
-        data-type="other"
-        data-topics="Langlands, L-functions, Automorphic forms"
-        data-start="2026-06-01"
-        data-end="2026-06-05"
-      >
-        <div class="conf-meta">
-          <span class="tag"><i class="fa fa-calendar"></i> Jun 1–5, 2026</span>
-          <span class="tag"><i class="fa fa-map-marker"></i> Bonn</span>
+      <article class="conf-card" data-start="2026-04-18" data-end="2026-04-22" data-topics="shimura varieties, langlands, number theory">
+        <h3>Workshop on Shimura Varieties and the Langlands Program</h3>
+        <div class="conf-meta">Somewhere else · Apr 18–22, 2026</div>
+        <p>Connections between Shimura varieties and the (arithmetic) Langlands program.</p>
+        <div class="topics">
+          <span class="badge">Shimura varieties</span>
+          <span class="badge">Langlands</span>
+          <span class="badge">Number theory</span>
         </div>
-        <h3>Langlands, \(L\)-functions, and Arithmetic</h3>
-        <p class="desc">A summer meeting featuring developments across the Langlands program.</p>
-        <div class="links">
-          <a class="btn" href="#" target="_blank" rel="noopener"><i class="fa fa-external-link"></i> Website</a>
+      </article>
+
+      <article class="conf-card" data-start="2026-06-05" data-end="2026-06-09" data-topics="algebraic geometry, number theory">
+        <h3>Summer School in Modern Algebraic Geometry</h3>
+        <div class="conf-meta">Nice place · Jun 5–9, 2026</div>
+        <p>Introductory and advanced mini-courses in modern AG with arithmetic flavors.</p>
+        <div class="topics">
+          <span class="badge">Algebraic geometry</span>
+          <span class="badge">Number theory</span>
         </div>
       </article>
     </section>
 
-    <!-- Past conferences (auto-filled by JS) -->
+    <!-- Past conferences (auto-filled) -->
     <h2 class="section-title">Past conferences</h2>
-    <section class="grid" id="grid-past">
-      <article
-        class="conf-card"
-        data-id="oth-arith-kyoto-2025"
-        data-type="other"
-        data-topics="Arithmetic geometry"
-        data-start="2025-04-15"
-        data-end="2025-04-18"
-      >
-        <div class="conf-meta">
-          <span class="tag"><i class="fa fa-calendar"></i> Apr 15–18, 2025</span>
-          <span class="tag"><i class="fa fa-map-marker"></i> Kyoto</span>
-        </div>
-        <h3>Arithmetic Geometry Spring Meeting</h3>
-        <p class="desc">Kept here as a template for past events.</p>
-        <div class="links">
-          <a class="btn" href="#" target="_blank" rel="noopener"><i class="fa fa-external-link"></i> Website</a>
+    <section class="conf-grid" id="past-grid">
+      <!-- Auto-moved items will appear here -->
+      <article class="conf-card" data-start="2025-05-18" data-end="2025-05-22" data-topics="number theory, langlands">
+        <h3>Automorphic Forms Spring School</h3>
+        <div class="conf-meta">Somewhere · May 18–22, 2025</div>
+        <p>Introductory school on automorphic forms and representations.</p>
+        <div class="topics">
+          <span class="badge">Number theory</span>
+          <span class="badge">Langlands</span>
         </div>
       </article>
     </section>
   </main>
 
-  <footer style="background:var(--primary-color);color:#fff;padding:1em;text-align:center;">
+  <footer>
     <p>&copy; 2025 Alex Youcis. All rights reserved.</p>
   </footer>
 
@@ -390,96 +319,115 @@
       if(btn) btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     }
 
+    // ========= Filters: smooth open, full-width pill, topic search/chips =========
     (function(){
-      /* Animate <details> open/close; ensure pill expands to full width; no stray space when closed */
       const det   = document.getElementById('filters');
       const pill  = document.getElementById('filter-pill');
       const panel = document.getElementById('filters-panel');
 
-      function setExpanded(){
-        pill.setAttribute('aria-expanded', det.open ? 'true' : 'false');
-      }
-      function setPanelHeight(){
-        if(det.open){
-          panel.style.maxHeight = panel.scrollHeight + 'px';
-        }else{
-          panel.style.maxHeight = '0px';
-        }
-      }
-
-      det.addEventListener('toggle', ()=>{
-        setExpanded();
-        setPanelHeight();
+      // Clicking the pill toggles its parent <details>
+      pill.addEventListener('click', (e)=>{
+        e.preventDefault(); e.stopPropagation();
+        det.open = !det.open;
+        reflect();
       });
 
+      function reflect(){
+        pill.setAttribute('aria-expanded', det.open ? 'true' : 'false');
+      }
+
+      function openPanelSmooth(){
+        // Let layout fully settle before measuring to avoid "first-open" truncation
+        panel.style.maxHeight = 'none';
+        requestAnimationFrame(()=>{ requestAnimationFrame(()=>{
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        });});
+      }
+      function closePanelSmooth(){ panel.style.maxHeight = '0px'; }
+
+      det.addEventListener('toggle', ()=>{
+        reflect();
+        if(det.open) openPanelSmooth(); else closePanelSmooth();
+      });
+
+      panel.addEventListener('transitionend', (e)=>{
+        if(e.propertyName === 'max-height' && det.open){
+          panel.style.maxHeight = 'none'; // unlock height so contents can grow/shrink
+        }
+      });
+
+      window.addEventListener('load', ()=>{
+        reflect();
+        if(det.open) openPanelSmooth(); else closePanelSmooth();
+      });
       window.addEventListener('resize', ()=>{
         if(det.open){
           panel.style.maxHeight = 'none';
           requestAnimationFrame(()=>{ panel.style.maxHeight = panel.scrollHeight + 'px'; });
         }
       });
+    })();
 
-      setExpanded();
-      setPanelHeight();
+    // ========= Topic filter logic (search + chips) =========
+    (function(){
+      const chips = Array.from(document.querySelectorAll('.chip'));
+      const search = document.getElementById('search-input');
+      const clearBtn = document.getElementById('btn-clear');
 
-      /* Filter logic */
-      const chipWrap = document.getElementById('chip-wrap');
-      const chips = Array.from(chipWrap.querySelectorAll('.chip'));
-      const search = document.getElementById('tag-search');
-      const clearBtn = document.getElementById('clear-tags');
+      // Grids we filter (do NOT filter the co-organizing section)
+      const grids = [document.getElementById('upcoming-grid'), document.getElementById('past-grid')];
 
-      const gridCo   = document.getElementById('grid-coorg');
-      const gridOth  = document.getElementById('grid-other');
-      const gridPast = document.getElementById('grid-past');
+      function activeTopics(){
+        const chipTopics = chips.filter(c=>c.classList.contains('active')).map(c=>c.dataset.topic.trim().toLowerCase());
+        const text = (search.value || '').toLowerCase().trim();
+        const fromSearch = text ? text.split(/[,\s]+/).filter(Boolean) : [];
+        return [...new Set([...chipTopics, ...fromSearch])]; // union
+      }
 
-      const allCards = Array.from(document.querySelectorAll('.conf-card'));
-      const selectedTopics = new Set();
+      function cardMatches(card, topics){
+        if(!topics.length) return true;
+        const tags = (card.dataset.topics || '').toLowerCase();
+        return topics.some(t => tags.includes(t));
+      }
+
+      function applyFilter(){
+        const topics = activeTopics();
+        grids.forEach(grid=>{
+          grid.querySelectorAll('.conf-card').forEach(card=>{
+            card.style.display = cardMatches(card, topics) ? '' : 'none';
+          });
+        });
+      }
 
       chips.forEach(chip=>{
-        chip.addEventListener('click', ()=>{
-          const tag = chip.dataset.tag;
-          if(selectedTopics.has(tag)) selectedTopics.delete(tag); else selectedTopics.add(tag);
-          chip.classList.toggle('active');
-          applyFilters();
-        });
+        chip.addEventListener('click', ()=>{ chip.classList.toggle('active'); applyFilter(); });
       });
-
+      search.addEventListener('input', applyFilter);
       clearBtn.addEventListener('click', ()=>{
-        selectedTopics.clear();
         chips.forEach(c=>c.classList.remove('active'));
-        search.value='';
-        applyFilters();
+        search.value = ''; applyFilter();
       });
+      applyFilter();
+    })();
 
-      function relocateByDate(){
-        const today = new Date(); today.setHours(0,0,0,0);
-        allCards.forEach(card=>{
-          const end = card.dataset.end ? new Date(card.dataset.end) : null;
-          const type = card.dataset.type;
-          if(end && !isNaN(end) && end < today){
-            if(card.parentElement !== gridPast) gridPast.appendChild(card);
-          }else{
-            if(type === 'coorg' && card.parentElement !== gridCo) gridCo.appendChild(card);
-            if(type === 'other' && card.parentElement !== gridOth) gridOth.appendChild(card);
+    // ========= Auto-move "other conferences" between upcoming and past by date =========
+    (function(){
+      const upcomingGrid = document.getElementById('upcoming-grid');
+      const pastGrid = document.getElementById('past-grid');
+
+      function moveByDate(){
+        const today = new Date();
+        // consider only cards currently in upcomingGrid
+        Array.from(upcomingGrid.querySelectorAll('.conf-card')).forEach(card=>{
+          const end = card.dataset.end || card.dataset.start;
+          if(!end) return;
+          const endDate = new Date(end + 'T23:59:59');
+          if(!isNaN(endDate) && endDate < today){
+            pastGrid.prepend(card); // move to Past (newest first)
           }
         });
       }
-
-      function applyFilters(){
-        const q = search.value.trim().toLowerCase();
-        allCards.forEach(card=>{
-          const topics = (card.dataset.topics||'').toLowerCase();
-          const chipMatch = (selectedTopics.size === 0) ||
-                            Array.from(selectedTopics).some(t => topics.includes(t.toLowerCase()));
-          const textMatch = (q === '') || topics.includes(q);
-          card.style.display = (chipMatch && textMatch) ? '' : 'none';
-        });
-      }
-
-      search.addEventListener('input', applyFilters);
-
-      relocateByDate();
-      applyFilters();
+      window.addEventListener('load', moveByDate);
     })();
   </script>
 </body>
