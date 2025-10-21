@@ -209,6 +209,20 @@
     @media (max-width:600px){
       body.normalize-hero .hero{ height:auto; min-height:180px; }
     }
+
+    /* Compact conference cards: remove descriptions and tighten spacing */
+.conf-card > .desc { 
+  display: none !important; 
+}
+
+.conf-card h3 { 
+  margin-bottom: .15em;            /* smaller gap under the title */
+}
+
+.conf-card .links { 
+  margin-top: .15em !important;    /* override the existing margin-top:auto */
+  padding-top: 0 !important;       /* no extra padding */
+}
   </style>
 </head>
 <body class="normalize-hero">
