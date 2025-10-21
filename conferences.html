@@ -49,7 +49,7 @@
 
     main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
 
-    /* HERO — blackboard triptych spaced & smaller (no overlap) */
+    /* HERO — blackboard triptych (shrunk & spaced, no overlap) */
     .hero{
       position:relative;overflow:hidden;background:var(--card);border-radius:14px;
       padding:1.25em 1.5em; box-shadow:0 2px 10px rgba(0,0,0,.05);
@@ -63,9 +63,9 @@
         url('https://alex-youcis.github.io/blackboard.png'),
         url('https://alex-youcis.github.io/blackboard.png');
       background-repeat:no-repeat,no-repeat,no-repeat;
-      /* widened spacing + smaller height to prevent overlap */
-      background-position:14% center, 50% center, 86% center;
-      background-size:auto 50%, auto 50%, auto 50%;
+      /* more spacing + smaller height */
+      background-position:12% center, 50% center, 88% center;
+      background-size:auto 42%, auto 42%, auto 42%;
     }
     .hero h1{
       margin:.1em 0 .1em; font-size:clamp(1.6rem,3.2vw,2.1rem);
@@ -73,7 +73,7 @@
     }
     @media (max-width:600px){
       .hero{ padding:1em 1em 1.1em; }
-      .hero::before{ background-size:auto 38%, auto 38%, auto 38%; }
+      .hero::before{ background-size:auto 32%, auto 32%, auto 32%; }
     }
 
     /* Section titles with accent bar */
@@ -86,7 +86,7 @@
       border-radius:999px; background:linear-gradient(90deg,#000 0%, var(--button-color) 100%); opacity:.95;
     }
 
-    /* Centered layered pill filter button (matches research page) */
+    /* Centered layered pill (matches research aesthetic) */
     .filter-controls{ display:flex; justify-content:center; margin:.6em 0 .2em; }
     .term-btn{
       --label-size: 1.15rem;
@@ -107,16 +107,29 @@
     .term-btn__label{font:700 var(--label-size)/1.05 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#000;white-space:nowrap}
     .term-btn__chevron{width:calc(var(--btn-h)*0.28);height:calc(var(--btn-h)*0.28);flex:0 0 auto;transition:transform 160ms ease;color:#000}
     .term-btn:hover .term-btn__inner{background:#f7f7f7}
-    .term-btn[aria-expanded="true"] .term-btn__chevron{transform:rotate(180deg)}
+    details.filters[open] .term-btn__chevron{transform:rotate(180deg)}
 
-    /* Collapsible filter box — hidden when closed, no stray space; animated height */
-    .filters-box{ max-width:820px; margin:.0 auto .3em; }
+    /* Collapsible filter box — full bubble width, no whitespace when closed */
+    details.filters{ max-width:var(--content-max); margin:.0 auto .6em; }
+    details.filters > summary{
+      list-style:none; display:flex; justify-content:center; align-items:center;
+      cursor:pointer; outline: none;
+    }
+    details.filters > summary::-webkit-details-marker{display:none}
+
     .filters-shell{
       background:#fff;border:1px solid var(--border);border-radius:12px;
       box-shadow:0 2px 6px rgba(0,0,0,.05); overflow:hidden;
     }
-    .filters-collapsible{ height:0; overflow:hidden; transition:height 220ms ease; }
-    .filter-body{ padding:.6em .5em .9em }
+    .filters-collapsible{
+      max-height:0; overflow:hidden;
+      transition:max-height 240ms ease, padding 240ms ease;
+      padding:0 0;  /* no stray top whitespace when closed */
+    }
+    details.filters[open] .filters-collapsible{
+      /* max-height is set inline via JS to content height; padding fades in */
+      padding:.6em .5em .9em;
+    }
 
     .filter-tools{display:flex; gap:.5em; align-items:center; flex-wrap:wrap; margin-bottom:.5em; justify-content:center}
     .tag-search{padding:.5em .65em; border:1px solid #cfcfd4; border-radius:8px; min-width:260px}
@@ -131,19 +144,19 @@
     }
     .chip.active{ background:var(--button-color); color:#fff; }
 
-    /* Floating legend in right margin (desktop); subtle footer note on mobile */
-    .legend-float{
+    /* Right-margin legend (fixed to gutter; small; always visible on desktop) */
+    .legend-gutter{
       position:fixed;
-      right:calc(max((100vw - var(--content-max))/2, 12px));
-      top:92px; z-index:5;
+      top:92px;
+      /* stays fully in the right margin beside the content */
+      right: calc(max((100vw - var(--content-max))/2, 12px));
+      z-index:5;
       background:#fff; border:1px solid var(--border); border-radius:10px;
-      padding:.35em .6em; font-size:.92rem; box-shadow:0 1px 4px rgba(0,0,0,.06); opacity:.85;
+      padding:.35em .6em; font-size:.92rem; box-shadow:0 1px 4px rgba(0,0,0,.06); opacity:.9;
+      white-space:nowrap;
     }
-    .legend-float .legend-mark{ font-weight:900; color:var(--button-color); margin-right:.25em; }
-    @media (max-width:900px){ .legend-float{ display:none; } }
-    .legend-end{ display:none; margin:1.2em auto 0; text-align:center; font-size:.95rem; opacity:.7; }
-    .legend-end .legend-mark{ font-weight:900; color:var(--button-color); margin-right:.25em; }
-    @media (max-width:900px){ .legend-end{ display:block; } }
+    .legend-gutter .legend-mark{ font-weight:900; color:var(--button-color); margin-right:.25em; }
+    @media (max-width:900px){ .legend-gutter{ display:none; } }
 
     /* Grid & cards */
     .grid{ display:grid; grid-template-columns:1fr 1fr; gap:2em; align-items:stretch; }
@@ -203,31 +216,30 @@
       <h1>Conferences</h1>
     </section>
 
-    <!-- Floating legend (desktop) -->
-    <div class="legend-float" aria-hidden="true">
-      <span class="legend-mark">*</span> likely attending
+    <!-- Legend in right margin -->
+    <div class="legend-gutter" aria-hidden="true">
+      <span class="legend-mark">*</span> I’m likely to attend
     </div>
 
-    <!-- Centered pill toggle -->
-    <div class="filter-controls">
-      <button class="term-btn" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filters-panel">
-        <span class="term-btn__outer">
-          <span class="term-btn__middle">
-            <span class="term-btn__inner">
-              <span class="term-btn__label">Filter by topic</span>
-              <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-              </svg>
+    <!-- Filters: research-style pill + collapsible bubble -->
+    <details class="filters" id="filters">
+      <summary class="filter-controls">
+        <span class="term-btn" id="filter-pill" aria-expanded="false" aria-controls="filters-panel">
+          <span class="term-btn__outer">
+            <span class="term-btn__middle">
+              <span class="term-btn__inner">
+                <span class="term-btn__label">Filter by topic</span>
+                <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </span>
             </span>
           </span>
         </span>
-      </button>
-    </div>
+      </summary>
 
-    <!-- Collapsible filter box (no whitespace when closed) -->
-    <div class="filters-box" id="filters-box" hidden>
       <div class="filters-shell">
-        <div class="filters-collapsible" id="filters-panel" aria-hidden="true">
+        <div class="filters-collapsible" id="filters-panel">
           <div class="filter-body">
             <div class="filter-tools">
               <input type="search" id="tag-search" class="tag-search" placeholder="Search topics… (e.g. Shimura)">
@@ -243,7 +255,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </details>
 
     <!-- Co-organizing -->
     <h2 class="section-title">Conferences I’m co-organizing</h2>
@@ -353,11 +365,6 @@
         </div>
       </article>
     </section>
-
-    <!-- Mobile-only legend -->
-    <div class="legend-end" aria-hidden="true">
-      <span class="legend-mark">*</span> I’m likely attending
-    </div>
   </main>
 
   <footer style="background:var(--primary-color);color:#fff;padding:1em;text-align:center;">
@@ -374,35 +381,39 @@
     }
 
     (function(){
-      /* Filter pill -> animated collapsible (no whitespace when closed) */
-      const filterBtn   = document.getElementById('filter-toggle');
-      const box         = document.getElementById('filters-box');
-      const panel       = document.getElementById('filters-panel');
+      /* Animate <details> open/close to full bubble width, no whitespace when closed */
+      const det   = document.getElementById('filters');
+      const pill  = document.getElementById('filter-pill');
+      const panel = document.getElementById('filters-panel');
 
-      function openPanel(){
-        box.hidden = false;
-        panel.style.height = '0px';
-        panel.setAttribute('aria-hidden','false');
-        requestAnimationFrame(()=>{
-          panel.style.height = panel.scrollHeight + 'px';
-        });
-        filterBtn.setAttribute('aria-expanded','true');
+      function setExpanded(){
+        pill.setAttribute('aria-expanded', det.open ? 'true' : 'false');
       }
-      function closePanel(){
-        // animate from current height to 0, then hide container
-        panel.style.height = panel.scrollHeight + 'px';
-        requestAnimationFrame(()=>{
-          panel.style.height = '0px';
-        });
-        panel.setAttribute('aria-hidden','true');
-        filterBtn.setAttribute('aria-expanded','false');
-        panel.addEventListener('transitionend', ()=>{ box.hidden = true; }, {once:true});
+      function setPanelHeight(){
+        if(det.open){
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+        }else{
+          panel.style.maxHeight = '0px';
+        }
       }
-      function isOpen(){ return !box.hidden; }
 
-      filterBtn.addEventListener('click', ()=>{
-        if(isOpen()) closePanel(); else openPanel();
+      det.addEventListener('toggle', ()=>{
+        setExpanded();
+        // when opening, measure; when closing, collapse
+        setPanelHeight();
       });
+
+      window.addEventListener('resize', ()=>{
+        // keep height in sync while open
+        if(det.open){
+          panel.style.maxHeight = 'none';   // let it grow for a tick
+          requestAnimationFrame(()=>{ panel.style.maxHeight = panel.scrollHeight + 'px'; });
+        }
+      });
+
+      // initialize collapsed with no stray space
+      setExpanded();
+      setPanelHeight();
 
       /* Filter logic */
       const chipWrap = document.getElementById('chip-wrap');
@@ -454,8 +465,7 @@
           const chipMatch = (selectedTopics.size === 0) ||
                             Array.from(selectedTopics).some(t => topics.includes(t.toLowerCase()));
           const textMatch = (q === '') || topics.includes(q);
-          const show = chipMatch && textMatch;
-          card.style.display = show ? '' : 'none';
+          card.style.display = (chipMatch && textMatch) ? '' : 'none';
         });
       }
 
@@ -463,16 +473,6 @@
 
       relocateByDate();
       applyFilters();
-
-      // Make sure the panel ends at 'auto' height after opening (for responsive content)
-      panel.addEventListener('transitionend', ()=>{
-        if(!box.hidden){ panel.style.height = 'auto'; }
-      });
-      window.addEventListener('resize', ()=>{
-        if(!box.hidden){
-          panel.style.height = 'auto';
-        }
-      });
     })();
   </script>
 </body>
