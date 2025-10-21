@@ -144,6 +144,8 @@
       max-height:0; overflow:hidden;
       transition:max-height 240ms ease, padding 240ms ease;
       padding:0 0;                 /* no stray space when closed */
+      will-change: max-height;       /* NEW: hint for smooth/timely reflow */
+      contain: layout;  
     }
     details.filters[open] .filters-collapsible{
       /* max-height set via JS; padding fades in */
@@ -400,35 +402,44 @@
 
     (function(){
       /* Animate <details> open/close; ensure pill expands to full width; no stray space when closed */
-      const det   = document.getElementById('filters');
-      const pill  = document.getElementById('filter-pill');
-      const panel = document.getElementById('filters-panel');
+      /* Animate <details> open/close; robust first-open height */
+const det   = document.getElementById('filters');
+const pill  = document.getElementById('filter-pill');
+const panel = document.getElementById('filters-panel');
 
-      function setExpanded(){
-        pill.setAttribute('aria-expanded', det.open ? 'true' : 'false');
-      }
-      function setPanelHeight(){
-        if(det.open){
-          panel.style.maxHeight = panel.scrollHeight + 'px';
-        }else{
-          panel.style.maxHeight = '0px';
-        }
-      }
+function setExpanded(){
+  pill.setAttribute('aria-expanded', det.open ? 'true' : 'false');
+}
 
-      det.addEventListener('toggle', ()=>{
-        setExpanded();
-        setPanelHeight();
-      });
+// Re-measure after layout settles (fonts/wrapping) using double rAF
+function recalcHeight(){
+  if(!det.open) return;
+  panel.style.maxHeight = 'none';
+  requestAnimationFrame(()=>{ requestAnimationFrame(()=>{
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+  });});
+}
 
-      window.addEventListener('resize', ()=>{
-        if(det.open){
-          panel.style.maxHeight = 'none';
-          requestAnimationFrame(()=>{ panel.style.maxHeight = panel.scrollHeight + 'px'; });
-        }
-      });
+function openPanel(){ recalcHeight(); }
+function closePanel(){ panel.style.maxHeight = '0px'; }
 
-      setExpanded();
-      setPanelHeight();
+det.addEventListener('toggle', ()=>{
+  setExpanded();
+  det.open ? openPanel() : closePanel();
+});
+
+// Keep height correct on resize/font load/content growth
+window.addEventListener('resize', recalcHeight);
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(recalcHeight);
+}
+// Chips can wrap after first paint — watch for size changes
+new ResizeObserver(()=>recalcHeight()).observe(panel);
+
+// Init state (closed, no sliver)
+setExpanded();
+closePanel();
+
 
       /* Filter logic */
       const chipWrap = document.getElementById('chip-wrap');
