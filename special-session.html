@@ -89,6 +89,68 @@
 
     /* Normalize hero width */
     body.normalize-hero main{ max-width: var(--content-max); margin-inline:auto; }
+
+    /* Schedule tables */
+    .schedule-wrap{ margin-top:.2em; }
+    .schedule-card{
+      background:#fff; border:1px solid var(--border); border-radius:12px;
+      box-shadow:0 1px 4px rgba(0,0,0,.06);
+      overflow:hidden; margin: .75em 0 1.1em;
+    }
+    table.schedule{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      font-size:0.98rem;
+    }
+    table.schedule caption{
+      text-align:left;
+      padding:.85em 1em .55em;
+      font-weight:800;
+      background:rgba(0,0,0,.03);
+      border-bottom:1px solid var(--border);
+    }
+    table.schedule thead th{
+      text-align:left;
+      padding:.65em 1em;
+      font-weight:800;
+      background:rgba(0,0,0,.02);
+      border-bottom:1px solid var(--border);
+    }
+    table.schedule td{
+      padding:.65em 1em;
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+    }
+    table.schedule tr:last-child td{ border-bottom:none; }
+    table.schedule td.time{
+      width: 165px;
+      white-space:nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    table.schedule tr.session-row td{
+      font-weight:800;
+      background:rgba(191,6,3,.07);
+      border-bottom:1px solid var(--border);
+    }
+
+    /* Speakers multi-column list */
+    ul.speaker-list{
+      margin:.3em 0 0;
+      padding-left:1.2em;
+      columns:3;
+      column-gap:2.2em;
+    }
+    ul.speaker-list li{
+      break-inside:avoid;
+      padding:.15em 0;
+    }
+    @media (max-width:900px){
+      ul.speaker-list{ columns:2; }
+    }
+    @media (max-width:600px){
+      ul.speaker-list{ columns:1; }
+    }
   </style>
 </head>
 <body class="normalize-hero">
@@ -127,16 +189,81 @@
         <li><a href="https://alex-youcis.github.io/" target="_blank" rel="noopener">Alex Youcis</a></li>
       </ul>
 
-      <h2 class="section-title">Dates &amp; time slots</h2>
-      <ul>
-        <li>Saturday morning: 8:00–11:00</li>
-        <li>Saturday afternoon: 15:00–18:00</li>
-        <li>Sunday morning: 8:00–11:00</li>
-        <li>Sunday afternoon: 14:00–17:00</li>
-      </ul>
+      <h2 class="section-title">Schedule of talks</h2>
+
+      <div class="schedule-wrap">
+        <div class="schedule-card">
+          <table class="schedule" aria-label="Schedule of talks for Saturday">
+            <caption>Saturday, March 28, 2026</caption>
+            <thead>
+              <tr>
+                <th style="width:165px;">Time</th>
+                <th>Speaker</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="session-row"><td colspan="2">Morning session (08:00–11:00)</td></tr>
+              <tr><td class="time">08:00–08:30</td><td>Zachary Gardner</td></tr>
+              <tr><td class="time">08:30–09:00</td><td>Jacksyn Bakeberg</td></tr>
+              <tr><td class="time">09:00–09:30</td><td>Alice Lin</td></tr>
+              <tr><td class="time">09:30–10:00</td><td>Steffan Reppen</td></tr>
+              <tr><td class="time">10:00–11:00</td><td>Linus Hamann</td></tr>
+
+              <tr class="session-row"><td colspan="2">Afternoon session (15:00–18:00)</td></tr>
+              <tr><td class="time">15:00–16:00</td><td>Keerthi Madapusi</td></tr>
+              <tr><td class="time">16:00–16:30</td><td>Sandra Nair</td></tr>
+              <tr><td class="time">16:30–17:30</td><td>Mathilde Gerbelli-Gauthier</td></tr>
+              <tr><td class="time">17:30–18:00</td><td>Hymn Chan</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="schedule-card">
+          <table class="schedule" aria-label="Schedule of talks for Sunday">
+            <caption>Sunday, March 29, 2026</caption>
+            <thead>
+              <tr>
+                <th style="width:165px;">Time</th>
+                <th>Speaker</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="session-row"><td colspan="2">Morning session (08:00–11:00)</td></tr>
+              <tr><td class="time">08:00–08:30</td><td>James Yang</td></tr>
+              <tr><td class="time">08:30–09:00</td><td>Xinyu Zhou</td></tr>
+              <tr><td class="time">09:00–10:00</td><td>Ben Howard</td></tr>
+              <tr><td class="time">10:00–11:00</td><td>Mingjia Zhang</td></tr>
+
+              <tr class="session-row"><td colspan="2">Afternoon session (14:00–17:00)</td></tr>
+              <tr><td class="time">14:00–15:00</td><td>Mark Kisin</td></tr>
+              <tr><td class="time">15:00–15:30</td><td>Jake Huyn</td></tr>
+              <tr><td class="time">15:30–16:00</td><td>Dongryul Kim</td></tr>
+              <tr><td class="time">16:00–17:00</td><td>George Pappas</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       <h2 class="section-title">Speakers</h2>
-      <p>To be announced.</p>
+      <ul class="speaker-list" aria-label="Alphabetized list of speakers">
+        <li>Jacksyn Bakeberg</li>
+        <li>Hymn Chan</li>
+        <li>Zachary Gardner</li>
+        <li>Mathilde Gerbelli-Gauthier</li>
+        <li>Linus Hamann</li>
+        <li>Ben Howard</li>
+        <li>Jake Huyn</li>
+        <li>Dongryul Kim</li>
+        <li>Mark Kisin</li>
+        <li>Alice Lin</li>
+        <li>Keerthi Madapusi</li>
+        <li>Sandra Nair</li>
+        <li>George Pappas</li>
+        <li>Steffan Reppen</li>
+        <li>James Yang</li>
+        <li>Mingjia Zhang</li>
+        <li>Xinyu Zhou</li>
+      </ul>
 
       <h2 class="section-title">Travel funding</h2>
       <p>
