@@ -59,8 +59,8 @@
         url('https://alex-youcis.github.io/blackboard.png'),
         url('https://alex-youcis.github.io/blackboard.png');
       background-repeat:no-repeat,no-repeat,no-repeat;
-      background-position:16% center, 50% center, 84% center;
-      background-size:auto 90%, auto 90%, auto 90%;
+      background-position:10% center, 50% center, 90% center;
+      background-size:auto 75%, auto 75%, auto 75%;
     }
     .hero h1{
       margin:.1em 0 .1em; font-size:clamp(1.4rem,3vw,2rem);
@@ -104,7 +104,7 @@
       font-size:0.98rem;
     }
     table.schedule caption{
-      text-align:left;
+      text-align:center;
       padding:.85em 1em .55em;
       font-weight:800;
       background:rgba(0,0,0,.03);
@@ -132,25 +132,21 @@
       font-weight:800;
       background:rgba(191,6,3,.07);
       border-bottom:1px solid var(--border);
+      text-align:center;
     }
 
-    /* Speakers multi-column list */
-    ul.speaker-list{
-      margin:.3em 0 0;
-      padding-left:1.2em;
-      columns:3;
-      column-gap:2.2em;
+    /* Abstract toggle button in tables */
+    details.abs { background: transparent; padding: 0; box-shadow: none; border-radius: 0; }
+    .abs__btn {
+      display: inline-flex; align-items: center; gap: .4em;
+      padding: .25em .55em; border: 1px solid #cfcfd4; border-radius: 8px;
+      font-weight: 700; background: #fff; cursor: pointer;
     }
-    ul.speaker-list li{
-      break-inside:avoid;
-      padding:.15em 0;
-    }
-    @media (max-width:900px){
-      ul.speaker-list{ columns:2; }
-    }
-    @media (max-width:600px){
-      ul.speaker-list{ columns:1; }
-    }
+    .abs__chev { width: 0.9em; height: 0.9em; transition: transform 160ms ease; }
+    details.abs[open] .abs__chev { transform: rotate(180deg); }
+    .abs__body { margin-top: .5em; }
+    summary::-webkit-details-marker{display:none;}
+    summary::marker{content:"";}
   </style>
 </head>
 <body class="normalize-hero">
@@ -178,8 +174,17 @@
     </section>
 
     <article class="bubble">
+      <h2 class="section-title">General information</h2>
       <p style="margin-top:0">
         Full meeting information: <a href="https://www.ams.org/meetings/sectional/2330_program.html" target="_blank" rel="noopener">AMS sectional meeting page</a>.
+      </p>
+      <p><strong>Location &amp; time:</strong> Boston College (Chestnut Hill, MA). The session runs Sat–Sun, Mar 28–29, 2026, with talks in the following blocks: Saturday 8:00–11:00 and 15:00–18:00; Sunday 8:00–11:00 and 14:00–17:00.</p>
+      <p><strong>Brief description:</strong> A special session on Shimura varieties and related aspects of arithmetic geometry, automorphic forms, and \(p\)-adic/cohomological methods.</p>
+      <p>
+        <strong>Travel funding:</strong> Graduate-student travel support information:
+        <a href="https://www.ams.org/grants-awards/travel-grants/grad-students/emp-student-JMM" target="_blank" rel="noopener">
+          AMS travel grants
+        </a>.
       </p>
 
       <h2 class="section-title">Organizers</h2>
@@ -199,21 +204,158 @@
               <tr>
                 <th style="width:165px;">Time</th>
                 <th>Speaker</th>
+                <th>Title</th>
+                <th>Abstract</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="session-row"><td colspan="2">Morning session (08:00–11:00)</td></tr>
-              <tr><td class="time">08:00–08:30</td><td>Zachary Gardner</td></tr>
-              <tr><td class="time">08:30–09:00</td><td>Jacksyn Bakeberg</td></tr>
-              <tr><td class="time">09:00–09:30</td><td>Alice Lin</td></tr>
-              <tr><td class="time">09:30–10:00</td><td>Steffan Reppen</td></tr>
-              <tr><td class="time">10:00–11:00</td><td>Linus Hamann</td></tr>
+              <tr class="session-row"><td colspan="4">Morning session (08:00–11:00)</td></tr>
+              <tr>
+                <td class="time">08:00–08:30</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Zachary Gardner</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="time">08:30–09:00</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Jacksyn Bakeberg</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="time">09:00–09:30</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Alice Lin</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="time">09:30–10:00</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Steffan Reppen</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="time">10:00–11:00</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Linus Hamann</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
 
-              <tr class="session-row"><td colspan="2">Afternoon session (15:00–18:00)</td></tr>
-              <tr><td class="time">15:00–16:00</td><td>Keerthi Madapusi</td></tr>
-              <tr><td class="time">16:00–16:30</td><td>Sandra Nair</td></tr>
-              <tr><td class="time">16:30–17:30</td><td>Mathilde Gerbelli-Gauthier</td></tr>
-              <tr><td class="time">17:30–18:00</td><td>Hymn Chan</td></tr>
+              <tr class="session-row"><td colspan="4">Afternoon session (15:00–18:00)</td></tr>
+              <tr>
+                <td class="time">15:00–16:00</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Keerthi Madapusi</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="time">16:00–16:30</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Sandra Nair</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="time">16:30–17:30</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Mathilde Gerbelli-Gauthier</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="time">17:30–18:00</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Hymn Chan</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -225,53 +367,146 @@
               <tr>
                 <th style="width:165px;">Time</th>
                 <th>Speaker</th>
+                <th>Title</th>
+                <th>Abstract</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="session-row"><td colspan="2">Morning session (08:00–11:00)</td></tr>
-              <tr><td class="time">08:00–08:30</td><td>James Yang</td></tr>
-              <tr><td class="time">08:30–09:00</td><td>Xinyu Zhou</td></tr>
-              <tr><td class="time">09:00–10:00</td><td>Ben Howard</td></tr>
-              <tr><td class="time">10:00–11:00</td><td>Mingjia Zhang</td></tr>
+              <tr class="session-row"><td colspan="4">Morning session (08:00–11:00)</td></tr>
+              <tr>
+                <td class="time">08:00–08:30</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">James Yang</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="time">08:30–09:00</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Xinyu Zhou</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="time">09:00–10:00</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Ben Howard</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="time">10:00–11:00</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Mingjia Zhang</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
 
-              <tr class="session-row"><td colspan="2">Afternoon session (14:00–17:00)</td></tr>
-              <tr><td class="time">14:00–15:00</td><td>Mark Kisin</td></tr>
-              <tr><td class="time">15:00–15:30</td><td>Jake Huyn</td></tr>
-              <tr><td class="time">15:30–16:00</td><td>Dongryul Kim</td></tr>
-              <tr><td class="time">16:00–17:00</td><td>George Pappas</td></tr>
+              <tr class="session-row"><td colspan="4">Afternoon session (14:00–17:00)</td></tr>
+              <tr>
+                <td class="time">14:00–15:00</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Mark Kisin</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="time">15:00–15:30</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Jake Huyn</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="time">15:30–16:00</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Dongryul Kim</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="time">16:00–17:00</td>
+                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">George Pappas</a></td>
+                <td><em>Title TBD</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBD</div>
+                  </details>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
-
-      <h2 class="section-title">Speakers</h2>
-      <ul class="speaker-list" aria-label="Alphabetized list of speakers">
-        <li>Jacksyn Bakeberg</li>
-        <li>Hymn Chan</li>
-        <li>Zachary Gardner</li>
-        <li>Mathilde Gerbelli-Gauthier</li>
-        <li>Linus Hamann</li>
-        <li>Ben Howard</li>
-        <li>Jake Huyn</li>
-        <li>Dongryul Kim</li>
-        <li>Mark Kisin</li>
-        <li>Alice Lin</li>
-        <li>Keerthi Madapusi</li>
-        <li>Sandra Nair</li>
-        <li>George Pappas</li>
-        <li>Steffan Reppen</li>
-        <li>James Yang</li>
-        <li>Mingjia Zhang</li>
-        <li>Xinyu Zhou</li>
-      </ul>
-
-      <h2 class="section-title">Travel funding</h2>
-      <p>
-        Graduate-student travel support information:
-        <a href="https://www.ams.org/grants-awards/travel-grants/grad-students/emp-student-JMM" target="_blank" rel="noopener">
-          AMS travel grants
-        </a>.
-      </p>
 
       <p style="margin:.8em 0 0">
         <a class="btn" href="conferences.html"><i class="fa fa-arrow-left"></i> Back to Conferences</a>
