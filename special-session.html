@@ -95,10 +95,13 @@
     .schedule-card{
       background:#fff; border:1px solid var(--border); border-radius:12px;
       box-shadow:0 1px 4px rgba(0,0,0,.06);
-      overflow:hidden; margin: .75em 0 1.1em;
+      overflow-x:auto; -webkit-overflow-scrolling: touch;
+      margin: .75em 0 1.1em;
     }
     table.schedule{
       width:100%;
+      min-width: 980px;
+      table-layout: fixed;
       border-collapse:separate;
       border-spacing:0;
       font-size:0.98rem;
@@ -148,6 +151,21 @@
     summary::-webkit-details-marker{display:none;}
     summary::marker{content:"";}
   </style>
+
+  <!-- MathJax (LaTeX rendering) -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(','\\)'], ['$', '$']],
+        displayMath: [['\\[','\\]'], ['$$','$$']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
+      }
+    };
+  </script>
+  <script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body class="normalize-hero">
   <header>
@@ -199,6 +217,12 @@
       <div class="schedule-wrap">
         <div class="schedule-card">
           <table class="schedule" aria-label="Schedule of talks for Saturday">
+            <colgroup>
+              <col style="width:140px;">
+              <col style="width:230px;">
+              <col style="width:200px;">
+              <col>
+            </colgroup>
             <caption>Saturday, March 28, 2026</caption>
             <thead>
               <tr>
@@ -212,7 +236,7 @@
               <tr class="session-row"><td colspan="4">Morning session (08:00–11:00)</td></tr>
               <tr>
                 <td class="time">08:00–08:30</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Zachary Gardner</a></td>
+                <td><a href="https://zacharygardner.net/" target="_blank" rel="noopener">Zachary Gardner</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -228,7 +252,7 @@
               </tr>
               <tr>
                 <td class="time">08:30–09:00</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Jacksyn Bakeberg</a></td>
+                <td><a href="https://math.bu.edu/people/bakeberg/" target="_blank" rel="noopener">Jacksyn Bakeberg</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -244,7 +268,7 @@
               </tr>
               <tr>
                 <td class="time">09:00–09:30</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Alice Lin</a></td>
+                <td><a href="https://sites.google.com/view/alicelinmath/about" target="_blank" rel="noopener">Alice Lin</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -260,7 +284,7 @@
               </tr>
               <tr>
                 <td class="time">09:30–10:00</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Steffan Reppen</a></td>
+                <td><a href="https://sites.google.com/view/stefanreppen/home" target="_blank" rel="noopener">Steffan Reppen</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -276,7 +300,7 @@
               </tr>
               <tr>
                 <td class="time">10:00–11:00</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Linus Hamann</a></td>
+                <td><a href="https://people.math.harvard.edu/~hamann/" target="_blank" rel="noopener">Linus Hamann</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -294,7 +318,7 @@
               <tr class="session-row"><td colspan="4">Afternoon session (15:00–18:00)</td></tr>
               <tr>
                 <td class="time">15:00–16:00</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Keerthi Madapusi</a></td>
+                <td><a href="https://www.keerthimadapusi.com/" target="_blank" rel="noopener">Keerthi Madapusi</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -310,7 +334,7 @@
               </tr>
               <tr>
                 <td class="time">16:00–16:30</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Sandra Nair</a></td>
+                <td><a href="https://sites.google.com/view/sandra-nair" target="_blank" rel="noopener">Sandra Nair</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -326,7 +350,7 @@
               </tr>
               <tr>
                 <td class="time">16:30–17:30</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Mathilde Gerbelli-Gauthier</a></td>
+                <td><a href="https://mgerbelli.github.io/website/" target="_blank" rel="noopener">Mathilde Gerbelli-Gauthier</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -342,7 +366,7 @@
               </tr>
               <tr>
                 <td class="time">17:30–18:00</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Hymn Chan</a></td>
+                <td><a href="https://hymnchan98.github.io/index.html" target="_blank" rel="noopener">Hymn Chan</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -362,6 +386,12 @@
 
         <div class="schedule-card">
           <table class="schedule" aria-label="Schedule of talks for Sunday">
+            <colgroup>
+              <col style="width:140px;">
+              <col style="width:230px;">
+              <col style="width:200px;">
+              <col>
+            </colgroup>
             <caption>Sunday, March 29, 2026</caption>
             <thead>
               <tr>
@@ -375,7 +405,7 @@
               <tr class="session-row"><td colspan="4">Morning session (08:00–11:00)</td></tr>
               <tr>
                 <td class="time">08:00–08:30</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">James Yang</a></td>
+                <td><a href="http://math.bu.edu/people/yangzhe/" target="_blank" rel="noopener">James Yang</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -391,7 +421,7 @@
               </tr>
               <tr>
                 <td class="time">08:30–09:00</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Xinyu Zhou</a></td>
+                <td><a href="https://math.bu.edu/people/xyz6/" target="_blank" rel="noopener">Xinyu Zhou</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -407,7 +437,7 @@
               </tr>
               <tr>
                 <td class="time">09:00–10:00</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Ben Howard</a></td>
+                <td><a href="https://sites.google.com/bc.edu/benjamin-howard/home" target="_blank" rel="noopener">Ben Howard</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -423,7 +453,7 @@
               </tr>
               <tr>
                 <td class="time">10:00–11:00</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Mingjia Zhang</a></td>
+                <td><a href="https://www.math.princeton.edu/people/mingjia-zhang" target="_blank" rel="noopener">Mingjia Zhang</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -441,7 +471,7 @@
               <tr class="session-row"><td colspan="4">Afternoon session (14:00–17:00)</td></tr>
               <tr>
                 <td class="time">14:00–15:00</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Mark Kisin</a></td>
+                <td><a href="https://people.math.harvard.edu/~kisin/" target="_blank" rel="noopener">Mark Kisin</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -457,7 +487,7 @@
               </tr>
               <tr>
                 <td class="time">15:00–15:30</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Jake Huyn</a></td>
+                <td><a href="https://jakehuryn.github.io/" target="_blank" rel="noopener">Jake Huryn</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -473,7 +503,7 @@
               </tr>
               <tr>
                 <td class="time">15:30–16:00</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">Dongryul Kim</a></td>
+                <td><a href="https://web.stanford.edu/~dkim04/" target="_blank" rel="noopener">Dongryul Kim</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
@@ -489,7 +519,7 @@
               </tr>
               <tr>
                 <td class="time">16:00–17:00</td>
-                <td><a href="REPLACE_WITH_WEBSITE" target="_blank" rel="noopener">George Pappas</a></td>
+                <td><a href="https://sites.google.com/site/georgepappashomepage/home" target="_blank" rel="noopener">George Pappas</a></td>
                 <td><em>Title TBD</em></td>
                 <td>
                   <details class="abs">
