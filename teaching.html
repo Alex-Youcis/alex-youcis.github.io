@@ -19,7 +19,7 @@
       --button-color:#BF0603;
       --card:#fff;
       --border:#e1e1e6;
-      --filter-label-size:1rem; /* keep same scale as other tabs */
+      --filter-label-size:1rem;
     }
 
     *,:before,:after{box-sizing:border-box}
@@ -33,7 +33,6 @@
     .nav-links a::after{content:'';position:absolute;width:0;height:2px;background:var(--secondary-color);left:50%;bottom:-5px;transition:all .3s}
     .nav-links a:hover{color:var(--secondary-color)}
     .nav-links a:hover::after{left:0;width:100%}
-    /* Keep current page link WHITE when idle */
     .nav-links a[aria-current="page"]{color:#fff}
     .nav-mobile{display:none}
     @media (max-width:768px){
@@ -48,7 +47,7 @@
 
     main{padding:2em 1.25em 3em;max-width:1200px;margin:0 auto}
 
-    /* HERO (clean card with 2px border, subtle triptych background) */
+    /* HERO */
     .hero{
       position:relative;overflow:hidden;background:var(--card);border-radius:14px;
       padding:1.25em 1.5em;
@@ -57,19 +56,19 @@
       border:2px solid #000;
     }
     .hero::before{
-      content:""; position:absolute; inset:0; pointer-events:none; opacity:.16;
-      /* Minimal “teaching” motif — thinner strokes + no overlap + spaced triptych */
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.15;
+      /* Smaller, thinner, non-overlapping triptych */
       background-image:
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 120' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><rect x='76' y='20' width='92' height='54' rx='6'/><line x1='76' y1='78' x2='168' y2='78'/><circle cx='34' cy='40' r='9'/><line x1='34' y1='49' x2='34' y2='74'/><line x1='34' y1='56' x2='18' y2='64'/><line x1='34' y1='56' x2='50' y2='64'/><line x1='34' y1='74' x2='24' y2='92'/><line x1='34' y1='74' x2='44' y2='92'/><line x1='50' y1='64' x2='72' y2='52'/><line x1='88' y1='36' x2='112' y2='36'/><line x1='88' y1='50' x2='138' y2='50'/><line x1='88' y1='64' x2='126' y2='64'/></svg>"),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 120' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><rect x='76' y='20' width='92' height='54' rx='6'/><line x1='76' y1='78' x2='168' y2='78'/><circle cx='34' cy='40' r='9'/><line x1='34' y1='49' x2='34' y2='74'/><line x1='34' y1='56' x2='18' y2='64'/><line x1='34' y1='56' x2='50' y2='64'/><line x1='34' y1='74' x2='24' y2='92'/><line x1='34' y1='74' x2='44' y2='92'/><line x1='50' y1='64' x2='72' y2='52'/><line x1='88' y1='36' x2='112' y2='36'/><line x1='88' y1='50' x2='138' y2='50'/><line x1='88' y1='64' x2='126' y2='64'/></svg>"),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 120' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><rect x='76' y='20' width='92' height='54' rx='6'/><line x1='76' y1='78' x2='168' y2='78'/><circle cx='34' cy='40' r='9'/><line x1='34' y1='49' x2='34' y2='74'/><line x1='34' y1='56' x2='18' y2='64'/><line x1='34' y1='56' x2='50' y2='64'/><line x1='34' y1='74' x2='24' y2='92'/><line x1='34' y1='74' x2='44' y2='92'/><line x1='50' y1='64' x2='72' y2='52'/><line x1='88' y1='36' x2='112' y2='36'/><line x1='88' y1='50' x2='138' y2='50'/><line x1='88' y1='64' x2='126' y2='64'/></svg>");
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 120' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><rect x='86' y='28' width='72' height='42' rx='5'/><line x1='86' y1='74' x2='158' y2='74'/><circle cx='40' cy='44' r='7'/><line x1='40' y1='51' x2='40' y2='70'/><line x1='40' y1='57' x2='28' y2='63'/><line x1='40' y1='57' x2='52' y2='63'/><line x1='40' y1='70' x2='32' y2='86'/><line x1='40' y1='70' x2='48' y2='86'/><line x1='52' y1='63' x2='78' y2='54'/><line x1='96' y1='40' x2='114' y2='40'/><line x1='96' y1='52' x2='142' y2='52'/><line x1='96' y1='64' x2='130' y2='64'/></svg>"),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 120' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><rect x='86' y='28' width='72' height='42' rx='5'/><line x1='86' y1='74' x2='158' y2='74'/><circle cx='40' cy='44' r='7'/><line x1='40' y1='51' x2='40' y2='70'/><line x1='40' y1='57' x2='28' y2='63'/><line x1='40' y1='57' x2='52' y2='63'/><line x1='40' y1='70' x2='32' y2='86'/><line x1='40' y1='70' x2='48' y2='86'/><line x1='52' y1='63' x2='78' y2='54'/><line x1='96' y1='40' x2='114' y2='40'/><line x1='96' y1='52' x2='142' y2='52'/><line x1='96' y1='64' x2='130' y2='64'/></svg>"),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 120' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><rect x='86' y='28' width='72' height='42' rx='5'/><line x1='86' y1='74' x2='158' y2='74'/><circle cx='40' cy='44' r='7'/><line x1='40' y1='51' x2='40' y2='70'/><line x1='40' y1='57' x2='28' y2='63'/><line x1='40' y1='57' x2='52' y2='63'/><line x1='40' y1='70' x2='32' y2='86'/><line x1='40' y1='70' x2='48' y2='86'/><line x1='52' y1='63' x2='78' y2='54'/><line x1='96' y1='40' x2='114' y2='40'/><line x1='96' y1='52' x2='142' y2='52'/><line x1='96' y1='64' x2='130' y2='64'/></svg>");
       background-repeat:no-repeat,no-repeat,no-repeat;
-      background-position:16% center, 50% center, 84% center;
-      background-size:auto 108%, auto 108%, auto 108%;
+      background-position:14% center, 50% center, 86% center;
+      background-size:auto 86%, auto 86%, auto 86%;
     }
     @media (max-width:600px){
       .hero{ padding:1em 1em 1.1em; }
-      .hero::before{ background-size:auto 80%, auto 80%, auto 80%; }
+      .hero::before{ background-size:auto 68%, auto 68%, auto 68%; }
     }
     .hero h1{
       margin:.1em 0 .1em;
@@ -78,13 +77,11 @@
       position:relative; z-index:1;
     }
 
-    /* Wrapper (same vibe as other tabs) */
     .teaching-wrap{
       background:#fff;border:1px solid var(--border);border-radius:12px;
       box-shadow:0 1px 4px rgba(0,0,0,.06); padding:16px;
     }
 
-    /* Course cards */
     .courses{display:grid;grid-template-columns:1fr;gap:14px}
     .course-card{
       background:#fff;border:1px solid var(--border);border-radius:12px;
@@ -97,10 +94,10 @@
     .course-title{font-weight:700;font-size:1.1rem;line-height:1.25}
     .course-meta{font-weight:600;color:#444}
 
-    /* ===== “Layered pill” button (matches publications filter button) ===== */
+    /* Layered pill buttons (narrower) */
     .course-pill{
       --label-size: var(--filter-label-size);
-      --btn-h: calc(var(--label-size) * 2.65);
+      --btn-h: calc(var(--label-size) * 2.5);
       --band: calc(var(--btn-h) * 0.075);
       --radius: calc(var(--btn-h) * 0.5);
       border:0;background:transparent;padding:0;cursor:pointer;line-height:0;display:inline-block;
@@ -112,7 +109,8 @@
       display:inline-flex;align-items:center;justify-content:center;
       gap: calc(var(--btn-h) * 0.18);
       background:#fff;border-radius:calc(var(--radius) - (2 * var(--band)));
-      height:var(--btn-h); padding:0 calc(var(--btn-h) * 0.95);
+      height:var(--btn-h);
+      padding:0 calc(var(--btn-h) * 0.72); /* narrower than before */
     }
     .term-btn__label{
       font:700 var(--label-size)/1.05 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
@@ -128,10 +126,8 @@
     .course-pill[aria-expanded="true"] .term-btn__chevron{transform:rotate(180deg)}
     .course-pill:hover .term-btn__inner{background:#f7f7f7}
 
-    /* Course website link: use the pill, but as an <a> */
     a.course-link{display:inline-block;text-decoration:none}
 
-    /* Dropdown materials panel (only used when no course website) */
     .materials{
       margin-top:10px;
       border-top:1px solid var(--border);
@@ -141,18 +137,11 @@
       list-style:none;padding:0;margin:10px 0 0;
       display:flex;flex-wrap:wrap;gap:10px;
     }
-    .materials-list a{
-      text-decoration:none;
-      display:inline-block;
-    }
 
     footer{background:var(--primary-color);color:#fff;padding:1em;text-align:center}
 
     /* normalize-hero */
-    :root{
-      --content-max: 1100px;
-      --hero-height: 260px;
-    }
+    :root{ --content-max: 1100px; --hero-height: 260px; }
     body.normalize-hero main{max-width:var(--content-max);margin-inline:auto}
     body.normalize-hero .hero{width:100%;min-height:var(--hero-height);height:var(--hero-height)}
     @media (max-width: 600px){
@@ -200,9 +189,7 @@
     <div class="teaching-wrap">
       <div class="courses">
 
-        <!-- ========================================================= -->
-        <!-- COURSE TYPE A: HAS A COURSE WEBSITE => JUST A LINK (binary) -->
-        <!-- ========================================================= -->
+        <!-- TYPE A: HAS COURSE WEBSITE (binary => only link) -->
         <section class="course-card">
           <div class="course-head">
             <span class="course-title">MAT138 — Introduction to Proofs</span>
@@ -220,18 +207,14 @@
           </a>
         </section>
 
-        <!-- ================================================================== -->
-        <!-- COURSE TYPE B: NO WEBSITE => DROPDOWN (binary) -->
-        <!-- Duplicate this block per course without a website and fill links. -->
-        <!-- ================================================================== -->
-        <!--
+        <!-- TYPE B: NO WEBSITE (binary => dropdown materials) -->
         <section class="course-card">
           <div class="course-head">
-            <span class="course-title">COURSE CODE — Course Title</span>
-            <span class="course-meta">Institution · Term/Year</span>
+            <span class="course-title">MATH XXX — Topics in Arithmetic Geometry</span>
+            <span class="course-meta">University of Somewhere · Fall 2024</span>
           </div>
 
-          <button class="course-pill" type="button" aria-expanded="false" aria-controls="materials-EXAMPLE" onclick="toggleMaterials('materials-EXAMPLE', this)">
+          <button class="course-pill" type="button" aria-expanded="false" aria-controls="materials-mathxxx" onclick="toggleMaterials('materials-mathxxx', this)">
             <span class="term-btn__outer">
               <span class="term-btn__middle">
                 <span class="term-btn__inner">
@@ -244,7 +227,7 @@
             </span>
           </button>
 
-          <div class="materials" id="materials-EXAMPLE" hidden>
+          <div class="materials" id="materials-mathxxx" hidden>
             <ul class="materials-list">
               <li>
                 <a class="course-link course-pill" href="PATH/notes.pdf">
@@ -257,8 +240,8 @@
                 </a>
               </li>
               <li>
-                <a class="course-link course-pill" href="PATH/assignments.pdf">
-                  <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Assignments</span></span></span></span>
+                <a class="course-link course-pill" href="PATH/problem-sets.pdf">
+                  <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Problem sets</span></span></span></span>
                 </a>
               </li>
               <li>
@@ -269,7 +252,6 @@
             </ul>
           </div>
         </section>
-        -->
 
       </div>
     </div>
