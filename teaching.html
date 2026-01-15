@@ -57,18 +57,18 @@
     }
     .hero::before{
       content:""; position:absolute; inset:0; pointer-events:none; opacity:.15;
-      /* Smaller, thinner, non-overlapping triptych */
+      /* Same size icons; spaced to near edges / centered */
       background-image:
         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 120' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><rect x='86' y='28' width='72' height='42' rx='5'/><line x1='86' y1='74' x2='158' y2='74'/><circle cx='40' cy='44' r='7'/><line x1='40' y1='51' x2='40' y2='70'/><line x1='40' y1='57' x2='28' y2='63'/><line x1='40' y1='57' x2='52' y2='63'/><line x1='40' y1='70' x2='32' y2='86'/><line x1='40' y1='70' x2='48' y2='86'/><line x1='52' y1='63' x2='78' y2='54'/><line x1='96' y1='40' x2='114' y2='40'/><line x1='96' y1='52' x2='142' y2='52'/><line x1='96' y1='64' x2='130' y2='64'/></svg>"),
         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 120' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><rect x='86' y='28' width='72' height='42' rx='5'/><line x1='86' y1='74' x2='158' y2='74'/><circle cx='40' cy='44' r='7'/><line x1='40' y1='51' x2='40' y2='70'/><line x1='40' y1='57' x2='28' y2='63'/><line x1='40' y1='57' x2='52' y2='63'/><line x1='40' y1='70' x2='32' y2='86'/><line x1='40' y1='70' x2='48' y2='86'/><line x1='52' y1='63' x2='78' y2='54'/><line x1='96' y1='40' x2='114' y2='40'/><line x1='96' y1='52' x2='142' y2='52'/><line x1='96' y1='64' x2='130' y2='64'/></svg>"),
         url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 120' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><rect x='86' y='28' width='72' height='42' rx='5'/><line x1='86' y1='74' x2='158' y2='74'/><circle cx='40' cy='44' r='7'/><line x1='40' y1='51' x2='40' y2='70'/><line x1='40' y1='57' x2='28' y2='63'/><line x1='40' y1='57' x2='52' y2='63'/><line x1='40' y1='70' x2='32' y2='86'/><line x1='40' y1='70' x2='48' y2='86'/><line x1='52' y1='63' x2='78' y2='54'/><line x1='96' y1='40' x2='114' y2='40'/><line x1='96' y1='52' x2='142' y2='52'/><line x1='96' y1='64' x2='130' y2='64'/></svg>");
       background-repeat:no-repeat,no-repeat,no-repeat;
-      background-position:14% center, 50% center, 86% center;
+      background-position:3% center, 50% center, 97% center; /* pushed outward */
       background-size:auto 86%, auto 86%, auto 86%;
     }
     @media (max-width:600px){
       .hero{ padding:1em 1em 1.1em; }
-      .hero::before{ background-size:auto 68%, auto 68%, auto 68%; }
+      .hero::before{ background-position:6% center, 50% center, 94% center; background-size:auto 68%, auto 68%, auto 68%; }
     }
     .hero h1{
       margin:.1em 0 .1em;
@@ -82,6 +82,43 @@
       box-shadow:0 1px 4px rgba(0,0,0,.06); padding:16px;
     }
 
+    /* Section headers */
+    .section-title{
+      margin:.25em 0 .75em;
+      font-size:1.15rem;
+      font-weight:800;
+    }
+    .section{
+      padding:4px 2px 2px;
+    }
+    .section + .section{
+      margin-top:18px;
+      padding-top:16px;
+      border-top:1px solid var(--border);
+    }
+
+    /* Current teaching “none” card */
+    .empty-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:12px;
+      box-shadow:0 1px 4px rgba(0,0,0,.06);
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:700;
+      color:#444;
+      max-width:520px;
+    }
+    .empty-dot{
+      width:10px;height:10px;border-radius:999px;
+      background:var(--button-color);
+      box-shadow:0 0 0 3px rgba(191,6,3,.12);
+      flex:0 0 auto;
+    }
+
+    /* Past teaching cards */
     .courses{display:grid;grid-template-columns:1fr;gap:14px}
     .course-card{
       background:#fff;border:1px solid var(--border);border-radius:12px;
@@ -94,13 +131,14 @@
     .course-title{font-weight:700;font-size:1.1rem;line-height:1.25}
     .course-meta{font-weight:600;color:#444}
 
-    /* Layered pill buttons (narrower) */
+    /* Layered pill buttons (compact, not full width) */
     .course-pill{
       --label-size: var(--filter-label-size);
-      --btn-h: calc(var(--label-size) * 2.5);
+      --btn-h: calc(var(--label-size) * 2.35);
       --band: calc(var(--btn-h) * 0.075);
       --radius: calc(var(--btn-h) * 0.5);
       border:0;background:transparent;padding:0;cursor:pointer;line-height:0;display:inline-block;
+      max-width:max-content; /* prevents stretching */
     }
     .course-pill:focus-visible .term-btn__inner{outline:2px solid #333;outline-offset:3px}
     .term-btn__outer{display:inline-block;background:#000;padding:var(--band);border-radius:var(--radius)}
@@ -110,7 +148,7 @@
       gap: calc(var(--btn-h) * 0.18);
       background:#fff;border-radius:calc(var(--radius) - (2 * var(--band)));
       height:var(--btn-h);
-      padding:0 calc(var(--btn-h) * 0.72); /* narrower than before */
+      padding:0 calc(var(--btn-h) * 0.62); /* more compact */
     }
     .term-btn__label{
       font:700 var(--label-size)/1.05 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
@@ -187,73 +225,93 @@
     </section>
 
     <div class="teaching-wrap">
-      <div class="courses">
 
-        <!-- TYPE A: HAS COURSE WEBSITE (binary => only link) -->
-        <section class="course-card">
-          <div class="course-head">
-            <span class="course-title">MAT138 — Introduction to Proofs</span>
-            <span class="course-meta">University of Toronto · 2025–26</span>
-          </div>
+      <!-- ================= -->
+      <!-- CURRENT TEACHING -->
+      <!-- ================= -->
+      <section class="section">
+        <div class="section-title">Current teaching</div>
+        <div class="empty-card" role="note" aria-label="No current teaching">
+          <span class="empty-dot" aria-hidden="true"></span>
+          <span>Not teaching this term.</span>
+        </div>
+      </section>
 
-          <a class="course-link course-pill" href="MAT138.html" aria-label="Open course website">
-            <span class="term-btn__outer">
-              <span class="term-btn__middle">
-                <span class="term-btn__inner">
-                  <span class="term-btn__label">Course website</span>
+      <!-- ============== -->
+      <!-- PAST TEACHING -->
+      <!-- ============== -->
+      <section class="section">
+        <div class="section-title">Past teaching</div>
+
+        <div class="courses">
+
+          <!-- TYPE A: HAS COURSE WEBSITE (binary => only link) -->
+          <section class="course-card">
+            <div class="course-head">
+              <span class="course-title">MAT138 — Introduction to Proofs</span>
+              <span class="course-meta">University of Toronto · 2025–26</span>
+            </div>
+
+            <a class="course-link course-pill" href="MAT138.html" aria-label="Open course website">
+              <span class="term-btn__outer">
+                <span class="term-btn__middle">
+                  <span class="term-btn__inner">
+                    <span class="term-btn__label">Course website</span>
+                  </span>
                 </span>
               </span>
-            </span>
-          </a>
-        </section>
+            </a>
+          </section>
 
-        <!-- TYPE B: NO WEBSITE (binary => dropdown materials) -->
-        <section class="course-card">
-          <div class="course-head">
-            <span class="course-title">MATH XXX — Topics in Arithmetic Geometry</span>
-            <span class="course-meta">University of Somewhere · Fall 2024</span>
-          </div>
+          <!-- TYPE B: NO WEBSITE (binary => dropdown materials) -->
+          <section class="course-card">
+            <div class="course-head">
+              <span class="course-title">MATH XXX — Topics in Arithmetic Geometry</span>
+              <span class="course-meta">University of Somewhere · Fall 2024</span>
+            </div>
 
-          <button class="course-pill" type="button" aria-expanded="false" aria-controls="materials-mathxxx" onclick="toggleMaterials('materials-mathxxx', this)">
-            <span class="term-btn__outer">
-              <span class="term-btn__middle">
-                <span class="term-btn__inner">
-                  <span class="term-btn__label">Materials</span>
-                  <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                  </svg>
+            <button class="course-pill" type="button" aria-expanded="false" aria-controls="materials-mathxxx" onclick="toggleMaterials('materials-mathxxx', this)">
+              <span class="term-btn__outer">
+                <span class="term-btn__middle">
+                  <span class="term-btn__inner">
+                    <span class="term-btn__label">Materials</span>
+                    <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                  </span>
                 </span>
               </span>
-            </span>
-          </button>
+            </button>
 
-          <div class="materials" id="materials-mathxxx" hidden>
-            <ul class="materials-list">
-              <li>
-                <a class="course-link course-pill" href="PATH/notes.pdf">
-                  <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Notes</span></span></span></span>
-                </a>
-              </li>
-              <li>
-                <a class="course-link course-pill" href="PATH/syllabus.pdf">
-                  <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Syllabus</span></span></span></span>
-                </a>
-              </li>
-              <li>
-                <a class="course-link course-pill" href="PATH/problem-sets.pdf">
-                  <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Problem sets</span></span></span></span>
-                </a>
-              </li>
-              <li>
-                <a class="course-link course-pill" href="PATH/exams.pdf">
-                  <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Exams</span></span></span></span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </section>
+            <div class="materials" id="materials-mathxxx" hidden>
+              <ul class="materials-list">
+                <li>
+                  <a class="course-link course-pill" href="PATH/notes.pdf">
+                    <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Notes</span></span></span></span>
+                  </a>
+                </li>
+                <li>
+                  <a class="course-link course-pill" href="PATH/syllabus.pdf">
+                    <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Syllabus</span></span></span></span>
+                  </a>
+                </li>
+                <li>
+                  <a class="course-link course-pill" href="PATH/problem-sets.pdf">
+                    <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Problem sets</span></span></span></span>
+                  </a>
+                </li>
+                <li>
+                  <a class="course-link course-pill" href="PATH/exams.pdf">
+                    <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Exams</span></span></span></span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </section>
 
-      </div>
+        </div>
+      </section>
+
     </div>
   </main>
 
