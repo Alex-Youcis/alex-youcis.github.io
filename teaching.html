@@ -19,6 +19,7 @@
       --button-color:#BF0603;
       --card:#fff;
       --border:#e1e1e6;
+      --filter-label-size:1rem; /* keep same scale as other tabs */
     }
 
     *,:before,:after{box-sizing:border-box}
@@ -57,14 +58,14 @@
     }
     .hero::before{
       content:""; position:absolute; inset:0; pointer-events:none; opacity:.16;
-      /* Minimal “teaching” motif as inline SVG (triptych) */
+      /* Minimal “teaching” motif — thinner strokes + no overlap + spaced triptych */
       background-image:
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 120' fill='none' stroke='%23000' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'><rect x='54' y='18' width='92' height='56' rx='6'/><line x1='54' y1='78' x2='146' y2='78'/><circle cx='28' cy='36' r='10'/><line x1='28' y1='46' x2='28' y2='72'/><line x1='28' y1='54' x2='12' y2='62'/><line x1='28' y1='54' x2='44' y2='62'/><line x1='28' y1='72' x2='16' y2='92'/><line x1='28' y1='72' x2='40' y2='92'/><line x1='44' y1='62' x2='60' y2='46'/><line x1='66' y1='34' x2='94' y2='34'/><line x1='66' y1='50' x2='114' y2='50'/><line x1='66' y1='66' x2='104' y2='66'/></svg>"),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 120' fill='none' stroke='%23000' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'><rect x='54' y='18' width='92' height='56' rx='6'/><line x1='54' y1='78' x2='146' y2='78'/><circle cx='28' cy='36' r='10'/><line x1='28' y1='46' x2='28' y2='72'/><line x1='28' y1='54' x2='12' y2='62'/><line x1='28' y1='54' x2='44' y2='62'/><line x1='28' y1='72' x2='16' y2='92'/><line x1='28' y1='72' x2='40' y2='92'/><line x1='44' y1='62' x2='60' y2='46'/><line x1='66' y1='34' x2='94' y2='34'/><line x1='66' y1='50' x2='114' y2='50'/><line x1='66' y1='66' x2='104' y2='66'/></svg>"),
-        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 120' fill='none' stroke='%23000' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'><rect x='54' y='18' width='92' height='56' rx='6'/><line x1='54' y1='78' x2='146' y2='78'/><circle cx='28' cy='36' r='10'/><line x1='28' y1='46' x2='28' y2='72'/><line x1='28' y1='54' x2='12' y2='62'/><line x1='28' y1='54' x2='44' y2='62'/><line x1='28' y1='72' x2='16' y2='92'/><line x1='28' y1='72' x2='40' y2='92'/><line x1='44' y1='62' x2='60' y2='46'/><line x1='66' y1='34' x2='94' y2='34'/><line x1='66' y1='50' x2='114' y2='50'/><line x1='66' y1='66' x2='104' y2='66'/></svg>");
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 120' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><rect x='76' y='20' width='92' height='54' rx='6'/><line x1='76' y1='78' x2='168' y2='78'/><circle cx='34' cy='40' r='9'/><line x1='34' y1='49' x2='34' y2='74'/><line x1='34' y1='56' x2='18' y2='64'/><line x1='34' y1='56' x2='50' y2='64'/><line x1='34' y1='74' x2='24' y2='92'/><line x1='34' y1='74' x2='44' y2='92'/><line x1='50' y1='64' x2='72' y2='52'/><line x1='88' y1='36' x2='112' y2='36'/><line x1='88' y1='50' x2='138' y2='50'/><line x1='88' y1='64' x2='126' y2='64'/></svg>"),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 120' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><rect x='76' y='20' width='92' height='54' rx='6'/><line x1='76' y1='78' x2='168' y2='78'/><circle cx='34' cy='40' r='9'/><line x1='34' y1='49' x2='34' y2='74'/><line x1='34' y1='56' x2='18' y2='64'/><line x1='34' y1='56' x2='50' y2='64'/><line x1='34' y1='74' x2='24' y2='92'/><line x1='34' y1='74' x2='44' y2='92'/><line x1='50' y1='64' x2='72' y2='52'/><line x1='88' y1='36' x2='112' y2='36'/><line x1='88' y1='50' x2='138' y2='50'/><line x1='88' y1='64' x2='126' y2='64'/></svg>"),
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 120' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><rect x='76' y='20' width='92' height='54' rx='6'/><line x1='76' y1='78' x2='168' y2='78'/><circle cx='34' cy='40' r='9'/><line x1='34' y1='49' x2='34' y2='74'/><line x1='34' y1='56' x2='18' y2='64'/><line x1='34' y1='56' x2='50' y2='64'/><line x1='34' y1='74' x2='24' y2='92'/><line x1='34' y1='74' x2='44' y2='92'/><line x1='50' y1='64' x2='72' y2='52'/><line x1='88' y1='36' x2='112' y2='36'/><line x1='88' y1='50' x2='138' y2='50'/><line x1='88' y1='64' x2='126' y2='64'/></svg>");
       background-repeat:no-repeat,no-repeat,no-repeat;
       background-position:16% center, 50% center, 84% center;
-      background-size:auto 110%, auto 110%, auto 110%;
+      background-size:auto 108%, auto 108%, auto 108%;
     }
     @media (max-width:600px){
       .hero{ padding:1em 1em 1.1em; }
@@ -74,107 +75,88 @@
       margin:.1em 0 .1em;
       font-size:clamp(1.6rem,3.2vw,2.1rem);
       justify-self:center; align-self:center; text-align:center;
+      position:relative; z-index:1;
     }
 
-    /* Teaching list – professional “course cards” with resource bubbles */
+    /* Wrapper (same vibe as other tabs) */
     .teaching-wrap{
       background:#fff;border:1px solid var(--border);border-radius:12px;
       box-shadow:0 1px 4px rgba(0,0,0,.06); padding:16px;
     }
 
-    .courses{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:14px;
-    }
-
+    /* Course cards */
+    .courses{display:grid;grid-template-columns:1fr;gap:14px}
     .course-card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:14px 14px 12px;
-      box-shadow:0 1px 4px rgba(0,0,0,.04);
+      background:#fff;border:1px solid var(--border);border-radius:12px;
+      box-shadow:0 1px 4px rgba(0,0,0,.06); padding:16px;
     }
-
     .course-head{
-      display:flex;
-      flex-wrap:wrap;
-      gap:.35em .75em;
-      align-items:baseline;
-      margin-bottom:.6em;
+      display:flex;flex-wrap:wrap;gap:.35em .75em;align-items:baseline;
+      margin:.1em 0 .75em;
     }
-    .course-title{font-weight:700}
+    .course-title{font-weight:700;font-size:1.1rem;line-height:1.25}
     .course-meta{font-weight:600;color:#444}
 
-    .resources{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
+    /* ===== “Layered pill” button (matches publications filter button) ===== */
+    .course-pill{
+      --label-size: var(--filter-label-size);
+      --btn-h: calc(var(--label-size) * 2.65);
+      --band: calc(var(--btn-h) * 0.075);
+      --radius: calc(var(--btn-h) * 0.5);
+      border:0;background:transparent;padding:0;cursor:pointer;line-height:0;display:inline-block;
     }
+    .course-pill:focus-visible .term-btn__inner{outline:2px solid #333;outline-offset:3px}
+    .term-btn__outer{display:inline-block;background:#000;padding:var(--band);border-radius:var(--radius)}
+    .term-btn__middle{display:inline-block;background:var(--button-color);padding:var(--band);border-radius:calc(var(--radius) - var(--band))}
+    .term-btn__inner{
+      display:inline-flex;align-items:center;justify-content:center;
+      gap: calc(var(--btn-h) * 0.18);
+      background:#fff;border-radius:calc(var(--radius) - (2 * var(--band)));
+      height:var(--btn-h); padding:0 calc(var(--btn-h) * 0.95);
+    }
+    .term-btn__label{
+      font:700 var(--label-size)/1.05 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:#000; white-space:nowrap;
+    }
+    .term-btn__chevron{
+      width:calc(var(--btn-h) * 0.28);
+      height:calc(var(--btn-h) * 0.28);
+      flex:0 0 auto;
+      transition:transform 160ms ease;
+      color:#000;
+    }
+    .course-pill[aria-expanded="true"] .term-btn__chevron{transform:rotate(180deg)}
+    .course-pill:hover .term-btn__inner{background:#f7f7f7}
 
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:.45em;
-      padding:.45em .7em;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:#fafafa;
-      font-weight:700;
-      font-size:.92rem;
-      line-height:1;
-    }
-    .pill .label{
-      font-weight:700;
-      color:var(--primary-color);
-    }
-    .pill a{
-      color:var(--button-color);
-      text-decoration:none;
-      font-weight:700;
-    }
-    .pill a:hover{color:#9B0502; text-decoration:underline}
-    .pill.muted{
-      background:#f3f3f6;
-      color:#666;
-      font-weight:700;
-    }
-    .pill.muted .label{color:#666}
+    /* Course website link: use the pill, but as an <a> */
+    a.course-link{display:inline-block;text-decoration:none}
 
-    /* Optional: compact separator line for “extra” notes in a card */
-    .course-note{
-      margin-top:.7em;
-      padding-top:.65em;
+    /* Dropdown materials panel (only used when no course website) */
+    .materials{
+      margin-top:10px;
       border-top:1px solid var(--border);
-      color:#444;
-      font-weight:600;
-      font-size:.95rem;
+      padding-top:10px;
+    }
+    .materials-list{
+      list-style:none;padding:0;margin:10px 0 0;
+      display:flex;flex-wrap:wrap;gap:10px;
+    }
+    .materials-list a{
+      text-decoration:none;
+      display:inline-block;
     }
 
     footer{background:var(--primary-color);color:#fff;padding:1em;text-align:center}
 
-    /* add class="normalize-hero" to your <body> on pages you want normalized */
+    /* normalize-hero */
     :root{
       --content-max: 1100px;
       --hero-height: 260px;
     }
-
-    body.normalize-hero main{
-      max-width: var(--content-max);
-      margin-inline: auto;
-    }
-
-    body.normalize-hero .hero{
-      width: 100%;
-      min-height: var(--hero-height);
-      height: var(--hero-height);
-    }
-
+    body.normalize-hero main{max-width:var(--content-max);margin-inline:auto}
+    body.normalize-hero .hero{width:100%;min-height:var(--hero-height);height:var(--hero-height)}
     @media (max-width: 600px){
-      body.normalize-hero .hero{
-        height: auto;
-        min-height: 180px;
-      }
+      body.normalize-hero .hero{height:auto;min-height:180px}
     }
   </style>
 
@@ -218,35 +200,74 @@
     <div class="teaching-wrap">
       <div class="courses">
 
-        <!-- EXAMPLE: with course website -->
+        <!-- ========================================================= -->
+        <!-- COURSE TYPE A: HAS A COURSE WEBSITE => JUST A LINK (binary) -->
+        <!-- ========================================================= -->
         <section class="course-card">
           <div class="course-head">
             <span class="course-title">MAT138 — Introduction to Proofs</span>
             <span class="course-meta">University of Toronto · 2025–26</span>
           </div>
-          <div class="resources">
-            <span class="pill"><span class="label">Website:</span> <a href="MAT138.html">Link</a></span>
-            <span class="pill muted"><span class="label">Notes:</span> —</span>
-            <span class="pill muted"><span class="label">Syllabus:</span> —</span>
-            <span class="pill muted"><span class="label">Assignments:</span> —</span>
-          </div>
+
+          <a class="course-link course-pill" href="MAT138.html" aria-label="Open course website">
+            <span class="term-btn__outer">
+              <span class="term-btn__middle">
+                <span class="term-btn__inner">
+                  <span class="term-btn__label">Course website</span>
+                </span>
+              </span>
+            </span>
+          </a>
         </section>
 
-        <!-- TEMPLATE: fill in and duplicate as needed -->
+        <!-- ================================================================== -->
+        <!-- COURSE TYPE B: NO WEBSITE => DROPDOWN (binary) -->
+        <!-- Duplicate this block per course without a website and fill links. -->
+        <!-- ================================================================== -->
         <!--
         <section class="course-card">
           <div class="course-head">
             <span class="course-title">COURSE CODE — Course Title</span>
             <span class="course-meta">Institution · Term/Year</span>
           </div>
-          <div class="resources">
-            <span class="pill"><span class="label">Website:</span> <a href="https://example.com">Link</a></span>
-            <span class="pill"><span class="label">Notes:</span> <a href="PATH/notes.pdf">PDF</a></span>
-            <span class="pill"><span class="label">Syllabus:</span> <a href="PATH/syllabus.pdf">PDF</a></span>
-            <span class="pill"><span class="label">Assignments:</span> <a href="PATH/psets.pdf">PDF</a></span>
-            <span class="pill muted"><span class="label">Exams:</span> —</span>
+
+          <button class="course-pill" type="button" aria-expanded="false" aria-controls="materials-EXAMPLE" onclick="toggleMaterials('materials-EXAMPLE', this)">
+            <span class="term-btn__outer">
+              <span class="term-btn__middle">
+                <span class="term-btn__inner">
+                  <span class="term-btn__label">Materials</span>
+                  <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </span>
+              </span>
+            </span>
+          </button>
+
+          <div class="materials" id="materials-EXAMPLE" hidden>
+            <ul class="materials-list">
+              <li>
+                <a class="course-link course-pill" href="PATH/notes.pdf">
+                  <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Notes</span></span></span></span>
+                </a>
+              </li>
+              <li>
+                <a class="course-link course-pill" href="PATH/syllabus.pdf">
+                  <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Syllabus</span></span></span></span>
+                </a>
+              </li>
+              <li>
+                <a class="course-link course-pill" href="PATH/assignments.pdf">
+                  <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Assignments</span></span></span></span>
+                </a>
+              </li>
+              <li>
+                <a class="course-link course-pill" href="PATH/exams.pdf">
+                  <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Exams</span></span></span></span>
+                </a>
+              </li>
+            </ul>
           </div>
-          <div class="course-note">Optional one-line note (e.g. “Co-taught with …”, “Topics course”, etc.).</div>
         </section>
         -->
 
@@ -265,6 +286,18 @@
       const btn = nav.querySelector('.nav-mobile .icon');
       const expanded = nav.classList.contains('responsive');
       if(btn) btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    }
+
+    function toggleMaterials(id, btn){
+      const panel = document.getElementById(id);
+      const isOpen = !panel.hasAttribute('hidden');
+      if(isOpen){
+        panel.setAttribute('hidden','');
+        if(btn) btn.setAttribute('aria-expanded','false');
+      }else{
+        panel.removeAttribute('hidden');
+        if(btn) btn.setAttribute('aria-expanded','true');
+      }
     }
   </script>
 </body>
