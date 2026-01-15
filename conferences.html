@@ -276,7 +276,6 @@
         <div class="filters-collapsible" id="filters-panel">
           <div class="filter-body">
             <div class="filter-tools">
-              <input type="search" id="tag-search" class="tag-search" placeholder="Search topics… (e.g. Shimura)">
               <button type="button" id="clear-tags" class="btn-lite">Clear</button>
             </div>
             <div id="chip-wrap" class="chip-wrap" aria-label="Topic chips">
@@ -358,6 +357,45 @@
 
       <article
         class="conf-card"
+        data-id="cjm-kudla-semester-2026"
+        data-type="other"
+        data-topics="Number theory, Arithmetic geometry, Shimura varieties, p-adic Hodge theory, p-adic automorphic forms, Kudla program, Iwasawa theory"
+        data-start="2026-01-01"
+        data-end="2026-06-30"
+      >
+        <div class="conf-meta">
+          <span class="tag"><i class="fa fa-calendar"></i> Jan–Jun, 2026</span>
+          <span class="tag"><i class="fa fa-map-marker"></i> CIRM (Luminy, Marseille)</span>
+        </div>
+        <h3>Jean Morlet Chair Semester: p-adic Kudla program and p-adic automorphic forms</h3>
+        <p class="desc">Chaired by Fabrizio Andreatta with local project leader Joaquín Rodrigues Jacinto.</p>
+        <div class="links">
+          <a class="btn" href="https://www.chairejeanmorlet.com/2026-andreatta-rodrigues-jacinto-1st-semester.html" target="_blank" rel="noopener"><i class="fa fa-external-link"></i> Website</a>
+        </div>
+      </article>
+
+      <article
+        class="conf-card"
+        data-id="ias-hodge-ominimality-2026"
+        data-type="other"
+        data-topics="Hodge theory, O-minimality, Arithmetic geometry, Unlikely intersections"
+        data-start="2026-03-09"
+        data-end="2026-03-12"
+        data-attending="1"
+      >
+        <div class="conf-meta">
+          <span class="tag"><i class="fa fa-calendar"></i> Mar 9–12, 2026</span>
+          <span class="tag"><i class="fa fa-map-marker"></i> IAS (Princeton)</span>
+        </div>
+        <h3>Workshop on Recent Developments in Hodge Theory and O-minimality</h3>
+        <p class="desc">Location: Simonyi Hall 101.</p>
+        <div class="links">
+          <a class="btn" href="https://www.ias.edu/math/events/workshop-recent-developments-hodge-theory-and-o-minimality" target="_blank" rel="noopener"><i class="fa fa-external-link"></i> Website</a>
+        </div>
+      </article>
+
+      <article
+        class="conf-card"
         data-id="oth-langlands-llfns-2026"
         data-type="other"
         data-topics="Langlands, L-functions, Automorphic forms"
@@ -370,29 +408,6 @@
         </div>
         <h3>Langlands, \(L\)-functions, and Arithmetic</h3>
         <p class="desc">A summer meeting featuring developments across the Langlands program.</p>
-        <div class="links">
-          <a class="btn" href="#" target="_blank" rel="noopener"><i class="fa fa-external-link"></i> Website</a>
-        </div>
-      </article>
-    </section>
-
-    <!-- Past conferences (auto-filled by JS) -->
-    <h2 class="section-title">Past conferences</h2>
-    <section class="grid" id="grid-past">
-      <article
-        class="conf-card"
-        data-id="oth-arith-kyoto-2025"
-        data-type="other"
-        data-topics="Arithmetic geometry"
-        data-start="2025-04-15"
-        data-end="2025-04-18"
-      >
-        <div class="conf-meta">
-          <span class="tag"><i class="fa fa-calendar"></i> Apr 15–18, 2025</span>
-          <span class="tag"><i class="fa fa-map-marker"></i> Kyoto</span>
-        </div>
-        <h3>Arithmetic Geometry Spring Meeting</h3>
-        <p class="desc">Kept here as a template for past events.</p>
         <div class="links">
           <a class="btn" href="#" target="_blank" rel="noopener"><i class="fa fa-external-link"></i> Website</a>
         </div>
@@ -479,11 +494,12 @@ closePanel();
       clearBtn.addEventListener('click', ()=>{
         selectedTopics.clear();
         chips.forEach(c=>c.classList.remove('active'));
-        search.value='';
+        if(search) search.value='';
         applyFilters();
       });
 
       function relocateByDate(){
+        if(!gridPast) return;
         const today = new Date(); today.setHours(0,0,0,0);
         allCards.forEach(card=>{
           const end = card.dataset.end ? new Date(card.dataset.end) : null;
@@ -498,7 +514,7 @@ closePanel();
       }
 
       function applyFilters(){
-        const q = search.value.trim().toLowerCase();
+        const q = search ? search.value.trim().toLowerCase() : '';
         allCards.forEach(card=>{
           const topics = (card.dataset.topics||'').toLowerCase();
           const chipMatch = (selectedTopics.size === 0) ||
@@ -508,7 +524,7 @@ closePanel();
         });
       }
 
-      search.addEventListener('input', applyFilters);
+      if(search) search.addEventListener('input', applyFilters);
 
       relocateByDate();
       applyFilters();
