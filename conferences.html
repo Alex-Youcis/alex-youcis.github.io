@@ -36,6 +36,7 @@
     .nav-links a:hover{color:var(--secondary-color)}
     .nav-links a:hover::after{left:0;width:100%}
     .nav-links a[aria-current="page"]{color:#fff}
+    .nav-links a[aria-current="page"]:hover{color:var(--secondary-color)}
     .nav-mobile{display:none}
     @media (max-width:768px){
       .nav-links{display:none;flex-direction:column;background:var(--primary-color);position:absolute;top:60px;right:0;width:220px}
@@ -257,20 +258,7 @@
 
     <!-- Filters: research-style pill + collapsible bubble -->
     <details class="filters" id="filters">
-      <summary class="filter-controls">
-        <span class="term-btn" id="filter-pill" aria-expanded="false" aria-controls="filters-panel">
-          <span class="term-btn__outer">
-            <span class="term-btn__middle">
-              <span class="term-btn__inner">
-                <span class="term-btn__label">Filter by topic</span>
-                <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                </svg>
-              </span>
-            </span>
-          </span>
-        </span>
-      </summary>
+      <summary class="filter-controls"></summary>
 
       <div class="filters-shell">
         <div class="filters-collapsible" id="filters-panel">
@@ -436,7 +424,7 @@ const pill  = document.getElementById('filter-pill');
 const panel = document.getElementById('filters-panel');
 
 function setExpanded(){
-  pill.setAttribute('aria-expanded', det.open ? 'true' : 'false');
+  if(pill) pill.setAttribute('aria-expanded', det.open ? 'true' : 'false');
 }
 
 // Re-measure after layout settles (fonts/wrapping) using double rAF
