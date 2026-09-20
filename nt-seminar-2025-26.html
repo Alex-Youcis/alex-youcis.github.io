@@ -53,16 +53,6 @@
     }
     .hero::before{
       content:""; position:absolute; inset:0; pointer-events:none; opacity:.22;
-      background-image:
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
-      background-repeat: no-repeat, no-repeat, no-repeat;
-      background-position: 16% center, 50% center, 84% center; /* equidistributed */
-      background-size: auto 96%, auto 96%, auto 96%;           /* scaled up 1.2× */
-    }
-    @media (max-width: 600px){
-      .hero::before{ background-size: auto 78%, auto 78%, auto 78%; }
     }
     .hero h1 {
       margin: .2em 0 .1em; font-size: clamp(1.6rem, 3.2vw, 2.1rem); position: relative;
@@ -229,6 +219,7 @@
       .sched > summary { margin: .3em 0; }
     }
   </style>
+  <link rel="stylesheet" href="seminar-crest.css" />
   <script>
     window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]], processEscapes:true }, options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' } };
   </script>
