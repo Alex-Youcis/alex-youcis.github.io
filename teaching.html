@@ -76,10 +76,7 @@
       position:relative; z-index:1;
     }
 
-    .teaching-wrap{
-      background:#fff;border:1px solid var(--border);border-radius:12px;
-      box-shadow:0 1px 4px rgba(0,0,0,.06); padding:16px;
-    }
+    .teaching-listings{padding-top:4px}
 
     /* Section headers */
     .section-title{
@@ -97,7 +94,8 @@
     }
 
     /* Teaching cards */
-    .courses{display:grid;grid-template-columns:1fr;gap:14px}
+    .teaching-courses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2em}
+    @media (max-width:900px){.teaching-courses{grid-template-columns:1fr}}
     .course-card{
       background:#fff;border:1px solid var(--border);border-radius:12px;
       box-shadow:0 1px 4px rgba(0,0,0,.06); padding:16px;
@@ -109,50 +107,18 @@
     .course-title{font-weight:700;font-size:1.1rem;line-height:1.25}
     .course-meta{font-weight:600;color:#444}
 
-    /* Layered pill buttons (compact, not full width) */
-    .course-pill{
-      --label-size: var(--filter-label-size);
-      --btn-h: calc(var(--label-size) * 2.35);
-      --band: calc(var(--btn-h) * 0.075);
-      --radius: calc(var(--btn-h) * 0.5);
-      border:0;background:transparent;padding:0;cursor:pointer;line-height:0;display:inline-block;
-      max-width:max-content; /* prevents stretching */
+    .teaching-materials{margin-top:.65em}
+    .teaching-materials summary{
+      display:inline-flex;align-items:center;gap:.45em;cursor:pointer;
+      background:var(--button-color);color:#fff;border-radius:8px;
+      padding:.45em .7em;font-weight:700;
     }
-    .course-pill:focus-visible .term-btn__inner{outline:2px solid #333;outline-offset:3px}
-    .term-btn__outer{display:inline-block;background:#000;padding:var(--band);border-radius:var(--radius)}
-    .term-btn__middle{display:inline-block;background:var(--button-color);padding:var(--band);border-radius:calc(var(--radius) - var(--band))}
-    .term-btn__inner{
-      display:inline-flex;align-items:center;justify-content:center;
-      gap: calc(var(--btn-h) * 0.18);
-      background:#fff;border-radius:calc(var(--radius) - (2 * var(--band)));
-      height:var(--btn-h);
-      padding:0 calc(var(--btn-h) * 0.62); /* more compact */
-    }
-    .term-btn__label{
-      font:700 var(--label-size)/1.05 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      color:#000; white-space:nowrap;
-    }
-    .term-btn__chevron{
-      width:calc(var(--btn-h) * 0.28);
-      height:calc(var(--btn-h) * 0.28);
-      flex:0 0 auto;
-      transition:transform 160ms ease;
-      color:#000;
-    }
-    .course-pill[aria-expanded="true"] .term-btn__chevron{transform:rotate(180deg)}
-    .course-pill:hover .term-btn__inner{background:#f7f7f7}
-
-    a.course-link{display:inline-block;text-decoration:none}
-
-    .materials{
-      margin-top:10px;
-      border-top:1px solid var(--border);
-      padding-top:10px;
-    }
-    .materials-list{
-      list-style:none;padding:0;margin:10px 0 0;
-      display:flex;flex-wrap:wrap;gap:10px;
-    }
+    .teaching-materials summary::after{content:"+";font-size:1.15em;line-height:1}
+    .teaching-materials[open] summary::after{content:"\2212"}
+    .teaching-materials summary:focus-visible{outline:3px solid #000;outline-offset:3px}
+    .teaching-materials-list{margin:.75em 0 0;padding:0;list-style:none}
+    .teaching-materials-list a{color:#0f62fe;text-decoration:none;font-weight:600}
+    .teaching-materials-list a:hover{text-decoration:underline}
 
     footer{background:var(--primary-color);color:#fff;padding:1em;text-align:center}
 
@@ -202,14 +168,14 @@
       <h1>Teaching</h1>
     </section>
 
-    <div class="teaching-wrap">
+    <div class="teaching-listings">
 
       <!-- ================= -->
       <!-- CURRENT TEACHING -->
       <!-- ================= -->
       <section class="section">
         <div class="section-title">Current teaching</div>
-        <div class="courses">
+        <div class="teaching-courses">
           <section class="course-card">
             <div class="course-head">
               <span class="course-title">MAT224 — Linear Algebra II</span>
@@ -225,7 +191,7 @@
       <section class="section">
         <div class="section-title">Past teaching</div>
 
-        <div class="courses">
+        <div class="teaching-courses">
 
           <section class="course-card">
             <div class="course-head">
@@ -233,15 +199,12 @@
               <span class="course-meta">University of Toronto · Fall 2025</span>
             </div>
 
-            <a class="course-link course-pill" href="MAT138.html" aria-label="Open course website">
-              <span class="term-btn__outer">
-                <span class="term-btn__middle">
-                  <span class="term-btn__inner">
-                    <span class="term-btn__label">Course website</span>
-                  </span>
-                </span>
-              </span>
-            </a>
+            <details class="teaching-materials">
+              <summary>Materials</summary>
+              <ul class="teaching-materials-list">
+                <li><a href="MAT138.html">Course website</a></li>
+              </ul>
+            </details>
           </section>
 
           <section class="course-card">

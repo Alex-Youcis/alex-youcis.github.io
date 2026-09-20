@@ -1,13 +1,9 @@
-/* Shared seminar header crest used by both the current and archived pages. */
-.hero {
-  --seminar-crest: url("https://thumb.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1280px-Utoronto_coa.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail");
-}
-
-.hero::before {
+/* Shared seminar-header crest treatment used by the current and archive pages. */
+.seminar-hero::before {
   background-image:
-    var(--seminar-crest),
-    var(--seminar-crest),
-    var(--seminar-crest);
+    url("Utoronto_coa.svg"),
+    url("Utoronto_coa.svg"),
+    url("Utoronto_coa.svg");
   background-repeat: no-repeat, no-repeat, no-repeat;
   background-position: 16% center, 50% center, 84% center;
   background-size: auto 96%, auto 96%, auto 96%;
@@ -15,7 +11,7 @@
 }
 
 @media (max-width: 600px) {
-  .hero::before {
+  .seminar-hero::before {
     background-size: auto 78%, auto 78%, auto 78%;
   }
 }
