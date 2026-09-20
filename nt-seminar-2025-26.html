@@ -218,6 +218,36 @@
 
       .sched > summary { margin: .3em 0; }
     }
+
+    /* Narrow-screen usability safeguards */
+    img, svg { max-width:100%; }
+    main, section, article, .grid > *, .publication-grid > * { min-width:0; }
+    p, li, h1, h2, h3, a { overflow-wrap:anywhere; }
+    button, a, summary, [role="button"] { touch-action:manipulation; }
+    a:focus-visible, button:focus-visible, summary:focus-visible, [role="button"]:focus-visible {
+      outline:3px solid #0f62fe; outline-offset:3px;
+    }
+    mjx-container[display="true"] { max-width:100%; overflow-x:auto; overflow-y:hidden; }
+    .icon { background:transparent; border:0; padding:.45rem; min-width:44px; min-height:44px; }
+    @media (max-width:768px){
+      .nav-links { width:min(220px, 100vw); max-height:calc(100dvh - 60px); overflow-y:auto; overscroll-behavior:contain; }
+      .nav-links a { min-height:44px; }
+      main { padding-left:.75rem; padding-right:.75rem; }
+      .btn, .chip, .btn-lite, summary { min-height:44px; }
+    }
+    @media (max-width:390px){
+      .search, .search input, .tag-search { min-width:0; width:100%; }
+      .filters-row { align-items:stretch; }
+      .term-btn__inner { padding-left:1rem; padding-right:1rem; }
+    }
+
+    @media (max-width:390px){
+      .term-controls{width:100%}
+      .term-controls .term-btn,.sched > summary .term-btn{display:block;width:100%;min-width:0}
+      .term-btn__outer,.term-btn__middle{display:block;width:100%;min-width:0;box-sizing:border-box}
+      .term-btn__inner{display:flex;width:100%;min-width:0;box-sizing:border-box;padding-left:.5rem;padding-right:.5rem}
+      .term-btn__label{min-width:0;white-space:normal;overflow-wrap:anywhere;line-height:1.15}
+    }
   </style>
   <link rel="stylesheet" href="seminar-crest.css" />
   <script>
@@ -230,7 +260,7 @@
     <nav class="navbar" id="myNavbar">
       <div class="nav-mobile">
         <span class="nav-text">Navigation</span>
-        <span class="icon" onclick="toggleMenu()"><i class="fa fa-bars"></i></span>
+        <button type="button" class="icon" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false"><i class="fa fa-bars"></i></button>
       </div>
       <div class="nav-links">
         <a href="index.html">Home</a>
@@ -379,7 +409,7 @@
                   </details>
                 </td>
               </tr>
-          
+
               <tr>
                 <td class="nowrap">Sep 24, 2025</td><td><a href="https://sites.google.com/view/yitong-wang" target="_blank" rel="noopener">Yitong Wang</a></td><td><em>Multivariable \((\varphi,\Gamma)\)-modules and local-global compatibility.</em></td>
                 <td>
@@ -456,7 +486,7 @@ Witt vectors.</div>
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body"><p>Hecke operators play a fundamental role in understanding the arithmetic properties of modular and automorphic forms. Since the advent of the original Eichler-Shimura relation, it has been clear that the mod-\(p\) behavior of Hecke correspondences is crucial for such applications. However, one could argue a truly robust theory of such correspondences yielding convenient access to their mod-\(p\) reductions has so far been elusive, especially when dealing with higher rank groups.</p> 
+                    <div class="abs__body"><p>Hecke operators play a fundamental role in understanding the arithmetic properties of modular and automorphic forms. Since the advent of the original Eichler-Shimura relation, it has been clear that the mod-\(p\) behavior of Hecke correspondences is crucial for such applications. However, one could argue a truly robust theory of such correspondences yielding convenient access to their mod-\(p\) reductions has so far been elusive, especially when dealing with higher rank groups.</p>
 
 <p>In this talk, I will present a new approach to these matters, using recent advances in \(p\)-adic geometry and \(p\)-adic cohomology, building on work of Drinfeld and Bhatt-Lurie, and combining them with a tool familiar to the geometric Langlands and representation theory community: the Vinberg monoid. In particular, this approach yields direct access to geometric incarnations of the 'standard' basis elements of the spherical Hecke algebra.</p>
 
@@ -544,7 +574,7 @@ Witt vectors.</div>
                   </details>
                 </td>
               </tr>
-          
+
             </tbody>
           </table>
         </div>
@@ -572,7 +602,7 @@ Witt vectors.</div>
               </tr>
             </thead>
             <tbody>
-             
+
               <tr>
                 <td class="nowrap">Jan 28, 2026</td><td><a href="https://sites.google.com/view/luepan/home" target="_blank" rel="noopener">Lue Pan</a></td><td><em>Completed cohomology of Hilbert modular varieties below middle
 degree </em></td>
@@ -654,7 +684,7 @@ work and sketch several applications.
                         <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
                       </svg>
                     </summary>
-                    <div class="abs__body">For quasi-split \(p\)-adic orthogonal and symplectic groups, Arthur showed that there exists finite sets of irreducible unitary representations, called local Arthur packets, whose associated distributions satisfy the twisted endoscopic character identities. Much progress has since been made in computing local Arthur packets explicitly and understanding their properties. In this talk, we will take an ahistorical approach to studying local Arthur packets. Specifically, if we took a recent explicit algorithm for computing local Arthur packets as a definition, how much of Arthur's theory could we recover? 
+                    <div class="abs__body">For quasi-split \(p\)-adic orthogonal and symplectic groups, Arthur showed that there exists finite sets of irreducible unitary representations, called local Arthur packets, whose associated distributions satisfy the twisted endoscopic character identities. Much progress has since been made in computing local Arthur packets explicitly and understanding their properties. In this talk, we will take an ahistorical approach to studying local Arthur packets. Specifically, if we took a recent explicit algorithm for computing local Arthur packets as a definition, how much of Arthur's theory could we recover?
 
 </div>
                   </details>

@@ -151,6 +151,9 @@
     .publication-card a:not(.btn):not(.collaborator-link){color:#0f62fe;text-decoration:none}
     .publication-card a:not(.btn):not(.collaborator-link):hover{text-decoration:underline}
 
+    .solo-meta-spacer{min-height:1.75em}
+    @media (max-width:900px){.solo-meta-spacer{display:none}}
+
     /* Footer */
     footer{background:var(--primary-color);color:#fff;padding:1em;text-align:center}
     footer .social-icons a{color:#fff;margin:0 .33em}
@@ -184,6 +187,28 @@ body.normalize-hero .hero{
   }
 }
 
+
+    /* Narrow-screen usability safeguards */
+    img, svg { max-width:100%; }
+    main, section, article, .grid > *, .publication-grid > * { min-width:0; }
+    p, li, h1, h2, h3, a { overflow-wrap:anywhere; }
+    button, a, summary, [role="button"] { touch-action:manipulation; }
+    a:focus-visible, button:focus-visible, summary:focus-visible, [role="button"]:focus-visible {
+      outline:3px solid #0f62fe; outline-offset:3px;
+    }
+    mjx-container[display="true"] { max-width:100%; overflow-x:auto; overflow-y:hidden; }
+    .icon { background:transparent; border:0; padding:.45rem; min-width:44px; min-height:44px; }
+    @media (max-width:768px){
+      .nav-links { width:min(220px, 100vw); max-height:calc(100dvh - 60px); overflow-y:auto; overscroll-behavior:contain; }
+      .nav-links a { min-height:44px; }
+      main { padding-left:.75rem; padding-right:.75rem; }
+      .btn, .chip, .btn-lite, summary { min-height:44px; }
+    }
+    @media (max-width:390px){
+      .search, .search input, .tag-search { min-width:0; width:100%; }
+      .filters-row { align-items:stretch; }
+      .term-btn__inner { padding-left:1rem; padding-right:1rem; }
+    }
   </style>
 
   <!-- MathJax -->
@@ -200,9 +225,9 @@ body.normalize-hero .hero{
     <nav class="navbar" id="myNavbar">
       <div class="nav-mobile">
         <span class="nav-text">Navigation</span>
-        <span class="icon" role="button" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
+        <button type="button" class="icon" aria-label="Open menu" aria-expanded="false" onclick="toggleMenu()">
           <i class="fa fa-bars"></i>
-        </span>
+        </button>
       </div>
       <div class="nav-links">
         <a href="index.html">Home</a>
@@ -237,7 +262,7 @@ body.normalize-hero .hero{
             </span>
           </span>
         </button>
-        <div id="filters-inner" class="filters-inner hidden" aria-hidden="true">
+        <div id="filters-inner" class="filters-inner hidden" aria-hidden="true" inert>
           <!-- Row 1: Search -->
           <div class="filters-row">
             <label for="q">Search:</label>
@@ -249,20 +274,20 @@ body.normalize-hero .hero{
           <div class="filters-row" role="group" aria-label="Filter by status">
             <span style="font-weight:600">Status:</span>
             <div class="chips">
-              <button class="chip" data-status="all" aria-pressed="true">All</button>
-              <button class="chip" data-status="journal" aria-pressed="false">Published</button>
-              <button class="chip" data-status="to-appear" aria-pressed="false">To appear</button>
-              <button class="chip" data-status="submitted" aria-pressed="false">Preprint</button>
+              <button type="button" class="chip" data-status="all" aria-pressed="true">All</button>
+              <button type="button" class="chip" data-status="journal" aria-pressed="false">Published</button>
+              <button type="button" class="chip" data-status="to-appear" aria-pressed="false">To appear</button>
+              <button type="button" class="chip" data-status="submitted" aria-pressed="false">Preprint</button>
             </div>
           </div>
           <!-- Row 3: Quick tags -->
           <div class="filters-row" role="group" aria-label="Filter by tag">
             <span style="font-weight:600">Quick tags:</span>
             <div class="chips">
-              <button class="chip" data-tag="p-adic hodge" aria-pressed="false">\(p\)-adic Hodge theory</button>
-              <button class="chip" data-tag="shimura" aria-pressed="false">Shimura varieties</button>
-              <button class="chip" data-tag="rigid" aria-pressed="false">Rigid geometry</button>
-              <button class="chip" data-tag="langlands" aria-pressed="false">Langlands</button>
+              <button type="button" class="chip" data-tag="p-adic hodge" aria-pressed="false">\(p\)-adic Hodge theory</button>
+              <button type="button" class="chip" data-tag="shimura" aria-pressed="false">Shimura varieties</button>
+              <button type="button" class="chip" data-tag="rigid" aria-pressed="false">Rigid geometry</button>
+              <button type="button" class="chip" data-tag="langlands" aria-pressed="false">Langlands</button>
             </div>
           </div>
         </div>
@@ -275,9 +300,9 @@ body.normalize-hero .hero{
       <div class="publication-card" data-status="submitted"
         data-tags="Shimura varieties, Langlands, p-adic Hodge theory"
         data-title="On the Langlands–Kottwitz–Scholze Method"
-        data-collab="alex youcis">
+        data-collab="">
         <h2>On the Langlands–Kottwitz–Scholze Method</h2>
-        <p><strong>Author:</strong> Alex Youcis</p>
+        <div class="solo-meta-spacer" aria-hidden="true"></div>
         <p><strong>Status:</strong> Preprint</p>
         <p><strong>Tags:</strong> Shimura varieties, Langlands, \(p\)-adic Hodge theory</p>
         <details>
@@ -306,13 +331,13 @@ body.normalize-hero .hero{
         </div>
       </div>
       <!-- 1 -->
-      <div class="publication-card" data-status="submitted"
+      <div class="publication-card" data-status="to-appear"
         data-tags="p-adic hodge theory, prismatic f-gauges, crystalline cohomology, de rham cohomology"
         data-title="An integral comparison of crystalline and de Rham cohomology"
         data-collab="abhinandan">
         <h2>An integral comparison of crystalline and de Rham cohomology</h2>
         <p><strong>Collaborators:</strong> <a href="https://abhinandan.perso.math.cnrs.fr/" class="collaborator-link">Abhinandan</a></p>
-        <p><strong>Status:</strong> Submitted</p>
+        <p><strong>Status:</strong> To appear in <i>Selecta Mathematica (New Series)</i>.</p>
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-gauges, crystalline cohomology, de Rham cohomology</p>
         <details>
           <summary>Description</summary>
@@ -320,6 +345,7 @@ body.normalize-hero .hero{
         </details>
         <div class="links">
           <a href="https://arxiv.org/abs/2507.17631" class="btn">arXiv</a>
+          <a href="https://link.springer.com/journal/29" class="btn">Journal website</a>
         </div>
       </div>
 
@@ -359,25 +385,25 @@ body.normalize-hero .hero{
         <div class="links">
           <a href="https://www.cambridge.org/core/journals/journal-of-the-institute-of-mathematics-of-jussieu/article/beauvillelaszlo-gluing-of-algebraic-spaces/42979B071AAD5D8BA39458E8CA12E6A0" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2410.20500" class="btn">arXiv</a>
-        
+
         </div>
       </div>
 
       <!-- 4 -->
-      <div class="publication-card" data-status="submitted"
+      <div class="publication-card" data-status="journal"
         data-tags="p-adic hodge theory, prismatic f-crystals, p-adic shtukas, tannakian formalism"
         data-title="A Tannakian Framework for Prismatic F-crystals"
         data-collab="naoki imai, hiroki kato">
         <h2>A Tannakian Framework for Prismatic \(F\)-crystals</h2>
         <p><strong>Collaborators:</strong> <a href="https://www.ms.u-tokyo.ac.jp/~naoki/" class="collaborator-link">Naoki Imai</a> and Hiroki Kato</p>
-        <p><strong>Status:</strong> <i>Forum of Mathematics, Sigma</i></p>
+        <p><strong>Status:</strong> <i>Forum of Mathematics, Sigma</i> 14 (2026), e100.</p>
         <p><strong>Tags:</strong> \(p\)-adic Hodge theory, prismatic \(F\)-crystals, \(p\)-adic shtukas, Tannakian formalism</p>
         <details>
           <summary>Description</summary>
           <p>We study some Tannakian aspects of the theory of prismatic \(F\)-crystals, a recent notion in integral \(p\)-adic Hodge theory developed by Bhatt--Scholze and others. Additionally, we explain how to connect this Tannakian theory to the previous Tannakian theory of shtukas studied by Scholze et al.</p>
         </details>
         <div class="links">
-          <a href="https://www.cambridge.org/core/journals/forum-of-mathematics-sigma/article/tannakian-framework-for-prismatic-fcrystals/F516FBAFE557E457A1556DA54E995382" class="btn">Journal</a>
+          <a href="https://doi.org/10.1017/fms.2026.10228" class="btn">Journal</a>
           <a href="https://arxiv.org/abs/2406.08259" class="btn">arXiv</a>
         </div>
       </div>
@@ -584,6 +610,7 @@ body.normalize-hero .hero{
         inner.classList.toggle('hidden', !willOpen);
         btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
         inner.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
+        inner.inert = !willOpen;
       });
     })();
 
