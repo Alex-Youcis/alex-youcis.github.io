@@ -1,4 +1,3 @@
-<!-- Save as teaching.html (or whatever filename you use site-wide) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,28 +96,7 @@
       border-top:1px solid var(--border);
     }
 
-    /* Current teaching “none” card */
-    .empty-card{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:12px;
-      box-shadow:0 1px 4px rgba(0,0,0,.06);
-      padding:14px 16px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:700;
-      color:#444;
-      max-width:520px;
-    }
-    .empty-dot{
-      width:10px;height:10px;border-radius:999px;
-      background:var(--button-color);
-      box-shadow:0 0 0 3px rgba(191,6,3,.12);
-      flex:0 0 auto;
-    }
-
-    /* Past teaching cards */
+    /* Teaching cards */
     .courses{display:grid;grid-template-columns:1fr;gap:14px}
     .course-card{
       background:#fff;border:1px solid var(--border);border-radius:12px;
@@ -210,7 +188,7 @@
         <a href="index.html">Home</a>
         <a href="research.html">Publications and preprints</a>
         <a href="notes.html">Expository material</a>
-        <a href="#" aria-current="page">Teaching</a>
+        <a href="teaching.html" aria-current="page">Teaching</a>
         <a href="friends.html">Friends</a>
         <a href="nt-seminar.html">U of T number theory seminar</a>
         <a href="conferences.html">Conferences</a>
@@ -231,9 +209,13 @@
       <!-- ================= -->
       <section class="section">
         <div class="section-title">Current teaching</div>
-        <div class="empty-card" role="note" aria-label="No current teaching">
-          <span class="empty-dot" aria-hidden="true"></span>
-          <span>Not teaching this term.</span>
+        <div class="courses">
+          <section class="course-card">
+            <div class="course-head">
+              <span class="course-title">MAT224 — Linear Algebra II</span>
+              <span class="course-meta">University of Toronto · Fall 2026</span>
+            </div>
+          </section>
         </div>
       </section>
 
@@ -245,11 +227,10 @@
 
         <div class="courses">
 
-          <!-- TYPE A: HAS COURSE WEBSITE (binary => only link) -->
           <section class="course-card">
             <div class="course-head">
               <span class="course-title">MAT138 — Introduction to Proofs</span>
-              <span class="course-meta">University of Toronto · 2025–26</span>
+              <span class="course-meta">University of Toronto · Fall 2025</span>
             </div>
 
             <a class="course-link course-pill" href="MAT138.html" aria-label="Open course website">
@@ -263,52 +244,26 @@
             </a>
           </section>
 
-          <!-- TYPE B: NO WEBSITE (binary => dropdown materials) -->
           <section class="course-card">
             <div class="course-head">
-              <span class="course-title">MATH XXX — Topics in Arithmetic Geometry</span>
-              <span class="course-meta">University of Somewhere · Fall 2024</span>
-            </div>
-
-            <button class="course-pill" type="button" aria-expanded="false" aria-controls="materials-mathxxx" onclick="toggleMaterials('materials-mathxxx', this)">
-              <span class="term-btn__outer">
-                <span class="term-btn__middle">
-                  <span class="term-btn__inner">
-                    <span class="term-btn__label">Materials</span>
-                    <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                  </span>
-                </span>
-              </span>
-            </button>
-
-            <div class="materials" id="materials-mathxxx" hidden>
-              <ul class="materials-list">
-                <li>
-                  <a class="course-link course-pill" href="PATH/notes.pdf">
-                    <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Notes</span></span></span></span>
-                  </a>
-                </li>
-                <li>
-                  <a class="course-link course-pill" href="PATH/syllabus.pdf">
-                    <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Syllabus</span></span></span></span>
-                  </a>
-                </li>
-                <li>
-                  <a class="course-link course-pill" href="PATH/problem-sets.pdf">
-                    <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Problem sets</span></span></span></span>
-                  </a>
-                </li>
-                <li>
-                  <a class="course-link course-pill" href="PATH/exams.pdf">
-                    <span class="term-btn__outer"><span class="term-btn__middle"><span class="term-btn__inner"><span class="term-btn__label">Exams</span></span></span></span>
-                  </a>
-                </li>
-              </ul>
+              <span class="course-title">Math 115 — Number Theory</span>
+              <span class="course-meta">University of California, Berkeley · Summer 2018</span>
             </div>
           </section>
 
+          <section class="course-card">
+            <div class="course-head">
+              <span class="course-title">Math 115 — Number Theory</span>
+              <span class="course-meta">University of California, Berkeley · Summer 2017</span>
+            </div>
+          </section>
+
+          <section class="course-card">
+            <div class="course-head">
+              <span class="course-title">Graduate Student Instructor</span>
+              <span class="course-meta">University of California, Berkeley · 2013–2019</span>
+            </div>
+          </section>
         </div>
       </section>
 
@@ -326,18 +281,6 @@
       const btn = nav.querySelector('.nav-mobile .icon');
       const expanded = nav.classList.contains('responsive');
       if(btn) btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-    }
-
-    function toggleMaterials(id, btn){
-      const panel = document.getElementById(id);
-      const isOpen = !panel.hasAttribute('hidden');
-      if(isOpen){
-        panel.setAttribute('hidden','');
-        if(btn) btn.setAttribute('aria-expanded','false');
-      }else{
-        panel.removeAttribute('hidden');
-        if(btn) btn.setAttribute('aria-expanded','true');
-      }
     }
   </script>
 </body>
