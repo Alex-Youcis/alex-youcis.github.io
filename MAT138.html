@@ -18,6 +18,8 @@
       --info-btn-font-size:1rem;
     }
 
+    *,:before,:after{box-sizing:border-box}
+
     /* Page-wide background image (outside bubbles only) */
     html, body { min-height:100%; }
     body{
@@ -231,12 +233,44 @@
       table{table-layout:auto;min-width:680px}
       .sched>summary{margin:.3em 0}
     }
+
+    /* Narrow-screen usability safeguards */
+    img, svg { max-width:100%; }
+    main, section, article, .grid > *, .publication-grid > * { min-width:0; }
+    p, li, h1, h2, h3, a { overflow-wrap:anywhere; }
+    button, a, summary, [role="button"] { touch-action:manipulation; }
+    a:focus-visible, button:focus-visible, summary:focus-visible, [role="button"]:focus-visible {
+      outline:3px solid #0f62fe; outline-offset:3px;
+    }
+    mjx-container[display="true"] { max-width:100%; overflow-x:auto; overflow-y:hidden; }
+    .icon { background:transparent; border:0; padding:.45rem; min-width:44px; min-height:44px; }
+    @media (max-width:768px){
+      .nav-links { width:min(220px, 100vw); max-height:calc(100dvh - 60px); overflow-y:auto; overscroll-behavior:contain; }
+      .nav-links a { min-height:44px; }
+      main { padding-left:.75rem; padding-right:.75rem; }
+      .btn, .chip, .btn-lite, summary { min-height:44px; }
+    }
+    @media (max-width:390px){
+      .search, .search input, .tag-search { min-width:0; width:100%; }
+      .filters-row { align-items:stretch; }
+      .term-btn__inner { padding-left:1rem; padding-right:1rem; }
+    }
+
+    @media (max-width:390px){
+      .drop-grid.single-open{display:grid;width:100%}
+      .drop-grid.single-open > details{min-width:0;width:100%}
+      .term-controls{width:100%}
+      .term-controls .term-btn,.sched > summary .term-btn{display:block;width:100%;min-width:0}
+      .term-btn__outer,.term-btn__middle{display:block;width:100%;min-width:0;box-sizing:border-box}
+      .term-btn__inner{display:flex;width:100%;min-width:0;box-sizing:border-box;padding-left:.5rem;padding-right:.5rem}
+      .term-btn__label{min-width:0;white-space:normal;overflow-wrap:anywhere;line-height:1.15}
+    }
   </style>
   <!-- MathJax (in case TeX appears) -->
   <script>
     window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]],processEscapes:true},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"],ignoreHtmlClass:"tex2jax_ignore",processHtmlClass:"tex2jax_process"}};
   </script>
- 
+
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
@@ -244,7 +278,7 @@
     <nav class="navbar" id="myNavbar">
       <div class="nav-mobile">
         <span class="nav-text">Navigation</span>
-        <span class="icon" onclick="toggleMenu()"><i class="fa fa-bars"></i></span>
+        <button type="button" class="icon" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false"><i class="fa fa-bars"></i></button>
       </div>
       <div class="nav-links">
         <a href="index.html">Home</a>

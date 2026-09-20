@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
 <title>Alex Youcis</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,82 +21,75 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
 .w3-container{
   min-height: 100%;
     position: relative;
-    min-width: 100%;
-    overflow: hidden;
+    width: 100%;
 }
+#mobileNav{display:none;margin-top:43px;background:#000;color:#fff}
+#mobileNav.open{display:block}
+#mobileNav a{display:block;min-height:44px;padding:12px 16px;color:#fff;text-decoration:none}
+button:focus-visible,a:focus-visible{outline:3px solid #0f62fe;outline-offset:2px}
+@media (min-width:993px){#mobileNav{display:none!important}}
 </style>
+</head>
 
 <body>
-  
+
 <!-- Navbar -->
 <div class="w3-top">
   <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
-    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+    <button type="button" class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" onclick="w3_open()" aria-controls="mobileNav" aria-expanded="false" aria-label="Open menu"><i class="fa fa-bars"></i></button>
     <a href="index.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About me</a>
     <a href="research.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Research</a>
     <a href="notes.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Expository material</a>
     <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
     <a href="friends.html" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Friends</a>
   </div>
+<nav id="mobileNav" aria-label="Mobile navigation">
+  <a href="index.html">About me</a>
+  <a href="research.html">Research</a>
+  <a href="notes.html">Expository material</a>
+  <a href="contact.html" aria-current="page">Contact</a>
+  <a href="friends.html">Friends</a>
+</nav>
 </div>
-
-
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
-<div class="w3-main">
-
+<!-- Main content -->
+<main class="w3-main">
   <div class="w3-row w3-padding-64">
-    <div class="w3-twothird w3-container">
+    <section class="w3-twothird w3-container">
       <h1 class="w3-text-black">By email</h1>
-      <p>If you have any questions, mathematical or otherwise, feel free to email me. My email address is (firstinitial+lastname)@ms.u-tokyo.ac.jp.
-      </p>
-    </div>
+      <p>If you have any questions, mathematical or otherwise, feel free to email me. My email address is (firstinitial+lastname)@ms.u-tokyo.ac.jp.</p>
+    </section>
 
-    <div class="w3-row w3-padding-64">
-        <div class="w3-twothird w3-container">
-          <h1 class="w3-text-black">Referee requests</h1>
-          <p>If you are interested in sending me a paper to review, I am likely interested, but may not be able to commit depending on my current backlog.</p>
-        </div>
-
-
-
-   
-
-  <!-- Pagination -->
-
-
-    <div class="w3-container w3-theme-l1">
-      <p style="margin-bottom:.5cm;"> Alex Youcis -- all rights reserved. </p>
-    </div>
-  </footer>
-
-<!-- END MAIN -->
-</div>
+    <section class="w3-twothird w3-container">
+      <h1 class="w3-text-black">Referee requests</h1>
+      <p>If you are interested in sending me a paper to review, I am likely interested, but may not be able to commit depending on my current backlog.</p>
+    </section>
+  </div>
+</main>
+<footer class="w3-container w3-theme-l1">
+  <p style="margin-bottom:.5cm;">Alex Youcis -- all rights reserved.</p>
+</footer>
 
 <script>
 
 
-// Get the DIV with overlay effect
-var overlayBg = document.getElementById("myOverlay");
-
-// Toggle between showing and hiding the sidebar, and add overlay effect
+// Toggle the small-screen navigation while keeping ARIA state current.
 function w3_open() {
-  if (mySidebar.style.display === 'block') {
-    mySidebar.style.display = 'none';
-    overlayBg.style.display = "none";
-  } else {
-    mySidebar.style.display = 'block';
-    overlayBg.style.display = "block";
-  }
+  var menu = document.getElementById("mobileNav");
+  var button = document.querySelector('[aria-controls="mobileNav"]');
+  var open = menu.classList.toggle("open");
+  button.setAttribute("aria-expanded", String(open));
+  button.setAttribute("aria-label", open ? "Close menu" : "Open menu");
 }
-
-// Close the sidebar with the close button
 function w3_close() {
-  mySidebar.style.display = "none";
-  overlayBg.style.display = "none";
+  var menu = document.getElementById("mobileNav");
+  var button = document.querySelector('[aria-controls="mobileNav"]');
+  menu.classList.remove("open");
+  button.setAttribute("aria-expanded", "false");
+  button.setAttribute("aria-label", "Open menu");
 }
 </script>
 

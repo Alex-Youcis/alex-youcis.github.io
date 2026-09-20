@@ -130,6 +130,28 @@
     @media (max-width: 600px){
       body.normalize-hero .hero{height:auto;min-height:180px}
     }
+
+    /* Narrow-screen usability safeguards */
+    img, svg { max-width:100%; }
+    main, section, article, .grid > *, .publication-grid > * { min-width:0; }
+    p, li, h1, h2, h3, a { overflow-wrap:anywhere; }
+    button, a, summary, [role="button"] { touch-action:manipulation; }
+    a:focus-visible, button:focus-visible, summary:focus-visible, [role="button"]:focus-visible {
+      outline:3px solid #0f62fe; outline-offset:3px;
+    }
+    mjx-container[display="true"] { max-width:100%; overflow-x:auto; overflow-y:hidden; }
+    .icon { background:transparent; border:0; padding:.45rem; min-width:44px; min-height:44px; }
+    @media (max-width:768px){
+      .nav-links { width:min(220px, 100vw); max-height:calc(100dvh - 60px); overflow-y:auto; overscroll-behavior:contain; }
+      .nav-links a { min-height:44px; }
+      main { padding-left:.75rem; padding-right:.75rem; }
+      .btn, .chip, .btn-lite, summary { min-height:44px; }
+    }
+    @media (max-width:390px){
+      .search, .search input, .tag-search { min-width:0; width:100%; }
+      .filters-row { align-items:stretch; }
+      .term-btn__inner { padding-left:1rem; padding-right:1rem; }
+    }
   </style>
 
   <!-- MathJax (kept for consistency) -->
@@ -147,9 +169,9 @@
     <nav class="navbar" id="myNavbar">
       <div class="nav-mobile">
         <span class="nav-text">Navigation</span>
-        <span class="icon" onclick="toggleMenu()" role="button" aria-label="Open menu" aria-expanded="false">
+        <button type="button" class="icon" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false">
           <i class="fa fa-bars"></i>
-        </span>
+        </button>
       </div>
       <div class="nav-links">
         <a href="index.html">Home</a>
