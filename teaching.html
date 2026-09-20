@@ -97,7 +97,7 @@
     .teaching-courses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2em}
     @media (max-width:900px){.teaching-courses{grid-template-columns:1fr}}
     .course-card{
-      background:#fff;border:1px solid var(--border);border-radius:12px;
+      background:#fff;border:3px solid #000;border-radius:12px;
       box-shadow:0 1px 4px rgba(0,0,0,.06); padding:16px;
     }
     .course-head{
@@ -119,6 +119,7 @@
     .teaching-materials-list{margin:.75em 0 0;padding:0;list-style:none}
     .teaching-materials-list a{color:#0f62fe;text-decoration:none;font-weight:600}
     .teaching-materials-list a:hover{text-decoration:underline}
+    .resource-btn{display:inline-flex;margin-top:.65em;background:var(--button-color);color:#fff;text-decoration:none;border-radius:8px;padding:.45em .7em;font-weight:700}
 
     footer{background:var(--primary-color);color:#fff;padding:1em;text-align:center}
 
@@ -154,9 +155,9 @@
         <a href="index.html">Home</a>
         <a href="research.html">Publications and preprints</a>
         <a href="notes.html">Expository material</a>
-        <a href="teaching.html" aria-current="page">Teaching</a>
         <a href="friends.html">Friends</a>
         <a href="nt-seminar.html">U of T number theory seminar</a>
+        <a href="teaching.html" aria-current="page">Teaching</a>
         <a href="conferences.html">Conferences</a>
       </div>
     </nav>
@@ -199,12 +200,7 @@
               <span class="course-meta">University of Toronto · Fall 2025</span>
             </div>
 
-            <details class="teaching-materials">
-              <summary>Materials</summary>
-              <ul class="teaching-materials-list">
-                <li><a href="MAT138.html">Course website</a></li>
-              </ul>
-            </details>
+            <a class="resource-btn" href="MAT138.html">Course webpage</a>
           </section>
 
           <section class="course-card">
@@ -212,6 +208,7 @@
               <span class="course-title">Math 115 — Number Theory</span>
               <span class="course-meta">University of California, Berkeley · Summer 2018</span>
             </div>
+            <a class="resource-btn" href="/Math_115_Partial_Notes.pdf">Partial notes</a>
           </section>
 
           <section class="course-card">
@@ -219,6 +216,7 @@
               <span class="course-title">Math 115 — Number Theory</span>
               <span class="course-meta">University of California, Berkeley · Summer 2017</span>
             </div>
+            <a class="resource-btn" href="/Math_115_Partial_Notes.pdf">Partial notes</a>
           </section>
 
           <section class="course-card">
