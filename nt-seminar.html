@@ -258,6 +258,7 @@
     window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]], processEscapes:true }, options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' } };
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="current-year.js" defer></script>
 </head>
 <body>
   <header>
@@ -563,7 +564,7 @@
   </main>
 
   <footer style="background:var(--primary-color); color:#fff; padding:1em; text-align:center;">
-    <p>&copy; 2026 Alex Youcis. All rights reserved.</p>
+    <p>&copy; <span data-current-year>2026</span> Alex Youcis. All rights reserved.</p>
   </footer>
 
   <script>
