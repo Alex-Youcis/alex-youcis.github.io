@@ -53,16 +53,6 @@
     }
     .hero::before{
       content:""; position:absolute; inset:0; pointer-events:none; opacity:.22;
-      background-image:
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
-        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
-      background-repeat: no-repeat, no-repeat, no-repeat;
-      background-position: 16% center, 50% center, 84% center; /* equidistributed */
-      background-size: auto 96%, auto 96%, auto 96%;           /* scaled up 1.2× */
-    }
-    @media (max-width: 600px){
-      .hero::before{ background-size: auto 78%, auto 78%, auto 78%; }
     }
     .hero h1 {
       margin: .2em 0 .1em; font-size: clamp(1.6rem, 3.2vw, 2.1rem); position: relative;
@@ -233,6 +223,7 @@
       .sched > summary { margin: .3em 0; }
     }
   </style>
+  <link rel="stylesheet" href="seminar-crest.css" />
   <script>
     window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]], processEscapes:true }, options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' } };
   </script>
@@ -365,7 +356,7 @@
                 <td class="nowrap">Sep 9, 2026</td>
                 <td>Alex Youcis</td>
                 <td><em>The Langlands--Kottwitz--Scholze method</em></td>
-                <td><details class="abs"><summary class="abs__btn"><span class="abs__label">Abstract:</span><svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBD<a class="source-link" href="https://seminars.math.toronto.edu/pages/seminars?case=view_talk&amp;talk_id=1788977400-1788540786-925" target="_blank" rel="noopener">Official announcement</a></div></details></td>
+                <td><details class="abs"><summary class="abs__btn"><span class="abs__label">Abstract:</span><svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body"><p>The local Langlands correspondence for a reductive group \(G\) over \(\mathbb{Q}_p\) posits a correspondence between certain smooth representations \(\pi\) of \(G(\mathbb{Q}_p)\) and certain \(G\)-valued (in an appropriate sense) representations \(\varphi\) of \(\operatorname{Gal}(\overline{\mathbb{Q}_p}/\mathbb{Q}_p)\). While brought into clearer perspective by recent work, the precise nature of what is meant by \(\varphi\) corresponding to \(\pi\) has historically been somewhat vague but, there is a natural guess: the characters of \(\varphi\) and \(\pi\) should match. This does not quite make sense as traces for \(\varphi\) take as inputs Galois-group elements \(\tau\), and traces on \(\pi\) take as inputs certain functions \(f\) on \(G(\mathbb{Q}_p)\). Thus, it is natural to guess that to each \(\tau\) there is an \(f_\tau\) and one should require that \(\operatorname{tr}(\tau \mid \varphi) = \operatorname{tr}(f_\tau \mid \pi)\). While such a naive statement cannot be true, it is a conjecture of Scholze--Shin that an appropriate refinement does hold. The question then becomes: what are the functions \(f_\tau\)? In this talk I will try to roughly explain the definition of these functions and their relationship to Shimura varieties, the so-called <em>Langlands--Kottwitz--Scholze method</em>.</p></div></details></td>
               </tr>
               <tr>
                 <td class="nowrap">Sep 16, 2026</td>
@@ -377,7 +368,7 @@
                 <td class="nowrap">Sep 23, 2026</td>
                 <td><a href="https://sites.google.com/view/xiao-zhong-website" target="_blank" rel="noopener">Xiao Zhong</a></td>
                 <td><em>Bounds on the Greatest Common Divisors and a Dynamical Analogy</em></td>
-                <td><details class="abs"><summary class="abs__btn"><span class="abs__label">Abstract:</span><svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body">TBD<a class="source-link" href="https://seminars.math.toronto.edu/pages/seminars?case=view_talk&amp;talk_id=1790187000-1789671675-769" target="_blank" rel="noopener">Official announcement</a></div></details></td>
+                <td><details class="abs"><summary class="abs__btn"><span class="abs__label">Abstract:</span><svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></summary><div class="abs__body"><p>In this talk, I will discuss a dynamical analogue of a classical number-theoretic question concerning bounds on the greatest common divisors of two integer sequences. I will present some recent progress on this problem and highlight several open directions for future research. Finally, I will explain how this question relates to the Dynamical Mordell--Lang Conjecture, a central topic in algebraic and arithmetic dynamics.</p></div></details></td>
               </tr>
               <tr>
                 <td class="nowrap">Sep 30, 2026</td>
