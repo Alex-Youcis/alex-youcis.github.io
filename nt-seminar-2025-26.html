@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>U of T number theory seminar — 2025–26 archive</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+  <style>
+    :root {
+      --primary-color: #1D1E18;
+      --secondary-color: #C5C3C6;
+      --background-color: #DCDCDD;
+      --text-color: #1D1E18;
+      --button-color: #BF0603; /* red accent */
+      --card: #ffffff;
+      --border: #e1e1e6;
+
+      /* master text size for Info buttons AND base scale for term buttons */
+      --info-btn-font-size: 1rem;
+    }
+
+    body { font-family: 'Open Sans', sans-serif; background: var(--background-color); color: var(--text-color); margin: 0; }
+    header { background: var(--primary-color); position: sticky; top: 0; z-index: 1000; }
+    .navbar { display:flex; justify-content:flex-end; align-items:center; padding:0 1em; height:60px; }
+    .nav-links { display:flex; }
+    .nav-links a { color:#fff; text-decoration:none; margin:0 1em; position:relative; transition:color .3s ease; }
+    .nav-links a::after { content:''; position:absolute; width:0; height:2px; background:var(--secondary-color); left:50%; bottom:-5px; transition:all .3s ease; }
+    .nav-links a:hover { color:var(--secondary-color); }
+    .nav-links a:hover::after { left:0; width:100%; }
+    .nav-mobile{display:none}
+    @media (max-width: 768px){
+      .nav-links{display:none; flex-direction:column; background:var(--primary-color); position:absolute; top:60px; right:0; width:220px}
+      .nav-links a{margin:0; padding:1em; text-align:right; border-bottom:1px solid var(--secondary-color)}
+      .nav-mobile{display:flex; align-items:center}
+      .nav-text{color:#fff; margin-right:.5em}
+      .icon{color:#fff; font-size:24px; cursor:pointer}
+      .navbar.responsive .nav-links{display:flex}
+      .navbar.responsive .nav-mobile .nav-text{display:none}
+    }
+
+    main { padding: 2em 1.25em 3em; max-width: 1200px; margin: 0 auto; }
+
+    /* HERO with 3 visible U of T crests, fully inside card */
+    .hero {
+      position: relative; overflow: hidden;
+      background: var(--card); border-radius: 14px; padding: 1.25em 1.5em;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05); display:grid; gap: .75em; margin-bottom: 1.5em;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05), 0 0 0 2px #000; /* keeps size, respects border-radius */
+
+      /* NEW to match other pages' hero sizing */
+      min-height: 200px;
+    }
+    .hero::before{
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.22;
+      background-image:
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png'),
+        url('https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Utoronto_coa.svg/1200px-Utoronto_coa.svg.png');
+      background-repeat: no-repeat, no-repeat, no-repeat;
+      background-position: 16% center, 50% center, 84% center; /* equidistributed */
+      background-size: auto 96%, auto 96%, auto 96%;           /* scaled up 1.2× */
+    }
+    @media (max-width: 600px){
+      .hero::before{ background-size: auto 78%, auto 78%, auto 78%; }
+    }
+    .hero h1 {
+      margin: .2em 0 .1em; font-size: clamp(1.6rem, 3.2vw, 2.1rem); position: relative;
+
+      /* NEW: center the title text like other pages */
+      text-align: center;
+      justify-self: center;
+    }
+    .meta { display:flex; flex-wrap:wrap; gap:.75em 1.25em; font-size: .98rem; color:#222; position: relative; }
+    .meta .tag { background: var(--secondary-color); color:#111; border-radius: 999px; padding: .25em .7em; }
+    .btn { display:inline-flex; align-items:center; gap:.4em; background: var(--button-color); color:#fff; text-decoration:none; padding:.6em .9em; border-radius:10px; font-weight:600; box-shadow: 0 2px 6px rgba(0,0,0,.15); position: relative; }
+    .btn:hover { filter: brightness(1.05); }
+
+    /* Reusable white bubble */
+    .bubble {
+      background: var(--card); border-radius: 14px; padding: 1em 1.2em;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05);
+      display:flex; flex-direction:column;
+    }
+
+    h2 { margin-top: 0; }
+
+    /* Tables */
+    .table-wrap { overflow-x:auto; background:var(--card); border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+    table { width:100%; border-collapse: collapse; table-layout: fixed; }
+    thead { background: #f4f4f6; }
+    th, td { padding: .85em 1.2em; border-bottom: 1px solid #e6e6ea; vertical-align: top; overflow-wrap:anywhere; word-break:break-word; }
+    th { text-align:left; font-weight:700; }
+    tr:last-child td { border-bottom: none; }
+    .nowrap { white-space: nowrap; }
+
+    /* Abstract cells (generic) */
+    details { background:var(--card); padding:.6em .8em; border-radius:10px; margin:.3em 0; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+    details[open] summary { opacity:.95; }
+    summary { cursor:pointer; font-weight:600; min-width: 110px; display:inline-block; }
+    summary::-webkit-details-marker{display:none;}
+    summary::marker{content:"";}
+
+    /* Call for speakers (legacy utility) */
+    .notice { background:var(--card); border-left: 6px solid var(--button-color); padding:1em 1.1em; border-radius: 10px; margin: 0; }
+    .callout { width: 100%; }
+    .cfs-title { display:block; text-align:center; font-weight:700; margin-bottom:.35em; font-size: var(--info-btn-font-size); }
+
+    /* Term buttons: exact layered pill */
+    .sched { padding: 0; margin: .3em 0 .8em; border: none; background: transparent; box-shadow: none; }
+    .sched > summary { display:none !important; } /* hide in-place summaries; we use top buttons */
+    .term-btn {
+      --label-size: calc(var(--info-btn-font-size) * 1.5);
+      --btn-h: calc(var(--label-size) * 3);      /* label ≈ 1/3 of height */
+      --band: calc(var(--btn-h) * 0.075);        /* each band ~7.5% height */
+      --radius: calc(var(--btn-h) * 0.5);
+      border: 0; background: transparent; padding: 0; cursor: pointer; line-height: 0;
+    }
+    .term-btn__outer { display:inline-block; background:#000; padding: var(--band); border-radius: var(--radius); }
+    .term-btn__middle{ display:inline-block; background: var(--button-color); padding: var(--band); border-radius: calc(var(--radius) - var(--band)); }
+    .term-btn__inner {
+      display:inline-flex; align-items:center; justify-content:center;
+      gap: calc(var(--btn-h) * 0.18);
+      background:#fff; border-radius: calc(var(--radius) - (2 * var(--band)));
+      height: var(--btn-h);
+      padding: 0 calc(var(--btn-h) * 1.4); /* keeps text ≈ 1/5 of width */
+    }
+    .term-btn__label {
+      font: 700 var(--label-size)/1.05 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:#000; white-space:nowrap;
+    }
+    .term-btn__chevron {
+      width: calc(var(--btn-h) * 0.28); height: calc(var(--btn-h) * 0.28);
+      flex:0 0 auto; transition: transform 160ms ease; color:#000;
+    }
+    .term-btn:focus-visible .term-btn__inner { outline: 2px solid #333; outline-offset: 3px; }
+    .term-btn:hover .term-btn__inner { background:#f7f7f7; }
+    .term-btn[aria-expanded="true"] .term-btn__chevron { transform: rotate(180deg); }
+
+    /* Side-by-side button row */
+    .term-controls{display:flex;gap:14px;justify-content:center;margin:.8em 0 1em;flex-wrap:wrap}
+    .term-controls .hidden{display:none !important;}
+
+    /* ⟵ NEW: shrink button width so they fit side-by-side more easily */
+    .term-controls .term-btn__inner { padding: 0 calc(var(--btn-h) * 0.9); }
+
+    /* Column width preferences (Abstract widest) */
+    .col-date    { width: 12ch; }
+    .col-speaker { width: 20ch; }
+    .col-title   { width: 34ch; }
+    /* 4th column (Abstract) takes remaining space */
+
+    /* Invisible anchor so Subscribe button still works */
+    #subscribe { position: relative; height: 0; }
+
+    /* =========================
+       NAMESPACED CSS FROM SPEC
+       ========================= */
+    /* Grid wrapper: two columns, no forced equal height */
+    .info-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6, 24px);
+      align-items: start;  /* no equal height */
+      margin-bottom: 1.25em;
+    }
+
+    /* Left column stacks (now just About) */
+    .info-layout__left {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6, 24px);
+    }
+
+    /* Bold black outline around About / Information bubbles */
+    .about-card, .call-card, .speakers-card { border: 3px solid #000; }
+    .call-card { border-left: 6px solid var(--button-color) !important; }
+
+    /* Speaker subsections spacing (base) */
+    .speaker-section + .speaker-section { margin-top: var(--space-3, 12px); }
+    .speaker-section__title { margin: 0 0 var(--space-2, 8px) 0; }
+
+    /* Responsive: stack to one column on small screens */
+    @media (max-width: 768px) {
+      .info-layout { grid-template-columns: 1fr; }
+    }
+
+    /* =========================================
+       SPACING TWEAKS IN INFORMATION BUBBLE
+       (more space after H2, less at the very bottom)
+       ========================================= */
+    .speakers-card > h2 { margin-bottom: 28px; }
+    .speakers-card { padding-bottom: 0.8em; }
+    .speakers-card .speaker-section:last-child { margin-bottom: 0; }
+    .speakers-card .speaker-section__body > *:last-child { margin-bottom: 0; }
+
+    /* =========================
+       Abstract toggle button in tables
+       ========================= */
+    details.abs { background: transparent; padding: 0; box-shadow: none; border-radius: 0; }
+    .abs__btn {
+      display: inline-flex; align-items: center; gap: .4em;
+      padding: .25em .55em; border: 1px solid #cfcfd4; border-radius: 8px;
+      font-weight: 700; background: #fff; cursor: pointer;
+    }
+    .abs__chev { width: 0.9em; height: 0.9em; transition: transform 160ms ease; }
+    details.abs[open] .abs__chev { transform: rotate(180deg); }
+    .abs__body { margin-top: .5em; }
+
+    /* =======================================================
+       MOBILE-ONLY FIXES (do not affect desktop presentation)
+       ======================================================= */
+    @media (max-width: 600px) {
+      .hero { text-align: center; padding: 1.25em 1em 1.6em; }
+      .meta { justify-content: center; gap: .5em .6em; }
+      .hero .btn { margin: .25em; }
+
+      .term-btn {
+        --label-size: calc(var(--info-btn-font-size) * 1.05);
+        --btn-h: calc(var(--label-size) * 3);
+        --band: calc(var(--btn-h) * 0.075);
+        --radius: calc(var(--btn-h) * 0.5);
+      }
+
+      .table-wrap { -webkit-overflow-scrolling: touch; }
+      .table-wrap table { table-layout: auto; min-width: 680px; }
+      .table-wrap th, .table-wrap td { word-break: normal; overflow-wrap: break-word; }
+
+      .sched > summary { margin: .3em 0; }
+    }
+  </style>
+  <script>
+    window.MathJax = { tex:{ inlineMath:[["\\(","\\)"]], displayMath:[["\\[","\\]"]], processEscapes:true }, options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' } };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="navbar" id="myNavbar">
+      <div class="nav-mobile">
+        <span class="nav-text">Navigation</span>
+        <span class="icon" onclick="toggleMenu()"><i class="fa fa-bars"></i></span>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="research.html">Publications and preprints</a>
+        <a href="notes.html">Expository material</a>
+        <a href="friends.html">Friends</a>
+        <a href="nt-seminar.html" aria-current="page">U of T number theory seminar</a>
+        <a href="teaching.html">Teaching</a>
+        <a href="conferences.html">Conferences</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>U of T number theory seminar — 2025–26 archive</h1>
+      <div class="meta">
+        <span class="tag"><i class="fa fa-calendar"></i>&nbsp; Wednesday, 2:10–3:0X PM <span class="muted">(50 minutes + questions)</span></span>
+        <span class="tag"><i class="fa fa-map-marker"></i>&nbsp; Bahen Center, Room 6183</span>
+        <span class="tag"><i class="fa fa-user"></i>&nbsp; Organizers: Alex Youcis</span>
+      </div>
+      <div>
+        <a class="btn" href="nt-seminar.html"><i class="fa fa-arrow-left"></i> Current seminar (2026–27)</a>
+      </div>
+    </section>
+
+    <!-- Restructured area -->
+    <section class="info-layout" aria-labelledby="info-for-speakers-title">
+      <!-- LEFT COLUMN -->
+      <div class="info-layout__left">
+        <article class="bubble bubble--white about-card" id="blurb" aria-labelledby="about-title">
+          <h2 id="about-title">About</h2>
+          <p>
+            This seminar features research talks in number theory broadly construed (e.g.,
+            \(p\)-adic Hodge theory, automorphic forms, Galois representations, arithmetic statistics, etc.).
+          </p>
+        </article>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <aside class="bubble bubble--white speakers-card" id="info">
+        <h2 id="info-for-speakers-title">Information for speakers</h2>
+
+        <!-- Abstract subsection removed per your instruction -->
+
+        <section class="speaker-section">
+          <h3 class="speaker-section__title"><strong>Format &amp; length</strong></h3>
+          <div class="speaker-section__body">
+            <p>50 minutes + short Q&amp;A. Please make the first 20 minutes accessible to a number-theory-focused graduate student.</p>
+          </div>
+        </section>
+
+        <section class="speaker-section">
+          <h3 class="speaker-section__title"><strong>Technical logistics</strong></h3>
+          <div class="speaker-section__body">
+            <p>If you are giving a slide talk, please send the slides three days in advance to
+              <a href="mailto:alex.youcis@gmail.com">alex.youcis@gmail.com</a>.
+            </p>
+          </div>
+        </section>
+      </aside>
+    </section>
+
+    <!-- Invisible anchor so the Subscribe button works even without a visible contact section -->
+    <div id="subscribe" aria-hidden="true"></div>
+
+    <!-- Side-by-side buttons row -->
+    <div class="term-controls" aria-label="Term schedule controls">
+      <button class="term-btn" id="fall-top" type="button" aria-expanded="false" aria-controls="fall-panel">
+        <span class="term-btn__outer">
+          <span class="term-btn__middle">
+            <span class="term-btn__inner">
+              <span class="term-btn__label">Fall 2025</span>
+              <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </span>
+          </span>
+        </span>
+      </button>
+
+      <button class="term-btn" id="spring-top" type="button" aria-expanded="false" aria-controls="spring-panel">
+        <span class="term-btn__outer">
+          <span class="term-btn__middle">
+            <span class="term-btn__inner">
+              <span class="term-btn__label">Spring 2026</span>
+              <svg class="term-btn__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </span>
+          </span>
+        </span>
+      </button>
+    </div>
+
+    <!-- Fall schedule (table lives inside details; summary hidden; controlled by top button) -->
+    <section id="schedule">
+      <details class="sched" id="fall-details" open>
+        <summary><!-- hidden on purpose --></summary>
+        <div class="table-wrap" id="fall-panel">
+          <table>
+            <colgroup>
+              <col class="col-date">
+              <col class="col-speaker">
+              <col class="col-title">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="nowrap">Date</th>
+                <th>Speaker</th>
+                <th>Title</th>
+                <th>Abstract</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="nowrap">Sep 10, 2025</td>
+                <td>Alex Youcis</td>
+                <td><em>An integral comparison of crystalline and de Rham cohomology</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">
+                      Let \( \mathcal{O}_K \) be a mixed characteristic complete DVR with residue field \( k \) of characteristic \( p \), and \( X/\mathcal{O}_K \) a smooth proper formal scheme. A celebrated result of Berthelot–Ogus shows that the de Rham cohomology groups \( H^i_\mathrm{dR}(X/\mathcal{O}_K) \) and crystalline cohomology groups \( H^i_\mathrm{crys}(X_k/W(k))\) agree after tensoring to \(K\). Using recent advances in prismatic cohomology we show that an <i>integral</i> version of this statement holds using appropriate notions of 'twisted' de Rham and crystalline cohomology. This is a prismatic manifestation of Dwork's trick. This further gives an integral comparison even for non-trivial (prismatic) coefficients, and allows one to initiate a prismatic study of the relationship between crystalline and de Rham torsion. This is based off joint work with Abhinandan.
+                    </div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Sep 17, 2025</td><td><a href="https://sites.google.com/view/yi-shan/" target="_blank" rel="noopener">Yi Shan</a></td><td><em>Automorphic forms of \(F_4\) and exceptional theta series</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">For a connected reductive group scheme over \(\mathbb{Z}\), it is interesting to study its level one automorphic forms, for example, give a dimension formula or some explicit construction. For a classical group with small rank or a compact \(G_2\)-type group, a computable dimension formula is given by Chenevier–Ta&iuml;bi–Renard, and it is known that some families of automorphic forms can be constructed via theta correspondences. In this talk, I will present my recent work on the automorphic forms of a compact \(F_4\)-type group, emphasizing an "exceptional" analogue of the classical theta series on Euclidean spaces. </div>
+                  </details>
+                </td>
+              </tr>
+          
+              <tr>
+                <td class="nowrap">Sep 24, 2025</td><td><a href="https://sites.google.com/view/yitong-wang" target="_blank" rel="noopener">Yitong Wang</a></td><td><em>Multivariable \((\varphi,\Gamma)\)-modules and local-global compatibility.</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Let \(K\) be a finite unramified extension of \(\mathbb{Q}_p\). Let \(\pi\) be an admissible smooth mod \(p\) representation of \(\mathrm{GL}_2(K)\) occurring in some Hecke eigenspaces of the mod \(p\) cohomology of a Shimura curve, and \(r\) be its underlying global \(2\)-dimensional Galois representation. When \(r\) is sufficiently generic, we prove that the associated multivariable \((\varphi,\Gamma)\)-module \(D_A(\pi)\) defined by Breuil–Herzig–Hu–Morra–Schraen is completely determined by the restriction of \(r\) to the decomposition group at \(p\) in an explicit way, generalizing their results.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Oct 1, 2025</td><td>Vadim Vologodsky (Toronto)</td><td><em>A new approach to the classifications of \(p\)-divisible groups. (After V. Drinfeld, E. Lau, and T. Zink.)</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">The classical Dieudonne theory classifies \(p\)-divisible groups
+over a perfect field \(k\) in terms of semi-linear algebra over \(W(k)\). In
+this talk, I will explain a conjectural generalization -  due to
+Drinfeld - of   Dieudonne's classification to a broader  class of
+rings, whose spectra form a basis for the fpqc topology on \(p\)-nilpotent
+schemes. A key input in Drinfeld's approach is a certain square-zero
+extension of the ring of Witt vectors, known as the ring of sheared
+Witt vectors.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Oct 8, 2025</td><td><a href="https://www.daniellitt.com/" target="_blank" rel="noopener">Daniel Litt</a></td><td><em>\(p\)-curvature and non-abelian cohomology</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">In 1972, Katz proved the Grothendieck-Katz \(p\)-curvature conjecture for linear differential equations arising from algebraic geometry—that is, Gauss-Manin connections. His proof made use of the structures and properties of the cohomology of a family of varieties: for example, the Hodge and conjugate filtrations, the Hodge index theorem, etc. I'll explain analogues of these structures and properties for non-abelian cohomology (that is, the moduli of representations of \(\pi_1\)) and how to use them to prove a version of the Grothendieck-Katz \(p\)-curvature conjecture in the non-abelian setting.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr></tr>
+                <td class="nowrap">Oct 15, 2025</td><td>Zahra Janbazi (Toronto)</td><td><em>Finiteness Theorems in Arithmetic Statistics</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body"><p>A classical theorem of Birch and Merriman states that, for fixed \(n\), the set of integral binary \(n\)-ic forms with fixed nonzero discriminant breaks into finitely many \(\mathrm{GL}{_2}(\mathbb{Z})\) orbits. In this talk, I will present several extensions of this finiteness result from both the representation theoretic and the geometric perspectives, along with an application of these generalizations.</p>
+<p>On the representation theoretic side, we study ternary \(n\)-ic forms and prove analogous finiteness theorems for \(\mathrm{GL}{_3}(\mathbb{Z})\) orbits with fixed nonzero discriminant. We also establish a corresponding result for a 27 dimensional representation associated with a family of K3 surfaces (joint with A. Shankar).</p>
+<p>On the geometric side, we prove a finiteness theorem for Galois invariant point configurations on arbitrary smooth curves with controlled reduction, unifying the classical finiteness theorems of Birch and Merriman, Siegel, and Faltings (joint with F. Sajadi).</p>
+<p>As an application, we consider families of pencils of curves with fixed discriminant, where the representation theoretic and geometric extensions, together with the Birch and Merriman theorem, play a central role in establishing finiteness.</p></div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Oct 22, 2025</td><td><a href="https://sites.google.com/a/bc.edu/keerthi/home" target="_blank" rel="noopener">Keerthi Madapusi</a></td><td><em>A new approach to \(p\)-Hecke correspondences and Rapoport–Zink spaces</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body"><p>Hecke operators play a fundamental role in understanding the arithmetic properties of modular and automorphic forms. Since the advent of the original Eichler-Shimura relation, it has been clear that the mod-\(p\) behavior of Hecke correspondences is crucial for such applications. However, one could argue a truly robust theory of such correspondences yielding convenient access to their mod-\(p\) reductions has so far been elusive, especially when dealing with higher rank groups.</p> 
+
+<p>In this talk, I will present a new approach to these matters, using recent advances in \(p\)-adic geometry and \(p\)-adic cohomology, building on work of Drinfeld and Bhatt-Lurie, and combining them with a tool familiar to the geometric Langlands and representation theory community: the Vinberg monoid. In particular, this approach yields direct access to geometric incarnations of the 'standard' basis elements of the spherical Hecke algebra.</p>
+
+<p>For another application, this approach also gives the first general construction of Rapoport–Zink spaces associated with exceptional groups.</p> </div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Oct 29, 2025</td>
+                <td>Reading week (no seminar)</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="nowrap">Nov 5, 2025</td><td>TBA</td><td><em>TBA</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Nov 12, 2025</td><td><a href="https://qirui.li" target="_blank" rel="noopener">Qirui Li</a></td><td><em>The higher linear Arithmetic Fundamental Lemma over function fields</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body"><p>The study of special values and derivatives of automorphic L-functions reveals deep connections between arithmetic geometry and harmonic analysis. A central theme is the Arithmetic Fundamental Lemma (AFL), which predicts precise identities between orbital integrals and intersection numbers of cycles. While methods based on perverse sheaves have achieved remarkable results in the function field case, they often obscure the underlying local geometry.</p>
+
+<p>In this talk I will present recent progress on the higher linear AFL through the framework of the Relative Trace Formula (RTF). This approach provides explicit structural links between analytic orbital integrals and local intersection theory, enabling direct local proofs beyond global sheaf-theoretic methods. I will also outline several new directions: extending the AFL  by adding  conductors, and exploring their applications to global conjectures on derivatives of L-functions, including variants of Gross–Zagier type formulas.</p></div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Nov 19, 2025</td><td>Vojin Jovanovic (Toronto)</td><td><em>Construction and Applications of Trisections of Low Genus on Del Pezzo Surfaces of Degree One</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Consider a rational elliptic surface over a field \(k\) with characteristic \(0\) given by \(E: y^2 = x^3 + f(t)x + g(t)\), with \(f,g\in k[t]\), \(\deg(f) \leqslant 4\) and \(\deg(g) \leqslant 6\). If all the bad fibres are irreducible, such a surface comes from the blow-up of a del Pezzo surface of degree one. We are interested in studying the relationship between the existence of low genus multisections on these surfaces and the properties of \(k\)-unirationality and Zariski density of the \(k\)-rationals. More specifically, we study trisections, i.e., multisections of degree three, and use them to show Zariski density on a large family of surfaces. This is especially interesting since the results in this regard are partial for del Pezzo surfaces of degree one.
+
+</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Nov 26, 2025</td><td>Hymn Chan (Toronto)</td><td><em>The \(p\)-adic Langlands Program and Breuil's lattice conjecture</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">We seek a \(p\)-adic Langlands correspondence between a Galois representation \(\mathrm{Gal}(\overline{K}/K) \to \mathrm{GL}{_n}(\overline{\mathbb{Q}{_p}})\) and an admissible unitary representation of \(\mathrm{GL}{_n}(K)\) over a \(p\)-adic Banach space. This correspondence is known when \(\mathrm{GL}{_n}(K) = \mathrm{GL}{_2}(\mathbb{Q}{_p})\), but remains unknown even for \(\mathrm{GL}{_2}(\mathbb{Q}{_{p^f}})\). That said, given a \(p\)-adic Galois representation \(\mathrm{Gal}(\overline{K}/K) \to \mathrm{GL}{_2}(\overline{\mathbb{Q}{_p}})\), one can construct an admissible unitary representation of \(\mathrm{GL}{_2}(\mathbb{Q}{_{p^f}})\) using a global setup. However, it is unclear whether this construction is independent of the global setting. Breuil's lattice conjecture provides evidence for such a claim. Proving the conjecture shows strong local-global compatibility. In the talk, I will explain the motivation behind the conjecture and, time permitting, briefly sketch the proof.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Dec 3, 2025</td><td><a href="https://www.math.toronto.edu/henrykim/" target="_blank" rel="noopener">Henry Kim</a></td><td><em>Ikeda type lift on \(\mathrm{SO}(3,n+1)\)</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">We compute explicitly Fourier coefficients of Eisenstein series of level one on \(\mathrm{SO}(3,n+1)\), and construct the Ikeda type lift, following Ikeda's method. Our lifts are Hecke eigen cusp forms of weight \(k\) which come from elliptic newforms with respect to \(\mathrm{SL}_2(\mathbb{Z})\) which are of weight \(k-\tfrac{1}{2}(n-2)\) when \(n\) is even, and \(2k-n+1\) when \(n\) is odd. This is a joint work with Takuya Yamauchi.</div>
+                  </details>
+                </td>
+              </tr>
+          
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <!-- Spring schedule (also controlled by top button) -->
+    <section id="spring-schedule">
+      <details class="sched" id="spring-details">
+        <summary><!-- hidden on purpose --></summary>
+        <div class="table-wrap" id="spring-panel">
+          <table>
+            <colgroup>
+              <col class="col-date">
+              <col class="col-speaker">
+              <col class="col-title">
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="nowrap">Date</th>
+                <th>Speaker</th>
+                <th>Title</th>
+                <th>Abstract</th>
+              </tr>
+            </thead>
+            <tbody>
+             
+              <tr>
+                <td class="nowrap">Jan 28, 2026</td><td><a href="https://sites.google.com/view/luepan/home" target="_blank" rel="noopener">Lue Pan</a></td><td><em>Completed cohomology of Hilbert modular varieties below middle
+degree </em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">The goal of this talk is to give upper bounds on the
+Gelfand--Kirillov dimension of the rational completed cohomology
+of Hilbert modular varieties. We will explain the motivation of this
+work and sketch several applications.
+</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Feb 4, 2026</td><td><a href="https://sites.google.com/view/carlopagano" target="_blank" rel="noopener">Carlo Pagano</a></td><td><em>Reconstructing curves from their Galois set of points</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Mazur--Rubin asked to what extent one can reconstruct a curve \(C\) over a number field \(K\), from the \(\overline{K}\)-points viewed as Galois set. More precisely they asked to what extent one can reconstruct \(C\) over \(\overline{K}\) from the set of number fields where \(C\) acquires new points, and they provided some evidence of a positive answer in the case of curves of genus \(0\). In this joint work with Zev Klagsbrun, we give an affirmative answer for a generic pair of elliptic curves having full rational \(2\)-torsion over \(K\). The method employed is the combination of additive combinatorics and descent introduced by Koymans and the speaker in 2024, in their resolution of Hilbert 10th problem for finitely generated rings. I shall, along the way, overview the method and its several recent applications.</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Feb 11, 2026</td><td><a href="https://redjoseph.github.io/more-website/" target="_blank" rel="noopener">Morena Porzio</a></td><td><em>"Measuring" the Vanishing of Ceresa cycles via Modified diagonals</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body"><p>Ceresa cycles were introduced by Ceresa in the 1980s as one of the first examples of cycles able to distinguish between homological and algebraic equivalence. Recently, there has been renewed interest in the study of the vanishing of Ceresa cycles, also due to their connection to Gross–Kudla–Schoen diagonal cycles, which are used to study the positivity of the Beilinson–Bloch height, as well as conjectures involving \(L\)-functions.</p>
+
+<p>In this talk, we introduce two generalizations of GKS-cycles and prove they “measure how much" Ceresa cycles vanish, extending work of S. Zhang and Moonen–Yin. We moreover prove an integral refinement of S. Zhang's result, relating the order of torsion of the Ceresa cycle with the one of the GKS-cycle. We then apply our general theory to prove (non-)vanishing results for generic curves, and if time permits bound the order of torsion in specific examples.</p>
+
+<p>This is joint work with L. Lagarde, M. Moakher, J. Rawson, and F. Trejos-Suárez.</p></div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Feb 18, 2026</td>
+                <td>Reading week (no seminar)</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td class="nowrap">Feb 25, 2026</td><td>Cancelled</td><td><em>Cancelled</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">TBA</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Mar 4, 2026</td><td><a href="https://public.websites.umich.edu/~ahazelti/" target="_blank" rel="noopener">Alex Hazeltine</a></td><td><em>Explicit constructions of local Arthur packets</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">For quasi-split \(p\)-adic orthogonal and symplectic groups, Arthur showed that there exists finite sets of irreducible unitary representations, called local Arthur packets, whose associated distributions satisfy the twisted endoscopic character identities. Much progress has since been made in computing local Arthur packets explicitly and understanding their properties. In this talk, we will take an ahistorical approach to studying local Arthur packets. Specifically, if we took a recent explicit algorithm for computing local Arthur packets as a definition, how much of Arthur's theory could we recover? 
+
+</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Mar 11, 2026</td><td><a href="https://sites.google.com/view/nf-math/" target="_blank" rel="noopener">Nic Fellini</a></td><td><em>Applications of \(p\)-adic \(L\)-functions to arithmetic congruences</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body"><p>In the early 1950s, N. Ankeny, E. Artin, and S. Chowla derived four congruence relations involving the arithmetic invariants of real quadratic fields \(K\) with \(\mathrm{disc}(K) = 1 \mod 4\). In particular, they obtained a congruence relating the ideal class number and fundamental unit of \(K\) to generalized Bernoulli number for each of the odd ramified primes in \(K\). In the course of their work, they posed a question regarding the arithmetic properties of fundamental units which, if true, would yield a local method for computing the ideal class number of \(K\). </p> <p>Over time, this question became known as the Ankeny–Artin–Chowla (AAC) conjecture. Until recently, this question seemed to evade any resolution, but in 2024, counterexamples were finally found. In this talk, I will discuss how the restrictions on the discriminant and primes considered can be overcome using the Kubota–Leopoldt \(p\)-adic \(L\)-function. Additionally, we will discuss how counterexamples to the AAC conjecture correspond to well-studied objects, such as dihedral extensions with specified ramification and number field versions of Wieferich primes. Parts of this work are joint with M. Ram Murty.</p></div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Mar 18, 2026</td><td><a href="https://personal.math.ubc.ca/~vatsal/" target="_blank" rel="noopener">Vinayak Vatsal</a></td><td><em>The \(\mu\)-invariant and \((\phi,\Gamma)\)-modules</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body"><p>Iwasawa conjectured in the 1960s that the \(\mu\)-invariant vanishes
+for abelian number fields. This theorem was originally proven by
+Ferrero-Washington using explicit formulae for abelian \(p\)-adic \(L\)-functions
+in terms of Stickelberger elements. Shortly after, Sinnott gave a
+different proof, also using an explicit formula in terms of rational
+functions. Greenberg subsequently conjectured that the \(\mu\)-invariant
+vanishes for the non-abelian extensions of \(\mathbb{Q}\) associated to ordinary
+representations of \(\mathrm{GL}(2)\) coming from elliptic curves, but this conjecture
+has remained open, since there are no explicit formulae in this situation.</p>
+
+<p>I will present a proof of Iwasawaʼs conjecture using \((\phi,\Gamma)\)-modules.
+This proof does not rely on explicit formulae, but rather on a certain
+global invariance property enjoyed by the phi-gamma modules in question.
+Our proof not only unifies the apparently dissimilar proofs of
+Ferrero-Washington and Sinnott, but also is amenable to generalization to
+\(\mathrm{GL}(2)\). We will show how to extend the method to \(\mathrm{GL}(2)\) and deduce
+Greenbergʼs conjecture from certain formal properties enjoyed by a modular
+symbol constructed from \((\phi,\Gamma)\)-modules.</p>
+</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Mar 25, 2026</td><td><a href="https://math.bu.edu/people/abertolo/" target="_blank" rel="noopener">Alexander Bertoloni Meli</a></td><td><em>Cuspidal Sheaves on the Stack of \(L\)-Parameters</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">I will talk about my work in progress with Teruhisa Koshikawa defining a category of cuspidal sheaves on the moduli space of \(L\)-parameters for a \(p\)-adic group.  Such a category is motivated by the categorical Langlands conjecture of Fargues and Scholze. I will explain the structure of this category and its connection to cuspidal local systems of Lusztig.
+</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Apr 1, 2026</td><td><a href="https://math.rice.edu/~bl70/" target="_blank" rel="noopener">Brandon Levin</a></td><td><em>
+Modularity lifting in dimension three</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">I will discuss joint with Robin Bartlett and Bao V. Le Hung on modularity lifting for three-dimensional Galois representations that are potentially crystalline of minimal regular weight at all places above \(p\). I will begin by reviewing the Taylor-Wiles method and the analogous results in dimension two due to Kisin. I will then outline our approach to generalizing Kisin’s resolution of the local crystalline deformation ring in the very ramified setting when dimension is greater than \(2\).</div>
+                  </details>
+                </td>
+              </tr>
+              <tr>
+                <td class="nowrap">Apr 8, 2026</td><td><a href="https://sites.google.com/view/ashankar/home" target="_blank" rel="noopener">Ananth Shankar</a></td><td><em>A \(p\)-adic extension theorem for Shimura varieties and period images</em></td>
+                <td>
+                  <details class="abs">
+                    <summary class="abs__btn">
+                      <span class="abs__label">Abstract:</span>
+                      <svg class="abs__chev" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/>
+                      </svg>
+                    </summary>
+                    <div class="abs__body">Borel proved that every holomorphic map from a product of punctured unit discs to a complex Shimura variety extends to a map from a product of discs to its Bailey-Borel compactification. In joint work with Oswal, Zhu, and Patel, we proved a \(p\)-adic version of this theorem over discretely valued fields for Shimura varieties of abelian type. I will speak about work with Bakker, Oswal, and Yao, where we prove the analogous \(p\)-adic extension theorem for non-abelian Shimura varieties for large \(p\). If time permits, I will also address the case of of geometric period images, where we prove the same extension result under a good-reduction hypothesis.</div>
+                  </details>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer style="background:var(--primary-color); color:#fff; padding:1em; text-align:center;">
+    <p>&copy; 2025 Alex Youcis. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleMenu(){ document.getElementById('myNavbar').classList.toggle('responsive'); }
+
+    // Side-by-side top buttons controlling the two details panels.
+    (function(){
+      const fallBtn   = document.getElementById('fall-top');
+      const springBtn = document.getElementById('spring-top');
+      const fallDet   = document.getElementById('fall-details');
+      const springDet = document.getElementById('spring-details');
+
+      function setState(which, open){
+        if(which === 'fall'){
+          fallDet.open = open;
+          fallBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          // Hide the *other* button when open
+          springBtn.classList.toggle('hidden', open);
+          // Always close the other panel
+          if(open){
+            springDet.open = false;
+            springBtn.setAttribute('aria-expanded','false');
+          }
+        }else{
+          springDet.open = open;
+          springBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          fallBtn.classList.toggle('hidden', open);
+          if(open){
+            fallDet.open = false;
+            fallBtn.setAttribute('aria-expanded','false');
+          }
+        }
+      }
+
+      function toggle(which){
+        const isOpen = (which==='fall') ? fallDet.open : springDet.open;
+        setState(which, !isOpen);
+        // If closing, reveal both buttons
+        if(isOpen){
+          fallBtn.classList.remove('hidden');
+          springBtn.classList.remove('hidden');
+        }
+      }
+
+      fallBtn.addEventListener('click', ()=>toggle('fall'));
+      springBtn.addEventListener('click', ()=>toggle('spring'));
+      fallBtn.addEventListener('keydown', e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggle('fall'); }});
+      springBtn.addEventListener('keydown', e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggle('spring'); }});
+
+      // Start both closed, both buttons visible
+      setState('fall', false);
+      setState('spring', false);
+
+      // Equalize visible term button widths
+      function syncWidths(){
+        const inners = [fallBtn, springBtn].map(b=>b.querySelector('.term-btn__inner'));
+        inners.forEach(el => el.style.minWidth = '');
+        const max = Math.max(...inners.map(el => el.offsetWidth || 0));
+        inners.forEach(el => el.style.minWidth = max + 'px');
+      }
+      window.addEventListener('load', syncWidths);
+      window.addEventListener('resize', () => { clearTimeout(syncWidths._t); syncWidths._t=setTimeout(syncWidths,120); });
+    })();
+  </script>
+</body>
+</html>
