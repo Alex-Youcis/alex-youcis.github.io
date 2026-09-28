@@ -136,7 +136,6 @@
       options:{ skipHtmlTags:['script','noscript','style','textarea','pre','code'], ignoreHtmlClass:'tex2jax_ignore', processHtmlClass:'tex2jax_process' }
     };
   </script>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
@@ -292,7 +291,7 @@
       if(btn) btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     }
 
-    // Most recent blog post (same approach you had)
+    // Most recent blog post
     (function() {
       const rssUrl = 'https://ayoucis.wordpress.com/feed';
       const proxyUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl);
