@@ -141,7 +141,6 @@
     /* 4th column (Abstract) takes remaining space */
 
     /* Invisible anchor so Subscribe button still works */
-    #subscribe { position: relative; height: 0; }
 
     /* =========================
        NAMESPACED CSS FROM SPEC
@@ -287,10 +286,6 @@
         <span class="tag"><i class="fa fa-map-marker"></i>&nbsp; Bahen Center, Room 6183</span>
         <span class="tag"><i class="fa fa-user"></i>&nbsp; Organizers: Alex Youcis and <a href="https://www.y-shan.com/">Yi Shan</a></span>
       </div>
-      <div>
-        <a class="btn" href="#subscribe"><i class="fa fa-envelope"></i> Subscribe</a>
-
-      </div>
     </section>
 
     <!-- Restructured area -->
@@ -309,8 +304,6 @@
       <!-- RIGHT COLUMN -->
       <aside class="bubble bubble--white speakers-card" id="info">
         <h2 id="info-for-speakers-title">Information for speakers</h2>
-
-        <!-- Abstract subsection removed per your instruction -->
 
         <section class="speaker-section">
           <h3 class="speaker-section__title"><strong>Format &amp; length</strong></h3>
@@ -331,7 +324,6 @@
     </section>
 
     <!-- Invisible anchor so the Subscribe button works even without a visible contact section -->
-    <div id="subscribe" aria-hidden="true"></div>
 
     <!-- Side-by-side buttons row -->
     <div class="term-controls" aria-label="Term schedule controls">
@@ -568,7 +560,11 @@
   </footer>
 
   <script>
-    function toggleMenu(){ document.getElementById('myNavbar').classList.toggle('responsive'); }
+    function toggleMenu(){
+      const nav = document.getElementById('myNavbar');
+      nav.classList.toggle('responsive');
+      nav.querySelector('.nav-mobile .icon').setAttribute('aria-expanded', nav.classList.contains('responsive') ? 'true' : 'false');
+    }
 
     // Side-by-side top buttons controlling the two details panels.
     (function(){

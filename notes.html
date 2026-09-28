@@ -128,7 +128,6 @@
   align-self: center;    /* vertical */
 }
 
-    /* add class="normalize-hero" to your <body> on pages you want normalized */
 :root{
   --content-max: 1100px;
   --hero-height: 260px;
@@ -351,37 +350,84 @@ body.normalize-hero .hero{
       if(btn) btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     }
 
-    // Most recent blog post (same approach you had)
+    // Most recent blog post
     (function() {
+      const blogUrl = 'https://ayoucis.wordpress.com/';
       const rssUrl = 'https://ayoucis.wordpress.com/feed';
       const proxyUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl);
+      const container = document.getElementById('most-recent-post');
+
+      function showFallback() {
+        container.replaceChildren();
+        const message = document.createElement('p');
+        message.textContent = 'Unable to load the most recent post. ';
+        const link = document.createElement('a');
+        link.href = blogUrl;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.textContent = 'Visit the blog.';
+        message.append(link);
+        container.append(message);
+      }
+
+      function trustedPostUrl(value) {
+        if (typeof value !== 'string') return null;
+        try {
+          const url = new URL(value);
+          if (url.origin !== new URL(blogUrl).origin || url.username || url.password) return null;
+          return url.href;
+        } catch (_) {
+          return null;
+        }
+      }
+
+      function excerptText(html) {
+        if (typeof html !== 'string') return '';
+        const template = document.createElement('template');
+        template.innerHTML = html;
+        template.content.querySelectorAll('script, style').forEach(node => node.remove());
+        const firstParagraph = template.content.querySelector('p');
+        return (firstParagraph ? firstParagraph.textContent : template.content.textContent)
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+
+      function showPost(post) {
+        const title = typeof post?.title === 'string' ? post.title.trim() : '';
+        const linkUrl = trustedPostUrl(post?.link);
+        if (!title || !linkUrl) {
+          showFallback();
+          return;
+        }
+
+        const heading = document.createElement('h3');
+        const link = document.createElement('a');
+        link.href = linkUrl;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.textContent = title;
+        heading.append(link);
+
+        const excerpt = document.createElement('p');
+        excerpt.textContent = excerptText(post.content || post.description || '');
+        container.replaceChildren(heading, excerpt);
+      }
 
       fetch(proxyUrl)
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok) throw new Error('Feed request failed');
+          return response.json();
+        })
         .then(data => {
-          if(data.status === 'ok') {
-            const post = data.items[0];
-            const title = post.title;
-            const link = post.link;
-            const content = post.content;
-
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = content;
-            const firstParagraph = tempDiv.querySelector('p');
-            const description = firstParagraph ? firstParagraph.innerText : '';
-
-            const postHtml = `
-              <h3><a href="${link}" target="_blank" rel="noopener">${title}</a></h3>
-              <p>${description}</p>
-            `;
-            document.getElementById('most-recent-post').innerHTML = postHtml;
-          } else {
-            document.getElementById('most-recent-post').innerHTML = 'Unable to load the most recent post.';
+          if (data?.status !== 'ok' || !Array.isArray(data.items) || !data.items[0]) {
+            showFallback();
+            return;
           }
+          showPost(data.items[0]);
         })
         .catch(error => {
           console.error('Error fetching the RSS feed:', error);
-          document.getElementById('most-recent-post').innerHTML = 'Unable to load the most recent post.';
+          showFallback();
         });
     })();
   </script>

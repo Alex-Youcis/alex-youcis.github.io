@@ -260,7 +260,7 @@
     </section>
     <section>
       <h2>My CV</h2>
-      <p>A more detailed account of my professional activities can be found in my <a href="/Alex_Youcis_CV_fixed%20%2809%3A28%3A26%29.pdf">CV</a>.</p>
+      <p>A more detailed account of my professional activities can be found in my <a href="/Alex_Youcis_CV_revised_2026-09-28.pdf">CV</a>.</p>
     </section>
     <section>
       <h2>Published Articles</h2>
@@ -272,10 +272,10 @@
         <li>K. Česnavičius and A. Youcis. <i>The analytic topology suffices for the \(B_{\mathrm{dR}}^+\)-Grassmannian.</i> To appear in <strong>\(p\)-adic Hodge Theory (2022 Simons Symposium)</strong> DOI: <a href="https://doi.org/10.48550/arXiv.2303.11710">arXiv.2303.11710</a></li>
         <li>P. Achinger, M. Lara, and A. Youcis. <i>Variants of the de Jong fundamental group</i>. <strong>American Journal of Mathematics</strong>. DOI: <a href="https://doi.org/10.1353/ajm.2025.a971095">10.1353/ajm.2025.a971095</a></li>
         <li>A. Bertoloni Meli, N. Imai, and A. Youcis. <i>The Jacobson–Morozov Morphism for Langlands Parameters in the Relative Setting</i>. <strong>International Mathematics Research Notices (2023)</strong> . DOI: <a href="https://doi.org/10.1093/imrn/rnad217">10.1093/imrn/rnad217</a></li>
-        <li>A. Bertoloni Meli and A Youcis. <i>An approach to the characterization of the local Langlands correspondence</i>. <strong>Represent. Theory 27 (2023), 415--430. </strong> DOI: <a href="https://doi.org/10.1090/ert/643">10.1090/ert/643</a></li>
-        <li>P. Achinger, M. Lara, and A. Youcis. <i>Geometric arcs and fundamental groups of rigid spaces</i>. <strong>J. Reine Angew. Math. 799 (2023), 57--107.</strong> DOI: <a href="https://doi.org/10.1515/crelle-2023-0013">10.1515/crelle-2023-0013</a></li>
-        <li>P.  Achinger, M. Lara, and A. Youcis. <i>Specialization for the pro-étale fundamental group.</i>. <strong>Compos. Math. 158 (2022), no. 8, 1713--1745.</strong> DOI: <a href="https://doi.org/10.1112/S0010437X2200759X">10.1112/S0010437X2200759X</a></li>
-        <li>E. Beazley, M. Nichols, M. Park, X. Shi, and A. Youcis.  <i>Bijective projections on parabolic quotients of affine Weyl groups</i>. <strong>Journal of Algebraic Combinatorics (2014).</strong> DOI: <a href="https://doi.org/10.1007/s10801-014-0559-9">0.1007/s10801-014-0559-9</a></li>
+        <li>A. Bertoloni Meli and A. Youcis. <i>An approach to the characterization of the local Langlands correspondence</i>. <strong>Represent. Theory 27 (2023), 415–430. </strong> DOI: <a href="https://doi.org/10.1090/ert/643">10.1090/ert/643</a></li>
+        <li>P. Achinger, M. Lara, and A. Youcis. <i>Geometric arcs and fundamental groups of rigid spaces</i>. <strong>J. Reine Angew. Math. 799 (2023), 57–107.</strong> DOI: <a href="https://doi.org/10.1515/crelle-2023-0013">10.1515/crelle-2023-0013</a></li>
+        <li>P.  Achinger, M. Lara, and A. Youcis. <i>Specialization for the pro-étale fundamental group.</i> <strong>Compos. Math. 158 (2022), no. 8, 1713–1745.</strong> DOI: <a href="https://doi.org/10.1112/S0010437X2200759X">10.1112/S0010437X2200759X</a></li>
+        <li>E. Beazley, M. Nichols, M. Park, X. Shi, and A. Youcis.  <i>Bijective projections on parabolic quotients of affine Weyl groups</i>. <strong>Journal of Algebraic Combinatorics (2014).</strong> DOI: <a href="https://doi.org/10.1007/s10801-014-0559-9">10.1007/s10801-014-0559-9</a></li>
       </ul>
     </section>
     <section>
@@ -298,6 +298,8 @@
     function toggleMenu() {
       var navbar = document.getElementById("myNavbar");
       navbar.classList.toggle("responsive");
+      var button = navbar.querySelector('.nav-mobile .icon');
+      button.setAttribute('aria-expanded', navbar.classList.contains('responsive') ? 'true' : 'false');
     }
   </script>
 </body>

@@ -141,7 +141,6 @@
     /* 4th column (Abstract) takes remaining space */
 
     /* Invisible anchor so Subscribe button still works */
-    #subscribe { position: relative; height: 0; }
 
     /* =========================
        NAMESPACED CSS FROM SPEC
@@ -305,8 +304,6 @@
       <aside class="bubble bubble--white speakers-card" id="info">
         <h2 id="info-for-speakers-title">Information for speakers</h2>
 
-        <!-- Abstract subsection removed per your instruction -->
-
         <section class="speaker-section">
           <h3 class="speaker-section__title"><strong>Format &amp; length</strong></h3>
           <div class="speaker-section__body">
@@ -326,7 +323,6 @@
     </section>
 
     <!-- Invisible anchor so the Subscribe button works even without a visible contact section -->
-    <div id="subscribe" aria-hidden="true"></div>
 
     <!-- Side-by-side buttons row -->
     <div class="term-controls" aria-label="Term schedule controls">
@@ -793,7 +789,11 @@ Modularity lifting in dimension three</em></td>
   </footer>
 
   <script>
-    function toggleMenu(){ document.getElementById('myNavbar').classList.toggle('responsive'); }
+    function toggleMenu(){
+      const nav = document.getElementById('myNavbar');
+      nav.classList.toggle('responsive');
+      nav.querySelector('.nav-mobile .icon').setAttribute('aria-expanded', nav.classList.contains('responsive') ? 'true' : 'false');
+    }
 
     // Side-by-side top buttons controlling the two details panels.
     (function(){
